@@ -13,6 +13,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.ComponentModel;
+using System.Linq;
 
 namespace System.IO.Ports
 {
@@ -245,11 +246,11 @@ namespace System.IO.Ports
 		}
 
 		[DllImport("kernel32", SetLastError = true)]
-			static extern unsafe bool ReadFile (int handle, byte* buffer, int bytes_to_read,
+			static extern bool ReadFile (int handle, [Out] byte[] buffer, int bytes_to_read,
 					out int bytes_read, IntPtr overlapped);
 
 		[DllImport("kernel32", SetLastError = true)]
-			static extern unsafe bool GetOverlappedResult (int handle, IntPtr overlapped,
+			static extern bool GetOverlappedResult (int handle, IntPtr overlapped,
 					ref int bytes_transfered, bool wait);
 
 		public override int Read ([In, Out] byte [] buffer, int offset, int count)
@@ -266,9 +267,10 @@ namespace System.IO.Ports
 
 			int bytes_read;
 
-			unsafe {
-				fixed (byte* ptr = buffer) {
-					if (ReadFile (handle, ptr + offset, count, out bytes_read, read_overlapped))
+			{
+				byte[] ptr = offset == 0 ? buffer : buffer.Skip(offset).ToArray();
+                {
+					if (ReadFile (handle, ptr, count, out bytes_read, read_overlapped))
 						return bytes_read;
 				
 					// Test for overlapped behavior
@@ -288,7 +290,7 @@ namespace System.IO.Ports
 		}
 
 		[DllImport("kernel32", SetLastError = true)]
-		static extern unsafe bool WriteFile (int handle, byte* buffer, int bytes_to_write,
+		static extern bool WriteFile (int handle, [In] byte[] buffer, int bytes_to_write,
 				out int bytes_written, IntPtr overlapped);
 
 		public override void Write (byte [] buffer, int offset, int count)
@@ -306,9 +308,10 @@ namespace System.IO.Ports
 
 			int bytes_written = 0;
 
-			unsafe {
-				fixed (byte* ptr = buffer) {
-					if (WriteFile (handle, ptr + offset, count, out bytes_written, write_overlapped))
+			{
+                byte[] ptr = offset == 0 ? buffer : buffer.Skip(offset).ToArray();
+                {
+					if (WriteFile (handle, ptr, count, out bytes_written, write_overlapped))
 						return;
 					if (Marshal.GetLastWin32Error() != FileIOPending)
 						ReportIOError (null);
