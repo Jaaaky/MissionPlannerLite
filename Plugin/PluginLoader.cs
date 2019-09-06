@@ -1,17 +1,17 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using log4net;
+//using log4net;
 using MissionPlanner.Utilities;
 
 namespace MissionPlanner.Plugin
 {
     public class PluginLoader
     {
-        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+     //   private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         public static List<Plugin> Plugins = new List<Plugin>();
 
@@ -70,7 +70,7 @@ namespace MissionPlanner.Plugin
                 } catch { }
             }
 
-            log.Info("LoadFromSameFolder " + args.RequestingAssembly + "-> "+ args.Name);
+          // log.info("LoadFromSameFolder " + args.RequestingAssembly + "-> "+ args.Name);
 
             return null;
         }
@@ -121,7 +121,7 @@ namespace MissionPlanner.Plugin
 
                 if (pluginInfo != null)
                 {
-                    log.Info("Plugin Load " + file);
+                  // log.info("Plugin Load " + file);
 
                     Object o = Activator.CreateInstance(pluginInfo, BindingFlags.Default, null, null, CultureInfo.CurrentUICulture);
                     Plugin plugin = (Plugin) o;
@@ -132,7 +132,7 @@ namespace MissionPlanner.Plugin
 
                     if (plugin.Init())
                     {
-                        log.InfoFormat("Plugin Init {0} {1} by {2}", plugin.Name, plugin.Version, plugin.Author);
+                      // log.infoFormat("Plugin Init {0} {1} by {2}", plugin.Name, plugin.Version, plugin.Author);
                         lock (Plugins)
                         {
                             Plugins.Add(plugin);
@@ -142,10 +142,10 @@ namespace MissionPlanner.Plugin
             }
             catch (Exception ex)
             {
-                log.Error("Failed to load plugin " + file, ex);
+              // log.error("Failed to load plugin " + file, ex);
             }
 
-            log.InfoFormat("Plugin Load {0} time {1} s", file, (DateTime.Now - startDateTime).TotalSeconds);
+          // log.infoFormat("Plugin Load {0} time {1} s", file, (DateTime.Now - startDateTime).TotalSeconds);
         }
 
         public static void LoadAll()
@@ -175,7 +175,7 @@ namespace MissionPlanner.Plugin
                     }
                     catch (Exception ex)
                     {
-                        log.Error(ex);
+                      // log.error(ex);
                         Plugins.RemoveAt(i);
                         --i;
                     }

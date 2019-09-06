@@ -1,4 +1,4 @@
-using log4net;
+//using log4net;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -12,8 +12,8 @@ namespace MissionPlanner.Utilities
 {
     public class LogAnalyzer
     {
-        private static readonly ILog log =
-            LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+     //   private static readonly ILog log =
+            //LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public static string CheckLogFile(string FileName)
         {
@@ -102,7 +102,7 @@ namespace MissionPlanner.Utilities
                 // until we are done
                 P.WaitForExit();
 
-                log.Info(sb.ToString());
+              // log.info(sb.ToString());
             }
             catch
             {
@@ -169,7 +169,7 @@ namespace MissionPlanner.Utilities
                                 }
                                 catch (Exception ex)
                                 {
-                                    log.Error(ex);
+                                  // log.error(ex);
                                 }
                             }
                         }

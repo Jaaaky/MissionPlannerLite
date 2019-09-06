@@ -1,4 +1,4 @@
-﻿using MissionPlanner;
+using MissionPlanner;
 using MissionPlanner.ArduPilot;
 using MissionPlanner.Utilities;
 using System;
@@ -92,7 +92,7 @@ namespace Xamarin.GCSViews
 
                 if (devid.HasValue && devid.Value != 0)
                 {
-                    log.InfoFormat("{0}: {1} - {2}", deviceInfo.name, deviceInfo.description, deviceInfo.board);
+                  // log.infoFormat("{0}: {1} - {2}", deviceInfo.name, deviceInfo.description, deviceInfo.board);
 
                     var baseurl = "";
 
@@ -125,7 +125,7 @@ namespace Xamarin.GCSViews
                     try
                     {
                         // update to use mirror url
-                        log.Info("Using " + baseurl);
+                      // log.info("Using " + baseurl);
 
                         var starttime = DateTime.Now;
 
@@ -140,7 +140,7 @@ namespace Xamarin.GCSViews
                         using (WebResponse response = request.GetResponse())
                         {
                             // Display the status.
-                            log.Info(((HttpWebResponse)response).StatusDescription);
+                          // log.info(((HttpWebResponse)response).StatusDescription);
                             // Get the stream containing content returned by the server.
                             using (dataStream = response.GetResponseStream())
                             {
@@ -186,7 +186,7 @@ namespace Xamarin.GCSViews
                         Tracking.AddTiming("Firmware Download", deviceInfo.board, timetook, deviceInfo.description);
 
                         fw_Progress1(100, Strings.DownloadedFromInternet);
-                        log.Info("Downloaded");
+                      // log.info("Downloaded");
                     }
                     catch
                     {

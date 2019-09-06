@@ -1,4 +1,4 @@
-﻿// <copyright file="AdbCommandLineClient.cs" company="The Android Open Source Project, Ryan Conrad, Quamotion">
+// <copyright file="AdbCommandLineClient.cs" company="The Android Open Source Project, Ryan Conrad, Quamotion">
 // Copyright (c) The Android Open Source Project, Ryan Conrad, Quamotion. All rights reserved.
 // </copyright>
 
@@ -101,7 +101,7 @@ namespace SharpAdbClient
             if (version < AdbServer.RequiredAdbVersion)
             {
                 string message = $"Required minimum version of adb: {AdbServer.RequiredAdbVersion}. Current version is {version}";
-                Log.LogAndDisplay(LogLevel.Error, Tag, message);
+              // log.LogAndDisplay(LogLevel.Error, Tag, message);
                 throw new AdbException(message);
             }
 

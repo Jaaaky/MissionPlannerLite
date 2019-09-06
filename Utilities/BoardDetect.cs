@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.Reflection;
 using System.Management;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Threading;
-using log4net;
+//using log4net;
 using MissionPlanner.Comms;
 using px4uploader;
 
@@ -12,7 +12,7 @@ namespace MissionPlanner.Utilities
 {
     public class BoardDetect
     {
-        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+     //   private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         public enum boards
         {
@@ -68,7 +68,7 @@ namespace MissionPlanner.Utilities
 
                     foreach (var item in ports)
                     {
-                        log.InfoFormat("{0}: {1} - {2}", item.name, item.description, item.board);
+                      // log.infoFormat("{0}: {1} - {2}", item.name, item.description, item.board);
 
                         //if (port.ToLower() == item.name.ToLower())
                         {
@@ -83,36 +83,36 @@ namespace MissionPlanner.Utilities
                             {
                                 if (item.board == "fmuv2" || item.board.ToLower() == "fmuv2-bl")
                                 {
-                                    log.Info("is a fmuv2");
+                                  // log.info("is a fmuv2");
                                     return boards.px4v2;
                                 }
                                 if (item.board == "fmuv3" || item.board.ToLower() == "fmuv3-bl")
                                 {
-                                    log.Info("is a fmuv3");
+                                  // log.info("is a fmuv3");
                                     return boards.px4v3;
                                 }
                                 if (item.board == "fmuv4" || item.board.ToLower() == "fmuv4-bl")
                                 {
-                                    log.Info("is a fmuv4");
+                                  // log.info("is a fmuv4");
                                     return boards.px4v4;
                                 }
                                 if (item.board == "fmuv5" || item.board.ToLower() == "fmuv5-bl")
                                 {
-                                    log.Info("is a fmuv5");
+                                  // log.info("is a fmuv5");
                                 }
                                 if (item.board == "revo-mini" || item.board.ToLower() == "revo-mini-bl")
                                 {
-                                    log.Info("is a revo-mini");
+                                  // log.info("is a revo-mini");
                                     //return boards.revomini;
                                 }
                                 if (item.board == "mini-pix" || item.board.ToLower() == "mini-pix-bl")
                                 {
-                                    log.Info("is a mini-pix");
+                                  // log.info("is a mini-pix");
                                     //return boards.minipix;
                                 }
                                 if (item.board == "mindpx-v2" || item.board.ToLower() == "mindpx-v2-bl")
                                 {
-                                    log.Info("is a mindpx-v2");
+                                  // log.info("is a mindpx-v2");
                                     //return boards.mindpxv2;
                                 }
 
@@ -124,13 +124,13 @@ namespace MissionPlanner.Utilities
 
                             if (item.board == "PX4 FMU v5.x")
                             {//USB\VID_26AC&PID_0032\0
-                                log.Info("is a PX4 FMU v5.x (fmuv5)");
+                              // log.info("is a PX4 FMU v5.x (fmuv5)");
                                 return boards.fmuv5;
                             }
 
                             if (item.board == "PX4 FMU v4.x")
                             {
-                                log.Info("is a px4v4 pixracer");
+                              // log.info("is a px4v4 pixracer");
                                 return boards.px4v4;
                             }
 
@@ -146,7 +146,7 @@ namespace MissionPlanner.Utilities
 
                                     foreach (string port1 in allports)
                                     {
-                                        log.Info(DateTime.Now.Millisecond + " Trying Port " + port1);
+                                      // log.info(DateTime.Now.Millisecond + " Trying Port " + port1);
                                         try
                                         {
                                             using (var up = new Uploader(port1, 115200))
@@ -159,41 +159,41 @@ namespace MissionPlanner.Utilities
 
                                                 if (up.fw_maxsize == 2080768 && up.board_type == 9 && up.bl_rev >= 5)
                                                 {
-                                                    log.Info("is a px4v3");
+                                                  // log.info("is a px4v3");
                                                     return boards.px4v3;
                                                 }
                                                 else
                                                 {
-                                                    log.Info("is a px4v2");
+                                                  // log.info("is a px4v2");
                                                     return boards.px4v2;
                                                 }
                                             }
                                         }
                                         catch (Exception ex)
                                         {
-                                            log.Error(ex);
+                                          // log.error(ex);
                                         }
                                     }
                                 }
 
-                                log.Info("Failed to detect px4 board type");
+                              // log.info("Failed to detect px4 board type");
                                 return boards.none;
                             }
                         }
                     }
-                } catch (Exception ex) { log.Error(ex); }
+                } catch (Exception ex) { }
 
                 ObjectQuery query = new ObjectQuery("SELECT * FROM Win32_SerialPort"); // Win32_USBControllerDevice
                 ManagementObjectSearcher searcher = new ManagementObjectSearcher(query);
                 foreach (ManagementObject obj2 in searcher.Get())
                 {
-                    log.InfoFormat("-----------------------------------");
-                    log.InfoFormat("Win32_USBDevice instance");
-                    log.InfoFormat("-----------------------------------");
+                  // log.infoFormat("-----------------------------------");
+                  // log.infoFormat("Win32_USBDevice instance");
+                  // log.infoFormat("-----------------------------------");
    
                     foreach (var item in obj2.Properties)
                     {
-                        log.InfoFormat("{0}: {1}", item.Name, item.Value);
+                      // log.infoFormat("{0}: {1}", item.Name, item.Value);
                     }
 
 
@@ -203,7 +203,7 @@ namespace MissionPlanner.Utilities
                         // check port name as well
                         if (obj2.Properties["Name"].Value.ToString().ToUpper().Contains(serialPort.PortName.ToUpper()))
                         {
-                            log.Info("is a 2560-2");
+                          // log.info("is a 2560-2");
                             return boards.b2560v2;
                         }
                     }
@@ -213,7 +213,7 @@ namespace MissionPlanner.Utilities
                         // check port name as well
                         //if (obj2.Properties["Name"].Value.ToString().ToUpper().Contains(serialPort.PortName.ToUpper()))
                         {
-                            log.Info("is a px4");
+                          // log.info("is a px4");
                             return boards.px4;
                         }
                     }
@@ -223,7 +223,7 @@ namespace MissionPlanner.Utilities
                         // check port name as well
                         //if (obj2.Properties["Name"].Value.ToString().ToUpper().Contains(serialPort.PortName.ToUpper()))
                         {
-                            log.Info("is a CUAVv5");
+                          // log.info("is a CUAVv5");
 							chbootloader = "CUAVv5";
                             return boards.chbootloader;
                         }
@@ -244,7 +244,7 @@ namespace MissionPlanner.Utilities
 
                             foreach (string port1 in allports)
                             {
-                                log.Info(DateTime.Now.Millisecond + " Trying Port " + port1);
+                              // log.info(DateTime.Now.Millisecond + " Trying Port " + port1);
                                 try
                                 {
                                     using (var up = new Uploader(port1, 115200))
@@ -257,53 +257,53 @@ namespace MissionPlanner.Utilities
 
                                         if (up.fw_maxsize == 2080768 && up.board_type == 9 && up.bl_rev >= 5)
                                         {
-                                            log.Info("is a px4v3");
+                                          // log.info("is a px4v3");
                                             return boards.px4v3;
                                         }
                                         else if (up.fw_maxsize == 2080768 && up.board_type == 50 && up.bl_rev >= 5)
                                         {
-                                            log.Info("is a fmuv5");
+                                          // log.info("is a fmuv5");
                                             return boards.fmuv5;
                                         }
                                         else
                                         {
-                                            log.Info("is a px4v2");
+                                          // log.info("is a px4v2");
                                             return boards.px4v2;
                                         }
                                     }
                                 }
                                 catch (Exception ex)
                                 {
-                                    log.Error(ex);
+                                  // log.error(ex);
                                 }
                             }
                         }
 
-                        log.Info("Failed to detect px4 board type");
+                      // log.info("Failed to detect px4 board type");
                         return boards.none;
                     }
 
                     if (obj2.Properties["PNPDeviceID"].Value.ToString().Contains(@"USB\VID_26AC&PID_0021"))
                     {
-                        log.Info("is a px4v3 X2.1");
+                      // log.info("is a px4v3 X2.1");
                         return boards.px4v3;
                     }
 
                     if (obj2.Properties["PNPDeviceID"].Value.ToString().Contains(@"USB\VID_26AC&PID_0012"))
                     {
-                        log.Info("is a px4v4 pixracer");
+                      // log.info("is a px4v4 pixracer");
                         return boards.px4v4;
                     }
 
                     if (obj2.Properties["PNPDeviceID"].Value.ToString().Contains(@"USB\VID_26AC&PID_0013"))
                     {
-                        log.Info("is a px4v4pro pixhawk 3 pro");
+                      // log.info("is a px4v4pro pixhawk 3 pro");
                         return boards.px4v4pro;
                     }
 
                     if (obj2.Properties["PNPDeviceID"].Value.ToString().Contains(@"USB\VID_26AC&PID_0001"))
                     {
-                        log.Info("is a px4v2 bootloader");
+                      // log.info("is a px4v2 bootloader");
                         return boards.px4v2;
                     }
 
@@ -316,61 +316,61 @@ namespace MissionPlanner.Utilities
 
                     if (obj2.Properties["PNPDeviceID"].Value.ToString().Contains(@"USB\VID_27AC&PID_1140"))
                     {
-                        log.Info("is a vrbrain 4.0 bootloader");
+                      // log.info("is a vrbrain 4.0 bootloader");
                         return boards.vrbrainv40;
                     }
 
                     if (obj2.Properties["PNPDeviceID"].Value.ToString().Contains(@"USB\VID_27AC&PID_1145"))
                     {
-                        log.Info("is a vrbrain 4.5 bootloader");
+                      // log.info("is a vrbrain 4.5 bootloader");
                         return boards.vrbrainv45;
                     }
 
                     if (obj2.Properties["PNPDeviceID"].Value.ToString().Contains(@"USB\VID_27AC&PID_1150"))
                     {
-                        log.Info("is a vrbrain 5.0 bootloader");
+                      // log.info("is a vrbrain 5.0 bootloader");
                         return boards.vrbrainv50;
                     }
 
                     if (obj2.Properties["PNPDeviceID"].Value.ToString().Contains(@"USB\VID_27AC&PID_1151"))
                     {
-                        log.Info("is a vrbrain 5.1 bootloader");
+                      // log.info("is a vrbrain 5.1 bootloader");
                         return boards.vrbrainv51;
                     }
 
                     if (obj2.Properties["PNPDeviceID"].Value.ToString().Contains(@"USB\VID_27AC&PID_1152"))
                     {
-                        log.Info("is a vrbrain 5.2 bootloader");
+                      // log.info("is a vrbrain 5.2 bootloader");
                         return boards.vrbrainv52;
                     }
 
                     if (obj2.Properties["PNPDeviceID"].Value.ToString().Contains(@"USB\VID_27AC&PID_1154"))
                     {
-                        log.Info("is a vrbrain 5.4 bootloader");
+                      // log.info("is a vrbrain 5.4 bootloader");
                         return boards.vrbrainv54;
                     }
 
                     if (obj2.Properties["PNPDeviceID"].Value.ToString().Contains(@"USB\VID_27AC&PID_1910"))
                     {
-                        log.Info("is a vrbrain core 1.0 bootloader");
+                      // log.info("is a vrbrain core 1.0 bootloader");
                         return boards.vrcorev10;
                     }
 
                     if (obj2.Properties["PNPDeviceID"].Value.ToString().Contains(@"USB\VID_27AC&PID_1351"))
                     {
-                        log.Info("is a vrubrain 5.1 bootloader");
+                      // log.info("is a vrubrain 5.1 bootloader");
                         return boards.vrubrainv51;
                     }
 
                     if (obj2.Properties["PNPDeviceID"].Value.ToString().Contains(@"USB\VID_27AC&PID_1352"))
                     {
-                        log.Info("is a vrubrain 5.2 bootloader");
+                      // log.info("is a vrubrain 5.2 bootloader");
                         return boards.vrubrainv52;
                     }
 
                     if (obj2.Properties["PNPDeviceID"].Value.ToString().Contains(@"USB\VID_1FC9&PID_001C"))
                     {
-                        log.Info("is a NXP RDDRONE-FMUK66");
+                      // log.info("is a NXP RDDRONE-FMUK66");
                         return boards.nxpfmuk66;
                     }
                 }
@@ -450,7 +450,7 @@ namespace MissionPlanner.Utilities
                     if (b1 == 0x14 && b2 == 0x10)
                     {
                         serialPort.Close();
-                        log.Info("is a 1280");
+                      // log.info("is a 1280");
                         return boards.b1280;
                     }
                 }
@@ -459,7 +459,7 @@ namespace MissionPlanner.Utilities
             if (serialPort.IsOpen)
                 serialPort.Close();
 
-            log.Warn("Not a 1280");
+          // log.Warn("Not a 1280");
 
             Thread.Sleep(500);
 
@@ -499,7 +499,7 @@ namespace MissionPlanner.Utilities
                                 {
                                     try
                                     {
-                                        log.Info(((PropertyData)x).Name.ToString() + " = " + ((PropertyData)x).Value.ToString());
+                                      // log.info(((PropertyData)x).Name.ToString() + " = " + ((PropertyData)x).Value.ToString());
                                     }
                                     catch { }
                                 });
@@ -513,13 +513,13 @@ namespace MissionPlanner.Utilities
                                             .ToUpper()
                                             .Contains(serialPort.PortName.ToUpper()))
                                     {
-                                        log.Info("is a 2560-2");
+                                      // log.info("is a 2560-2");
                                         return boards.b2560v2;
                                     }
                                 }
                             }
 
-                            log.Info("is a 2560");
+                          // log.info("is a 2560");
                             return boards.b2560;
                         }
                     }
@@ -530,7 +530,7 @@ namespace MissionPlanner.Utilities
             }
 
             serialPort.Close();
-            log.Warn("Not a 2560");
+          // log.Warn("Not a 2560");
 
             if ((int)DialogResult.Yes == CustomMessageBox.Show("Is this a APM 2+?", "APM 2+", MessageBoxButtons.YesNo))
             {

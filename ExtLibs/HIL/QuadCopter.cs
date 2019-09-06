@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
-using log4net;
+//using log4net;
 using MissionPlanner.ArduPilot;
 using MissionPlanner.HIL;
 using MissionPlanner.Utilities;
@@ -325,7 +325,7 @@ namespace MissionPlanner.HIL
 
     public class MultiCopter : Aircraft
     {
-        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+     //   private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         MultiCopter self;
 
         DateTime seconds = DateTime.Now;

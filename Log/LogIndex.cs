@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
-using log4net;
+//using log4net;
 using MissionPlanner.Controls;
 using MissionPlanner.Utilities;
 
@@ -15,8 +15,8 @@ namespace MissionPlanner.Log
 {
     public partial class LogIndex : Form
     {
-        private static readonly ILog log =
-            LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+     //   private static readonly ILog log =
+            //LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
 
 
@@ -113,7 +113,7 @@ namespace MissionPlanner.Log
                     }
                     catch (Exception ex)
                     {
-                        log.Debug(ex.ToString());
+                      // log.Debug(ex.ToString());
                         CustomMessageBox.Show("Log Can not be opened. Are you still connected?");
                         return;
                     }
@@ -360,11 +360,11 @@ namespace MissionPlanner.Log
                         }
                     }
 
-                    log.fullname = "--- DELETED ---";
-                    log.imgfile = null;
-                    log.TimeInAir = 0;
-                    log.DistTraveled = 0;
-                    log.Duration = "";
+                  // log.fullname = "--- DELETED ---";
+                  // log.imgfile = null;
+                  // log.TimeInAir = 0;
+                  // log.DistTraveled = 0;
+                  // log.Duration = "";
                 }
 
                 objectListView1.Refresh();

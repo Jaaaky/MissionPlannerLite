@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
@@ -6,14 +6,14 @@ using System.Globalization;
 using GMap.NET.WindowsForms;
 using GMap.NET.WindowsForms.Markers;
 using MissionPlanner.Utilities;
-using log4net;
+//using log4net;
 
 namespace MissionPlanner.GeoRef
 {
     partial class Georefimage : Form
     {
-        private static readonly ILog log =
-    LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+     //   private static readonly ILog log =
+    //LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
 
         GeoRefImageBase georef = new GeoRefImageBase();
@@ -71,7 +71,7 @@ namespace MissionPlanner.GeoRef
 
         private void AppendText(string text)
         {
-            log.Info(text);
+          // log.info(text);
 
             var inv = new MethodInvoker(delegate {
                 TXT_outputlog.AppendText(text);
@@ -162,7 +162,7 @@ namespace MissionPlanner.GeoRef
 
             try
             {
-                log.Info("process " + selectedProcessingMode);
+              // log.info("process " + selectedProcessingMode);
 
                 switch (selectedProcessingMode)
                 {
@@ -195,7 +195,7 @@ namespace MissionPlanner.GeoRef
                 AppendText("Error " + ex.ToString());
             }
 
-            log.Info("Draw to Map");
+          // log.info("Draw to Map");
 
             GMapRoute route = new GMapRoute("vehicle");
             if (georef.vehicleLocations != null)

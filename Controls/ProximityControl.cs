@@ -1,4 +1,4 @@
-﻿using log4net;
+// //using log4net;
 using System;
 using System.Drawing;
 using System.Linq;
@@ -14,7 +14,7 @@ namespace MissionPlanner.Controls
 {
     public class ProximityControl : Form
     {
-        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        // private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         MAVState _parent;
         private Proximity.directionState _dS => _parent.Proximity.DirectionState;

@@ -1,6 +1,6 @@
-﻿using GMap.NET.MapProviders;
-using log4net;
-using log4net.Config;
+using GMap.NET.MapProviders;
+//using log4net;
+// using log4net.Config;
 using MissionPlanner.Comms;
 using MissionPlanner.Controls;
 using MissionPlanner.Utilities;
@@ -20,7 +20,7 @@ namespace MissionPlanner
 {
     public static class Program
     {
-        private static readonly ILog log = LogManager.GetLogger("Program");
+     //   private static readonly ILog log = LogManager.GetLogger("Program");
 
         public static DateTime starttime = DateTime.Now;
 
@@ -88,8 +88,8 @@ namespace MissionPlanner
             Thread = Thread.CurrentThread;
 
             System.Windows.Forms.Application.EnableVisualStyles();
-            XmlConfigurator.Configure();
-            log.Info("******************* Logging Configured *******************");
+            // XmlConfigurator.Configure();
+          // log.info("******************* Logging Configured *******************");
 
             ServicePointManager.DefaultConnectionLimit = 10;
 
@@ -143,12 +143,12 @@ namespace MissionPlanner
                 var ptr = NativeLibrary.LoadLibrary(file);
                 if (ptr != IntPtr.Zero)
                 {
-                    log.Info("SkiaLoaded");
+                  // log.info("SkiaLoaded");
                 }
             }
             catch (Exception ex)
             {
-                log.Error(ex);
+              // log.error(ex);
             }
 
             Splash = new MissionPlanner.Splash();
@@ -203,19 +203,19 @@ namespace MissionPlanner
             GMap.NET.MapProviders.GMapProviders.List.Add(Maps.Earthbuilder.Instance);
             GMap.NET.MapProviders.GMapProviders.List.Add(Maps.Statkart_Topo2.Instance);
             GMap.NET.MapProviders.GMapProviders.List.Add(Maps.Eniro_Topo.Instance);
-            GMap.NET.MapProviders.GMapProviders.List.Add(Maps.MapBox.Instance);
-            GMap.NET.MapProviders.GMapProviders.List.Add(Maps.MapboxNoFly.Instance);
-            GMap.NET.MapProviders.GMapProviders.List.Add(Maps.Japan.Instance);
-            GMap.NET.MapProviders.GMapProviders.List.Add(Maps.Japan_Lake.Instance);
-            GMap.NET.MapProviders.GMapProviders.List.Add(Maps.Japan_1974.Instance);
-            GMap.NET.MapProviders.GMapProviders.List.Add(Maps.Japan_1979.Instance);
-            GMap.NET.MapProviders.GMapProviders.List.Add(Maps.Japan_1984.Instance);
-            GMap.NET.MapProviders.GMapProviders.List.Add(Maps.Japan_1988.Instance);
-            GMap.NET.MapProviders.GMapProviders.List.Add(Maps.Japan_Relief.Instance);
-            GMap.NET.MapProviders.GMapProviders.List.Add(Maps.Japan_Slopezone.Instance);
-            GMap.NET.MapProviders.GMapProviders.List.Add(Maps.Japan_Sea.Instance);
+            //GMap.NET.MapProviders.GMapProviders.List.Add(Maps.MapBox.Instance);
+            //GMap.NET.MapProviders.GMapProviders.List.Add(Maps.MapboxNoFly.Instance);
+            //GMap.NET.MapProviders.GMapProviders.List.Add(Maps.Japan.Instance);
+            //GMap.NET.MapProviders.GMapProviders.List.Add(Maps.Japan_Lake.Instance);
+            //GMap.NET.MapProviders.GMapProviders.List.Add(Maps.Japan_1974.Instance);
+            //GMap.NET.MapProviders.GMapProviders.List.Add(Maps.Japan_1979.Instance);
+            //GMap.NET.MapProviders.GMapProviders.List.Add(Maps.Japan_1984.Instance);
+            //GMap.NET.MapProviders.GMapProviders.List.Add(Maps.Japan_1988.Instance);
+            //GMap.NET.MapProviders.GMapProviders.List.Add(Maps.Japan_Relief.Instance);
+            //GMap.NET.MapProviders.GMapProviders.List.Add(Maps.Japan_Slopezone.Instance);
+            //GMap.NET.MapProviders.GMapProviders.List.Add(Maps.Japan_Sea.Instance);
 
-            GoogleMapProvider.APIKey = "AIzaSyA5nFp39fEHruCezXnG3r8rGyZtuAkmCug";
+            //BingHybridMapProvider.APIKey = "AIzaSyA5nFp39fEHruCezXnG3r8rGyZtuAkmCug";
 
             Settings.Instance.UserAgent = Application.ProductName + " " + Application.ProductVersion + " (" + Environment.OSVersion.VersionString + ")";
 
@@ -249,8 +249,8 @@ namespace MissionPlanner
 
             //LoadDlls();
 
-            log.InfoFormat("64bit os {0}, 64bit process {1}", System.Environment.Is64BitOperatingSystem,
-                System.Environment.Is64BitProcess);
+          // log.infoFormat("64bit os {0}, 64bit process {1}", System.Environment.Is64BitOperatingSystem,
+                //System.Environment.Is64BitProcess);
 
 
             Device.DeviceStructure test1 = new Device.DeviceStructure(73225);
@@ -303,7 +303,7 @@ namespace MissionPlanner
             }
             catch (Exception ex)
             {
-                log.Fatal("Fatal app exception", ex);
+              // log.Fatal("Fatal app exception", ex);
                 Console.WriteLine(ex.ToString());
 
                 Console.WriteLine("\nPress any key to exit!");
@@ -347,30 +347,30 @@ namespace MissionPlanner
             {
                 try
                 {
-                    log.Debug("Load: "+dll);
+                  // log.Debug("Load: "+dll);
                     Assembly.LoadFile(dll);
                 }
                 catch (Exception ex)
                 {
-                    log.Debug(ex);
+                  // log.Debug(ex);
                 }
             }
         }
 
         private static void CurrentDomain_FirstChanceException(object sender, System.Runtime.ExceptionServices.FirstChanceExceptionEventArgs e)
         {
-            log.Debug("FirstChanceException in: " + e.Exception.Source, e.Exception);
+          // log.Debug("FirstChanceException in: " + e.Exception.Source, e.Exception);
         }
 
         private static Assembly CurrentDomain_TypeResolve(object sender, ResolveEventArgs args)
         {
-            log.Debug("TypeResolve Failed: " + args.Name + " from "+ args.RequestingAssembly);
+          // log.Debug("TypeResolve Failed: " + args.Name + " from "+ args.RequestingAssembly);
             return null;
         }
 
         private static void CurrentDomain_AssemblyLoad(object sender, AssemblyLoadEventArgs args)
         {
-            log.Debug("Loaded: " + args.LoadedAssembly);
+          // log.Debug("Loaded: " + args.LoadedAssembly);
         }
 
         private static inputboxreturn CommsBaseOnInputBoxShow(string title, string prompttext, ref string text)
@@ -426,31 +426,31 @@ namespace MissionPlanner
 
             }
 
-            try
-            {
-                foreach (string newupdater in Directory.GetFiles(Settings.GetRunningDirectory(), "Updater.exe*.new"))
-                {
-                    File.Copy(newupdater, newupdater.Remove(newupdater.Length - 4), true);
-                    File.Delete(newupdater);
-                }
-            }
-            catch (Exception ex)
-            {
-                log.Error("Exception during update", ex);
-            }
+            // try
+            // {
+            //     foreach (string newupdater in Directory.GetFiles(Settings.GetRunningDirectory(), "Updater.exe*.new"))
+            //     {
+            //         File.Copy(newupdater, newupdater.Remove(newupdater.Length - 4), true);
+            //         File.Delete(newupdater);
+            //     }
+            // }
+            // catch (Exception ex)
+            // {
+            //   // log.error("Exception during update", ex);
+            // }
 
-            try
-            {
-                foreach (string newupdater in Directory.GetFiles(Settings.GetRunningDirectory(), "tlogThumbnailHandler.dll.new"))
-                {
-                    File.Copy(newupdater, newupdater.Remove(newupdater.Length - 4), true);
-                    File.Delete(newupdater);
-                }
-            }
-            catch (Exception ex)
-            {
-                log.Error("Exception during update", ex);
-            }
+            // try
+            // {
+            //     // foreach (string newupdater in Directory.GetFiles(Settings.GetRunningDirectory(), "tlogThumbnailHandler.dll.new"))
+            //     // {
+            //     //     File.Copy(newupdater, newupdater.Remove(newupdater.Length - 4), true);
+            //     //     File.Delete(newupdater);
+            //     // }
+            // }
+            // catch (Exception ex)
+            // {
+            //   // log.error("Exception during update", ex);
+            // }
         }
 
 
@@ -474,7 +474,7 @@ namespace MissionPlanner
         {
             var list = AppDomain.CurrentDomain.ReflectionOnlyGetAssemblies();
 
-            log.Error(list);
+          // log.error(list);
 
             handleException((Exception) e.ExceptionObject);
         }
@@ -513,7 +513,7 @@ namespace MissionPlanner
 
             MissionPlanner.Utilities.Tracking.AddException(ex);
 
-            log.Debug(ex.ToString());
+          // log.Debug(ex.ToString());
 
             GetStackTrace(ex);
 
@@ -552,7 +552,7 @@ namespace MissionPlanner
             if (ex.GetType() == typeof (ObjectDisposedException) || ex.GetType() == typeof (InvalidOperationException))
                 // something is trying to update while the form, is closing.
             {
-                log.Error(ex);
+              // log.error(ex);
                 return; // ignore
             }
             if (ex.GetType() == typeof (FileNotFoundException) || ex.GetType() == typeof (BadImageFormatException))
@@ -567,11 +567,11 @@ namespace MissionPlanner
             if (ex.StackTrace != null && ex.StackTrace.Contains("System.IO.Ports.SerialStream.Dispose") ||
                 ex.StackTrace != null && ex.StackTrace.Contains("System.IO.Ports.SerialPortStream.Dispose"))
             {
-                log.Error(ex);
+              // log.error(ex);
                 return; // ignore
             }
 
-            log.Info("Th Name " + Thread.Name);
+          // log.info("Th Name " + Thread.Name);
 
             var dr =
                 CustomMessageBox.Show("An error has occurred\n" + ex.ToString() + "\n\nReport this Error???",
@@ -642,7 +642,7 @@ namespace MissionPlanner
                 catch (Exception exp)
                 {
                     Console.WriteLine(exp.ToString());
-                    log.Error(exp);
+                  // log.error(exp);
                     CustomMessageBox.Show("Could not send report! Typically due to lack of internet connection.");
                 }
             }

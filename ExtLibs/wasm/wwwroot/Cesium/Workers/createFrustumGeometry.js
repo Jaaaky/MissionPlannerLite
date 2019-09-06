@@ -12125,7 +12125,7 @@ define('Core/FeatureDetection',[
     supportsWebP._promise = undefined;
     supportsWebP._result = undefined;
     supportsWebP.initialize = function() {
-        // From https://developers.google.com/speed/webp/faq#how_can_i_detect_browser_support_for_webp
+        // From https://developers.noaa.io/speed/webp/faq#how_can_i_detect_browser_support_for_webp
         if (defined(supportsWebP._promise)) {
             return supportsWebP._promise;
         }

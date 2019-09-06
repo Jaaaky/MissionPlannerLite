@@ -1,18 +1,18 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
-using log4net;
+//using log4net;
 using Microsoft.Win32.SafeHandles;
 
 namespace MissionPlanner.Comms
 {
     public class SerialPort : System.IO.Ports.SerialPort, ICommsSerial
     {
-        private static readonly ILog log = LogManager.GetLogger(typeof(SerialPort));
+     //   private static readonly ILog log = LogManager.GetLogger(typeof(SerialPort));
 
         private static readonly object locker = new object();
 
@@ -33,7 +33,7 @@ namespace MissionPlanner.Comms
             get => base.DtrEnable;
             set
             {
-                log.Info(PortName + " DtrEnable " + value);
+              // log.info(PortName + " DtrEnable " + value);
                 if (base.DtrEnable == value) return;
                 base.DtrEnable = value;
             }
@@ -44,7 +44,7 @@ namespace MissionPlanner.Comms
             get => base.RtsEnable;
             set
             {
-                log.Info(PortName + " RtsEnable " + value);
+              // log.info(PortName + " RtsEnable " + value);
                 if (base.RtsEnable == value) return;
                 base.RtsEnable = value;
             }
@@ -131,7 +131,7 @@ namespace MissionPlanner.Comms
 
         public new void Close()
         {
-            log.Info("Closing port " + PortName);
+          // log.info("Closing port " + PortName);
             base.Close();
         }
 
@@ -253,13 +253,13 @@ namespace MissionPlanner.Comms
 
                 if (comportnamecache.ContainsKey(port))
                 {
-                    log.Info("done GetNiceName cache " + port + " " + comportnamecache[port]);
+                  // log.info("done GetNiceName cache " + port + " " + comportnamecache[port]);
                     return comportnamecache[port];
                 }
 
                 try
                 {
-                    log.Info("start GetNiceName " + port);
+                  // log.info("start GetNiceName " + port);
 
                     CallWithTimeout(GetName, 1000, port);
                 }
@@ -267,7 +267,7 @@ namespace MissionPlanner.Comms
                 {
                 }
 
-                log.Info("done GetNiceName " + port + " = " + portnamenice);
+              // log.info("done GetNiceName " + port + " = " + portnamenice);
 
                 comportnamecache[port] = portnamenice;
 
@@ -341,7 +341,7 @@ namespace MissionPlanner.Comms
 
     public sealed class SerialPortFixer : IDisposable
     {
-        private static readonly ILog log = LogManager.GetLogger(typeof(SerialPortFixer));
+     //   private static readonly ILog log = LogManager.GetLogger(typeof(SerialPortFixer));
 
         #region IDisposable Members
 
@@ -423,9 +423,9 @@ namespace MissionPlanner.Comms
         {
             var dcb = new Dcb();
             GetCommStateNative(ref dcb);
-            log.Info("before dcb flags: " + dcb.Flags);
+          // log.info("before dcb flags: " + dcb.Flags);
             dcb.Flags &= ~(1u << DcbFlagAbortOnError);
-            log.Info("after dcb flags: " + dcb.Flags);
+          // log.info("after dcb flags: " + dcb.Flags);
             SetCommStateNative(ref dcb);
         }
 

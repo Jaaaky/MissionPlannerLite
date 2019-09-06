@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Reflection;
@@ -8,7 +8,7 @@ using GeoAPI.CoordinateSystems.Transformations;
 using GMap.NET;
 using GMap.NET.WindowsForms;
 using GMap.NET.WindowsForms.Markers;
-using log4net;
+//using log4net;
 using MissionPlanner.Plugin;
 using MissionPlanner.Utilities;
 using ProjNet.CoordinateSystems;
@@ -18,7 +18,7 @@ namespace MissionPlanner.SimpleGrid
 {
     public partial class GridUI : Form
     {
-        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+     //   private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         const double rad2deg = (180 / Math.PI);
         const double deg2rad = (1.0 / rad2deg);

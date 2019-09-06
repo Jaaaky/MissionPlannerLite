@@ -1,4 +1,4 @@
-﻿//===================================================================================================
+//===================================================================================================
 // Source Control URL : $HeadURL: file:///D:/svn/branch/3.1.7.0/GeoUtility/GeoSystem/MapService.cs $
 // Last changed by    : $LastChangedBy: sh $
 // Revision           : $LastChangedRevision: 255 $
@@ -40,7 +40,7 @@ namespace GeoUtility.GeoSystem
 
         private const int TILE_SIZE = 256;
         private const string USER_AGENT = @"Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2;)";
-        private const string GOOGLE_TILE_SERVER = @"http://khm{0}.google.com/kh/v=84&{1}&s=Galileo";
+        private const string GOOGLE_TILE_SERVER = @"http://khm{0}.noaa.io/kh/v=84&{1}&s=Galileo";
         private const string VIRTUAL_EARTH_TILE_SERVER = @"http://t{0}.tiles.virtualearth.net/tiles/{1}.jpeg?g=1";
         private const string YAHOO_TILE_SERVER = @"http://maps{0}.yimg.com/ae/ximg?v=1.9&t=a&s=256&{1}&r=1";
         

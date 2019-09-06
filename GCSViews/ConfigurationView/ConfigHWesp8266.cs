@@ -1,16 +1,16 @@
-﻿using System;
+using System;
 using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
-using log4net;
+//using log4net;
 using MissionPlanner.Controls;
 
 namespace MissionPlanner.GCSViews.ConfigurationView
 {
     public partial class ConfigHWESP8266 : MyUserControl, IActivate
     {
-        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+     //   private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         public ConfigHWESP8266()
         {

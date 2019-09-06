@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using System.Reflection;
 using System.Windows.Forms;
-using log4net;
+//using log4net;
 using MissionPlanner.Controls;
 using System.Text;
 
@@ -11,7 +11,7 @@ namespace MissionPlanner.GCSViews.ConfigurationView
     {
         private const float DisabledOpacity = 0.2F;
         private const float EnabledOpacity = 1.0F;
-        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+     //   private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private byte count;
 
         bool _incalibrate = false;
@@ -56,7 +56,7 @@ namespace MissionPlanner.GCSViews.ConfigurationView
             {
                 count = 0;
 
-                Log.Info("Sending accel command (mavlink 1.0)");
+                // Log.Info("Sending accel command (mavlink 1.0)");
 
                 MainV2.comPort.doCommand(MAVLink.MAV_CMD.PREFLIGHT_CALIBRATION, 0, 0, 0, 0, 1, 0, 0);
 
@@ -70,7 +70,7 @@ namespace MissionPlanner.GCSViews.ConfigurationView
             catch (Exception ex)
             {
                 _incalibrate = false;
-                Log.Error("Exception on level", ex);
+                // log.Error("Exception on level", ex);
                 CustomMessageBox.Show("Failed to level", Strings.ERROR);
             }
         }
@@ -131,14 +131,14 @@ namespace MissionPlanner.GCSViews.ConfigurationView
         {
             try
             {
-                Log.Info("Sending level command (mavlink 1.0)");
+                // Log.Info("Sending level command (mavlink 1.0)");
                 MainV2.comPort.doCommand(MAVLink.MAV_CMD.PREFLIGHT_CALIBRATION, 0, 0, 0, 0, 2, 0, 0);
 
                 BUT_level.Text = Strings.Completed;
             }
             catch (Exception ex)
             {
-                Log.Error("Exception on level", ex);
+                // log.Error("Exception on level", ex);
                 CustomMessageBox.Show("Failed to level", Strings.ERROR);
             }
         }

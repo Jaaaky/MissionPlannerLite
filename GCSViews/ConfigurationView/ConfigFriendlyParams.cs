@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
@@ -7,7 +7,7 @@ using System.Reflection;
 using System.Text;
 using System.Timers;
 using System.Windows.Forms;
-using log4net;
+//using log4net;
 using MissionPlanner.Controls;
 using MissionPlanner.Utilities;
 
@@ -116,8 +116,8 @@ namespace MissionPlanner.GCSViews.ConfigurationView
 
         #region Class Fields
 
-        private static readonly ILog log =
-            LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+     //   private static readonly ILog log =
+            //LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         private Dictionary<string, string> _params = new Dictionary<string, string>();
         private readonly Dictionary<string, string> _params_changed = new Dictionary<string, string>();
@@ -222,7 +222,7 @@ namespace MissionPlanner.GCSViews.ConfigurationView
                 }
                 catch (Exception ex)
                 {
-                    log.Error("Exception getting param list", ex);
+                  // log.error("Exception getting param list", ex);
                     CustomMessageBox.Show(Strings.ErrorReceivingParams, Strings.ERROR);
                 }
 
@@ -339,7 +339,7 @@ namespace MissionPlanner.GCSViews.ConfigurationView
                 }
                 catch (Exception exp)
                 {
-                    log.Error(exp);
+                  // log.error(exp);
                 } // just to cleanup any errors
             }
 
@@ -571,7 +571,7 @@ namespace MissionPlanner.GCSViews.ConfigurationView
                 } // if there is an error simply dont show it, ie bad pde file, bad scale etc
                 catch (Exception ex)
                 {
-                    log.Error(ex);
+                  // log.error(ex);
                 }
             }
         }

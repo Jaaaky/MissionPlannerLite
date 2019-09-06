@@ -1,4 +1,4 @@
-﻿/*******************************************************************************
+/*******************************************************************************
 *                                                                              *
 * Author    :  Angus Johnson                                                   *
 * Version   :  6.4.2                                                           *
@@ -19,7 +19,7 @@
 * Computer graphics and geometric modeling: implementation and algorithms      *
 * By Max K. Agoston                                                            *
 * Springer; 1 edition (January 4, 2005)                                        *
-* http://books.google.com/books?q=vatti+clipping+agoston                       *
+* http://books.noaa.io/books?q=vatti+clipping+agoston                       *
 *                                                                              *
 * See also:                                                                    *
 * "Polygon Offsetting by Computing Winding Numbers"                            *

@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using log4net;
+//using log4net;
 using MissionPlanner.ArduPilot;
 using MissionPlanner.Controls;
 
@@ -11,8 +11,8 @@ namespace MissionPlanner.Utilities
 {
     public class ParamFile
     {
-        private static readonly ILog log =
-            LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+     //   private static readonly ILog log =
+            //LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public static string FileMask = "Parameter File|*.param;*.parm|All Files|*.*";
 
@@ -48,7 +48,7 @@ namespace MissionPlanner.Utilities
                     }
                     catch (Exception ex)
                     {
-                        log.Error(ex);
+                      // log.error(ex);
                         throw new FormatException("Invalid number on param " + name + " : " + items[1].ToString());
                     }
 

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 
@@ -24,25 +24,25 @@ namespace SharpKml.Base
         public const string AtomPrefix = "atom";
 
         /// <summary>Represents the Google Data Batch Processing namespace.</summary>
-        public const string BatchNamespace = "http://schemas.google.com/gdata/batch";
+        public const string BatchNamespace = "http://schemas.noaa.io/gdata/batch";
 
         /// <summary>Represents the default Google Data Batch Processing prefix.</summary>
         public const string BatchPrefix = "batch";
 
         /// <summary>Represents the Google Documents namespace.</summary>
-        public const string DocsNamespace = "http://schemas.google.com/docs/2007";
+        public const string DocsNamespace = "http://schemas.noaa.io/docs/2007";
 
         /// <summary>Represents the default Google Documents prefix.</summary>
         public const string DocsPrefix = "docs";
 
         /// <summary>Represents the Exchangeable Image File Format namespace.</summary>
-        public const string ExifNamespace = "http://schemas.google.com/photos/exif/2007";
+        public const string ExifNamespace = "http://schemas.noaa.io/photos/exif/2007";
 
         /// <summary>Represents the default Exchangeable Image File Format prefix.</summary>
         public const string ExifPrefix = "exif";
 
         /// <summary>Represents the Google Data namespace.</summary>
-        public const string GoogleDataNamespace = "http://schemas.google.com/g/2005";
+        public const string GoogleDataNamespace = "http://schemas.noaa.io/g/2005";
 
         /// <summary>Represents the default Google Data prefix.</summary>
         public const string GoogleDataPrefix = "gd";
@@ -66,7 +66,7 @@ namespace SharpKml.Base
         public const string GpxPrefix = "gpx";
 
         /// <summary>Represents the Google Extensions namespace.</summary>
-        public const string GX22Namespace = "http://www.google.com/kml/ext/2.2";
+        public const string GX22Namespace = "http://www.noaa.io/kml/ext/2.2";
 
         /// <summary>Represents the default Google Extensions prefix.</summary>
         public const string GX22Prefix = "gx";
@@ -90,13 +90,13 @@ namespace SharpKml.Base
         public const string OpenSearchPrefix = "openSearch";
 
         /// <summary>Represents the Picasa Web Albums namespace.</summary>
-        public const string PhotoNamespace = "http://schemas.google.com/photos/2007";
+        public const string PhotoNamespace = "http://schemas.noaa.io/photos/2007";
 
         /// <summary>Represents the default Picasa Web Albums prefix.</summary>
         public const string PhotoPrefix = "gphoto";
 
         /// <summary>Represents the Google Spreadsheets namespace.</summary>
-        public const string SpreadSheetsNamespace = "http://schemas.google.com/spreadsheets/2006";
+        public const string SpreadSheetsNamespace = "http://schemas.noaa.io/spreadsheets/2006";
 
         /// <summary>Represents the default Google Spreadsheets prefix.</summary>
         public const string SpreadSheetsPrefix = "gs";

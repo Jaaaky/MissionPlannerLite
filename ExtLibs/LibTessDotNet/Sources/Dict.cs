@@ -1,4 +1,4 @@
-﻿/*
+/*
 ** SGI FREE SOFTWARE LICENSE B (Version 2.0, Sept. 18, 2008) 
 ** Copyright (C) 2011 Silicon Graphics, Inc.
 ** All Rights Reserved.
@@ -27,7 +27,7 @@
 */
 /*
 ** Original Author: Eric Veach, July 1994.
-** libtess2: Mikko Mononen, http://code.google.com/p/libtess2/.
+** libtess2: Mikko Mononen, http://code.noaa.io/p/libtess2/.
 ** LibTessDotNet: Remi Gillig, https://github.com/speps/LibTessDotNet
 */
 

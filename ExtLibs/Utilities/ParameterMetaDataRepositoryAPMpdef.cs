@@ -6,14 +6,14 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using log4net;
+//using log4net;
 
 namespace MissionPlanner.Utilities
 {
     public static class ParameterMetaDataRepositoryAPMpdef
     {
-        private static readonly ILog log =
-            LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+     //   private static readonly ILog log =
+            //LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         private static XDocument _parameterMetaDataXML;
 
@@ -40,7 +40,7 @@ namespace MissionPlanner.Utilities
             }
             catch (Exception ex)
             {
-                log.Error(ex);
+              // log.error(ex);
             }
         }
 
@@ -122,7 +122,7 @@ namespace MissionPlanner.Utilities
                 }
                 catch (Exception ex)
                 {
-                    log.Error(ex);
+                  // log.error(ex);
                 } 
             }
 

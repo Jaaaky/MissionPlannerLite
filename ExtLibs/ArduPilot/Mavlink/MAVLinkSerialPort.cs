@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using log4net;
+//using log4net;
 using System.Threading;
 using MissionPlanner.ArduPilot;
 
@@ -14,7 +14,7 @@ namespace MissionPlanner.Comms
     /// </summary>
     public class MAVLinkSerialPort : ICommsSerial
     {
-        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+     //   private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         MAVLinkInterface mavint;
 
@@ -36,7 +36,7 @@ namespace MissionPlanner.Comms
             {
                 if (open)
                 {
-                    log.Info("MAVLinkSerialPort baudrate " + value);
+                  // log.info("MAVLinkSerialPort baudrate " + value);
                     mavint.SendSerialControl(port, timeout, null, (uint) value);
                 }
                 baud = (uint) value;
@@ -93,7 +93,7 @@ namespace MissionPlanner.Comms
 
         ~MAVLinkSerialPort()
         {
-            log.Info("Destroy");
+          // log.info("Destroy");
 
             if (bgdata != null && bgdata.IsAlive)
                 bgdata.Abort();
@@ -108,7 +108,7 @@ namespace MissionPlanner.Comms
         {
             if (packetcounttimer.Second != DateTime.Now.Second)
             {
-                log.Info("packet count " + packetcount + " with data " + packetwithdata + " " + buffer.Size);
+              // log.info("packet count " + packetcount + " with data " + packetwithdata + " " + buffer.Size);
                 packetcount = 0;
                 packetwithdata = 0;
                 packetcounttimer = DateTime.Now;
@@ -185,7 +185,7 @@ namespace MissionPlanner.Comms
             if (bgdata.IsAlive)
                 bgdata.Abort();
 
-            log.Info("Close");
+          // log.info("Close");
             mavint.SendSerialControl(port, 0, null, 0, true);
         }
 
@@ -196,7 +196,7 @@ namespace MissionPlanner.Comms
 
         public void Open()
         {
-            log.Info("Open");
+          // log.info("Open");
             mavint.SendSerialControl(port, timeout, null, baud, false);
             System.Threading.Thread.Sleep(1000);
             open = true;

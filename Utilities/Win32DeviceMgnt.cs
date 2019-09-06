@@ -1,17 +1,17 @@
-﻿using System;
+using System;
 using System.Text;
 using System.Runtime.InteropServices;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using log4net;
+//using log4net;
 using System.Reflection;
 using MissionPlanner.ArduPilot;
 
 //http://www.nakov.com/blog/2009/05/10/enumerate-all-com-ports-and-find-their-name-and-description-in-c/
 public class Win32DeviceMgmt
 {
-    private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+ //   private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
     private const int BUFFER_SIZE=255;
     private const UInt32 DIGCF_PRESENT = 0x00000002;
     private const UInt32 DIGCF_DEVICEINTERFACE = 0x00000010;
@@ -425,7 +425,7 @@ public class Win32DeviceMgmt
                 bool success = SetupDiEnumDeviceInfo(hDeviceInfoSet, iMemberIndex, ref deviceInfoData);
                 if (!success)
                 {
-                    log.Info("no more devices " + GetLastError());
+                  // log.info("no more devices " + GetLastError());
                     // No more devices in the device information set
                     break;
                 }
@@ -440,7 +440,7 @@ public class Win32DeviceMgmt
                 }
                 catch (Exception e)
                 {
-                    log.Error(e);
+                  // log.error(e);
                     iMemberIndex++;
                     continue;
                 }
@@ -452,7 +452,7 @@ public class Win32DeviceMgmt
                 }
                 catch (Exception e)
                 {
-                    log.Error(e);
+                  // log.error(e);
                     iMemberIndex++;
                     continue;
                 }
@@ -464,7 +464,7 @@ public class Win32DeviceMgmt
                 }
                 catch (Exception e)
                 {
-                    log.Error(e);
+                  // log.error(e);
                     iMemberIndex++;
                     continue;
                 }
@@ -473,8 +473,8 @@ public class Win32DeviceMgmt
                 {
                     try
                     {
-                        log.Info((SPDRP) prop + ": " +
-                                 GetDeviceDescription(hDeviceInfoSet, deviceInfoData, (SPDRP) prop));
+                      // log.info((SPDRP) prop + ": " +
+                                 //GetDeviceDescription(hDeviceInfoSet, deviceInfoData, (SPDRP) prop));
                     }
                     catch
                     {
@@ -529,7 +529,7 @@ public class Win32DeviceMgmt
                             buffer, 1024, out requiredSize, 0))
                         {
                             var out11 = Marshal.PtrToStringAuto(buffer);
-                            log.Info(list[i].name + " " + out11);
+                          // log.info(list[i].name + " " + out11);
 
                             if (list[i].name == "DEVPKEY_Device_BusReportedDeviceDesc")
                                 deviceInfo.board = out11;
@@ -537,7 +537,7 @@ public class Win32DeviceMgmt
                     }
                     catch (Exception ex)
                     {
-                        log.Error(ex);
+                      // log.error(ex);
                     }
 
                     Marshal.FreeHGlobal(buffer);

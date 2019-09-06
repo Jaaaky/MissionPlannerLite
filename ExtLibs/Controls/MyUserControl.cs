@@ -1,5 +1,5 @@
-﻿using System.Drawing;
-using log4net;
+using System.Drawing;
+//using log4net;
 using System.Reflection;
 using System.Runtime.InteropServices;
 
@@ -11,7 +11,7 @@ namespace System.Windows.Forms
     [ComVisible(true)]
     public class MyUserControl : System.Windows.Forms.UserControl
     {
-        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+     //   private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         /// <summary>
         /// implement an on closing event to tidy up environment. 
         /// Using predefined reference as can change between form and user control this way.
@@ -50,7 +50,7 @@ namespace System.Windows.Forms
             }
             catch (Exception ex)
             {
-                log.Error(ex);
+              // log.error(ex);
             }
         }
 

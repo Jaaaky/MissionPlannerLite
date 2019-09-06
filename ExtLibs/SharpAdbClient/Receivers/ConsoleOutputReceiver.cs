@@ -1,4 +1,4 @@
-﻿// <copyright file="ConsoleOutputReceiver.cs" company="The Android Open Source Project, Ryan Conrad, Quamotion">
+// <copyright file="ConsoleOutputReceiver.cs" company="The Android Open Source Project, Ryan Conrad, Quamotion">
 // Copyright (c) The Android Open Source Project, Ryan Conrad, Quamotion. All rights reserved.
 // </copyright>
 
@@ -48,27 +48,27 @@ namespace SharpAdbClient
             {
                 if (line.EndsWith(": not found"))
                 {
-                    Log.Warn(Tag, $"The remote execution returned: '{line}'");
+                  // log.Warn(Tag, $"The remote execution returned: '{line}'");
                     throw new FileNotFoundException($"The remote execution returned: '{line}'");
                 }
 
                 if (line.EndsWith("No such file or directory"))
                 {
-                    Log.Warn(Tag, $"The remote execution returned: {line}");
+                  // log.Warn(Tag, $"The remote execution returned: {line}");
                     throw new FileNotFoundException($"The remote execution returned: '{line}'");
                 }
 
                 // for "unknown options"
                 if (line.Contains("Unknown option"))
                 {
-                    Log.Warn(Tag, $"The remote execution returned: {line}");
+                  // log.Warn(Tag, $"The remote execution returned: {line}");
                     throw new UnknownOptionException($"The remote execution returned: '{line}'");
                 }
 
                 // for "aborting" commands
                 if (line.IsMatch("Aborting.$"))
                 {
-                    Log.Warn(Tag, $"The remote execution returned: {line}");
+                  // log.Warn(Tag, $"The remote execution returned: {line}");
                     throw new CommandAbortingException($"The remote execution returned: '{line}'");
                 }
 
@@ -76,7 +76,7 @@ namespace SharpAdbClient
                 // cmd: applet not found
                 if (line.IsMatch("applet not found$"))
                 {
-                    Log.Warn(Tag, $"The remote execution returned: '{line}'");
+                  // log.Warn(Tag, $"The remote execution returned: '{line}'");
                     throw new FileNotFoundException($"The remote execution returned: '{line}'");
                 }
 
@@ -84,7 +84,7 @@ namespace SharpAdbClient
                 // workitem: 16822
                 if (line.IsMatch("(permission|access) denied$"))
                 {
-                    Log.Warn(Tag, $"The remote execution returned: '{line}'");
+                  // log.Warn(Tag, $"The remote execution returned: '{line}'");
                     throw new PermissionDeniedException($"The remote execution returned: '{line}'");
                 }
             }
@@ -105,7 +105,7 @@ namespace SharpAdbClient
 
                 this.output.AppendLine(line);
 
-                Log.Debug(Tag, line);
+              // log.Debug(Tag, line);
             }
         }
     }

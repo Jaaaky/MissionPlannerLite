@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 using MissionPlanner.Controls.BackstageView;
-using log4net;
+//using log4net;
 using MissionPlanner.Controls;
 using System.IO;
 using System.Linq;
@@ -17,8 +17,8 @@ namespace MissionPlanner.Utilities
     /// </summary>
     public class ThemeManager
     {
-        private static readonly ILog log =
-            LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+     //   private static readonly ILog log =
+            //LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         private static Themes _currentTheme = Themes.BurntKermit;
 
@@ -76,7 +76,7 @@ namespace MissionPlanner.Utilities
         /// <param name="theme"></param>
         public static void SetTheme(Themes theme)
         {
-            log.Debug("Theme set to " + Enum.GetName(typeof (Themes), theme));
+          // log.Debug("Theme set to " + Enum.GetName(typeof (Themes), theme));
             _currentTheme = theme;
         }
 

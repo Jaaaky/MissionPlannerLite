@@ -90,7 +90,7 @@ namespace MissionPlanner.Controls
 
             core.OnMapOpen();
 
-            type = GMap.NET.MapProviders.GoogleSatelliteMapProvider.Instance;
+            type = GMap.NET.MapProviders.BingHybridMapProvider.Instance;
             prj = type.Projection;
 
             this.Invalidate();

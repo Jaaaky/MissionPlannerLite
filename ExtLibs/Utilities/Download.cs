@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
@@ -8,7 +8,7 @@ using System.Net.Security;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using log4net;
+//using log4net;
 
 namespace MissionPlanner.Utilities
 {
@@ -274,8 +274,8 @@ namespace MissionPlanner.Utilities
 
     public class Download
     {
-        private static readonly ILog log =
-            LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+     //   private static readonly ILog log =
+            //LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public static async Task<bool> getFilefromNetAsync(string url, string saveto)
         {
@@ -296,8 +296,8 @@ namespace MissionPlanner.Utilities
                     new System.Net.Security.RemoteCertificateValidationCallback(
                         (sender, certificate, chain, policyErrors) => { return true; });
 
-                lock (log)
-                    log.Info(url);
+                //lock (log)
+                  // log.info(url);
                 // Create a request using a URL that can receive a post. 
                 WebRequest request = WebRequest.Create(url);
                 if (!String.IsNullOrEmpty(Settings.Instance.UserAgent))
@@ -308,8 +308,8 @@ namespace MissionPlanner.Utilities
                 // Get the response.
                 WebResponse response = request.GetResponse();
                 // Display the status.
-                lock (log)
-                    log.Info(((HttpWebResponse)response).StatusDescription);
+                //lock (log)
+                  // log.info(((HttpWebResponse)response).StatusDescription);
                 if (((HttpWebResponse)response).StatusCode != HttpStatusCode.OK)
                     return false;
 
@@ -322,9 +322,9 @@ namespace MissionPlanner.Utilities
                     {
                         if (((HttpWebResponse)response).ContentLength == new FileInfo(saveto).Length)
                         {
-                            lock (log)
-                                log.Info("got LastModified " + saveto + " " + ((HttpWebResponse)response).LastModified +
-                                     " vs " + new FileInfo(saveto).LastWriteTime);
+                            //lock (log)
+                              // log.info("got LastModified " + saveto + " " + ((HttpWebResponse)response).LastModified +
+                                     //" vs " + new FileInfo(saveto).LastWriteTime);
                             response.Close();
                             return true;
                         }
@@ -356,7 +356,7 @@ namespace MissionPlanner.Utilities
 
                     if (dt.Second != DateTime.Now.Second)
                     {
-                        log.Info(url + " " + bps + " " + bytes);
+                      // log.info(url + " " + bps + " " + bytes);
                         dt = DateTime.Now;
                         bps = 0;
                     }
@@ -376,8 +376,8 @@ namespace MissionPlanner.Utilities
             }
             catch (Exception ex)
             {
-                lock (log)
-                    log.Info("getFilefromNet(): " + ex.ToString());
+                //lock (log)
+                  // log.info("getFilefromNet(): " + ex.ToString());
                 return false;
             }
         }
@@ -455,10 +455,10 @@ namespace MissionPlanner.Utilities
                     var minrange = start * chunkSize;
                     var maxrange = Math.Min(start * chunkSize + chunkSize - 1, size);
                     request.AddRange(minrange, maxrange);
-                    log.Info(String.Format("chunk {0} {1} {2}-{3}", start, uri, minrange, maxrange));
+                  // log.info(String.Format("chunk {0} {1} {2}-{3}", start, uri, minrange, maxrange));
                     HttpWebResponse response = (HttpWebResponse)request.GetResponse();
 
-                    log.Info(start + " " + uri + " " + response.StatusCode + " " + response.ContentLength);
+                  // log.info(start + " " + uri + " " + response.StatusCode + " " + response.ContentLength);
 
                     if (response.StatusCode != HttpStatusCode.PartialContent && start != 0)
                     {

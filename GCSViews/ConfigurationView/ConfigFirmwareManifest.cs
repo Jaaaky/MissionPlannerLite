@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -10,7 +10,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using log4net;
+//using log4net;
 using MissionPlanner.ArduPilot;
 using MissionPlanner.Comms;
 using MissionPlanner.Controls;
@@ -21,7 +21,7 @@ namespace MissionPlanner.GCSViews.ConfigurationView
 {
     public partial class ConfigFirmwareManifest : UserControl, IActivate, IDeactivate
     {
-        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+     //   private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         APFirmware.RELEASE_TYPES REL_Type = APFirmware.RELEASE_TYPES.OFFICIAL;
         private string detectedport { get; set; } = "";
         private long? detectedboardid;
@@ -132,7 +132,7 @@ namespace MissionPlanner.GCSViews.ConfigurationView
                         var msg = String.Format("Found board type {0} boardrev {1} bl rev {2} fwmax {3} on {4}",
                             up.board_type,
                             up.board_rev, up.bl_rev, up.fw_maxsize, port);
-                        log.Info(msg);
+                      // log.info(msg);
 
                         up.close();
 
@@ -174,7 +174,7 @@ namespace MissionPlanner.GCSViews.ConfigurationView
 
                 if (devid.HasValue && devid.Value != 0)
                 {
-                    log.InfoFormat("{0}: {1} - {2}", deviceInfo.name, deviceInfo.description, deviceInfo.board);
+                  // log.infoFormat("{0}: {1} - {2}", deviceInfo.name, deviceInfo.description, deviceInfo.board);
 
                     var baseurl = "";
 
@@ -207,7 +207,7 @@ namespace MissionPlanner.GCSViews.ConfigurationView
                     try
                     {
                         // update to use mirror url
-                        log.Info("Using " + baseurl);
+                      // log.info("Using " + baseurl);
 
                         var starttime = DateTime.Now;
 
@@ -224,7 +224,7 @@ namespace MissionPlanner.GCSViews.ConfigurationView
                         using (WebResponse response = request.GetResponse())
                         {
                             // Display the status.
-                            log.Info(((HttpWebResponse)response).StatusDescription);
+                          // log.info(((HttpWebResponse)response).StatusDescription);
                             // Get the stream containing content returned by the server.
                             using (dataStream = response.GetResponseStream())
                             {
@@ -270,7 +270,7 @@ namespace MissionPlanner.GCSViews.ConfigurationView
                         Tracking.AddTiming("Firmware Download", deviceInfo.board, timetook, deviceInfo.description);
 
                         fw_Progress1(100, Strings.DownloadedFromInternet);
-                        log.Info("Downloaded");
+                      // log.info("Downloaded");
                     }
                     catch
                     {

@@ -1,4 +1,4 @@
-﻿using log4net;
+//using log4net;
 using ManagedNativeWifi.Simple;
 using MissionPlanner.Arduino;
 using MissionPlanner.Comms;
@@ -26,7 +26,7 @@ namespace MissionPlanner.Utilities
 {
     public class Firmware
     {
-        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+     //   private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         public event ProgressEventHandler Progress;
 
@@ -181,7 +181,7 @@ namespace MissionPlanner.Utilities
                 firmwareurl = this.firmwareurl;
 
             // mirror support
-            log.Info("getFWList");
+          // log.info("getFWList");
 
             options.softwares.Clear();
 
@@ -210,7 +210,7 @@ namespace MissionPlanner.Utilities
 
                     XmlSerializer xms = new XmlSerializer(typeof(optionsObject), new Type[] {typeof(software)});
 
-                    log.Info("url: " + url);
+                  // log.info("url: " + url);
                     WebRequest request = WebRequest.Create(url);
                     if (!String.IsNullOrEmpty(Settings.Instance.UserAgent))
                         ((HttpWebRequest)request).UserAgent = Settings.Instance.UserAgent;
@@ -239,7 +239,7 @@ namespace MissionPlanner.Utilities
                 }
                 catch (Exception ex)
                 {
-                    log.Error(ex);
+                  // log.error(ex);
                     //CustomMessageBox.Show("Failed to get Firmware List : " + ex.Message);
                     invalidex = ex;
                 }
@@ -248,7 +248,7 @@ namespace MissionPlanner.Utilities
             if (!valid)
                 throw invalidex;
 
-            log.Info("load done");
+          // log.info("load done");
 
             updateProgress(-1, Strings.ReceivedList);
 
@@ -284,7 +284,7 @@ namespace MissionPlanner.Utilities
             }
             catch (Exception ex)
             {
-                log.Error(ex);
+              // log.error(ex);
             }
 
             return new List<software>();
@@ -327,7 +327,7 @@ namespace MissionPlanner.Utilities
 
                 Uri url = new Uri(new Uri(baseurl), "git-version.txt");
 
-                log.Info("Get url " + url.ToString() + " for " + temp.name);
+              // log.info("Get url " + url.ToString() + " for " + temp.name);
 
                 updateProgress(-1, Strings.GettingFWVersion);
 
@@ -346,7 +346,7 @@ namespace MissionPlanner.Utilities
             }
             catch (Exception ex)
             {
-                log.Error(ex);
+              // log.error(ex);
             }
         }
 
@@ -363,7 +363,7 @@ namespace MissionPlanner.Utilities
                 lock (urlcachelock)
                     if (urlcache.ContainsKey(url.AbsoluteUri))
                     {
-                        log.Info("GetAPMVERSIONFile: using cache " + url.AbsoluteUri);
+                      // log.info("GetAPMVERSIONFile: using cache " + url.AbsoluteUri);
                         return urlcache[url.AbsoluteUri];
                     }
 
@@ -380,7 +380,7 @@ namespace MissionPlanner.Utilities
 
                         if (line.Contains("APMVERSION:"))
                         {
-                            log.Info(line);
+                          // log.info(line);
 
                             lock (urlcachelock)
                                 urlcache[url.AbsoluteUri] = line;
@@ -420,7 +420,7 @@ namespace MissionPlanner.Utilities
 
                         foreach (var item in ports)
                         {
-                            log.InfoFormat("{0}: {1} - {2}", item.name, item.description, item.board);
+                          // log.infoFormat("{0}: {1} - {2}", item.name, item.description, item.board);
 
                             // get the options for this device
                             var fwitems = APFirmware.GetOptions(item, MapRelType(temp), MapMAVType(temp));
@@ -463,7 +463,7 @@ namespace MissionPlanner.Utilities
                     return false;
                 }
 
-                log.Info("Detected a " + board);
+              // log.info("Detected a " + board);
 
                 updateProgress(-1, Strings.DetectedA + board);
 
@@ -613,7 +613,7 @@ namespace MissionPlanner.Utilities
                     baseurl = getUrl(historyhash, baseurl);
 
                 // update to use mirror url
-                log.Info("Using " + baseurl);
+              // log.info("Using " + baseurl);
 
                 var starttime = DateTime.Now;
 
@@ -630,7 +630,7 @@ namespace MissionPlanner.Utilities
                 using (WebResponse response = request.GetResponse())
                 {
                     // Display the status.
-                    log.Info(((HttpWebResponse)response).StatusDescription);
+                  // log.info(((HttpWebResponse)response).StatusDescription);
                     // Get the stream containing content returned by the server.
                     using (dataStream = response.GetResponseStream())
                     {
@@ -678,7 +678,7 @@ namespace MissionPlanner.Utilities
                 Tracking.AddTiming("Firmware Download", board.ToString(), timetook, temp.name);
 
                 updateProgress(100, Strings.DownloadedFromInternet);
-                log.Info("Downloaded");
+              // log.info("Downloaded");
             }
             catch (Exception ex)
             {
@@ -784,7 +784,7 @@ namespace MissionPlanner.Utilities
 
                 foreach (string port in allports)
                 {
-                    log.Info(DateTime.Now.Millisecond + " Trying Port " + port);
+                  // log.info(DateTime.Now.Millisecond + " Trying Port " + port);
 
                     try
                     {
@@ -801,8 +801,8 @@ namespace MissionPlanner.Utilities
                     {
                         up.identify();
                         updateProgress(-1, "Identify");
-                        log.InfoFormat("Found board type {0} boardrev {1} bl rev {2} fwmax {3} on {4}", up.board_type,
-                            up.board_rev, up.bl_rev, up.fw_maxsize, port);
+                      // log.infoFormat("Found board type {0} boardrev {1} bl rev {2} fwmax {3} on {4}", up.board_type,
+                            //up.board_rev, up.bl_rev, up.fw_maxsize, port);
 
                         up.ProgressEvent += new Uploader.ProgressEventHandler(up_ProgressEvent);
                         up.LogEvent += new Uploader.LogEventHandler(up_LogEvent);
@@ -826,7 +826,7 @@ namespace MissionPlanner.Utilities
                     }
                     catch (IOException ex)
                     {
-                        log.Error(ex);
+                      // log.error(ex);
                         CustomMessageBox.Show("lost communication with the board.", "lost comms");
                         up.close();
                         return false;
@@ -848,7 +848,7 @@ namespace MissionPlanner.Utilities
                     catch (Exception ex)
                     {
                         updateProgress(0, "ERROR: " + ex.Message);
-                        log.Info(ex);
+                      // log.info(ex);
                         Console.WriteLine(ex.ToString());
                         return false;
                     }
@@ -876,7 +876,7 @@ namespace MissionPlanner.Utilities
             // check if its in BL mode already
             foreach (string port in allports)
             {
-                log.Info(DateTime.Now.Millisecond + " Trying Port " + port);
+              // log.info(DateTime.Now.Millisecond + " Trying Port " + port);
                 try
                 {
                     var task = Task.Run(() => {
@@ -893,7 +893,7 @@ namespace MissionPlanner.Utilities
                 }
                 catch (Exception ex)
                 {
-                    log.Error(ex);
+                  // log.error(ex);
                 }
             }
 
@@ -910,7 +910,7 @@ namespace MissionPlanner.Utilities
                 }
                 catch (Exception ex)
                 {
-                    log.Error(ex);
+                  // log.error(ex);
                 }
             }
 
@@ -947,7 +947,7 @@ namespace MissionPlanner.Utilities
                 }
                 catch (Exception ex)
                 {
-                    log.Error(ex);
+                  // log.error(ex);
                     CustomMessageBox.Show(Strings.PleaseUnplugTheBoardAnd);
                 }
             }
@@ -998,7 +998,7 @@ namespace MissionPlanner.Utilities
             }
             catch (Exception ex)
             {
-                log.Error(ex);
+              // log.error(ex);
                 CustomMessageBox.Show(Strings.PleaseUnplugTheBoardAnd);
             }
 
@@ -1012,7 +1012,7 @@ namespace MissionPlanner.Utilities
 
                 foreach (string port in allports)
                 {
-                    log.Info(DateTime.Now.Millisecond + " Trying Port " + port);
+                  // log.info(DateTime.Now.Millisecond + " Trying Port " + port);
 
                     updateProgress(-1, "Connecting");
 
@@ -1031,8 +1031,8 @@ namespace MissionPlanner.Utilities
                     {
                         up.identify();
                         updateProgress(-1, "Identify");
-                        log.InfoFormat("Found board type {0} boardrev {1} bl rev {2} fwmax {3} on {4}", up.board_type,
-                            up.board_rev, up.bl_rev, up.fw_maxsize, port);
+                      // log.infoFormat("Found board type {0} boardrev {1} bl rev {2} fwmax {3} on {4}", up.board_type,
+                            //up.board_rev, up.bl_rev, up.fw_maxsize, port);
                     }
                     catch (Exception)
                     {
@@ -1068,7 +1068,7 @@ namespace MissionPlanner.Utilities
                     catch (Exception ex)
                     {
                         updateProgress(0, "ERROR: " + ex.Message);
-                        log.Info(ex);
+                      // log.info(ex);
                         Console.WriteLine(ex.ToString());
                         return false;
                     }
@@ -1345,7 +1345,7 @@ namespace MissionPlanner.Utilities
             }
             catch (Exception e)
             {
-                log.Error(e);
+              // log.error(e);
                 Console.WriteLine("An error occurred: " + e.ToString());
                 updateProgress(-1, "ERROR: " + e.Message);
                 return false;
@@ -1391,7 +1391,7 @@ namespace MissionPlanner.Utilities
 
         void up_LogEvent(string message, int level = 0)
         {
-            log.Debug(message);
+          // log.Debug(message);
 
             _message = message;
             updateProgress(-1, message);
@@ -1476,7 +1476,7 @@ namespace MissionPlanner.Utilities
                 {
                     FLASH = readIntelHEXv2(sr);
                 }
-                log.InfoFormat("\n\nSize: {0}\n\n", FLASH.Length);
+              // log.infoFormat("\n\nSize: {0}\n\n", FLASH.Length);
             }
             catch (Exception ex)
             {
@@ -1513,7 +1513,7 @@ namespace MissionPlanner.Utilities
 
                 if (port.connectAP())
                 {
-                    log.Info("starting");
+                  // log.info("starting");
                     updateProgress(0, String.Format(Strings.UploadingBytesToBoard, FLASH.Length) + board);
 
                     // this is enough to make ap_var reset
@@ -1532,7 +1532,7 @@ namespace MissionPlanner.Utilities
 
                     updateProgress(100, Strings.UploadComplete);
 
-                    log.Info("Uploaded");
+                  // log.info("Uploaded");
 
                     int start = 0;
                     short length = 0x100;

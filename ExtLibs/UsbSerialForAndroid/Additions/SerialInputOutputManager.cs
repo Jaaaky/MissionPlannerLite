@@ -1,4 +1,4 @@
-﻿//
+//
 // Copyright 2014 LusoVU. All rights reserved.
 //
 // This library is free software; you can redistribute it and/or
@@ -89,7 +89,7 @@ namespace Hoho.Android.UsbSerial.Util
 
             Task.Run(() =>
             {
-                Log.Info(TAG, "Task Started!");
+              // log.info(TAG, "Task Started!");
                 try
                 {
                     while (true)
@@ -105,7 +105,7 @@ namespace Hoho.Android.UsbSerial.Util
                 }
                 catch (Exception e)
                 {
-                    Log.Warn(TAG, "Task ending due to exception: " + e.Message, e);
+                  // log.Warn(TAG, "Task ending due to exception: " + e.Message, e);
                     ErrorReceived.Raise(this, new UnhandledExceptionEventArgs(e, false));
                 }
                 finally
@@ -113,7 +113,7 @@ namespace Hoho.Android.UsbSerial.Util
                     port.Close();
                     buffer = null;
                     isOpen = false;
-                    Log.Info(TAG, "Task Ended!");
+                  // log.info(TAG, "Task Ended!");
                 }
             }, cancelationToken);
         }
@@ -157,7 +157,7 @@ namespace Hoho.Android.UsbSerial.Util
             var len = port.Read(buffer, READ_WAIT_MILLIS);
             if (len > 0)
             {
-                Log.Debug(TAG, "Read data len=" + len);
+              // log.Debug(TAG, "Read data len=" + len);
 
                 var data = new byte[len];
                 Array.Copy(buffer, data, len);

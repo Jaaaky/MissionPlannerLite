@@ -304,8 +304,6 @@
 
     public string dflog { get { var uri = new Uri(UriHelper.GetAbsoluteUri()); return Microsoft.AspNetCore.WebUtilities.QueryHelpers.ParseQuery(uri.Query).TryGetValue("dflog", out var type) ? type.First() : ""; } }
 
-    private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-
     bool initrender = false;
 
     static DataFlash instance;

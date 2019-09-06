@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -121,11 +121,11 @@ using TrackerHomeGPS;
         double getGEAlt(double lat, double lng)
         {
             double alt = 0;
-            //http://maps.google.com/maps/api/elevation/xml
+            //http://maps.noaa.io/maps/api/elevation/xml
 
             try
             {
-                using (XmlTextReader xmlreader = new XmlTextReader("http://maps.google.com/maps/api/elevation/xml?locations=" + lat.ToString(new System.Globalization.CultureInfo("en-US")) + "," + lng.ToString(new System.Globalization.CultureInfo("en-US")) + "&sensor=true"))
+                using (XmlTextReader xmlreader = new XmlTextReader("http://maps.noaa.io/maps/api/elevation/xml?locations=" + lat.ToString(new System.Globalization.CultureInfo("en-US")) + "," + lng.ToString(new System.Globalization.CultureInfo("en-US")) + "&sensor=true"))
                 {
                     while (xmlreader.Read())
                     {

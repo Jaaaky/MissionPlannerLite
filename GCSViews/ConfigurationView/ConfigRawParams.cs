@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,7 +13,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Forms;
-using log4net;
+//using log4net;
 using MissionPlanner.Controls;
 using MissionPlanner.Utilities;
 
@@ -24,8 +24,8 @@ namespace MissionPlanner.GCSViews.ConfigurationView
         // from http://stackoverflow.com/questions/2512781/winforms-big-paragraph-tooltip/2512895#2512895
         private const int maximumSingleLineTooltipLength = 50;
 
-        private static readonly ILog log =
-            LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+     //   private static readonly ILog log =
+            //LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         private static Hashtable tooltips = new Hashtable();
         // Changes made to the params between writing to the copter
@@ -61,7 +61,7 @@ namespace MissionPlanner.GCSViews.ConfigurationView
                 if (!String.IsNullOrEmpty(Settings.Instance["rawparam_" + col.Name + "_width"]))
                 {
                     col.Width = Math.Max(50,Settings.Instance.GetInt32("rawparam_" + col.Name + "_width"));
-                    log.InfoFormat("{0} to {1}", col.Name, col.Width);
+                  // log.infoFormat("{0} to {1}", col.Name, col.Width);
                 }
             }
 
@@ -331,7 +331,7 @@ namespace MissionPlanner.GCSViews.ConfigurationView
                 }
                 catch (Exception ex)
                 {
-                    log.Error("Exception getting param list", ex);
+                  // log.error("Exception getting param list", ex);
                     CustomMessageBox.Show(Strings.ErrorReceivingParams, Strings.ERROR);
                 }
 
@@ -445,7 +445,7 @@ namespace MissionPlanner.GCSViews.ConfigurationView
             toolTip1.RemoveAll();
             Params.Rows.Clear();
 
-            log.Info("processToScreen");
+          // log.info("processToScreen");
 
             var list = new List<string>();
             foreach (string item in MainV2.comPort.MAV.param.Keys)
@@ -490,11 +490,11 @@ namespace MissionPlanner.GCSViews.ConfigurationView
                 }
                 catch (Exception ex)
                 {
-                    log.Error(ex);
+                  // log.error(ex);
                 }
             });
 
-            log.Info("about to add all");
+          // log.info("about to add all");
 
             Params.SuspendLayout();
             Params.Visible = false;
@@ -502,7 +502,7 @@ namespace MissionPlanner.GCSViews.ConfigurationView
 
             Params.Rows.AddRange(rowlist.ToArray());
 
-            log.Info("about to sort");
+          // log.info("about to sort");
 
             Params.SortCompare += OnParamsOnSortCompare;
 
@@ -512,7 +512,7 @@ namespace MissionPlanner.GCSViews.ConfigurationView
             Params.Visible = true;
             Params.ResumeLayout();
 
-            log.Info("Done");
+          // log.info("Done");
         }
 
         private void OnParamsOnSortCompare(object sender, DataGridViewSortCompareEventArgs args)
@@ -561,7 +561,7 @@ namespace MissionPlanner.GCSViews.ConfigurationView
             }
             catch (Exception ex)
             {
-                log.Error(ex);
+              // log.error(ex);
             }
         }
 
@@ -606,7 +606,7 @@ namespace MissionPlanner.GCSViews.ConfigurationView
             Params.Enabled = true;
             Params.ResumeLayout();
 
-            log.InfoFormat("Filter: {0}ms", (DateTime.Now - start).TotalMilliseconds);
+          // log.infoFormat("Filter: {0}ms", (DateTime.Now - start).TotalMilliseconds);
         }
 
         private void BUT_paramfileload_Click(object sender, EventArgs e)
@@ -662,7 +662,7 @@ namespace MissionPlanner.GCSViews.ConfigurationView
                 }
                 catch (Exception ex)
                 {
-                    log.Error(ex);
+                  // log.error(ex);
                     CustomMessageBox.Show(Strings.ErrorCommunicating + "\n" + ex, Strings.ERROR);
                 }
             }

@@ -9,7 +9,7 @@ using KMLib.Feature;
 
 namespace KMLib
 {
-    //[XmlRoot(ElementName = "kml", Namespace = "http://earth.google.com/kml/2.1")]
+    //[XmlRoot(ElementName = "kml", Namespace = "http://earth.noaa.io/kml/2.1")]
     //--if you add the namespace, then all children get a blank namespace attrib...
     [XmlRoot(ElementName = "kml")]
     public class KMLRoot

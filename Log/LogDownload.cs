@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using System.Reflection;
 using System.Windows.Forms;
 using System.IO;
 using System.Text.RegularExpressions;
-using log4net;
+//using log4net;
 using MissionPlanner.Comms;
 using MissionPlanner.Utilities;
 using System.IO.Ports;
@@ -12,7 +12,7 @@ namespace MissionPlanner.Log
 {
     public partial class LogDownload : Form
     {
-        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+     //   private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         ICommsSerial comPort;
         int logcount = 0;
         serialstatus status = serialstatus.Connecting;
@@ -123,7 +123,7 @@ namespace MissionPlanner.Log
             }
             catch (Exception ex)
             {
-                log.Error("Error opening comport", ex);
+              // log.error("Error opening comport", ex);
                 CustomMessageBox.Show("Error opening comport");
                 return;
             }
@@ -162,10 +162,10 @@ namespace MissionPlanner.Log
                     }
                     catch (Exception ex)
                     {
-                        log.Error("crash in comport reader " + ex);
+                      // log.error("crash in comport reader " + ex);
                     } // cant exit unless told to
                 }
-                log.Info("Comport thread close");
+              // log.info("Comport thread close");
             }) {Name = "comport reader", IsBackground = true};
             t11.Start();
 
@@ -281,7 +281,7 @@ namespace MissionPlanner.Log
                                 }
                                 catch (Exception ex)
                                 {
-                                    log.Error(ex);
+                                  // log.error(ex);
                                     CustomMessageBox.Show(
                                         "Failed to rename file " + logfile + "\nto " + newlogfilename, Strings.ERROR);
                                 }

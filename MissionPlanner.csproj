@@ -17,7 +17,7 @@
     <Description>Mission Planner ground control station for ardupilot</Description>
     <Copyright>Copyright © Michael Oborne 2010-2018</Copyright>
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
-    <PublishUrl>publish\</PublishUrl>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -27,10 +27,11 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
+    <AutorunEnabled>true</AutorunEnabled>
+    <ApplicationRevision>1</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -58,12 +59,31 @@
     <OutputPath>bin\Release\net461\</OutputPath>
     <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
     <Prefer32Bit>false</Prefer32Bit>
+    <PlatformTarget>x86</PlatformTarget>
+    <Optimize>true</Optimize>
+    <DebugType>none</DebugType>
+    <DebugSymbols>false</DebugSymbols>
   </PropertyGroup>
   <PropertyGroup>
     <RootNamespace>MissionPlanner</RootNamespace>
   </PropertyGroup>
   <PropertyGroup>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>6B3BC3A1A9FC612970A8D2007B57C22702393C86</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>MissionPlanner_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyName>MissionPlanner</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="APMPlannerXplanes\**" />
@@ -309,7 +329,7 @@
     <PackageReference Include="GeoJSON.Net" version="1.1.64" targetFramework="net462" />
     <PackageReference Include="IronPython" version="2.7.8.1" targetFramework="net462" />
     <PackageReference Include="IronPython.StdLib" version="2.7.8.1" targetFramework="net462" />
-    <PackageReference Include="log4net" version="2.0.8" targetFramework="net462" />
+    <!-- <PackageReference Include="log4net" version="2.0.8" targetFramework="net462" /> -->
     <PackageReference Include="Microsoft.Win32.Registry" Version="4.5.0" />
     <PackageReference Include="MP.GDAL.Native" Version="2.2.3" />
     <PackageReference Include="NETStandard.Library">
@@ -4506,6 +4526,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="MissionPlanner.GCSViews.ConfigurationView.UAVCANModel.datasource" />
+    <None Include="MissionPlanner_TemporaryKey.pfx" />
     <None Include="NoFly\Areas-Lisboa.kmz">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

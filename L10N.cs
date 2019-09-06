@@ -1,12 +1,12 @@
-﻿using System.Globalization;
-using log4net;
+using System.Globalization;
+//using log4net;
 using MissionPlanner.Utilities;
 
 namespace MissionPlanner
 {
     public class L10N
     {
-        private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+     //   private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public static CultureInfo ConfigLang;
 
         static L10N()

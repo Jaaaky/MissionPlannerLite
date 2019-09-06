@@ -1,4 +1,4 @@
-﻿using log4net;
+//using log4net;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -12,7 +12,7 @@ namespace MissionPlanner.Utilities
 {
     public class Proximity : IDisposable
     {
-        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+     //   private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         MAVState _parent;
         directionState _dS = new directionState();
@@ -26,7 +26,7 @@ namespace MissionPlanner.Utilities
         {
             _parent = mavInt;
             sub = mavInt.parent.SubscribeToPacketType(MAVLINK_MSG_ID.DISTANCE_SENSOR, messageReceived);
-            log.InfoFormat("created for {0} - {1}", mavInt.sysid, mavInt.compid);
+          // log.infoFormat("created for {0} - {1}", mavInt.sysid, mavInt.compid);
         }
 
         ~Proximity()

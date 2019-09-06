@@ -35,11 +35,11 @@ namespace MissionPlanner.Controls
 
             inOnPaint = true;
 
-            try
-            {
+            // try
+            // {
                 base.OnPaint(e);
-            }
-            catch (Exception ex) { Console.WriteLine(ex.ToString()); }
+            // }
+            // catch (Exception ex) { Console.WriteLine(ex.ToString()); }
 
             inOnPaint = false;
 

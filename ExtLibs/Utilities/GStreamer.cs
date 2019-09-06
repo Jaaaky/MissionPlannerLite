@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -12,7 +12,7 @@ using System.Net;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading;
-using log4net;
+//using log4net;
 using LibVLC.NET;
 using MissionPlanner.Utilities.Drawing;
 using guint = System.UInt32;
@@ -24,8 +24,8 @@ namespace MissionPlanner.Utilities
 {
     public class GStreamer
     {
-        private static readonly ILog log =
-            LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+     //   private static readonly ILog log =
+            //LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         private static List<Process> processList = new List<Process>();
 
@@ -365,7 +365,7 @@ namespace MissionPlanner.Utilities
             uint v1 = 0, v2 = 0, v3 = 0, v4 = 0;
             NativeMethods.gst_version(ref v1, ref v2, ref v3, ref v4);
 
-            log.InfoFormat("GStreamer {0}.{1}.{2}.{3}", v1, v2, v3, v4);
+          // log.infoFormat("GStreamer {0}.{1}.{2}.{3}", v1, v2, v3, v4);
 
             IntPtr error;
             NativeMethods.gst_init_check(IntPtr.Zero, IntPtr.Zero, out error);
@@ -373,7 +373,7 @@ namespace MissionPlanner.Utilities
             if (error != IntPtr.Zero)
             {
                 var er = Marshal.PtrToStructure<GError>(error);
-                log.Error("gst_init_check: " + er.message);
+              // log.error("gst_init_check: " + er.message);
                 return null;
             }
 
@@ -392,7 +392,7 @@ namespace MissionPlanner.Utilities
             if (error != IntPtr.Zero)
             {
                 var er = Marshal.PtrToStructure<GError>(error);
-                log.Error("gst_parse_launch: " + er.message);
+              // log.error("gst_parse_launch: " + er.message);
                 return null;
             }
 
@@ -423,7 +423,7 @@ namespace MissionPlanner.Utilities
             NativeMethods.gst_debug_bin_to_dot_file(pipeline, GstDebugGraphDetails.GST_DEBUG_GRAPH_SHOW_ALL,
                 "pipeline");
 
-            log.Info("graphviz of pipeline is at " + Path.GetTempPath() + "pipeline.dot");
+          // log.info("graphviz of pipeline is at " + Path.GetTempPath() + "pipeline.dot");
 
             //var msg = GStreamer.gst_bus_timed_pop_filtered(bus, GStreamer.GST_CLOCK_TIME_NONE, GStreamer.GstMessageType.GST_MESSAGE_ERROR | GStreamer.GstMessageType.GST_MESSAGE_EOS);
 
@@ -476,7 +476,7 @@ namespace MissionPlanner.Utilities
                         }
                         else
                         {
-                            log.Info("failed gst_app_sink_try_pull_sample "+ trys + "/60");
+                          // log.info("failed gst_app_sink_try_pull_sample "+ trys + "/60");
                             trys++;
                             if (trys > 60)
                                 break;
@@ -484,7 +484,7 @@ namespace MissionPlanner.Utilities
                     }
                     catch (Exception ex)
                     {
-                        log.Error(ex);
+                      // log.error(ex);
                         trys++;
                         if (trys > 60)
                             break;
@@ -499,7 +499,7 @@ namespace MissionPlanner.Utilities
                 NativeMethods.gst_element_set_state(pipeline, GstState.GST_STATE_NULL);
                 NativeMethods.gst_buffer_unref(bus);
 
-                log.Info("Gstreamer Exit");
+              // log.info("Gstreamer Exit");
 
             }) {IsBackground = true, Name = "gstreamer"};
 
@@ -574,39 +574,39 @@ namespace MissionPlanner.Utilities
 
         public static string LookForGstreamer()
         {
-            List<string> dirs = new List<string>();
+            // List<string> dirs = new List<string>();
 
-            dirs.Add(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
+            // dirs.Add(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
 
-            dirs.Add(Settings.GetDataDirectory());
+            // dirs.Add(Settings.GetDataDirectory());
             
-            DriveInfo[] allDrives = DriveInfo.GetDrives();
-            foreach (DriveInfo d in allDrives)
-            {
-                if (d.IsReady && d.DriveType == DriveType.Fixed)
-                {
-                    dirs.Add(d.RootDirectory.Name + "gstreamer");
-                    dirs.Add(d.RootDirectory.Name + "Program Files" + Path.DirectorySeparatorChar + "gstreamer");
-                    dirs.Add(d.RootDirectory.Name + "Program Files (x86)" + Path.DirectorySeparatorChar + "gstreamer");
-                }
-            }
+            // DriveInfo[] allDrives = DriveInfo.GetDrives();
+            // foreach (DriveInfo d in allDrives)
+            // {
+            //     if (d.IsReady && d.DriveType == DriveType.Fixed)
+            //     {
+            //         dirs.Add(d.RootDirectory.Name + "gstreamer");
+            //         dirs.Add(d.RootDirectory.Name + "Program Files" + Path.DirectorySeparatorChar + "gstreamer");
+            //         dirs.Add(d.RootDirectory.Name + "Program Files (x86)" + Path.DirectorySeparatorChar + "gstreamer");
+            //     }
+            // }
             
-            foreach (var dir in dirs)
-            {
-                if (Directory.Exists(dir))
-                {
-                    var ans = Directory.GetFiles(dir, "libgstreamer-1.0-0.dll", SearchOption.AllDirectories);
+            // foreach (var dir in dirs)
+            // {
+            //     if (Directory.Exists(dir))
+            //     {
+            //         var ans = Directory.GetFiles(dir, "libgstreamer-1.0-0.dll", SearchOption.AllDirectories);
 
-                    if (ans.Length > 0)
-                    {
-                        log.Info("Found gstreamer " + ans.First());
-                        SetGSTPath(ans.First());
-                        return ans.First();
-                    }
-                }
-            }
+            //         if (ans.Length > 0)
+            //         {
+            //           // log.info("Found gstreamer " + ans.First());
+            //             SetGSTPath(ans.First());
+            //             return ans.First();
+            //         }
+            //     }
+            // }
 
-            log.Info("No gstreamer found");
+            // log.Info("No gstreamer found");
             return "";
         }
 
@@ -640,7 +640,7 @@ namespace MissionPlanner.Utilities
             {
                 if (!allowmultiple && isrunning)
                 {
-                    log.Info("already running");
+                  // log.info("already running");
                     return null;
                 }
 
@@ -686,7 +686,7 @@ namespace MissionPlanner.Utilities
 
                     psi.UseShellExecute = false;
 
-                    log.Info("Starting " + psi.FileName + " " + psi.Arguments);
+                  // log.info("Starting " + psi.FileName + " " + psi.Arguments);
 
                     psi.RedirectStandardInput = true;
                     psi.RedirectStandardOutput = true;
@@ -697,8 +697,8 @@ namespace MissionPlanner.Utilities
 
                     process.Exited += delegate(object sender, EventArgs args) { Stop(process); };
 
-                    process.ErrorDataReceived += (sender, args) => { log.Error(args.Data); };
-                    process.OutputDataReceived += (sender, args) => { log.Info(args.Data); };
+                    process.ErrorDataReceived += (sender, args) => { };
+                    process.OutputDataReceived += (sender, args) => { };
 
                     process.BeginOutputReadLine();
                     process.BeginErrorReadLine();
@@ -709,7 +709,7 @@ namespace MissionPlanner.Utilities
                 }
                 else
                 {
-                    log.Info("No gstreamer found");
+                  // log.info("No gstreamer found");
                 }
             }
 
@@ -744,7 +744,7 @@ namespace MissionPlanner.Utilities
             {
                 var deadline = DateTime.Now.AddSeconds(20);
 
-                log.Info("_Start");
+              // log.info("_Start");
 
                 while (DateTime.Now < deadline)
                 {
@@ -799,7 +799,7 @@ namespace MissionPlanner.Utilities
             catch (Exception ex)
             {
                 _onNewImage?.Invoke(null, null);
-                log.Error(ex);
+              // log.error(ex);
             }
         }
 
@@ -1123,13 +1123,13 @@ namespace MissionPlanner.Utilities
         {
             try
             {
-                log.Info("Stop");
+              // log.info("Stop");
 
                 if (run != null)
                 {
                     try
                     {
-                        log.Info("StandardInput close");
+                      // log.info("StandardInput close");
                         run.StandardInput.Write('\x3');
                         run.StandardInput.Close();
                     }
@@ -1140,11 +1140,11 @@ namespace MissionPlanner.Utilities
                     if (!run.CloseMainWindow())
                     {
                         Thread.Sleep(100);
-                        log.Info("Kill");
+                      // log.info("Kill");
                         run.Kill();
                     }
 
-                    log.Info("Close");
+                  // log.info("Close");
                     run.Close();
                 }
             }

@@ -1,4 +1,4 @@
-﻿using log4net;
+//using log4net;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,7 +11,7 @@ namespace MissionPlanner.Utilities
 {
     public class KIndex
     {
-        private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+     //   private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         static string kindexurl = "http://services.swpc.noaa.gov/text/wwv.txt";
 
@@ -51,7 +51,7 @@ namespace MissionPlanner.Utilities
 
                         int kno = int.Parse(number);
 
-                        log.Info("K-Index is " + kno);
+                      // log.info("K-Index is " + kno);
 
                         if (KIndexEvent != null)
                             KIndexEvent(kno, null);
@@ -62,7 +62,7 @@ namespace MissionPlanner.Utilities
             }
             catch (Exception ex)
             {
-                log.Error(ex);
+              // log.error(ex);
             }
 
             if (KIndexEvent != null)

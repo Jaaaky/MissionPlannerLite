@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -10,7 +10,7 @@ using System.Drawing.Imaging;
 using System.Collections;
 using System.Threading;
 using System.Drawing.Drawing2D;
-using log4net;
+//using log4net;
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
@@ -27,8 +27,8 @@ namespace MissionPlanner.Controls
 {
     public class HUD : GLControl
     {
-        private static readonly ILog log =
-            LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+     //   private static readonly ILog log =
+            //LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         private object paintlock = new object();
         private object streamlock = new object();
@@ -875,7 +875,7 @@ namespace MissionPlanner.Controls
 
         protected override void OnLoad(EventArgs e)
         {
-            log.Info("OnLoad Start");
+          // log.info("OnLoad Start");
 
             if (opengl && !DesignMode)
             {
@@ -884,33 +884,33 @@ namespace MissionPlanner.Controls
 
                     OpenTK.Graphics.GraphicsMode test = this.GraphicsMode;
                     // log.Info(test.ToString());
-                    log.Info("Vendor: " + GL.GetString(StringName.Vendor));
-                    log.Info("Version: " + GL.GetString(StringName.Version));
-                    log.Info("Device: " + GL.GetString(StringName.Renderer));
+                  // log.info("Vendor: " + GL.GetString(StringName.Vendor));
+                  // log.info("Version: " + GL.GetString(StringName.Version));
+                  // log.info("Device: " + GL.GetString(StringName.Renderer));
                     //Console.WriteLine("Extensions: " + GL.GetString(StringName.Extensions));
 
                     int[] viewPort = new int[4];
 
-                    log.Debug("GetInteger");
+                  // log.Debug("GetInteger");
                     GL.GetInteger(GetPName.Viewport, viewPort);
-                    log.Debug("MatrixMode");
+                  // log.Debug("MatrixMode");
                     GL.MatrixMode(MatrixMode.Projection);
-                    log.Debug("LoadIdentity");
+                  // log.Debug("LoadIdentity");
                     GL.LoadIdentity();
-                    log.Debug("Ortho");
+                  // log.Debug("Ortho");
                     GL.Ortho(0, Width, Height, 0, -1, 1);
-                    log.Debug("MatrixMode");
+                  // log.Debug("MatrixMode");
                     GL.MatrixMode(MatrixMode.Modelview);
-                    log.Debug("LoadIdentity");
+                  // log.Debug("LoadIdentity");
                     GL.LoadIdentity();
 
-                    log.Debug("PushAttrib");
+                  // log.Debug("PushAttrib");
                     GL.PushAttrib(AttribMask.DepthBufferBit);
-                    log.Debug("Disable");
+                  // log.Debug("Disable");
                     GL.Disable(EnableCap.DepthTest);
-                    log.Debug("BlendFunc");
+                  // log.Debug("BlendFunc");
                     GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
-                    log.Debug("Enable");
+                  // log.Debug("Enable");
                     GL.Enable(EnableCap.Blend);
 
                     string versionString = GL.GetString(StringName.Version);
@@ -920,12 +920,12 @@ namespace MissionPlanner.Controls
                 }
                 catch (Exception ex)
                 {
-                    log.Error("HUD opengl onload 1 ", ex);
+                  // log.error("HUD opengl onload 1 ", ex);
                 }
 
                 try
                 {
-                    log.Debug("Hint");
+                  // log.Debug("Hint");
                     GL.Hint(HintTarget.PerspectiveCorrectionHint, HintMode.Nicest);
 
                     GL.Hint(HintTarget.LineSmoothHint, HintMode.Nicest);
@@ -936,12 +936,12 @@ namespace MissionPlanner.Controls
                 }
                 catch (Exception ex)
                 {
-                    log.Error("HUD opengl onload 2 ", ex);
+                  // log.error("HUD opengl onload 2 ", ex);
                 }
 
                 try
                 {
-                    log.Debug("Enable");
+                  // log.Debug("Enable");
                     GL.Enable(EnableCap.LineSmooth);
                     GL.Enable(EnableCap.PointSmooth);
                     GL.Disable(EnableCap.PolygonSmooth);
@@ -949,11 +949,11 @@ namespace MissionPlanner.Controls
                 }
                 catch (Exception ex)
                 {
-                    log.Error("HUD opengl onload 3 ", ex);
+                  // log.error("HUD opengl onload 3 ", ex);
                 }
             }
 
-            log.Info("OnLoad Done");
+          // log.info("OnLoad Done");
 
             started = true;
         }
@@ -1044,8 +1044,8 @@ namespace MissionPlanner.Controls
 
                 if (inOnPaint)
                 {
-                    log.Info("Was in onpaint Hud th:" + System.Threading.Thread.CurrentThread.Name + " in " +
-                             otherthread);
+                  // log.info("Was in onpaint Hud th:" + System.Threading.Thread.CurrentThread.Name + " in " +
+                             //otherthread);
                     return;
                 }
 
@@ -1089,7 +1089,7 @@ namespace MissionPlanner.Controls
             }
             catch (Exception ex)
             {
-                log.Info(ex.ToString());
+              // log.info(ex.ToString());
             }
 
             count++;
@@ -1706,7 +1706,7 @@ namespace MissionPlanner.Controls
                         }
                         catch (Exception ex)
                         {
-                            log.Error(ex);
+                          // log.error(ex);
                             _bgimage = null;
                         }
                     }
@@ -2750,7 +2750,7 @@ namespace MissionPlanner.Controls
             }
             catch (Exception ex)
             {
-                log.Info("hud error " + ex.ToString());
+              // log.info("hud error " + ex.ToString());
             }
         }
 
@@ -3056,8 +3056,8 @@ namespace MissionPlanner.Controls
             }
             catch (Exception ex)
             {
-                log.Error("Expected failure on max/linux due to opengl support");
-                log.Error(ex);
+              // log.error("Expected failure on max/linux due to opengl support");
+              // log.error(ex);
                 opengl = false;
             } // macs/linux fail here
         }
@@ -3073,7 +3073,7 @@ namespace MissionPlanner.Controls
             }
             catch (Exception ex)
             {
-                log.Info(ex.ToString());
+              // log.info(ex.ToString());
                 opengl = false;
             }
         }

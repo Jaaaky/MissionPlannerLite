@@ -1,4 +1,4 @@
-﻿// <copyright file="AdbSocket.cs" company="The Android Open Source Project, Ryan Conrad, Quamotion">
+// <copyright file="AdbSocket.cs" company="The Android Open Source Project, Ryan Conrad, Quamotion">
 // Copyright (c) The Android Open Source Project, Ryan Conrad, Quamotion. All rights reserved.
 // </copyright>
 
@@ -270,7 +270,7 @@ namespace SharpAdbClient
             }
             catch (SocketException sex)
             {
-                Log.Error(TAG, sex);
+                // log.Error(TAG, sex);
                 throw;
             }
         }
@@ -294,12 +294,12 @@ namespace SharpAdbClient
                     count = this.socket.Receive(buffer, buflen, SocketFlags.None);
                     if (count < 0)
                     {
-                        Log.Error(TAG, "read: channel EOF");
+                        // log.Error(TAG, "read: channel EOF");
                         throw new AdbException("EOF");
                     }
                     else if (count == 0)
                     {
-                        Log.Info(TAG, "DONE with Read");
+                      // log.info(TAG, "DONE with Read");
                     }
                     else
                     {
@@ -340,7 +340,7 @@ namespace SharpAdbClient
             }
             catch (IOException e)
             {
-                Log.Error(TAG, e);
+                // log.Error(TAG, e);
                 return false;
             }
 
@@ -375,7 +375,7 @@ namespace SharpAdbClient
             {
                 var message = this.ReadString();
                 resp.Message = message;
-                Log.Error(TAG, "Got reply '{0}', diag='{1}'", this.ReplyToString(reply), resp.Message);
+                // log.Error(TAG, "Got reply '{0}', diag='{1}'", this.ReplyToString(reply), resp.Message);
             }
 
             return resp;
@@ -399,7 +399,7 @@ namespace SharpAdbClient
             }
             catch (DecoderFallbackException uee)
             {
-                Log.Error(TAG, uee);
+                // log.Error(TAG, uee);
                 result = string.Empty;
             }
 

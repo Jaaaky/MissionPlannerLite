@@ -207,7 +207,7 @@ namespace MissionPlanner.Log
 
         static Bitmap GetMap(RectLatLng area)
         {
-            GMapProvider type = GMap.NET.MapProviders.GoogleSatelliteMapProvider.Instance;
+            GMapProvider type = GMap.NET.MapProviders.BingHybridMapProvider.Instance;
             PureProjection prj = type.Projection;
 
             int zoom = 16;

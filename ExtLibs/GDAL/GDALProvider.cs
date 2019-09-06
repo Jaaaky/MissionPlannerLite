@@ -57,7 +57,7 @@ namespace GDAL
             {
                 if (overlays == null)
                 {
-                    overlays = new GMapProvider[] { GoogleSatelliteMapProvider.Instance, this };
+                    overlays = new GMapProvider[] { BingHybridMapProvider.Instance, this };
                 }
                 return overlays;
             }

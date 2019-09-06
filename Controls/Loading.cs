@@ -1,15 +1,15 @@
-﻿using System;
+using System;
 using System.ComponentModel;
 using System.Reflection;
 using System.Windows.Forms;
 using MissionPlanner.Utilities;
-using log4net;
+// //using log4net;
 
 namespace MissionPlanner.Controls
 {
     public partial class Loading : Form
     {
-        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        // private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         static Loading Instance;
 
@@ -29,7 +29,7 @@ namespace MissionPlanner.Controls
 
         public new static void Close()
         {
-            log.Info("Loading.Close()");
+            // log.Info("Loading.Close()");
             lock (locker)
             {
                 if (Instance != null)
@@ -57,7 +57,7 @@ namespace MissionPlanner.Controls
         {
             //if (MainV2.MONO)
             {
-                log.Info(Text);
+                // log.Info(Text);
                 //return;
             }
 
@@ -70,7 +70,7 @@ namespace MissionPlanner.Controls
                     return;
                 }
 
-                log.Info("Create Instance");
+                // log.Info("Create Instance");
                 // create form on ui thread
                 MainV2.instance.Invoke((MethodInvoker) delegate
                 {

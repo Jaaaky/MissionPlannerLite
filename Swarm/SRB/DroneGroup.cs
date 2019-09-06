@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Threading;
-using log4net;
+//using log4net;
 using MissionPlanner.Controls;
 using MissionPlanner.GCSViews.ConfigurationView;
 using MissionPlanner.Utilities;
@@ -21,7 +21,7 @@ namespace MissionPlanner.Swarm.SRB
             Land
         }
 
-        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+     //   private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         Mode _currentMode = Mode.idle;
 
@@ -89,7 +89,7 @@ namespace MissionPlanner.Swarm.SRB
                         }
                         catch (Exception ex)
                         {
-                            log.Error(ex);
+                          // log.error(ex);
                             Loading.ShowLoading("Communication with one of the drones is failing\n" + ex);
 
                             return;
@@ -119,7 +119,7 @@ namespace MissionPlanner.Swarm.SRB
                         }
                         catch (Exception ex)
                         {
-                            log.Error(ex);
+                          // log.error(ex);
                             Loading.ShowLoading("Communication with one of the drones is failing\n" + ex);
 
                             return;

@@ -4,9 +4,9 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
-  <ItemGroup>
+  <!-- <ItemGroup>
     <PackageReference Include="log4net" Version="2.0.8" />
-  </ItemGroup>
+  </ItemGroup> -->
 
   <ItemGroup>
     <ProjectReference Include="..\ArduPilot\MissionPlanner.ArduPilot.csproj" />

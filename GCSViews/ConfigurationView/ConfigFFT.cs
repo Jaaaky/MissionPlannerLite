@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using System.Reflection;
 using System.Windows.Forms;
-using log4net;
+//using log4net;
 using MissionPlanner.Controls;
 using MissionPlanner.Utilities;
 
@@ -15,7 +15,7 @@ namespace MissionPlanner.GCSViews.ConfigurationView
         private MavlinkCheckBoxBitMask LOG_BITMASK;
         private GroupBox groupBox1;
         private GroupBox groupBox2;
-        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+     //   private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         /*
         INS_LOG_BAT_CNT is just the number of samples taken. Must be at least 
         twice the frequency you're interested in.

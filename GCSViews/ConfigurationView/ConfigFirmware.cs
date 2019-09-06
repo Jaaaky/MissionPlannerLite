@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using log4net;
+//using log4net;
 using MissionPlanner.ArduPilot;
 using MissionPlanner.Comms;
 using MissionPlanner.Controls;
@@ -17,7 +17,7 @@ namespace MissionPlanner.GCSViews.ConfigurationView
 {
     partial class ConfigFirmware : MyUserControl, IActivate, IDeactivate
     {
-        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+     //   private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private static List<Firmware.software> softwares = new List<Firmware.software>();
         private readonly Firmware fw = new Firmware();
         private string custom_fw_dir = "";
@@ -88,8 +88,8 @@ namespace MissionPlanner.GCSViews.ConfigurationView
                 try
                 {
                     up.identify();
-                    log.InfoFormat("Found board type {0} boardrev {1} bl rev {2} fwmax {3} on {4}", up.board_type,
-                        up.board_rev, up.bl_rev, up.fw_maxsize, port);
+                  // log.infoFormat("Found board type {0} boardrev {1} bl rev {2} fwmax {3} on {4}", up.board_type,
+                        //up.board_rev, up.bl_rev, up.fw_maxsize, port);
 
                     detectedport = port;
 
@@ -284,7 +284,7 @@ namespace MissionPlanner.GCSViews.ConfigurationView
             }
             catch (Exception ex)
             {
-                log.Error(ex);
+              // log.error(ex);
             }
         }
 
@@ -405,7 +405,7 @@ namespace MissionPlanner.GCSViews.ConfigurationView
             }
             else
             {
-                log.Info("No Home " + temp.name + " " + temp.url2560);
+              // log.info("No Home " + temp.name + " " + temp.url2560);
             }
         }
 
@@ -491,7 +491,7 @@ namespace MissionPlanner.GCSViews.ConfigurationView
 
         private void port_Progress(int progress, string status)
         {
-            log.InfoFormat("Progress {0} ", progress);
+          // log.infoFormat("Progress {0} ", progress);
             this.progress.Value = progress;
             this.progress.Refresh();
         }

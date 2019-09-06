@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -620,7 +620,7 @@ namespace MissionPlanner.Utilities
 
 
         /// <summary>
-        /// From http://code.google.com/p/gentlenav/source/browse/trunk/Tools/XP_UDB_HILSIM/utility.cpp
+        /// From http://code.noaa.io/p/gentlenav/source/browse/trunk/Tools/XP_UDB_HILSIM/utility.cpp
         /// Converts from xplanes to fixed body ref
         /// </summary>
         /// <param name="x"></param>

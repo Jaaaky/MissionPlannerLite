@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -9,14 +9,14 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using ClipperLib;
-using log4net;
+//using log4net;
 using MissionPlanner.Comms;
 
 namespace MissionPlanner.Utilities
 {
     public class AutoConnect
     {
-        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+     //   private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         private static List<ConnectionInfo> connectionInfos = new List<ConnectionInfo>()
         {
@@ -67,7 +67,7 @@ namespace MissionPlanner.Utilities
                 if (connectionInfo.Enabled == false)
                     continue;
 
-                log.Info(connectionInfo.ToJSON());
+              // log.info(connectionInfo.ToJSON());
 
                 if (connectionInfo.Format == ConnectionFormat.MAVLink)
                 {
@@ -80,7 +80,7 @@ namespace MissionPlanner.Utilities
                         }
                         catch (Exception ex)
                         {
-                            log.Error(ex);
+                          // log.error(ex);
                         }
 
                         continue;
@@ -97,7 +97,7 @@ namespace MissionPlanner.Utilities
                         }
                         catch (Exception ex)
                         {
-                            log.Error(ex);
+                          // log.error(ex);
                         }
 
                         continue;
@@ -149,7 +149,7 @@ namespace MissionPlanner.Utilities
                         }
                         catch (Exception ex)
                         {
-                            log.Error(ex);
+                          // log.error(ex);
                         }
 
                         continue;
@@ -166,7 +166,7 @@ namespace MissionPlanner.Utilities
                         }
                         catch (Exception ex)
                         {
-                            log.Error(ex);
+                          // log.error(ex);
                         }
 
                         continue;
@@ -182,7 +182,7 @@ namespace MissionPlanner.Utilities
                         }
                         catch (Exception ex)
                         {
-                            log.Error(ex);
+                          // log.error(ex);
                         }
 
                         continue;
@@ -218,7 +218,7 @@ namespace MissionPlanner.Utilities
             }
             catch (Exception ex)
             {
-                log.Error(ex);
+              // log.error(ex);
             }
         }
 
@@ -241,7 +241,7 @@ namespace MissionPlanner.Utilities
             }
             catch (Exception ex)
             {
-                log.Error(ex);
+              // log.error(ex);
             }
         }
 
@@ -266,7 +266,7 @@ namespace MissionPlanner.Utilities
             }
             catch (Exception ex)
             {
-                log.Error(ex);
+              // log.error(ex);
             }
         }
 

@@ -93,7 +93,6 @@
                 get { return _loading; }
                 set {   _loading = value;log.Info("Loading " + _loading);StateHasChanged(); }
             }
-            private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
             ElementRef inputTypeFileElement;
 

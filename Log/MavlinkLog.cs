@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections;
 using System.Drawing;
@@ -12,7 +12,7 @@ using SharpKml.Dom;
 using SharpKml.Dom.GX;
 using System.Reflection;
 using System.Xml;
-using log4net;
+//using log4net;
 using ZedGraph; // Graphs
 using MissionPlanner.Utilities;
 using System.CodeDom.Compiler;
@@ -24,8 +24,8 @@ namespace MissionPlanner.Log
 {
     public partial class MavlinkLog : Form
     {
-        private static readonly ILog log =
-            LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+     //   private static readonly ILog log =
+            //LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         List<string> selection = new List<string>();
         List<string> options = new List<string>();
@@ -68,7 +68,7 @@ namespace MissionPlanner.Log
 
             Document kml = new Document();
 
-            AddNamespace(kml, "gx", "http://www.google.com/kml/ext/2.2");
+            AddNamespace(kml, "gx", "http://www.noaa.io/kml/ext/2.2");
 
             Style style = new Style();
             style.Id = "yellowLineGreenPoly";
@@ -89,7 +89,7 @@ namespace MissionPlanner.Log
             stylet.Icon = ico;
             ico.Icon =
                 new IconStyle.IconLink(
-                    new Uri("http://earth.google.com/images/kml-icons/track-directional/track-none.png"));
+                    new Uri("http://earth.noaa.io/images/kml-icons/track-directional/track-none.png"));
             stylet.Icon.Scale = 0.5;
             stylet.Label = lst;
 
@@ -416,7 +416,7 @@ namespace MissionPlanner.Log
                             }
                             catch (Exception ex)
                             {
-                                log.Debug(ex.ToString());
+                              // log.Debug(ex.ToString());
                                 CustomMessageBox.Show("Log Can not be opened. Are you still connected?");
                                 return;
                             }
@@ -499,7 +499,7 @@ namespace MissionPlanner.Log
 
                             Application.DoEvents();
 
-                            log.Info(mine.MAV.cs.firmware + " : " + logfile);
+                          // log.info(mine.MAV.cs.firmware + " : " + logfile);
 
                             foreach (var flightdata in flightdataDictionary)
                             {
@@ -646,7 +646,7 @@ namespace MissionPlanner.Log
                             }
                             catch (Exception ex)
                             {
-                                log.Debug(ex.ToString());
+                              // log.Debug(ex.ToString());
                                 CustomMessageBox.Show("Log Can not be opened. Are you still connected?");
                                 return;
                             }
@@ -790,7 +790,7 @@ namespace MissionPlanner.Log
                 }
                 catch (Exception ex)
                 {
-                    log.Debug(ex.ToString());
+                  // log.Debug(ex.ToString());
                     CustomMessageBox.Show("Log Can not be opened. Are you still connected?");
                     return options;
                 }
@@ -827,7 +827,7 @@ namespace MissionPlanner.Log
 
                     if (data == null)
                     {
-                        log.Info("No info on packet");
+                      // log.info("No info on packet");
                         continue;
                     }
 
@@ -947,7 +947,7 @@ namespace MissionPlanner.Log
                 }
                 catch (Exception ex)
                 {
-                    log.Info(ex.ToString());
+                  // log.info(ex.ToString());
                 }
                 try
                 {
@@ -957,7 +957,7 @@ namespace MissionPlanner.Log
                 }
                 catch (Exception ex)
                 {
-                    log.Info(ex.ToString());
+                  // log.info(ex.ToString());
                 }
 
                 // custom sort based on packet name
@@ -1241,7 +1241,7 @@ namespace MissionPlanner.Log
         {
             System.Windows.Forms.Label lbl_head = new System.Windows.Forms.Label();
 
-            log.Info("Add Header " + Name);
+          // log.info("Add Header " + Name);
 
             lbl_head.Text = Name;
             lbl_head.Name = Name;
@@ -1437,7 +1437,7 @@ namespace MissionPlanner.Log
                             }
                             catch (Exception ex)
                             {
-                                log.Debug(ex.ToString());
+                              // log.Debug(ex.ToString());
                                 CustomMessageBox.Show("Log Can not be opened. Are you still connected?");
                                 return;
                             }
@@ -1512,7 +1512,7 @@ namespace MissionPlanner.Log
                                 }
                                 catch (Exception ex)
                                 {
-                                    log.Debug(ex.ToString());
+                                  // log.Debug(ex.ToString());
                                     CustomMessageBox.Show("Log Can not be opened. Are you still connected?");
                                     return;
                                 }
@@ -1592,7 +1592,7 @@ namespace MissionPlanner.Log
                             }
                             catch (Exception ex)
                             {
-                                log.Debug(ex.ToString());
+                              // log.Debug(ex.ToString());
                                 CustomMessageBox.Show("Log Can not be opened. Are you still connected?");
                                 return;
                             }

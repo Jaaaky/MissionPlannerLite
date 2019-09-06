@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using System.Reflection;
 using System.Threading;
-using log4net;
+// //using log4net;
 using MissionPlanner.Comms;
 
 // Written by Michael Oborne
@@ -10,7 +10,7 @@ namespace MissionPlanner.Arduino
 {
     public class ArduinoSTKv2 : SerialPort, IArduinoComms
     {
-        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        // private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public event ProgressEventHandler Progress;
 
         public new void Open()
@@ -158,7 +158,7 @@ namespace MissionPlanner.Arduino
 
                 byte[] command = {0x13, (byte) (sending >> 8), (byte) (sending & 0xff)};
 
-                log.InfoFormat(startfrom + (length - totalleft) + " - " + sending);
+                // log.InfoFormat(startfrom + (length - totalleft) + " - " + sending);
 
                 Array.Resize(ref command, sending + 10); // sending + head
 
@@ -174,7 +174,7 @@ namespace MissionPlanner.Arduino
 
                 if (command[1] != 0)
                 {
-                    log.InfoFormat("No Sync");
+                    // log.InfoFormat("No Sync");
                     return false;
                 }
             }
@@ -198,7 +198,7 @@ namespace MissionPlanner.Arduino
                 throw new Exception("Address must be an even number");
             }
 
-            log.InfoFormat("Sending address   " + address/2);
+            // log.InfoFormat("Sending address   " + address/2);
 
             var tempstart = address/2; // words
             byte[] temp =
@@ -256,7 +256,7 @@ namespace MissionPlanner.Arduino
 
                 byte[] command = {0x15, (byte) (sending >> 8), (byte) (sending & 0xff)};
 
-                log.InfoFormat(startfrom + (length - totalleft) + " - " + sending);
+                // log.InfoFormat(startfrom + (length - totalleft) + " - " + sending);
 
                 Array.Resize(ref command, sending + 10); // sending + head
 
@@ -272,7 +272,7 @@ namespace MissionPlanner.Arduino
 
                 if (command[1] != 0)
                 {
-                    log.InfoFormat("No Sync");
+                    // log.InfoFormat("No Sync");
                     return false;
                 }
             }
@@ -304,7 +304,7 @@ namespace MissionPlanner.Arduino
             {
                 if (item.Equals(new Chip("", sig1, sig2, sig3, 0)))
                 {
-                    log.Debug("Match " + item);
+                    // log.Debug("Match " + item);
                     return item;
                 }
             }

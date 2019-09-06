@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -267,7 +267,7 @@ namespace MissionPlanner.HIL
             }
             catch (Exception e)
             {
-                log.Info("Xplanes udp send error " + e.Message);
+              // log.info("Xplanes udp send error " + e.Message);
             }
         }
 
@@ -375,7 +375,7 @@ namespace MissionPlanner.HIL
             }
             catch (Exception e)
             {
-                log.Info("Xplanes udp send error " + e.Message);
+              // log.info("Xplanes udp send error " + e.Message);
             }
         }
 
@@ -438,7 +438,7 @@ namespace MissionPlanner.HIL
             }
             catch (Exception e)
             {
-                log.Info("Xplanes udp send error " + e.Message);
+              // log.info("Xplanes udp send error " + e.Message);
             }
         }
 

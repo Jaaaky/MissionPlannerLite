@@ -1,5 +1,5 @@
-﻿using GMap.NET;
-using log4net;
+using GMap.NET;
+//using log4net;
 using OSGeo.GDAL;
 using OSGeo.OGR;
 using OSGeo.OSR;
@@ -14,13 +14,13 @@ namespace GDAL
 {
     public static class GDAL
     {
-        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+     //   private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         static List<GeoBitmap> _cache = new List<GeoBitmap>();
 
         static GDAL()
         {
-            log.InfoFormat("GDAL static ctor");
+          // log.infoFormat("GDAL static ctor");
             GdalConfiguration.ConfigureGdal();
         }
 
@@ -51,7 +51,7 @@ namespace GDAL
                 }
                 catch (Exception ex)
                 {
-                    log.Error(ex);
+                  // log.error(ex);
                 }
             }
 
@@ -63,66 +63,66 @@ namespace GDAL
         {
             using (var ds = OSGeo.GDAL.Gdal.Open(file, OSGeo.GDAL.Access.GA_ReadOnly))
             {
-                log.InfoFormat("Raster dataset parameters:");
-                log.InfoFormat("  Projection: " + ds.GetProjectionRef());
-                log.InfoFormat("  RasterCount: " + ds.RasterCount);
-                log.InfoFormat("  RasterSize (" + ds.RasterXSize + "," + ds.RasterYSize + ")");
+              // log.infoFormat("Raster dataset parameters:");
+              // log.infoFormat("  Projection: " + ds.GetProjectionRef());
+              // log.infoFormat("  RasterCount: " + ds.RasterCount);
+              // log.infoFormat("  RasterSize (" + ds.RasterXSize + "," + ds.RasterYSize + ")");
 
                 OSGeo.GDAL.Driver drv = ds.GetDriver();
 
-                log.InfoFormat("Using driver " + drv.LongName);
+              // log.infoFormat("Using driver " + drv.LongName);
 
                 string[] metadata = ds.GetMetadata("");
                 if (metadata.Length > 0)
                 {
-                    log.InfoFormat("  Metadata:");
+                  // log.infoFormat("  Metadata:");
                     for (int iMeta = 0; iMeta < metadata.Length; iMeta++)
                     {
                         // log.InfoFormat("    " + iMeta + ":  " + metadata[iMeta]);
                     }
-                    log.InfoFormat("");
+                  // log.infoFormat("");
                 }
 
                 metadata = ds.GetMetadata("IMAGE_STRUCTURE");
                 if (metadata.Length > 0)
                 {
-                    log.InfoFormat("  Image Structure Metadata:");
+                  // log.infoFormat("  Image Structure Metadata:");
                     for (int iMeta = 0; iMeta < metadata.Length; iMeta++)
                     {
-                        log.InfoFormat("    " + iMeta + ":  " + metadata[iMeta]);
+                      // log.infoFormat("    " + iMeta + ":  " + metadata[iMeta]);
                     }
-                    log.InfoFormat("");
+                  // log.infoFormat("");
                 }
 
                 metadata = ds.GetMetadata("SUBDATASETS");
                 if (metadata.Length > 0)
                 {
-                    log.InfoFormat("  Subdatasets:");
+                  // log.infoFormat("  Subdatasets:");
                     for (int iMeta = 0; iMeta < metadata.Length; iMeta++)
                     {
-                        log.InfoFormat("    " + iMeta + ":  " + metadata[iMeta]);
+                      // log.infoFormat("    " + iMeta + ":  " + metadata[iMeta]);
                     }
-                    log.InfoFormat("");
+                  // log.infoFormat("");
                 }
 
                 metadata = ds.GetMetadata("GEOLOCATION");
                 if (metadata.Length > 0)
                 {
-                    log.InfoFormat("  Geolocation:");
+                  // log.infoFormat("  Geolocation:");
                     for (int iMeta = 0; iMeta < metadata.Length; iMeta++)
                     {
-                        log.InfoFormat("    " + iMeta + ":  " + metadata[iMeta]);
+                      // log.infoFormat("    " + iMeta + ":  " + metadata[iMeta]);
                     }
-                    log.InfoFormat("");
+                  // log.infoFormat("");
                 }
 
-                log.InfoFormat("Corner Coordinates:");
-                log.InfoFormat("  Upper Left (" + GDALInfoGetPosition(ds, 0.0, 0.0) + ")");
-                log.InfoFormat("  Lower Left (" + GDALInfoGetPosition(ds, 0.0, ds.RasterYSize) + ")");
-                log.InfoFormat("  Upper Right (" + GDALInfoGetPosition(ds, ds.RasterXSize, 0.0) + ")");
-                log.InfoFormat("  Lower Right (" + GDALInfoGetPosition(ds, ds.RasterXSize, ds.RasterYSize) + ")");
-                log.InfoFormat("  Center (" + GDALInfoGetPosition(ds, ds.RasterXSize / 2, ds.RasterYSize / 2) + ")");
-                log.InfoFormat("");
+              // log.infoFormat("Corner Coordinates:");
+              // log.infoFormat("  Upper Left (" + GDALInfoGetPosition(ds, 0.0, 0.0) + ")");
+              // log.infoFormat("  Lower Left (" + GDALInfoGetPosition(ds, 0.0, ds.RasterYSize) + ")");
+              // log.infoFormat("  Upper Right (" + GDALInfoGetPosition(ds, ds.RasterXSize, 0.0) + ")");
+              // log.infoFormat("  Lower Right (" + GDALInfoGetPosition(ds, ds.RasterXSize, ds.RasterYSize) + ")");
+              // log.infoFormat("  Center (" + GDALInfoGetPosition(ds, ds.RasterXSize / 2, ds.RasterYSize / 2) + ")");
+              // log.infoFormat("");
 
                 string projection = ds.GetProjectionRef();
                 if (projection != null)
@@ -132,35 +132,35 @@ namespace GDAL
                     {
                         string wkt;
                         srs.ExportToPrettyWkt(out wkt, 0);
-                        log.InfoFormat("Coordinate System is:");
-                        log.InfoFormat(wkt);
+                      // log.infoFormat("Coordinate System is:");
+                      // log.infoFormat(wkt);
                     }
                     else
                     {
-                        log.InfoFormat("Coordinate System is:");
-                        log.InfoFormat(projection);
+                      // log.infoFormat("Coordinate System is:");
+                      // log.infoFormat(projection);
                     }
                 }
 
                 if (ds.GetGCPCount() > 0)
                 {
-                    log.InfoFormat("GCP Projection: ", ds.GetGCPProjection());
+                  // log.infoFormat("GCP Projection: ", ds.GetGCPProjection());
                     GCP[] GCPs = ds.GetGCPs();
                     for (int i = 0; i < ds.GetGCPCount(); i++)
                     {
-                        log.InfoFormat("GCP[" + i + "]: Id=" + GCPs[i].Id + ", Info=" + GCPs[i].Info);
-                        log.InfoFormat("          (" + GCPs[i].GCPPixel + "," + GCPs[i].GCPLine + ") -> ("
-                                     + GCPs[i].GCPX + "," + GCPs[i].GCPY + "," + GCPs[i].GCPZ + ")");
-                        log.InfoFormat("");
+                      // log.infoFormat("GCP[" + i + "]: Id=" + GCPs[i].Id + ", Info=" + GCPs[i].Info);
+                      // log.infoFormat("          (" + GCPs[i].GCPPixel + "," + GCPs[i].GCPLine + ") -> ("
+                                     //+ GCPs[i].GCPX + "," + GCPs[i].GCPY + "," + GCPs[i].GCPZ + ")");
+                      // log.infoFormat("");
                     }
-                    log.InfoFormat("");
+                  // log.infoFormat("");
 
                     double[] transform = new double[6];
                     Gdal.GCPsToGeoTransform(GCPs, transform, 0);
-                    log.InfoFormat("GCP Equivalent geotransformation parameters: ", ds.GetGCPProjection());
-                    for (int i = 0; i < 6; i++)
-                        log.InfoFormat("t[" + i + "] = " + transform[i].ToString());
-                    log.InfoFormat("");
+                  // log.infoFormat("GCP Equivalent geotransformation parameters: ", ds.GetGCPProjection());
+                    //for (int i = 0; i < 6; i++)
+                      // log.infoFormat("t[" + i + "] = " + transform[i].ToString());
+                  // log.infoFormat("");
                 }
 
                 var TL = GDALInfoGetPositionDouble(ds, 0.0, 0.0);
@@ -240,7 +240,7 @@ namespace GDAL
                         }
                         catch (Exception ex)
                         {
-                            log.Error(ex);
+                          // log.error(ex);
                             //throw new Exception("Bad Image "+image.File);
                         }
                     }

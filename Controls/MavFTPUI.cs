@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -14,7 +14,7 @@ using ExifLibrary;
 using Force.Crc32;
 using ICSharpCode.SharpZipLib.Checksum;
 using Ionic.Zip;
-using log4net;
+// //using log4net;
 using MissionPlanner.ArduPilot.Mavlink;
 using MissionPlanner.Utilities;
 using OpenTK.Audio.OpenAL;
@@ -23,8 +23,8 @@ namespace MissionPlanner.Controls
 {
     public partial class MavFTPUI : UserControl
     {
-        private static readonly ILog log =
-            LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        // private static readonly ILog log =
+        //     LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private MAVLinkInterface _mav;
         private MAVFtp _mavftp;
 

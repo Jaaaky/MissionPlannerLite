@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
@@ -6,14 +6,14 @@ using System.Text.RegularExpressions;
 using ICSharpCode.SharpZipLib.Zip;
 using System.Threading;
 using System.Collections;
-using log4net;
+//using log4net;
 
 namespace MissionPlanner.Utilities
 {
     public class srtm : IDisposable
     {
-        private static readonly ILog log =
-            LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+     //   private static readonly ILog log =
+            //LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public enum tiletype
         {
@@ -39,7 +39,7 @@ namespace MissionPlanner.Utilities
             get { return _datadirectory; }
             set
             {
-                log.Info(value);
+              // log.info(value);
                 _datadirectory = value;
             }
         }
@@ -63,7 +63,7 @@ namespace MissionPlanner.Utilities
 
         static srtm()
         {
-            log.Info(".cctor");
+          // log.info(".cctor");
 
             // running tostring at a high rate was costing cpu
             for (int y = -90; y <= 90; y++)
@@ -116,7 +116,7 @@ namespace MissionPlanner.Utilities
             }
             catch (Exception ex)
             {
-                log.Error(ex);
+              // log.error(ex);
             }
 
             try
@@ -132,7 +132,7 @@ namespace MissionPlanner.Utilities
             }
             catch (Exception ex)
             {
-                log.Error(ex);
+              // log.error(ex);
             }
 
             //lat += 1 / 1199.0;
@@ -370,7 +370,7 @@ namespace MissionPlanner.Utilities
                         {
                             if (!queue.Contains(filename))
                             {
-                                log.Info("Getting " + filename);
+                              // log.info("Getting " + filename);
                                 queue.Add(filename);
                             }
                         }
@@ -380,7 +380,7 @@ namespace MissionPlanner.Utilities
             }
             catch (Exception ex)
             {
-                log.Error(ex);
+              // log.error(ex);
                 return altresponce.Invalid;
             }
 
@@ -484,7 +484,7 @@ namespace MissionPlanner.Utilities
 
         static MemoryStream readFile(string filename)
         {
-            log.Info(filename);
+          // log.info(filename);
 
             if (filecache.ContainsKey(filename))
             {
@@ -507,7 +507,7 @@ namespace MissionPlanner.Utilities
 
         static void requestRunner()
         {
-            log.Info("requestRunner start");
+          // log.info("requestRunner start");
 
             requestThreadrun = true;
 
@@ -526,7 +526,7 @@ namespace MissionPlanner.Utilities
 
                     if (item != "")
                     {
-                        log.Info(item);
+                      // log.info(item);
                         get3secfile(item);
                         lock (objlock)
                         {
@@ -536,7 +536,7 @@ namespace MissionPlanner.Utilities
                 }
                 catch (Exception ex)
                 {
-                    log.Error(ex);
+                  // log.error(ex);
                 }
                 Thread.Sleep(1000);
             }
@@ -599,7 +599,7 @@ namespace MissionPlanner.Utilities
                 if (!String.IsNullOrEmpty(Settings.Instance.UserAgent))
                     ((HttpWebRequest)req).UserAgent = Settings.Instance.UserAgent;
 
-                log.Info("Get " + url);
+              // log.info("Get " + url);
 
                 using (WebResponse res = req.GetResponse())
                 using (Stream resstream = res.GetResponseStream())
@@ -624,7 +624,7 @@ namespace MissionPlanner.Utilities
                     bw.Flush();
                     bw.Close();
 
-                    log.Info("Got " + url + " " + size);
+                  // log.info("Got " + url + " " + size);
 
                     FastZip fzip = new FastZip();
 
@@ -636,7 +636,7 @@ namespace MissionPlanner.Utilities
             }
             catch (Exception ex)
             {
-                log.Error(ex);
+              // log.error(ex);
             }
         }
 
@@ -671,7 +671,7 @@ namespace MissionPlanner.Utilities
 
             try
             {
-                log.Info("srtm req " + url);
+              // log.info("srtm req " + url);
 
                 var req = (HttpWebRequest)HttpWebRequest.Create(url);
                 if(!String.IsNullOrEmpty(Settings.Instance.UserAgent))
@@ -716,7 +716,7 @@ namespace MissionPlanner.Utilities
             }
             catch (WebException ex)
             {
-                log.Error(ex);
+              // log.error(ex);
                 throw;
             }
 

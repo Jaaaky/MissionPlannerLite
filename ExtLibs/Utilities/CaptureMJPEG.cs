@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,15 +6,15 @@ using System.Net;
 using System.IO;
 using System.Drawing;
 using System.Threading;
-using log4net;
+//using log4net;
 using MissionPlanner.Utilities.Drawing;
 
 namespace MissionPlanner.Utilities
 {
     public class CaptureMJPEG
     {
-        private static readonly ILog log =
-    LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+     //   private static readonly ILog log =
+    //LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         static Thread asyncthread;
         static bool running = false;
@@ -90,7 +90,7 @@ namespace MissionPlanner.Utilities
                 // Get the response.
                 WebResponse response = request.GetResponse();
                 // Display the status.
-                log.Debug(((HttpWebResponse)response).StatusDescription);
+              // log.Debug(((HttpWebResponse)response).StatusDescription);
                 // Get the stream containing content returned by the server.
                 Stream dataStream = response.GetResponseStream();
 
@@ -177,7 +177,8 @@ namespace MissionPlanner.Utilities
                         System.Threading.Thread.Sleep(1);
                         ReadLine(br);
                     }
-                    catch (Exception ex) { log.Info(ex); break; }
+                    catch (Exception ex) { //log.Info(ex); 
+                        break; }
                 }
 
                 // clear last image
@@ -188,7 +189,9 @@ namespace MissionPlanner.Utilities
                 response.Close();
 
             }
-            catch (Exception ex) { log.Error(ex); }
+            catch (Exception ex) {
+                //log.Error(ex);
+            }
 
             // dont stop trying until we are told to stop
             if (running)

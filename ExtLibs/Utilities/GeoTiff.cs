@@ -1,4 +1,4 @@
-﻿using BitMiracle.LibTiff.Classic;
+using BitMiracle.LibTiff.Classic;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,14 +7,14 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using GMap.NET;
-using log4net;
+//using log4net;
 
 namespace MissionPlanner.Utilities
 {
     public class GeoTiff
     {
-        private static readonly ILog log =
-            LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+     //   private static readonly ILog log =
+            //LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         private static Dictionary<string, float[,]> cache = new Dictionary<string, float[,]>();
 
@@ -26,7 +26,7 @@ namespace MissionPlanner.Utilities
             {
                 FileName = filename;
 
-                log.InfoFormat("GeoTiff {0}", filename);
+              // log.infoFormat("GeoTiff {0}", filename);
 
                 using (Tiff tiff = Tiff.Open(filename, "r"))
                 {
@@ -44,25 +44,25 @@ namespace MissionPlanner.Utilities
                     y = BitConverter.ToDouble(tiepoint[1].ToByteArray(), 0 + 32);
                     z = BitConverter.ToDouble(tiepoint[1].ToByteArray(), 0 + 40);
 
-                    log.InfoFormat("Tie Point ({0},{1},{2}) --> ({3},{4},{5})", i, j, k, x, y, z);
+                  // log.infoFormat("Tie Point ({0},{1},{2}) --> ({3},{4},{5})", i, j, k, x, y, z);
 
                     xscale = BitConverter.ToDouble(modelscale[1].ToByteArray(), 0);
                     yscale = BitConverter.ToDouble(modelscale[1].ToByteArray(), 0 + 8);
                     zscale = BitConverter.ToDouble(modelscale[1].ToByteArray(), 0 + 16);
 
-                    log.InfoFormat("Scale ({0},{1},{2})", xscale, yscale, zscale);
+                  // log.infoFormat("Scale ({0},{1},{2})", xscale, yscale, zscale);
 
                     Area = new RectLatLng(y, x, width*xscale, height*yscale);
 
-                    log.InfoFormat("Coverage {0}", Area.ToString());
+                  // log.infoFormat("Coverage {0}", Area.ToString());
 
-                    log.InfoFormat("CacheAble {0}", cacheable.ToString());
+                  // log.infoFormat("CacheAble {0}", cacheable.ToString());
 
                     // starts from top left so x + y -
                     x += xscale / 2.0;
                     y -= yscale / 2.0;
 
-                    log.InfoFormat("Start Point ({0},{1},{2}) --> ({3},{4},{5})", i, j, k, x, y, z);
+                  // log.infoFormat("Start Point ({0},{1},{2}) --> ({3},{4},{5})", i, j, k, x, y, z);
 
                     GeoTiff.index.Add(this);
 
@@ -132,7 +132,7 @@ namespace MissionPlanner.Utilities
                 }
                 catch (Exception ex)
                 {
-                    log.Error(ex);
+                  // log.error(ex);
                 }
             }
         }

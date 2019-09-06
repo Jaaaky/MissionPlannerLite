@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Diagnostics;
@@ -12,14 +12,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ICSharpCode.SharpZipLib.Checksum;
 using MissionPlanner.Controls;
-using log4net;
+//using log4net;
 
 namespace MissionPlanner.Utilities
 {
     class Update
     {
-        private static readonly ILog log =
-            LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+     //   private static readonly ILog log =
+            //LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         static bool MONO = false;
         public static bool dobeta = false;
@@ -75,26 +75,26 @@ namespace MissionPlanner.Utilities
                 }
                 catch (Exception ex)
                 {
-                    log.Error("Exception during update", ex);
+                  // log.error("Exception during update", ex);
                 }
                 if (frmProgressReporter != null)
                     frmProgressReporter.UpdateProgressAndStatus(-1, "Starting Updater");
-                log.Info("Starting new process: " + process.StartInfo.FileName + " with " +
-                         process.StartInfo.Arguments);
+              // log.info("Starting new process: " + process.StartInfo.FileName + " with " +
+                         //process.StartInfo.Arguments);
                 process.Start();
-                log.Info("Quitting existing process");
+              // log.info("Quitting existing process");
 
                 if (frmProgressReporter != null)
                     frmProgressReporter.BeginInvoke((Action) delegate { Application.Exit(); });
             }
             catch (AggregateException ex)
             {
-                log.Error("Update Failed", ex.InnerException);
+              // log.error("Update Failed", ex.InnerException);
                 CustomMessageBox.Show("Update Failed " + ex.InnerException?.Message);
             }
             catch (Exception ex)
             {
-                log.Error("Update Failed", ex);
+              // log.error("Update Failed", ex);
                 CustomMessageBox.Show("Update Failed " + ex.Message);
             }
         }
@@ -122,12 +122,12 @@ namespace MissionPlanner.Utilities
                 new System.Net.Security.RemoteCertificateValidationCallback(
                     (sender, certificate, chain, policyErrors) => { return true; });
 
-            log.Debug(path);
+          // log.Debug(path);
 
             // Create a request using a URL that can receive a post. 
             string requestUriString = baseurl;
 
-            log.Info("Checking for update at: " + requestUriString);
+          // log.info("Checking for update at: " + requestUriString);
             var webRequest = WebRequest.Create(requestUriString);
             if (!String.IsNullOrEmpty(Settings.Instance.UserAgent))
                 ((HttpWebRequest)webRequest).UserAgent = Settings.Instance.UserAgent;
@@ -144,7 +144,7 @@ namespace MissionPlanner.Utilities
             using (var response = webRequest.GetResponse())
             {
                 // Display the status.
-                log.Debug("Response status: " + ((HttpWebResponse) response).StatusDescription);
+              // log.Debug("Response status: " + ((HttpWebResponse) response).StatusDescription);
                 // Get the stream containing content returned by the server.
 
                 if (File.Exists(path))
@@ -170,7 +170,7 @@ namespace MissionPlanner.Utilities
                         WebVersion = new Version(sr.ReadLine());
                     }
 
-                    log.Info("New file Check: local " + LocalVersion + " vs Remote " + WebVersion);
+                  // log.info("New file Check: local " + LocalVersion + " vs Remote " + WebVersion);
 
                     if (LocalVersion < WebVersion)
                     {
@@ -180,7 +180,7 @@ namespace MissionPlanner.Utilities
                 else
                 {
                     updateFound = true;
-                    log.Info("File does not exist: Getting " + path);
+                  // log.info("File does not exist: Getting " + path);
                     // get it
                 }
             }
@@ -242,7 +242,7 @@ namespace MissionPlanner.Utilities
 
         static void CheckMD5(IProgressReporterDialogue frmProgressReporter, string md5url, string baseurl)
         {
-            log.InfoFormat("get checksums {0} - base {1}", md5url, baseurl);
+          // log.infoFormat("get checksums {0} - base {1}", md5url, baseurl);
 
             string responseFromServer = "";
 
@@ -260,7 +260,7 @@ namespace MissionPlanner.Utilities
             using (StreamReader reader = new StreamReader(dataStream))
             {
                 // Display the status.
-                log.Info(((HttpWebResponse) response).StatusDescription);
+              // log.info(((HttpWebResponse) response).StatusDescription);
                 // Read the content.
                 responseFromServer = reader.ReadToEnd();
             }
@@ -348,7 +348,7 @@ namespace MissionPlanner.Utilities
                     if (!match)
                     {
                         done++;
-                        log.Info("Newer File " + file);
+                      // log.info("Newer File " + file);
 
                         if (frmProgressReporter != null && frmProgressReporter.doWorkArgs.CancelRequested)
                         {
@@ -388,12 +388,12 @@ namespace MissionPlanner.Utilities
                         }
                         else
                         {
-                            log.Info("already got new File " + file);
+                          // log.info("already got new File " + file);
                         }
                     }
                     else
                     {
-                        log.Info("Same File " + file);
+                      // log.info("Same File " + file);
 
                         if (frmProgressReporter != null)
                             frmProgressReporter.UpdateProgressAndStatus(-1, Strings.Checking + file);
@@ -415,7 +415,7 @@ namespace MissionPlanner.Utilities
                     {
                         var answer = BitConverter.ToString(md5.ComputeHash(stream)).Replace("-", "").ToLower();
 
-                        log.Debug(filename + "," + hash + "," + answer);
+                      // log.Debug(filename + "," + hash + "," + answer);
 
                         return hash == answer;
                     }
@@ -423,7 +423,7 @@ namespace MissionPlanner.Utilities
             }
             catch (Exception ex)
             {
-                log.Info("md5 fail " + ex.ToString());
+              // log.info("md5 fail " + ex.ToString());
             }
 
             return false;
@@ -450,7 +450,7 @@ namespace MissionPlanner.Utilities
                             crc.Update(buf.Take(read).ToArray());
                         }
 
-                        log.Debug(filename + "," + hash + "," + crc.Value.ToString("X"));
+                      // log.Debug(filename + "," + hash + "," + crc.Value.ToString("X"));
 
                         return hash == crc.Value.ToString("X");
                     }
@@ -458,7 +458,7 @@ namespace MissionPlanner.Utilities
             }
             catch (Exception ex)
             {
-                log.Info("crc32 fail " + ex.ToString());
+              // log.info("crc32 fail " + ex.ToString());
             }
 
             return false;
@@ -489,7 +489,7 @@ namespace MissionPlanner.Utilities
 
             ds.chunksize = (int)entry.CompressedLength;
 
-            log.InfoFormat("unzip {0}", file);
+          // log.infoFormat("unzip {0}", file);
 
             //entry.ExtractToFile(path + ".new", true);
 
@@ -532,7 +532,7 @@ namespace MissionPlanner.Utilities
                     WebRequest request = WebRequest.Create(url);
                     if (!String.IsNullOrEmpty(Settings.Instance.UserAgent))
                         ((HttpWebRequest)request).UserAgent = Settings.Instance.UserAgent;
-                    log.Info("GetNewFile " + url);
+                  // log.info("GetNewFile " + url);
                     // Set the Method property of the request to GET.
                     request.Method = "GET";
                     // Allow compressed content
@@ -544,7 +544,7 @@ namespace MissionPlanner.Utilities
                     using (WebResponse response = request.GetResponse())
                     {
                         // Display the status.
-                        log.Info(((HttpWebResponse) response).StatusDescription);
+                      // log.info(((HttpWebResponse) response).StatusDescription);
                         // Get the stream containing content returned by the server.
                         Stream dataStream = response.GetResponseStream();
 
@@ -562,7 +562,7 @@ namespace MissionPlanner.Utilities
                         {
                             DateTime dt = DateTime.Now;
 
-                            log.Debug("ContentLength: " + file + " " + bytes);
+                          // log.Debug("ContentLength: " + file + " " + bytes);
 
                             while (dataStream.CanRead)
                             {
@@ -587,20 +587,20 @@ namespace MissionPlanner.Utilities
                                 int len = dataStream.Read(buf1, 0, buf1.Length);
                                 if (len == 0)
                                 {
-                                    log.Debug("GetNewFile: 0 byte read " + file);
+                                  // log.Debug("GetNewFile: 0 byte read " + file);
                                     break;
                                 }
                                 bytes -= len;
                                 fs.Write(buf1, 0, len);
                             }
 
-                            log.Info("GetNewFile: " + file + " Done with length: " + fs.Length);
+                          // log.info("GetNewFile: " + file + " Done with length: " + fs.Length);
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    log.Error(ex);
+                  // log.error(ex);
                     fail = ex;
                     attempt++;
                     continue;
@@ -642,7 +642,7 @@ namespace MissionPlanner.Utilities
             }
             catch (Exception ex)
             {
-                log.Error(ex.ToString());
+              // log.error(ex.ToString());
                 CustomMessageBox.Show("Error getting Parameter Information");
             }
 
@@ -658,7 +658,7 @@ namespace MissionPlanner.Utilities
             }
             catch (Exception ex)
             {
-                log.Info("Write test failed");
+              // log.info("Write test failed");
                 throw new Exception("Unable to write to the install directory", ex);
             }
             finally
@@ -670,7 +670,7 @@ namespace MissionPlanner.Utilities
                 }
                 catch
                 {
-                    log.Info("Write test cleanup failed");
+                  // log.info("Write test cleanup failed");
                 }
             }
 

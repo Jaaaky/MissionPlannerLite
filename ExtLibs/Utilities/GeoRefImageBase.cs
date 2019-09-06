@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
@@ -15,7 +15,7 @@ using com.drew.imaging.jpg;
 using com.drew.imaging.tiff;
 using com.drew.metadata;
 using ExifLibrary;
-using log4net;
+//using log4net;
 using MissionPlanner.Comms;
 using MissionPlanner.Utilities;
 using MissionPlanner.Utilities.Drawing;
@@ -35,7 +35,7 @@ namespace MissionPlanner.GeoRef
     {
         public const string PHOTO_FILES_FILTER = "*.jpg;*.tif";
         public const int JXL_ID_OFFSET = 10;
-        public static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        //public static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public Dictionary<string, PictureInformation> picturesInfo = new Dictionary<string, PictureInformation>();
         public Dictionary<long, VehicleLocation> vehicleLocations = new Dictionary<long, VehicleLocation>();
         public Hashtable filedatecache = new Hashtable();
@@ -75,12 +75,12 @@ namespace MissionPlanner.GeoRef
                 }
                 catch (JpegProcessingException e)
                 {
-                    log.InfoFormat(e.Message);
+                  // log.infoFormat(e.Message);
                     return dtaken;
                 }
                 catch (TiffProcessingException e)
                 {
-                    log.InfoFormat(e.Message);
+                  // log.infoFormat(e.Message);
                     return dtaken;
                 }
 
@@ -89,7 +89,7 @@ namespace MissionPlanner.GeoRef
                     if (lcDirectory.ContainsTag(0x9003))
                     {
                         dtaken = lcDirectory.GetDate(0x9003);
-                        log.InfoFormat("does " + lcDirectory.GetTagName(0x9003) + " " + dtaken);
+                      // log.infoFormat("does " + lcDirectory.GetTagName(0x9003) + " " + dtaken);
 
                         filedatecache[fn] = dtaken;
 
@@ -99,7 +99,7 @@ namespace MissionPlanner.GeoRef
                     if (lcDirectory.ContainsTag(0x9004))
                     {
                         dtaken = lcDirectory.GetDate(0x9004);
-                        log.InfoFormat("does " + lcDirectory.GetTagName(0x9004) + " " + dtaken);
+                      // log.infoFormat("does " + lcDirectory.GetTagName(0x9004) + " " + dtaken);
 
                         filedatecache[fn] = dtaken;
 
@@ -1526,8 +1526,8 @@ namespace MissionPlanner.GeoRef
                     lastRecordN = GenPhotoStationRecord(swloctrim, picInfo.Path, picInfo.Lat, picInfo.Lon,
                         picInfo.getAltitude(useAMSLAlt, usegpsalt), 0, 0, picInfo.Yaw, picInfo.Width, picInfo.Height, lastRecordN);
 
-                    log.InfoFormat(filename + " " + picInfo.Lon + " " + picInfo.Lat + " " +
-                                   picInfo.getAltitude(useAMSLAlt, usegpsalt) + "           ");
+                  // log.infoFormat(filename + " " + picInfo.Lon + " " + picInfo.Lat + " " +
+                                   //picInfo.getAltitude(useAMSLAlt, usegpsalt) + "           ");
                 }
 
                 Serializer serializer = new Serializer();

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -15,7 +15,7 @@ using GeoAPI.CoordinateSystems.Transformations;
 using GMap.NET;
 using GMap.NET.WindowsForms;
 using GMap.NET.WindowsForms.Markers;
-using log4net;
+//using log4net;
 using MissionPlanner.ArduPilot;
 using MissionPlanner.GCSViews;
 using MissionPlanner.Maps;
@@ -27,7 +27,7 @@ namespace MissionPlanner.Grid
 {
     public partial class GridUI : Form
     {
-        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+     //   private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         // Variables
         const double rad2deg = (180 / Math.PI);
@@ -1428,7 +1428,7 @@ namespace MissionPlanner.Grid
                     }
                     catch (JpegProcessingException ex)
                     {
-                        log.InfoFormat(ex.Message);
+                      // log.infoFormat(ex.Message);
                         return;
                     }
 
@@ -1791,7 +1791,7 @@ namespace MissionPlanner.Grid
                 }
                 catch(Exception ex)
                 {
-                    log.Error(ex);
+                  // log.error(ex);
                 }
 
                 savesettings();

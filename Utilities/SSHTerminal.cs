@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Windows.Forms;
-using log4net;
+//using log4net;
 using Renci.SshNet;
 using Renci.SshNet.Common;
 using System.Drawing;
@@ -15,7 +15,7 @@ namespace MissionPlanner.Utilities
 {
     public class SSHTerminal
     {
-        private static readonly log4net.ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        //private static readonly log4net.ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public static bool threadrun;
         private readonly List<string> cmdHistory = new List<string>();
         private readonly object thisLock = new object();

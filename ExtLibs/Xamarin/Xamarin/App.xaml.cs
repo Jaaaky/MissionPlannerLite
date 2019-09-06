@@ -1,4 +1,4 @@
-﻿using log4net;
+//using log4net;
 using MissionPlanner;
 using MissionPlanner.Comms;
 using MissionPlanner.Utilities;
@@ -19,7 +19,7 @@ namespace Xamarin
 
     public partial class App : Application
     {
-        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+     //   private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         private Thread httpthread;
 
@@ -43,7 +43,7 @@ namespace Xamarin
                 }
                 catch (Exception ex)
                 {
-                    Log.Warning("", ex.ToString());
+                  // log.Warning("", ex.ToString());
                 }
             });
 
@@ -56,26 +56,26 @@ namespace Xamarin
                 }
                 catch (Exception ex)
                 {
-                    Log.Warning("", ex.ToString());
+                  // log.Warning("", ex.ToString());
                 }
             });
 
-            // setup http server
-            try
-            {
-                log.Info("start http");
-                httpthread = new Thread(new httpserver().listernforclients)
-                {
-                    Name = "motion jpg stream-network kml",
-                    IsBackground = true
-                };
-                httpthread.Start();
-            }
-            catch (Exception ex)
-            {
-                log.Error("Error starting TCP listener thread: ", ex);
-                CustomMessageBox.Show(ex.ToString());
-            }
+            // // setup http server
+            // try
+            // {
+            //   // log.info("start http");
+            //     httpthread = new Thread(new httpserver().listernforclients)
+            //     {
+            //         Name = "motion jpg stream-network kml",
+            //         IsBackground = true
+            //     };
+            //     httpthread.Start();
+            // }
+            // catch (Exception ex)
+            // {
+            //   // log.error("Error starting TCP listener thread: ", ex);
+            //     CustomMessageBox.Show(ex.ToString());
+            // }
 
             CustomMessageBox.ShowEvent += CustomMessageBox_ShowEvent;
             MAVLinkInterface.CreateIProgressReporterDialogue += CreateIProgressReporterDialogue;
@@ -103,13 +103,13 @@ namespace Xamarin
         protected override void OnSleep()
         {
             // Handle when your app sleeps
-            Log.Warning("", "OnSleep");
+          // log.Warning("", "OnSleep");
         }
 
         protected override void OnResume()
         {
             // Handle when your app resumes
-            Log.Warning("", "OnResume");
+          // log.Warning("", "OnResume");
         }
 
 
@@ -132,11 +132,11 @@ namespace Xamarin
                 MainV2.Comports.Add(mav);
 
                 //MainV2.instance.doConnect(mav, "preset", port.ToString());
-                Log.Warning("", "mav init " + mav.ToString());
+              // log.Warning("", "mav init " + mav.ToString());
                 var hb = mav.getHeartBeat();
-                Log.Warning("", "getHeartBeat " + hb.ToString());
+              // log.Warning("", "getHeartBeat " + hb.ToString());
                 mav.setAPType(mav.MAV.sysid, mav.MAV.compid);
-                Log.Warning("", "setAPType " + mav.MAV.ToJSON());
+              // log.Warning("", "setAPType " + mav.MAV.ToJSON());
 
 
                 Forms.Device.BeginInvokeOnMainThread(() =>
@@ -159,7 +159,7 @@ namespace Xamarin
                         }
                         catch (Exception ex)
                         {
-                            Log.Warning("", ex.ToString());
+                          // log.Warning("", ex.ToString());
                             Thread.Sleep(10);
                         }
                     }
@@ -167,7 +167,7 @@ namespace Xamarin
             }
             catch (Exception ex)
             {
-                Log.Warning("", ex.ToString());
+              // log.Warning("", ex.ToString());
             }
         }
     }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
@@ -9,7 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
 using MissionPlanner.Utilities;
-using log4net;
+//using log4net;
 using System.Xml.Linq;
 
 namespace MissionPlanner.Utilities
@@ -22,8 +22,8 @@ namespace MissionPlanner.Utilities
 
         private static readonly Regex _parentDirectoryRegex = new Regex("(?<ParentDirectory>[../]*)(?<Path>.+)");
 
-        private static readonly ILog log =
-            LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+     //   private static readonly ILog log =
+            //LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         static Dictionary<string, string> cachequeue = new Dictionary<string, string>();
         static Dictionary<string, string> cache = new Dictionary<string, string>();
@@ -193,7 +193,7 @@ namespace MissionPlanner.Utilities
                 {
                     var newPath = parameterLocation.Replace(currentfn, newfn);
                     var dataFromAddress = ReadDataFromAddress(newPath);
-                    log.Info("Nested Group " + NestedGroups.Groups[1]);
+                  // log.info("Nested Group " + NestedGroups.Groups[1]);
                     ParseParameterInformation(dataFromAddress, objXmlTextWriter, parameterPrefix, string.Empty, vehicleType);
                     ParseGroupInformation(dataFromAddress, objXmlTextWriter, newPath, parameterPrefix, vehicleType);
                 }
@@ -219,7 +219,7 @@ namespace MissionPlanner.Utilities
                                         StringSplitOptions.None)
                                         .ForEach(separatedPath =>
                                         {
-                                            log.Info("Process " + parameterPrefix + node.Key + " : " + separatedPath);
+                                          // log.info("Process " + parameterPrefix + node.Key + " : " + separatedPath);
                                             Uri newUri = new Uri(new Uri(parameterLocation), separatedPath.Trim());
 
                                             var newPath = newUri.AbsoluteUri;
@@ -365,7 +365,7 @@ namespace MissionPlanner.Utilities
                                                         metaDict[metaKey] = metaMatch.Groups["MetaValue"].Value
                                                             .Trim(new char[] {' '});
                                                     }
-                                                } catch { log.Error("Invalid MetaFrame " + metaframe); }
+                                                } catch { }
                                             }
                                         }
                                     }
@@ -376,7 +376,7 @@ namespace MissionPlanner.Utilities
                                 }
                                 else
                                 {
-                                    log.Error("Duplicate Key " + key);
+                                  // log.error("Duplicate Key " + key);
                                 }
                             }
                         }
@@ -426,7 +426,7 @@ namespace MissionPlanner.Utilities
             // check attempt no
             if (attempt > 2)
             {
-                log.Error(String.Format("Failed {0}", address));
+              // log.error(String.Format("Failed {0}", address));
                 lock (cachequeue)
                 {
                     while (cachequeue.Remove(address)) ;
@@ -454,7 +454,7 @@ namespace MissionPlanner.Utilities
             // check cache - after delay above for other loader
             if (cache.ContainsKey(address))
             {
-                log.Info("using cache " + address);
+              // log.info("using cache " + address);
                 lock (cachequeue)
                 {
                     while (cachequeue.Remove(address)) ;
@@ -479,7 +479,7 @@ namespace MissionPlanner.Utilities
                 using (var response = request.GetResponse())
                 {
                     // Display the status.
-                    log.Info(address + " " + ((HttpWebResponse) response).StatusDescription);
+                  // log.info(address + " " + ((HttpWebResponse) response).StatusDescription);
 
                     // Get the stream containing content returned by the server.
                     using (var dataStream = response.GetResponseStream())
@@ -503,7 +503,7 @@ namespace MissionPlanner.Utilities
             }
             catch (WebException ex)
             {
-                log.Error(String.Format("The request to {0} failed.", address), ex);
+              // log.error(String.Format("The request to {0} failed.", address), ex);
 
                 attempt++;
 

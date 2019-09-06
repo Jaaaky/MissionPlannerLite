@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.Windows.Forms;
 using MissionPlanner;
@@ -91,7 +91,7 @@ namespace SikRadio
 
         private void helpToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Process.Start("http://code.google.com/p/ardupilot-mega/wiki/3DRadio");
+            Process.Start("http://code.noaa.io/p/ardupilot-mega/wiki/3DRadio");
         }
 
         private void projectPageToolStripMenuItem_Click(object sender, EventArgs e)

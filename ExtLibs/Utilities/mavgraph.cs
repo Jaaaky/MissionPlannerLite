@@ -1,16 +1,16 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Xml;
-using log4net;
+//using log4net;
 
 namespace MissionPlanner.Utilities
 {
     public class mavgraph
     {
-        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+     //   private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         private static bool readmavgraphsxml_runonce = false;
 
@@ -215,8 +215,8 @@ namespace MissionPlanner.Utilities
 
             List<graphitem> items = new List<graphitem>();
 
-            log.Info("readmavgraphsxml from " + Settings.GetRunningDirectory() + Path.DirectorySeparatorChar +
-                     "graphs");
+          // log.info("readmavgraphsxml from " + Settings.GetRunningDirectory() + Path.DirectorySeparatorChar +
+                     //"graphs");
             var files = Directory.GetFiles(Settings.GetRunningDirectory() + Path.DirectorySeparatorChar + "graphs",
                 "*.xml");
 
@@ -268,7 +268,7 @@ namespace MissionPlanner.Utilities
                 }
                 catch (Exception ex)
                 {
-                    log.Error(ex);
+                  // log.error(ex);
                 }
             }
         }

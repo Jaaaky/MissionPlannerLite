@@ -1,4 +1,4 @@
-﻿using log4net;
+//using log4net;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +10,7 @@ namespace MissionPlanner.Utilities
 {
     public class TerrainFollow
     {
-        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+     //   private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         bool issending = false;
 
@@ -27,13 +27,13 @@ namespace MissionPlanner.Utilities
         {
             _interface = inInterface;
 
-            log.Info("Subscribe to packets");
+          // log.info("Subscribe to packets");
             subscription = _interface.SubscribeToPacketType(MAVLink.MAVLINK_MSG_ID.TERRAIN_REQUEST, ReceivedPacket);
         }
 
         ~TerrainFollow()
         {
-            log.Info("unSubscribe to packets");
+          // log.info("unSubscribe to packets");
             _interface.UnSubscribeToPacketType(subscription);
         }
 
@@ -50,8 +50,8 @@ namespace MissionPlanner.Utilities
                 lastmessage = rawpacket;
                 lastrequest = packet;
 
-                log.Info("received TERRAIN_REQUEST " + packet.lat/1e7 + " " + packet.lon/1e7 + " space " +
-                         packet.grid_spacing + " " + Convert.ToString((long) packet.mask, 2));
+              // log.info("received TERRAIN_REQUEST " + packet.lat/1e7 + " " + packet.lon/1e7 + " space " +
+                         //packet.grid_spacing + " " + Convert.ToString((long) packet.mask, 2));
 
                 // reset state to block
                 mre.Reset();
@@ -64,8 +64,8 @@ namespace MissionPlanner.Utilities
             {
                 MAVLink.mavlink_terrain_report_t packet =
                     rawpacket.ToStructure<MAVLink.mavlink_terrain_report_t>();
-                log.Info("received TERRAIN_REPORT " + packet.lat/1e7 + " " + packet.lon/1e7 + " " + packet.loaded + " " +
-                         packet.pending);
+              // log.info("received TERRAIN_REPORT " + packet.lat/1e7 + " " + packet.lon/1e7 + " " + packet.loaded + " " +
+                         //packet.pending);
             }
             return false;
         }
@@ -105,7 +105,7 @@ namespace MissionPlanner.Utilities
             }
             catch (Exception ex)
             {
-                log.Error(ex);
+              // log.error(ex);
             }
             finally
             {
@@ -115,7 +115,7 @@ namespace MissionPlanner.Utilities
 
         void SendGrid(double lat, double lon, ushort grid_spacing, byte bit)
         {
-            log.Info("SendGrid " + lat + " " + lon + " space " + grid_spacing + " bit " + bit);
+          // log.info("SendGrid " + lat + " " + lon + " space " + grid_spacing + " bit " + bit);
 
             MAVLink.mavlink_terrain_data_t resp = new MAVLink.mavlink_terrain_data_t();
             resp.grid_spacing = grid_spacing;

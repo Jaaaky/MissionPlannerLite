@@ -1,4 +1,4 @@
-﻿using log4net;
+//using log4net;
 using System;
 using System.ComponentModel;
 using System.Threading;
@@ -56,30 +56,30 @@ namespace MissionPlanner.Utilities
 
         public static void LogInfoFormat(this Control ctl, string format, params object[] args)
         {
-            ILog log = LogManager.GetLogger(ctl.GetType().FullName);
+            //ILog log = LogManager.GetLogger(ctl.GetType().FullName);
 
-            log.InfoFormat(format, args);
+          // log.infoFormat(format, args);
         }
 
         public static void LogErrorFormat(this Control ctl, string format, params object[] args)
         {
-            ILog log = LogManager.GetLogger(ctl.GetType().FullName);
+            //ILog log = LogManager.GetLogger(ctl.GetType().FullName);
 
-            log.ErrorFormat(format, args);
+          // log.errorFormat(format, args);
         }
 
         public static void LogInfo(this Control ctl, object ex)
         {
-            ILog log = LogManager.GetLogger(ctl.GetType().FullName);
+            //ILog log = LogManager.GetLogger(ctl.GetType().FullName);
 
-            log.Info(ex);
+          // log.info(ex);
         }
 
         public static void LogError(this Control ctl, object ex)
         {
-            ILog log = LogManager.GetLogger(ctl.GetType().FullName);
+            //ILog log = LogManager.GetLogger(ctl.GetType().FullName);
 
-            log.Error(ex);
+          // log.error(ex);
         }
 
         public static Form ShowXamarinControl(this ContentPage ctl, int Width, int Height)

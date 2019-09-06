@@ -6,14 +6,14 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using log4net;
+//using log4net;
 
 namespace MissionPlanner.Utilities
 {
     public static class ParameterMetaDataRepositoryAPM
     {
-        private static readonly ILog log =
-            LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+     //   private static readonly ILog log =
+            //LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         private static XDocument _parameterMetaDataXML;
 
@@ -35,7 +35,7 @@ namespace MissionPlanner.Utilities
 
             try
             {
-                log.Debug(paramMetaDataXMLFileName);
+              // log.Debug(paramMetaDataXMLFileName);
 
                 if (File.Exists(paramMetaDataXMLFileName))
                     _parameterMetaDataXML = XDocument.Load(paramMetaDataXMLFileName);
@@ -43,12 +43,12 @@ namespace MissionPlanner.Utilities
             }
             catch (Exception ex)
             {
-                log.Error(ex);
+              // log.error(ex);
             }
 
             try
             {
-                log.Debug(paramMetaDataXMLFileNameBackup);
+              // log.Debug(paramMetaDataXMLFileNameBackup);
                 // error loading the good file, load the backup
                 if (File.Exists(paramMetaDataXMLFileNameBackup) && _parameterMetaDataXML == null)
                 {

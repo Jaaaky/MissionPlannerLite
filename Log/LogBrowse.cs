@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
-using log4net;
+//using log4net;
 using ZedGraph; // Graphs
 using System.Xml;
 using System.Collections;
@@ -31,7 +31,7 @@ namespace MissionPlanner.Log
 {
     public partial class LogBrowse : Form
     {
-        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+     //   private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         private static string lastLogDir;
 
@@ -294,7 +294,7 @@ namespace MissionPlanner.Log
                 ThreadPool.QueueUserWorkItem(o => LoadLog(logfilename));
             }
 
-            log.Info("LogBrowse_Load Done");
+          // log.info("LogBrowse_Load Done");
         }
 
         public void LoadLog(string FileName)
@@ -310,15 +310,15 @@ namespace MissionPlanner.Log
 
                 stream = File.Open(FileName, FileMode.Open, FileAccess.Read, FileShare.Read);
 
-                log.Info("before read " + (GC.GetTotalMemory(false) / 1024.0 / 1024.0));
+              // log.info("before read " + (GC.GetTotalMemory(false) / 1024.0 / 1024.0));
 
                 logdata = new CollectionBuffer(stream);
 
                 dflog = logdata.dflog;
 
-                log.Info("got log lines " + (GC.GetTotalMemory(false) / 1024.0 / 1024.0));
+              // log.info("got log lines " + (GC.GetTotalMemory(false) / 1024.0 / 1024.0));
 
-                log.Info("process to datagrid " + (GC.GetTotalMemory(false) / 1024.0 / 1024.0));
+              // log.info("process to datagrid " + (GC.GetTotalMemory(false) / 1024.0 / 1024.0));
 
                 Loading.ShowLoading("Scanning coloum widths", this);
 
@@ -332,7 +332,7 @@ namespace MissionPlanner.Log
                     colcount = Math.Max(colcount, (msgid.Value.Item4.Length + typecoloum + colsplit));
                 }
 
-                log.Info("Done " + (GC.GetTotalMemory(false) / 1024.0 / 1024.0));
+              // log.info("Done " + (GC.GetTotalMemory(false) / 1024.0 / 1024.0));
 
                 this.BeginInvokeIfRequired(()=>
                 {
@@ -345,7 +345,7 @@ namespace MissionPlanner.Log
                 return;
             }
 
-            log.Info("LoadLog Done");
+          // log.info("LoadLog Done");
         }
 
         void LoadLog2(String FileName, CollectionBuffer logdata, int colcount)
@@ -390,7 +390,7 @@ namespace MissionPlanner.Log
             CMB_preselect.DataSource = null;
             CMB_preselect.DataSource = mavgraph.graphs;
 
-            log.Info("LoadLog2 Done");
+          // log.info("LoadLog2 Done");
         }
 
         private void populateRowData(int rowstartoffset, int rowIndex, int destDGV = -1)
@@ -567,7 +567,7 @@ namespace MissionPlanner.Log
                             if (inner.Name.StartsWith("F"))
                             {
                                 dataGridView1.Columns[a].HeaderText = inner.ReadString();
-                                log.Info(a + " " + dataGridView1.Columns[a].HeaderText);
+                              // log.info(a + " " + dataGridView1.Columns[a].HeaderText);
                                 a++;
                             }
                         }
@@ -581,7 +581,7 @@ namespace MissionPlanner.Log
             }
             catch
             {
-                log.Info("DGV logbrowse error");
+              // log.info("DGV logbrowse error");
             }
         }
 
@@ -810,7 +810,7 @@ namespace MissionPlanner.Log
         void GraphItem(string type, string fieldname, bool left = true, bool displayerror = true,
             bool isexpression = false)
         {
-            log.InfoFormat("GraphItem: {0} {1}", type, fieldname);
+          // log.infoFormat("GraphItem: {0} {1}", type, fieldname);
             DataModifer dataModifier = new DataModifer();
             string nodeName = DataModifer.GetNodeName(type, fieldname);
 
@@ -855,7 +855,7 @@ namespace MissionPlanner.Log
                     return;
                 }
 
-                log.Info("Graphing " + type + " - " + fieldname);
+              // log.info("Graphing " + type + " - " + fieldname);
 
                 Loading.ShowLoading("Graphing " + type + " - " + fieldname, this);
 
@@ -880,7 +880,7 @@ namespace MissionPlanner.Log
                 }
                 catch (Exception ex)
                 {
-                    log.Error(ex);
+                  // log.error(ex);
                 }
 
                 if (list1 == null)
@@ -995,7 +995,7 @@ namespace MissionPlanner.Log
 
         void GraphItem_GetList(string fieldname, string type, DFLog dflog, DataModifer dataModifier, bool left)
         {
-            log.Info("GraphItem_GetList " + type + " " + fieldname);
+          // log.info("GraphItem_GetList " + type + " " + fieldname);
             int col = dflog.FindMessageOffset(type, fieldname);
 
             // field does not exist
@@ -1070,7 +1070,7 @@ namespace MissionPlanner.Log
                     catch
                     {
                         error++;
-                        log.Info("Bad Data : " + type + " " + col + " " + a);
+                      // log.info("Bad Data : " + type + " " + col + " " + a);
                         if (error >= 500)
                         {
                             CustomMessageBox.Show("There is to much bad data - failing");
@@ -1156,7 +1156,7 @@ namespace MissionPlanner.Log
         {
             await Task.Run(() =>
             {
-                log.Info("Start DrawErrors");
+              // log.info("Start DrawErrors");
                 bool top = false;
                 double a = 0;
 
@@ -1234,7 +1234,7 @@ namespace MissionPlanner.Log
 
                     a++;
                 }
-                log.Info("End DrawErrors");
+              // log.info("End DrawErrors");
             });
         }
 
@@ -1242,7 +1242,7 @@ namespace MissionPlanner.Log
         {
             await Task.Run(() =>
             {
-                log.Info("Start DrawEV");
+              // log.info("Start DrawEV");
                 bool top = false;
                 double a = 0;
 
@@ -1312,7 +1312,7 @@ namespace MissionPlanner.Log
 
                     a++;
                 }
-                log.Info("End DrawEV");
+              // log.info("End DrawEV");
             });
         }
 
@@ -1321,7 +1321,7 @@ namespace MissionPlanner.Log
         {
             await Task.Run(() =>
             {
-                log.Info("Start DrawModes");
+              // log.info("Start DrawModes");
                 bool top = false;
 
                 var prevx = zg1.GraphPane.XAxis.Scale.Min;
@@ -1431,7 +1431,7 @@ namespace MissionPlanner.Log
                         zg1.Invalidate();
                     });
                 }
-                log.Info("End DrawModes");
+              // log.info("End DrawModes");
             });
         }
 
@@ -1439,7 +1439,7 @@ namespace MissionPlanner.Log
         {
             await Task.Run(() =>
             {
-                log.Info("Start DrawMSG");
+              // log.info("Start DrawMSG");
                 bool top = false;
                 double a = 0;
 
@@ -1501,7 +1501,7 @@ namespace MissionPlanner.Log
 
                     a++;
                 }
-                log.Info("End DrawMSG");
+              // log.info("End DrawMSG");
             });
         }
 
@@ -1509,7 +1509,7 @@ namespace MissionPlanner.Log
         {
             await Task.Run(() =>
             {
-                log.Info("Start DrawTime");
+              // log.info("Start DrawTime");
                 if (chk_time.Checked)
                     return;
 
@@ -1593,7 +1593,7 @@ namespace MissionPlanner.Log
 
                     a++;
                 }
-                log.Info("End DrawTime");
+              // log.info("End DrawTime");
             });
         }
 
@@ -1608,7 +1608,7 @@ namespace MissionPlanner.Log
         {
             await Task.Run(() =>
             {
-                log.Info("Start DrawMap");
+              // log.info("Start DrawMap");
                 int rtcnt = 0;
 
                 try
@@ -1833,7 +1833,7 @@ namespace MissionPlanner.Log
                         i++;
                     }
 
-                    log.Info("done reading map points");
+                  // log.info("done reading map points");
 
                     // add last part of each
                     // gps1
@@ -1915,9 +1915,9 @@ namespace MissionPlanner.Log
                 }
                 catch (Exception ex)
                 {
-                    log.Error(ex);
+                  // log.error(ex);
                 }
-                log.Info("End DrawMap");
+              // log.info("End DrawMap");
             });
         }
 
@@ -2337,13 +2337,13 @@ namespace MissionPlanner.Log
             {
                 splitContainerZgMap.SplitterDistance = splitContainerZgMap.Width / 2;
 
-                log.Info("Get map");
+              // log.info("Get map");
 
                 myGMAP1.MapProvider = GCSViews.FlightData.mymap.MapProvider;
 
                 zg1_ZoomEvent(zg1, null, null);
 
-                log.Info("map done");
+              // log.info("map done");
             }
         }
 
@@ -2492,7 +2492,7 @@ namespace MissionPlanner.Log
                 catch 
                 (Exception ex)
                 {
-                    log.Error(ex);
+                  // log.error(ex);
                 }
             }
 
@@ -2938,7 +2938,7 @@ namespace MissionPlanner.Log
                 splitContainerZgGrid.SplitterDistance = splitContainerZgGrid.Height / 2;
                 try
                 {
-                    log.Info("set dgv datasourse " + (GC.GetTotalMemory(false) / 1024.0 / 1024.0));
+                  // log.info("set dgv datasourse " + (GC.GetTotalMemory(false) / 1024.0 / 1024.0));
 
                     if (MainV2.MONO)
                     {
@@ -2983,10 +2983,10 @@ namespace MissionPlanner.Log
                         dataGridView1.VirtualMode = true;
                         dataGridView1.ColumnCount = colcount;
                         dataGridView1.RowCount = logdata.Count;
-                        log.Info("datagrid size set " + (GC.GetTotalMemory(false) / 1024.0 / 1024.0));
+                      // log.info("datagrid size set " + (GC.GetTotalMemory(false) / 1024.0 / 1024.0));
                     }
 
-                    log.Info("datasource set " + (GC.GetTotalMemory(false) / 1024.0 / 1024.0));
+                  // log.info("datasource set " + (GC.GetTotalMemory(false) / 1024.0 / 1024.0));
                 }
                 catch (Exception ex)
                 {
@@ -2999,7 +2999,7 @@ namespace MissionPlanner.Log
                     column.SortMode = DataGridViewColumnSortMode.NotSortable;
                 }
 
-                log.Info("Done timetable " + (GC.GetTotalMemory(false) / 1024.0 / 1024.0));
+              // log.info("Done timetable " + (GC.GetTotalMemory(false) / 1024.0 / 1024.0));
             }
             else
             {

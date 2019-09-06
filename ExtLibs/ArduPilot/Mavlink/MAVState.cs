@@ -1,4 +1,4 @@
-﻿using log4net;
+//using log4net;
 using MissionPlanner.ArduPilot;
 using MissionPlanner.Utilities;
 using Newtonsoft.Json;
@@ -12,7 +12,7 @@ namespace MissionPlanner
 {
     public class MAVState : MAVLink, IDisposable
     {
-        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+     //   private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         [JsonIgnore]
         [IgnoreDataMember]

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -103,8 +103,8 @@ namespace MissionPlanner.Utilities
             //MainV2 buttons
             displaySimulation = false;
             displayTerminal = false;
-            displayDonate = true;
-            displayHelp = true;
+            displayDonate = false;
+            displayHelp = false;
 
             //flight Data view
             displayAnenometer = true;
@@ -160,8 +160,8 @@ namespace MissionPlanner.Utilities
 
             //config tuning
             displayBasicTuning = true;
-            displayExtendedTuning = true;
-            displayStandardParams = true;
+            displayExtendedTuning = false;
+            displayStandardParams = false;
             displayAdvancedParams = false;
             displayFullParamList = false;
             displayFullParamTree = false;
@@ -209,10 +209,10 @@ namespace MissionPlanner.Utilities
             {
                 displayName = DisplayNames.Basic,
                 //MainV2 buttons
-                displaySimulation = true,
+                displaySimulation = false,
                 displayTerminal = false,
-                displayDonate = true,
-                displayHelp = true,
+                displayDonate = false,
+                displayHelp = false,
 
                 //flight Data view
                 displayAnenometer = true,
@@ -220,7 +220,7 @@ namespace MissionPlanner.Utilities
                 displayPreFlightTab = true,
                 displayAdvActionsTab = false,
                 displaySimpleActionsTab = true,
-                displayGaugesTab = true,
+                displayGaugesTab = false,
                 displayStatusTab = false,
                 displayServoTab = false,
                 displayScriptsTab = false,
@@ -229,8 +229,8 @@ namespace MissionPlanner.Utilities
                 displayMessagesTab = true,
 
                 //flight plan
-                displayRallyPointsMenu = true,
-                displayGeoFenceMenu = true,
+                displayRallyPointsMenu = false,
+                displayGeoFenceMenu = false,
                 displaySplineCircleAutoWp = true,
                 displayCircleSurveyAutoWp = true,
                 displayTextAutoWp = true,
@@ -241,7 +241,7 @@ namespace MissionPlanner.Utilities
 
                 //initial setup
                 displayInstallFirmware = true,
-                displayWizard = true,
+                displayWizard = false,
                 displayFrameType = true,
                 displayAccelCalibration = true,
                 displayCompassConfiguration = true,
@@ -268,8 +268,8 @@ namespace MissionPlanner.Utilities
 
                 //config tuning
                 displayBasicTuning = true,
-                displayExtendedTuning = true,
-                displayStandardParams = true,
+                displayExtendedTuning = false,
+                displayStandardParams = false,
                 displayAdvancedParams = false,
                 displayFullParamList = false,
                 displayFullParamTree = false,
@@ -287,28 +287,28 @@ namespace MissionPlanner.Utilities
             {
                 displayName = DisplayNames.Advanced,
                 //MainV2 buttons
-                displaySimulation = true,
-                displayTerminal = true,
-                displayDonate = true,
-                displayHelp = true,
+                displaySimulation = false,
+                displayTerminal = false,
+                displayDonate = false,
+                displayHelp = false,
 
                 //flight Data view
                 displayAnenometer = true,
                 displayQuickTab = true,
-                displayPreFlightTab = true,
+                displayPreFlightTab = false,
                 displayAdvActionsTab = true,
                 displaySimpleActionsTab = false,
-                displayGaugesTab = true,
+                displayGaugesTab = false,
                 displayStatusTab = true,
                 displayServoTab = true,
-                displayScriptsTab = true,
+                displayScriptsTab = false,
                 displayTelemetryTab = true,
                 displayDataflashTab = true,
                 displayMessagesTab = true,
 
                 //flight plan
-                displayRallyPointsMenu = true,
-                displayGeoFenceMenu = true,
+                displayRallyPointsMenu = false,
+                displayGeoFenceMenu = false,
                 displaySplineCircleAutoWp = true,
                 displayTextAutoWp = true,
                 displayCircleSurveyAutoWp = true,
@@ -346,9 +346,9 @@ namespace MissionPlanner.Utilities
 
                 //config tuning
                 displayBasicTuning = true,
-                displayExtendedTuning = true,
-                displayStandardParams = true,
-                displayAdvancedParams = true,
+                displayExtendedTuning = false,
+                displayStandardParams = false,
+                displayAdvancedParams = false,
                 displayFullParamList = true,
                 displayFullParamTree = true,
                 displayParamCommitButton = false,

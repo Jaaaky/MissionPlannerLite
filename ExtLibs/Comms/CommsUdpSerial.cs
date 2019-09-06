@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
@@ -6,7 +6,7 @@ using System.Net.Sockets;
 using System.Reflection;
 using System.Text;
 using System.Threading;
-using log4net;
+//using log4net;
 
 // dns, ip address
 // tcplistner
@@ -15,7 +15,7 @@ namespace MissionPlanner.Comms
 {
     public class UdpSerial : CommsBase, ICommsSerial, IDisposable
     {
-        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+     //   private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         private readonly List<IPEndPoint> EndPointList = new List<IPEndPoint>();
 
@@ -99,7 +99,7 @@ namespace MissionPlanner.Comms
         {
             if (client.Client.Connected || IsOpen)
             {
-                log.Info("UDPSerial socket already open");
+              // log.info("UDPSerial socket already open");
                 return;
             }
 
@@ -157,14 +157,14 @@ namespace MissionPlanner.Comms
                 RemoteIpEndPoint = new IPEndPoint(IPAddress.Any, 0);
 
                 client.Receive(ref RemoteIpEndPoint);
-                log.InfoFormat("UDPSerial connecting to {0} : {1}", RemoteIpEndPoint.Address, RemoteIpEndPoint.Port);
+              // log.infoFormat("UDPSerial connecting to {0} : {1}", RemoteIpEndPoint.Address, RemoteIpEndPoint.Port);
                 EndPointList.Add(RemoteIpEndPoint);
                 _isopen = true;
             }
             catch (Exception ex)
             {
                 if (client != null && client.Client.Connected) client.Close();
-                log.Info(ex.ToString());
+              // log.info(ex.ToString());
                 //CustomMessageBox.Show("Please check your Firewall settings\nPlease try running this command\n1.    Run the following command in an elevated command prompt to disable Windows Firewall temporarily:\n    \nNetsh advfirewall set allprofiles state off\n    \nNote: This is just for test; please turn it back on with the command 'Netsh advfirewall set allprofiles state on'.\n", "Error");
                 throw new Exception("The socket/UDPSerial is closed " + ex);
             }
@@ -279,7 +279,7 @@ namespace MissionPlanner.Comms
             VerifyConnected();
             var size = client.Available;
             var crap = new byte[size];
-            log.InfoFormat("UdpSerial DiscardInBuffer {0}", size);
+          // log.infoFormat("UdpSerial DiscardInBuffer {0}", size);
             Read(crap, 0, size);
         }
 

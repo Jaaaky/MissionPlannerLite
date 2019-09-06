@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Reflection;
-using log4net;
+//using log4net;
 using MissionPlanner.Utilities;
 
 namespace MissionPlanner.Swarm.Sequence
@@ -15,7 +15,7 @@ namespace MissionPlanner.Swarm.Sequence
             running
         }
 
-        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+     //   private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         Mode _currentMode = Mode.idle;
 

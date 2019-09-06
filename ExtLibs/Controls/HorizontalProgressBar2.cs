@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ComponentModel;
@@ -17,7 +17,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Xml; // config file
 using System.Runtime.InteropServices; // dll imports
-using log4net;
+//using log4net;
 
 using MissionPlanner;
 using System.Reflection;

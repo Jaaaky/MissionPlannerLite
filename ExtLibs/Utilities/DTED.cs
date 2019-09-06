@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -6,14 +6,14 @@ using System.Text;
 using System.Text.RegularExpressions;
 using BitMiracle.LibTiff.Classic;
 using GMap.NET;
-using log4net;
+//using log4net;
 
 namespace MissionPlanner.Utilities
 {
     public class DTED
     {
-        private static readonly ILog log =
-LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+     //   private static readonly ILog log =
+//LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         //MIL-PRF-89020B
         /*
@@ -54,13 +54,13 @@ etc
 
             public void LoadFile(string filename)
             {
-                log.InfoFormat("DTED {0}", filename);
+              // log.infoFormat("DTED {0}", filename);
 
                 var exists = index.Where(a => { return a.FileName.ToLower() == filename.ToLower(); });
 
                 if (exists.Count() > 0)
                 {
-                    log.InfoFormat("DTED already loaded {0}", filename);
+                  // log.infoFormat("DTED already loaded {0}", filename);
                     return;
                 }
 
@@ -73,7 +73,7 @@ etc
 
                     if (!UHL.Success)
                     {
-                        log.ErrorFormat("DTED invalid header {0} - {1}", filename, ASCIIEncoding.ASCII.GetString(buffer).TrimUnPrintable());
+                      // log.errorFormat("DTED invalid header {0} - {1}", filename, ASCIIEncoding.ASCII.GetString(buffer).TrimUnPrintable());
                         return;
                     }
 
@@ -90,26 +90,26 @@ etc
                     width = int.Parse(UHL.Groups[10].Value);
                     height = int.Parse(UHL.Groups[11].Value);
 
-                    log.InfoFormat("Size ({0},{1})", width, height);
+                  // log.infoFormat("Size ({0},{1})", width, height);
 
                     // lower left corner
                     x = DDDMMSSH2DD(UHL.Groups[3].Value);
                     y = DDDMMSSH2DD(UHL.Groups[4].Value);
 
-                    log.InfoFormat("Start Point ({0},{1})", x, y);
+                  // log.infoFormat("Start Point ({0},{1})", x, y);
 
                     // scales
                     xscale = SSSS2DD(UHL.Groups[5].Value);
                     yscale = SSSS2DD(UHL.Groups[6].Value);
 
-                    log.InfoFormat("Scale ({0},{1})", xscale, yscale);
+                  // log.infoFormat("Scale ({0},{1})", xscale, yscale);
 
                     // switch top for bottom
                     y += height * yscale;
 
                     Area = new RectLatLng(y, x, width * xscale, height * yscale);
 
-                    log.InfoFormat("Coverage {0}", Area.ToString());
+                  // log.infoFormat("Coverage {0}", Area.ToString());
 
                     FileName = filename;
                     index.Add(this);
@@ -204,7 +204,7 @@ etc
                 }
                 catch (Exception ex)
                 {
-                    log.Error(ex);
+                  // log.error(ex);
                 }
             }
 

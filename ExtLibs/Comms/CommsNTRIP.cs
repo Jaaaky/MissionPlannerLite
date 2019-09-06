@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Globalization;
 using System.IO;
 using System.Net;
@@ -6,7 +6,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
-using log4net;
+//using log4net;
 
 // dns, ip address
 // tcplistner
@@ -15,7 +15,7 @@ namespace MissionPlanner.Comms
 {
     public class CommsNTRIP : CommsBase, ICommsSerial, IDisposable
     {
-        private static readonly ILog log = LogManager.GetLogger(typeof(CommsNTRIP));
+     //   private static readonly ILog log = LogManager.GetLogger(typeof(CommsNTRIP));
 
         private DateTime _lastnmea = DateTime.MinValue;
         public double alt = 0;
@@ -94,11 +94,11 @@ namespace MissionPlanner.Comms
         {
             if (client.Client.Connected)
             {
-                log.Warn("ntrip socket already open");
+              // log.Warn("ntrip socket already open");
                 return;
             }
 
-            log.Info("ntrip Open");
+          // log.info("ntrip Open");
 
             var url = OnSettings("NTRIP_url", "");
 
@@ -213,7 +213,7 @@ namespace MissionPlanner.Comms
             VerifyConnected();
             var size = client.Available;
             var crap = new byte[size];
-            log.InfoFormat("ntrip DiscardInBuffer {0}", size);
+          // log.infoFormat("ntrip DiscardInBuffer {0}", size);
             Read(crap, 0, size);
         }
 
@@ -322,13 +322,13 @@ namespace MissionPlanner.Comms
 
             sw.Write(line);
 
-            log.Info(line);
+          // log.info(line);
 
             sw.Flush();
 
             line = sr.ReadLine();
 
-            log.Info(line);
+          // log.info(line);
 
             if (!line.Contains("200"))
             {
@@ -364,7 +364,7 @@ namespace MissionPlanner.Comms
                     var checksum = GetChecksum(line);
                     WriteLine(line + "*" + checksum);
 
-                    log.Info(line + "*" + checksum);
+                  // log.info(line + "*" + checksum);
 
                     _lastnmea = DateTime.Now;
                 }
@@ -413,7 +413,7 @@ namespace MissionPlanner.Comms
                 // this should only happen if we have established a connection in the first place
                 if (client != null && retrys > 0)
                 {
-                    log.Info("ntrip reconnect");
+                  // log.info("ntrip reconnect");
                     doConnect();
                     retrys--;
                 }

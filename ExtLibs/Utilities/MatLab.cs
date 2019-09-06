@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -6,7 +6,7 @@ using System.Linq;
 using csmatio.io;
 using csmatio.types;
 using System.Globalization;
-using log4net;
+//using log4net;
 using System.Reflection;
 using MissionPlanner.Utilities;
 using MissionPlanner.Comms;
@@ -15,7 +15,7 @@ namespace MissionPlanner.Log
 {
     public class MatLab
     {
-        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+     //   private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         private static MLArray CreateCellArray(string name, string[] names)
         {
@@ -74,7 +74,7 @@ namespace MissionPlanner.Log
                 // keep track of line no
                 int a = 0;
 
-                log.Info("ProcessLog start " + (GC.GetTotalMemory(false)/1024.0/1024.0));
+              // log.info("ProcessLog start " + (GC.GetTotalMemory(false)/1024.0/1024.0));
 
                 foreach (var line in colbuf)
                 {
@@ -196,14 +196,14 @@ namespace MissionPlanner.Log
         static void DoWrite(string fn, Dictionary<string, MatLab.DoubleList> data, Dictionary<string, List<MLCell>> dataCell, SortedDictionary<string, double> param,
             List<MLArray> mlList, Hashtable seen)
         {
-            log.Info("DoWrite start " + (GC.GetTotalMemory(false)/1024.0/1024.0));
+          // log.info("DoWrite start " + (GC.GetTotalMemory(false)/1024.0/1024.0));
 
             foreach (var item in data)
             {
                 double[][] temp = item.Value.ToArray();
                 MLArray dbarray = new MLDouble(item.Key, temp);
                 mlList.Add(dbarray);
-                log.Info("DoWrite Double " + item.Key + " " + (GC.GetTotalMemory(false)/1024.0/1024.0));
+              // log.info("DoWrite Double " + item.Key + " " + (GC.GetTotalMemory(false)/1024.0/1024.0));
             }
 
             // datacell contains rows
@@ -220,10 +220,10 @@ namespace MissionPlanner.Log
                 }
                 // add table to masterlist
                 mlList.Add(temp1);
-                log.Info("DoWrite Cell " + item.Key + " " + (GC.GetTotalMemory(false) / 1024.0 / 1024.0));            
+              // log.info("DoWrite Cell " + item.Key + " " + (GC.GetTotalMemory(false) / 1024.0 / 1024.0));            
             }
 
-            log.Info("DoWrite mllist " + (GC.GetTotalMemory(false)/1024.0/1024.0));
+          // log.info("DoWrite mllist " + (GC.GetTotalMemory(false)/1024.0/1024.0));
 
             MLCell cell = new MLCell("PARM", new int[] {param.Keys.Count, 2});
             int m = 0;
@@ -242,10 +242,10 @@ namespace MissionPlanner.Log
 
             try
             {
-                log.Info("write " + fn + ".mat");
-                log.Info("DoWrite before" + (GC.GetTotalMemory(false)/1024.0/1024.0));
+              // log.info("write " + fn + ".mat");
+              // log.info("DoWrite before" + (GC.GetTotalMemory(false)/1024.0/1024.0));
                 MatFileWriter mfw = new MatFileWriter(fn + ".mat", mlList, false);
-                log.Info("DoWrite done" + (GC.GetTotalMemory(false)/1024.0/1024.0));
+              // log.info("DoWrite done" + (GC.GetTotalMemory(false)/1024.0/1024.0));
             }
             catch (Exception err)
             {

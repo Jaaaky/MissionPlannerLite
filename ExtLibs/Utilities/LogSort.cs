@@ -1,4 +1,4 @@
-﻿using log4net;
+//using log4net;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,7 +11,7 @@ namespace MissionPlanner.Log
 {
     public class LogSort
     {
-        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+     //   private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         public static void SortLogs(string[] logs, string masterdestdir = "")
         {
@@ -53,7 +53,7 @@ namespace MissionPlanner.Log
                             if (!Directory.Exists(destdir))
                                 Directory.CreateDirectory(destdir);
 
-                            log.Info("Move log small " + logfile + " to " + destdir + Path.GetFileName(logfile));
+                          // log.info("Move log small " + logfile + " to " + destdir + Path.GetFileName(logfile));
 
                             MoveFileUsingMask(logfile, destdir);
                         }
@@ -129,9 +129,9 @@ namespace MissionPlanner.Log
                                 Directory.CreateDirectory(masterdestdir + Path.DirectorySeparatorChar +
                                                           "BAD");
 
-                            log.Info("Move log bad " + logfile + " to " + masterdestdir +
-                                     Path.DirectorySeparatorChar + "BAD" + Path.DirectorySeparatorChar +
-                                     Path.GetFileName(logfile) + " " + info.Length);
+                          // log.info("Move log bad " + logfile + " to " + masterdestdir +
+                                     //Path.DirectorySeparatorChar + "BAD" + Path.DirectorySeparatorChar +
+                                     //Path.GetFileName(logfile) + " " + info.Length);
 
                             MoveFileUsingMask(logfile,
                                 masterdestdir + Path.DirectorySeparatorChar + "BAD" +
@@ -191,7 +191,7 @@ namespace MissionPlanner.Log
             string[] files = Directory.GetFiles(dir, filter);
             foreach (var file in files)
             {
-                log.Info("Move log " + file + " to " + destdir + Path.GetFileName(file));
+              // log.info("Move log " + file + " to " + destdir + Path.GetFileName(file));
 
                 if (file == destdir + Path.GetFileName(file))
                     continue;

@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using log4net;
+//using log4net;
 using System.Reflection;
 using System.Runtime.InteropServices;
 
@@ -12,7 +12,7 @@ namespace MissionPlanner.HIL
 
     public abstract class Hil
     {
-        internal static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        //internal static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         [StructLayout(LayoutKind.Sequential, Pack = 1)]
         public struct sitl_fdm

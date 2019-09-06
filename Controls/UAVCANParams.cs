@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,7 +13,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Forms;
-using log4net;
+// //using log4net;
 using MissionPlanner.Controls;
 using MissionPlanner.Utilities;
 using UAVCAN;
@@ -28,8 +28,8 @@ namespace MissionPlanner.Controls
         // from http://stackoverflow.com/questions/2512781/winforms-big-paragraph-tooltip/2512895#2512895
         private const int maximumSingleLineTooltipLength = 50;
 
-        private static readonly ILog log =
-            LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        // private static readonly ILog log =
+        //     LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         private static Hashtable tooltips = new Hashtable();
         // Changes made to the params between writing to the copter
@@ -67,7 +67,7 @@ namespace MissionPlanner.Controls
                 if (!String.IsNullOrEmpty(Settings.Instance["rawparam_" + col.Name + "_width"]))
                 {
                     col.Width = Math.Max(50,Settings.Instance.GetInt32("rawparam_" + col.Name + "_width"));
-                    log.InfoFormat("{0} to {1}", col.Name, col.Width);
+                    // log.InfoFormat("{0} to {1}", col.Name, col.Width);
                 }
             }
 
@@ -95,7 +95,7 @@ namespace MissionPlanner.Controls
             toolTip1.RemoveAll();
             Params.Rows.Clear();
 
-            log.Info("processToScreen");
+            // log.Info("processToScreen");
 
             var list = new List<string>();
             foreach (string item in _paramlist.Select(a => ASCIIEncoding.ASCII.GetString(a.name, 0, a.name_len)))
@@ -127,7 +127,7 @@ namespace MissionPlanner.Controls
 
             });
 
-            log.Info("about to add all");
+            // log.Info("about to add all");
 
             Params.SuspendLayout();
             Params.Visible = false;
@@ -135,7 +135,7 @@ namespace MissionPlanner.Controls
 
             Params.Rows.AddRange(rowlist.ToArray());
 
-            log.Info("about to sort");
+            // log.Info("about to sort");
 
             Params.SortCompare += OnParamsOnSortCompare;
 
@@ -145,7 +145,7 @@ namespace MissionPlanner.Controls
             Params.Visible = true;
             Params.ResumeLayout();
 
-            log.Info("Done");
+            // log.Info("Done");
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -265,7 +265,7 @@ namespace MissionPlanner.Controls
                 }
                 catch (Exception ex)
                 {
-                    log.Error("Exception getting param list", ex);
+                    // log.Error("Exception getting param list", ex);
                     CustomMessageBox.Show(Strings.ErrorReceivingParams, Strings.ERROR);
                 }
 
@@ -299,7 +299,7 @@ namespace MissionPlanner.Controls
                 }
                 catch (Exception ex)
                 {
-                    log.Error(ex);
+                    // log.Error(ex);
                     CustomMessageBox.Show(Strings.ErrorCommunicating + "\n" + ex, Strings.ERROR);
                 }
             }
@@ -443,7 +443,7 @@ namespace MissionPlanner.Controls
             Params.Enabled = true;
             Params.ResumeLayout();
 
-            log.InfoFormat("Filter: {0}ms", (DateTime.Now - start).TotalMilliseconds);
+            // log.InfoFormat("Filter: {0}ms", (DateTime.Now - start).TotalMilliseconds);
         }
 
         private void FilterTimerOnElapsed(object sender, ElapsedEventArgs elapsedEventArgs)

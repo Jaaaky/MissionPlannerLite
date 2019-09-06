@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
-using log4net;
+//using log4net;
 
 // dns, ip address
 // tcplistner
@@ -13,7 +13,7 @@ namespace MissionPlanner.Comms
 {
     public class TcpSerial : CommsBase, ICommsSerial, IDisposable
     {
-        private static readonly ILog log = LogManager.GetLogger(typeof(TcpSerial));
+     //   private static readonly ILog log = LogManager.GetLogger(typeof(TcpSerial));
         public bool autoReconnect;
         public TcpClient client = new TcpClient();
         private bool inOpen;
@@ -102,7 +102,7 @@ namespace MissionPlanner.Comms
 
                 if (client.Client.Connected)
                 {
-                    log.Warn("tcpserial socket already open");
+                  // log.Warn("tcpserial socket already open");
                     return;
                 }
 
@@ -124,7 +124,7 @@ namespace MissionPlanner.Comms
 
                 Port = dest;
 
-                log.InfoFormat("TCP Open {0} {1}", host, Port);
+              // log.infoFormat("TCP Open {0} {1}", host, Port);
 
                 OnSettings("TCP_port", Port, true);
                 OnSettings("TCP_host", host, true);
@@ -237,7 +237,7 @@ namespace MissionPlanner.Comms
             VerifyConnected();
             var size = client.Available;
             var crap = new byte[size];
-            log.InfoFormat("TcpSerial DiscardInBuffer {0}", size);
+          // log.infoFormat("TcpSerial DiscardInBuffer {0}", size);
             Read(crap, 0, size);
         }
 
@@ -328,7 +328,7 @@ namespace MissionPlanner.Comms
                     var host = OnSettings("TCP_host", "");
                     var port = int.Parse(OnSettings("TCP_port", ""));
 
-                    log.InfoFormat("doAutoReconnect {0} {1}", host, port);
+                  // log.infoFormat("doAutoReconnect {0} {1}", host, port);
 
                     var task = client.ConnectAsync(host, port);
 
@@ -355,7 +355,7 @@ namespace MissionPlanner.Comms
                 // this should only happen if we have established a connection in the first place
                 if (client != null && retrys > 0)
                 {
-                    log.Info("tcp reconnect");
+                  // log.info("tcp reconnect");
                     client = new TcpClient();
                     client.Connect(OnSettings("TCP_host", ""), int.Parse(OnSettings("TCP_port", "")));
                     retrys--;

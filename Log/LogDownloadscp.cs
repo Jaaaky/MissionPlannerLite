@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reflection;
 using System.Windows.Forms;
 using System.IO;
 using System.Linq;
-using log4net;
+//using log4net;
 using MissionPlanner.Utilities;
 using System.Diagnostics;
 using MissionPlanner.Controls;
@@ -16,7 +16,7 @@ namespace MissionPlanner.Log
 {
     public partial class LogDownloadscp : Form
     {
-        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+     //   private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         SerialStatus status = SerialStatus.Connecting;
         bool closed;
         string logfile = "";
@@ -121,7 +121,7 @@ namespace MissionPlanner.Log
                     }
                     catch (Exception ex)
                     {
-                        log.Error(ex);
+                      // log.error(ex);
                     }
                 }
 
@@ -213,7 +213,7 @@ namespace MissionPlanner.Log
 
         string GetLog(string no, string fileName)
         {
-            log.Info("GetLog " + no);
+          // log.info("GetLog " + no);
 
             
             status = SerialStatus.Reading;
@@ -224,7 +224,7 @@ namespace MissionPlanner.Log
                 // make log dir
                 Directory.CreateDirectory(Path.GetDirectoryName(logfile));
 
-                log.Info("about to write: " + logfile);
+              // log.info("about to write: " + logfile);
                 // save memorystream to file
 
 
@@ -239,7 +239,7 @@ namespace MissionPlanner.Log
 
             client.Disconnect();
 
-            log.Info("about to convertbin: " + logfile);
+          // log.info("about to convertbin: " + logfile);
 
             // create ascii log
             BinaryLog.ConvertBin(logfile, logfile + ".log");
@@ -248,7 +248,7 @@ namespace MissionPlanner.Log
             logfile = logfile + ".log";
 
             // rename file if needed
-            log.Info("about to GetFirstGpsTime: " + logfile);
+          // log.info("about to GetFirstGpsTime: " + logfile);
             // get gps time of assci log
             DateTime logtime = new DFLog().GetFirstGpsTime(logfile);
 

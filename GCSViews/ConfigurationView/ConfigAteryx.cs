@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.ComponentModel;
 using System.Drawing;
@@ -6,7 +6,7 @@ using System.Globalization;
 using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
-using log4net;
+//using log4net;
 using MissionPlanner.ArduPilot;
 using MissionPlanner.Controls;
 
@@ -17,8 +17,8 @@ namespace MissionPlanner.GCSViews.ConfigurationView
         // from http://stackoverflow.com/questions/2512781/winforms-big-paragraph-tooltip/2512895#2512895
         private const int maximumSingleLineTooltipLength = 50;
 
-        private static readonly ILog log =
-            LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+     //   private static readonly ILog log =
+            //LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         private static readonly Hashtable tooltips = new Hashtable();
         private readonly Hashtable changes = new Hashtable();

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -9,7 +9,7 @@ using GMap.NET;
 using GMap.NET.MapProviders;
 using GMap.NET.WindowsForms;
 using GMap.NET.WindowsForms.Markers;
-using log4net;
+//using log4net;
 using MissionPlanner;
 using MissionPlanner.ArduPilot;
 using MissionPlanner.Maps;
@@ -28,7 +28,7 @@ namespace Xamarin
 {
     public partial class FlightData : ContentPage
     {
-        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+     //   private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         public static GMapOverlay kmlpolygons;
         internal static GMapOverlay geofence;
@@ -526,7 +526,7 @@ namespace Xamarin
                                         }
                                         catch (Exception e)
                                         {
-                                            log.Error(e);
+                                          // log.error(e);
                                         }
                                     }
                                 }
@@ -655,7 +655,7 @@ namespace Xamarin
                             }
                             catch (Exception ex)
                             {
-                                log.Error(ex);
+                              // log.error(ex);
                             }
 
                             lock (MainV2.instance.adsblock)

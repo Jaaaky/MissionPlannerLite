@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections;
-using log4net;
+// //using log4net;
 using System.Reflection;
 using System.IO;
 using System.Threading;
@@ -13,7 +13,7 @@ namespace MissionPlanner.Joystick
 {
     public class Joystick : IDisposable
     {
-        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        // private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         SharpDX.DirectInput.Joystick joystick;
         MyJoystickState state;
         static DirectInput directInput = new DirectInput();
@@ -195,7 +195,7 @@ namespace MissionPlanner.Joystick
         public void loadconfig(string joystickconfigbuttonin = "joystickbuttons.xml",
             string joystickconfigaxisin = "joystickaxis.xml")
         {
-            log.Info("Loading joystick config files " + joystickconfigbuttonin + " " + joystickconfigaxisin);
+            //log.Info("Loading joystick config files " + joystickconfigbuttonin + " " + joystickconfigaxisin);
 
             // save for later
             if (File.Exists(joystickconfigaxisin))
@@ -247,7 +247,7 @@ namespace MissionPlanner.Joystick
 
         public void saveconfig()
         {
-            log.Info("Saving joystick config files " + joystickconfigbutton + " " + joystickconfigaxis);
+            //log.Info("Saving joystick config files " + joystickconfigbutton + " " + joystickconfigaxis);
 
             // save config
             System.Xml.Serialization.XmlSerializer writer =
@@ -375,16 +375,16 @@ namespace MissionPlanner.Joystick
                 {
                     //Console.WriteLine("Name: " + property.Name + ", Value: " + property.GetValue(obj, null));
 
-                    log.InfoFormat("test name {0} old {1} new {2} ", property.Name, values[property.Name],
-                        int.Parse(property.GetValue(nextstate, null).ToString()));
-                    log.InfoFormat("{0}  {1} {2}", property.Name, (int) values[property.Name],
-                        (int.Parse(property.GetValue(nextstate, null).ToString()) + threshold));
+                    //log.InfoFormat("test name {0} old {1} new {2} ", property.Name, values[property.Name],
+                        // int.Parse(property.GetValue(nextstate, null).ToString()));
+                    //log.InfoFormat("{0}  {1} {2}", property.Name, (int) values[property.Name],
+                        // (int.Parse(property.GetValue(nextstate, null).ToString()) + threshold));1
                     if ((int) values[property.Name] >
                         (int.Parse(property.GetValue(nextstate, null).ToString()) + threshold) ||
                         (int) values[property.Name] <
                         (int.Parse(property.GetValue(nextstate, null).ToString()) - threshold))
                     {
-                        log.Info(property.Name);
+                        //log.Info(property.Name);
                         joystick.Unacquire();
                         return (joystickaxis) Enum.Parse(typeof (joystickaxis), property.Name);
                     }
@@ -650,7 +650,7 @@ namespace MissionPlanner.Joystick
                 }
                 catch (SharpDX.SharpDXException ex)
                 {
-                    log.Error(ex);
+                    // //log.Error(ex);
                     clearRCOverride();
                     _context.Send(
                         delegate { CustomMessageBox.Show("Lost Joystick", "Lost Joystick"); }, null);
@@ -658,7 +658,7 @@ namespace MissionPlanner.Joystick
                 }
                 catch (Exception ex)
                 {
-                    log.Info("Joystick thread error " + ex.ToString());
+                    // //log.Info("Joystick thread error " + ex.ToString());
                 } // so we cant fall out
             }
         }
@@ -731,7 +731,7 @@ namespace MissionPlanner.Joystick
             }
             catch (Exception ex)
             {
-                log.Error(ex);
+                // //log.Error(ex);
             }
         }
 
@@ -1155,7 +1155,7 @@ namespace MissionPlanner.Joystick
 
             short ans = pickchannel(channel, JoyChannels[channel].axis, JoyChannels[channel].reverse,
                 JoyChannels[channel].expo);
-            log.DebugFormat("{0} = {1} = {2}", channel, ans, state.X);
+            //log.DebugFormat("{0} = {1} = {2}", channel, ans, state.X);
             return ans;
         }
 
@@ -1169,7 +1169,7 @@ namespace MissionPlanner.Joystick
             state = joystick.CurrentJoystickState();
 
             short ans = pickchannel(channel, JoyChannels[channel].axis, false, 0);
-            log.DebugFormat("{0} = {1} = {2}", channel, ans, state.X);
+            //log.DebugFormat("{0} = {1} = {2}", channel, ans, state.X);
             return ans;
         }
 

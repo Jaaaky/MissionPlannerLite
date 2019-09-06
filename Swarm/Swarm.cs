@@ -1,11 +1,11 @@
-﻿using log4net;
+//using log4net;
 using System.Reflection;
 
 namespace MissionPlanner.Swarm
 {
     abstract class Swarm
     {
-        internal static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        //internal static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         internal MAVState Leader = null;
 
         public void setLeader(MAVState lead)

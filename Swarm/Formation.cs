@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using GeoAPI.CoordinateSystems;
 using GeoAPI.CoordinateSystems.Transformations;
@@ -25,7 +25,7 @@ namespace MissionPlanner.Swarm
         public void setOffsets(MAVState mav, double x, double y, double z)
         {
             offsets[mav] = new Vector3(x, y, z);
-            log.Info(mav.ToString() + " " + offsets[mav].ToString());
+          // log.info(mav.ToString() + " " + offsets[mav].ToString());
         }
 
         public Vector3 getOffsets(MAVState mav)

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -8,7 +8,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
-using log4net;
+//using log4net;
 using MissionPlanner.Comms;
 using MissionPlanner.Utilities;
 using uploader;
@@ -17,7 +17,7 @@ namespace MissionPlanner.Radio
 {
     public partial class Sikradio : UserControl
     {
-        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+     //   private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         private bool beta;
 
@@ -225,7 +225,7 @@ S15: MAX_WINDOW=131
             }
             catch (Exception ex2)
             {
-                log.Error(ex2);
+              // log.error(ex2);
             }
 
             return false;
@@ -303,7 +303,7 @@ S15: MAX_WINDOW=131
             }
             catch (Exception ex1)
             {
-                log.Error(ex1);
+              // log.error(ex1);
 
                 // cleanup bootloader mode fail, and try firmware mode
                 comPort.Close();
@@ -343,7 +343,7 @@ S15: MAX_WINDOW=131
                     {
                         comPort.Write("AT&UPDATE\r\n");
                         var left = comPort.ReadExisting();
-                        log.Info(left);
+                      // log.info(left);
                         Sleep(700);
                         comPort.BaudRate = 115200;
                     }
@@ -436,12 +436,12 @@ S15: MAX_WINDOW=131
                 {
                     Console.Write(message);
                     lbl_status.Text = message;
-                    log.Info(message);
+                  // log.info(message);
                     Application.DoEvents();
                 }
                 else if (level < 5) // 5 = byte data
                 {
-                    log.Debug(message);
+                  // log.Debug(message);
                 }
             }
             catch
@@ -457,7 +457,7 @@ S15: MAX_WINDOW=131
                 {
                     lbl_status.Text = message;
                     Console.WriteLine(message);
-                    log.Info(message);
+                  // log.info(message);
                     Application.DoEvents();
                 }
             }
@@ -1010,7 +1010,7 @@ S15: MAX_WINDOW=131
                                     }
                                 }
                                 */
-                                log.Info("Odd config line :" + item);
+                              // log.info("Odd config line :" + item);
                             }
                         }
                     }
@@ -1077,7 +1077,7 @@ S15: MAX_WINDOW=131
             comPort.DiscardInBuffer();
 
             lbl_status.Text = "Doing Command " + cmd;
-            log.Info("Doing Command " + cmd);
+          // log.info("Doing Command " + cmd);
 
             comPort.Write(cmd + "\r\n");
 
@@ -1115,7 +1115,7 @@ S15: MAX_WINDOW=131
                     }
                 }
 
-                log.Info(value.Replace('\0', ' '));
+              // log.info(value.Replace('\0', ' '));
 
                 return value;
             }
@@ -1153,20 +1153,20 @@ S15: MAX_WINDOW=131
                 comPort.Write("+");
                 Sleep(1500, comPort);
                 // check for config response "OK"
-                log.Info("Connect btr " + comPort.BytesToRead + " baud " + comPort.BaudRate);
+              // log.info("Connect btr " + comPort.BytesToRead + " baud " + comPort.BaudRate);
                 // allow time for data/response
 
                 if (comPort.BytesToRead == 0 && trys <= 3)
                 {
                     trys++;
-                    log.Info("doConnect retry");
+                  // log.info("doConnect retry");
                     goto retry;
                 }
 
                 var buffer = new byte[20];
                 var len = comPort.Read(buffer, 0, buffer.Length);
                 var conn = Encoding.ASCII.GetString(buffer, 0, len);
-                log.Info("Connect first response " + conn.Replace('\0', ' ') + " " + conn.Length);
+              // log.info("Connect first response " + conn.Replace('\0', ' ') + " " + conn.Length);
                 if (conn.Contains("OK"))
                 {
                     //return true;
@@ -1181,7 +1181,7 @@ S15: MAX_WINDOW=131
 
                 var version = doCommand(comPort, "ATI");
 
-                log.Info("Connect Version: " + version.Trim() + "\n");
+              // log.info("Connect Version: " + version.Trim() + "\n");
 
                 var regex = new Regex(@"SiK\s+(.*)\s+on\s+(.*)");
 

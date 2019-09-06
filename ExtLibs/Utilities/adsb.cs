@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
@@ -6,7 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
-using log4net;
+//using log4net;
 using System.Threading;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -23,7 +23,7 @@ namespace MissionPlanner.Utilities
         //https://www.adsbexchange.com/data/
         //https://public-api.adsbexchange.com/VirtualRadar/AircraftList.json?lat=33.433638&lng=-112.008113&fDstL=0&fDstU=100
 
-        private static readonly ILog log =        LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+     //   private static readonly ILog log =        LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         /// <summary>
         /// When a plane position has been updated. you will need to age your own entries
@@ -42,7 +42,7 @@ namespace MissionPlanner.Utilities
 
         public adsb()
         {
-            log.Info("adsb ctor");
+          // log.info("adsb ctor");
 
             thisthread = new Thread(TryConnect);
 
@@ -55,7 +55,7 @@ namespace MissionPlanner.Utilities
 
         public static void Stop()
         {
-            log.Info("adsb stop");
+          // log.info("adsb stop");
             run = false;
 
             if (thisthread != null)
@@ -65,7 +65,7 @@ namespace MissionPlanner.Utilities
                 thisthread = null;
             }
 
-            log.Info("adsb stopped");
+          // log.info("adsb stopped");
         }
 
         void TryConnect()
@@ -74,7 +74,7 @@ namespace MissionPlanner.Utilities
 
             while (run)
             {
-                log.Info("adsb connect loop");
+              // log.info("adsb connect loop");
                 //custom
                 try
                 {
@@ -84,13 +84,13 @@ namespace MissionPlanner.Utilities
                         {
                             cl.Connect(server, serverport);
 
-                            log.Info("Connected " + server + ":" + serverport);
+                          // log.info("Connected " + server + ":" + serverport);
 
                             ReadMessage(cl.GetStream());
                         }
                     }
                 }
-                catch (Exception ex) { log.Error(ex); }
+                catch (Exception ex) { }
 
                 // dump1090 sbs
                 try
@@ -100,7 +100,7 @@ namespace MissionPlanner.Utilities
 
                         cl.Connect(System.Net.IPAddress.Loopback, 30003);
 
-                        log.Info("Connected loopback:30003");
+                      // log.info("Connected loopback:30003");
 
                         ReadMessage(cl.GetStream());
                     }
@@ -115,7 +115,7 @@ namespace MissionPlanner.Utilities
 
                         cl.Connect(System.Net.IPAddress.Loopback, 30002);
 
-                        log.Info("Connected loopback:30002");
+                      // log.info("Connected loopback:30002");
 
                         ReadMessage(cl.GetStream());
                     }
@@ -131,7 +131,7 @@ namespace MissionPlanner.Utilities
 
                         cl.Connect(System.Net.IPAddress.Loopback, 31004);
 
-                        log.Info("Connected loopback:31004");
+                      // log.info("Connected loopback:31004");
 
                         ReadMessage(cl.GetStream());
                     }
@@ -146,7 +146,7 @@ namespace MissionPlanner.Utilities
 
                         cl.Connect(System.Net.IPAddress.Loopback, 31001);
 
-                        log.Info("Connected loopback:31001");
+                      // log.info("Connected loopback:31001");
 
                         ReadMessage(cl.GetStream());
                     }
@@ -162,7 +162,7 @@ namespace MissionPlanner.Utilities
 
                         cl.Connect(System.Net.IPAddress.Loopback, 47806);
 
-                        log.Info("Connected loopback:47806");
+                      // log.info("Connected loopback:47806");
 
                         ReadMessage(cl.GetStream());
                     }
@@ -209,7 +209,7 @@ namespace MissionPlanner.Utilities
                 System.Threading.Thread.Sleep(5000);
             }
 
-            log.Info("adsb thread exit");
+          // log.info("adsb thread exit");
         }
 
         public class Feed
@@ -867,7 +867,7 @@ namespace MissionPlanner.Utilities
                     }
                     else
                     {
-                        log.Info(line);
+                      // log.info(line);
 
                     }
                 }
@@ -918,7 +918,7 @@ namespace MissionPlanner.Utilities
                 }
                 else
                 {
-                    log.Info("bad sync 0x" + by.ToString("X2") + " " + (char)by);
+                  // log.info("bad sync 0x" + by.ToString("X2") + " " + (char)by);
                 }
             }
         }
@@ -977,7 +977,7 @@ namespace MissionPlanner.Utilities
             if (!avrline.StartsWith("*"))
                 return null;
 
-            log.Debug(avrline);
+          // log.Debug(avrline);
 
             avrline = avrline.Trim().TrimEnd(';');
 

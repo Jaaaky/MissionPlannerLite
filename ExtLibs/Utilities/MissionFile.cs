@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -6,14 +6,14 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
-using log4net;
+//using log4net;
 using Newtonsoft.Json;
 
 namespace MissionPlanner.Utilities
 {
     public class WaypointFile
     {
-        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+     //   private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         public static List<Locationwp> ReadWaypointFile(string file)
         {
@@ -87,7 +87,7 @@ namespace MissionPlanner.Utilities
                 }
                 catch (Exception ex)
                 {
-                    log.Error(ex);
+                  // log.error(ex);
                     CustomMessageBox.Show("Line invalid\n" + line);
                 }
             }

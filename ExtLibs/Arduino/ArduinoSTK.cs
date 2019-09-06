@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using System.IO.Ports;
 using System.Reflection;
 using System.Threading;
-using log4net;
+// //using log4net;
 using MissionPlanner.Comms;
 
 // Written by Michael Oborne
@@ -11,7 +11,7 @@ namespace MissionPlanner.Arduino
 {
     public class ArduinoSTK : Comms.SerialPort, IArduinoComms
     {
-        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        // private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public event ProgressEventHandler Progress;
 
         public new void Open()
@@ -50,7 +50,7 @@ namespace MissionPlanner.Arduino
                 a++;
                 Thread.Sleep(50);
 
-                log.InfoFormat("connectap btr {0}", BytesToRead);
+                // log.InfoFormat("connectap btr {0}", BytesToRead);
                 if (BytesToRead >= 2)
                 {
                     var b1 = (byte) ReadByte();
@@ -99,14 +99,14 @@ namespace MissionPlanner.Arduino
                 {
                     var b1 = (byte) ReadByte();
                     var b2 = (byte) ReadByte();
-                    log.DebugFormat("bytes {0:X} {1:X}", b1, b2);
+                    // log.DebugFormat("bytes {0:X} {1:X}", b1, b2);
 
                     if (b1 == 0x14 && b2 == 0x10)
                     {
                         return true;
                     }
                 }
-                log.DebugFormat("btr {0}", BytesToRead);
+                // log.DebugFormat("btr {0}", BytesToRead);
                 Thread.Sleep(10);
                 a++;
             }
@@ -216,7 +216,7 @@ namespace MissionPlanner.Arduino
 
                 byte[] command = {(byte) 'd', (byte) (sending >> 8), (byte) (sending & 0xff), (byte) 'F'};
                 Write(command, 0, command.Length);
-                log.Info(startfrom + (length - totalleft) + " - " + sending);
+                // log.Info(startfrom + (length - totalleft) + " - " + sending);
                 Write(data, startfrom + (length - totalleft), sending);
                 command = new[] {(byte) ' '};
                 Write(command, 0, command.Length);
@@ -229,7 +229,7 @@ namespace MissionPlanner.Arduino
 
                 if (!sync())
                 {
-                    log.Info("No Sync");
+                    // log.Info("No Sync");
                     return false;
                 }
             }
@@ -253,7 +253,7 @@ namespace MissionPlanner.Arduino
                 throw new Exception("Address must be an even number");
             }
 
-            log.Info("Sending address   " + (ushort) (address/2));
+            // log.Info("Sending address   " + (ushort) (address/2));
 
             address /= 2;
             address = (ushort) address;
@@ -301,7 +301,7 @@ namespace MissionPlanner.Arduino
 
                 byte[] command = {(byte) 'd', (byte) (sending >> 8), (byte) (sending & 0xff), (byte) 'E'};
                 Write(command, 0, command.Length);
-                log.Info(startfrom + (length - totalleft) + " - " + sending);
+                // log.Info(startfrom + (length - totalleft) + " - " + sending);
                 Write(data, startfrom + (length - totalleft), sending);
                 command = new[] {(byte) ' '};
                 Write(command, 0, command.Length);
@@ -310,7 +310,7 @@ namespace MissionPlanner.Arduino
 
                 if (!sync())
                 {
-                    log.Info("No Sync");
+                    // log.Info("No Sync");
                     return false;
                 }
             }
@@ -331,7 +331,7 @@ namespace MissionPlanner.Arduino
             var chr = new byte[5];
 
             var count = Read(chr, 0, 5);
-            log.Debug("getChipType read " + count);
+            // log.Debug("getChipType read " + count);
 
             if (chr[0] == 0x14 && chr[4] == 0x10)
             {
@@ -344,7 +344,7 @@ namespace MissionPlanner.Arduino
             {
                 if (item.Equals(new Chip("", sig1, sig2, sig3, 0)))
                 {
-                    log.Debug("Match " + item);
+                    // log.Debug("Match " + item);
                     return item;
                 }
             }

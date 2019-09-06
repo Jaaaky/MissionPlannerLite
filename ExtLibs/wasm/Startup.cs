@@ -1,10 +1,10 @@
 using System;
 using Blazor.Extensions.Storage;
 using Blazor.FileReader;
-using log4net.Appender;
-using log4net.Core;
-using log4net.Layout;
-using log4net.Repository.Hierarchy;
+// using log4net.Appender;
+// using log4net.Core;
+// using log4net.Layout;
+// using log4net.Repository.Hierarchy;
 using Microsoft.AspNetCore.Components.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
@@ -17,7 +17,7 @@ namespace wasm
 {
     public class Startup
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        // private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public void ConfigureServices(IServiceCollection services)
         {
@@ -36,8 +36,8 @@ namespace wasm
         {
             app.AddComponent<App>("app");
 
-            log4net.Repository.Hierarchy.Hierarchy hierarchy =
-                (Hierarchy)log4net.LogManager.GetRepository(Assembly.GetAssembly(typeof(Startup)));
+            // log4net.Repository.Hierarchy.Hierarchy hierarchy =
+            //     (Hierarchy)log4net.LogManager.GetRepository(Assembly.GetAssembly(typeof(Startup)));
 
             PatternLayout patternLayout = new PatternLayout();
             patternLayout.ConversionPattern = "%date [%thread] %-5level %logger - %message%newline";
@@ -51,9 +51,9 @@ namespace wasm
             hierarchy.Root.Level = Level.Debug;
             hierarchy.Configured = true;
 
-            log.Info("test");
+          // log.info("test");
 
-            log.Info("Configure Done");
+          // log.info("Configure Done");
 
             BinaryLog.onFlightMode += (firmware, modeno) =>
             {

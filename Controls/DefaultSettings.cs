@@ -1,17 +1,17 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using System.IO;
 using MissionPlanner.Utilities;
-using log4net;
+// //using log4net;
 using System.Threading.Tasks;
 
 namespace MissionPlanner.Controls
 {
     public partial class DefaultSettings : UserControl, IActivate
     {
-        private static readonly ILog log =
-            LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        // private static readonly ILog log =
+        //     LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         List<GitHubContent.FileInfo> paramfiles;
 
@@ -53,7 +53,7 @@ namespace MissionPlanner.Controls
                 }
                 catch (Exception ex)
                 {
-                    log.Error(ex);
+                    // log.Error(ex);
                 }
             });
         }

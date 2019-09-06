@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
@@ -214,8 +214,8 @@ namespace MissionPlanner
 
             List<PointLatLngAlt> answer = new List<PointLatLngAlt>();
 
-            //http://code.google.com/apis/maps/documentation/elevation/
-            //http://maps.google.com/maps/api/elevation/xml
+            //http://code.noaa.io/apis/maps/documentation/elevation/
+            //http://maps.noaa.io/maps/api/elevation/xml
             string coords = "";
 
             foreach (PointLatLngAlt loc in list)
@@ -238,9 +238,8 @@ namespace MissionPlanner
             {
                 using (
                     XmlTextReader xmlreader =
-                        new XmlTextReader("https://maps.google.com/maps/api/elevation/xml?path=" + coords + "&samples=" +
-                                          (distance/100).ToString(new System.Globalization.CultureInfo("en-US")) +
-                                          "&sensor=false&key="+GoogleMapProvider.APIKey))
+                        new XmlTextReader("https://maps.noaa.io/maps/api/elevation/xml?path=" + coords + "&samples=" +
+                                          (distance/100).ToString(new System.Globalization.CultureInfo("en-US"))))
                 {
                     while (xmlreader.Read())
                     {

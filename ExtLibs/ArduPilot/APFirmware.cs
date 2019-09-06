@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -6,7 +6,7 @@ using System.IO.Compression;
 using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
-using log4net;
+//using log4net;
 
 namespace MissionPlanner.ArduPilot
 {
@@ -32,8 +32,8 @@ namespace MissionPlanner.ArduPilot
 
     public class APFirmware
     {
-        private static readonly ILog log =
-            LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+     //   private static readonly ILog log =
+            //LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public class FirmwareInfo
         {
@@ -108,7 +108,7 @@ namespace MissionPlanner.ArduPilot
             if (force == false && Manifest != null)
                 return;
 
-            log.Info(url);
+          // log.info(url);
 
             var manifestgz = new WebClient().DownloadData(url);
             var mssrc = new MemoryStream(manifestgz);
@@ -120,7 +120,7 @@ namespace MissionPlanner.ArduPilot
             
             Manifest = JsonConvert.DeserializeObject<ManifestRoot>(manifest);
 
-            log.Info(Manifest.Firmware?.Length);
+          // log.info(Manifest.Firmware?.Length);
         }
 
         public static ManifestRoot Manifest { get; set; }

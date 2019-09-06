@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.CodeDom;
 using System.Collections.Generic;
 using System.IO;
@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Core.ExtendedObjects;
-using log4net;
+//using log4net;
 using Newtonsoft.Json;
 using uint8_t = System.Byte;
 using uint16_t = System.UInt16;
@@ -29,7 +29,7 @@ namespace MissionPlanner.ArduPilot.Mavlink
         /// Identifies Skipped entry from List command
         const byte kDirentSkip = (byte) 'S';
 
-        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+     //   private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private readonly byte _compid;
         private readonly MAVLinkInterface _mavint;
         private readonly byte _sysid;
@@ -584,7 +584,7 @@ namespace MissionPlanner.ArduPilot.Mavlink
                 session = 0
             };
             fileTransferProtocol.payload = payload;
-            log.Info("get " + payload.opcode + " " + file);
+          // log.info("get " + payload.opcode + " " + file);
             var timeout = new RetryTimeout();
             size = -1;
             var localsize = size;
@@ -599,12 +599,12 @@ namespace MissionPlanner.ArduPilot.Mavlink
                     if (errorcode == FTPErrorCode.kErrFailErrno)
                     {
                         var _ftp_errno = (errno) ftphead.data[1];
-                        log.Error(ftphead.req_opcode + " " + errorcode + " " + _ftp_errno);
+                      // log.error(ftphead.req_opcode + " " + errorcode + " " + _ftp_errno);
                         timeout.Retries = 0;
                     }
                     else
                     {
-                        log.Error(ftphead.req_opcode + " " + errorcode);
+                      // log.error(ftphead.req_opcode + " " + errorcode);
                     }
 
                     if (errorcode == FTPErrorCode.kErrNoSessionsAvailable)
@@ -623,7 +623,7 @@ namespace MissionPlanner.ArduPilot.Mavlink
                 if (ftphead.opcode != FTPOpcode.kRspAck)
                     return true;
                 localsize = BitConverter.ToInt32(ftphead.data, 0);
-                log.Info(ftphead.req_opcode + " " + file + " " + localsize);
+              // log.info(ftphead.req_opcode + " " + file + " " + localsize);
                 timeout.Complete = true;
                 return true;
             });
@@ -641,7 +641,7 @@ namespace MissionPlanner.ArduPilot.Mavlink
             {
                 var msg = (MAVLink.mavlink_file_transfer_protocol_t) message.data;
                 FTPPayloadHeader ftphead = msg.payload;
-                log.Debug(ftphead);
+              // log.Debug(ftphead);
                 Console.WriteLine(ftphead);
 
                 return true;
@@ -728,7 +728,7 @@ namespace MissionPlanner.ArduPilot.Mavlink
                 offset = 0
             };
             fileTransferProtocol.payload = payload;
-            log.Info("get " + payload.opcode + " " + file + " " + size);
+          // log.info("get " + payload.opcode + " " + file + " " + size);
             SortedList<uint, uint> chunkSortedList = new SortedList<uint, uint>();
             MemoryStream answer = new MemoryStream();
             var sub = _mavint.SubscribeToPacketType(MAVLink.MAVLINK_MSG_ID.FILE_TRANSFER_PROTOCOL, message =>
@@ -749,12 +749,12 @@ namespace MissionPlanner.ArduPilot.Mavlink
                     if (errorcode == FTPErrorCode.kErrFailErrno)
                     {
                         var _ftp_errno = (errno) ftphead.data[1];
-                        log.Error(ftphead.req_opcode + " " + errorcode + " " + _ftp_errno);
+                      // log.error(ftphead.req_opcode + " " + errorcode + " " + _ftp_errno);
                         timeout.Retries = 0;
                     }
                     else
                     {
-                        log.Error(ftphead.req_opcode + " " + errorcode);
+                      // log.error(ftphead.req_opcode + " " + errorcode);
                     }
 
                     if (errorcode == FTPErrorCode.kErrEOF)
@@ -802,15 +802,15 @@ namespace MissionPlanner.ArduPilot.Mavlink
                     Progress?.Invoke((int)((float)payload.offset / size * 100.0));
                 if (ftphead.offset + ftphead.size >= size)
                 {
-                    log.InfoFormat("Done {0} {1} ", ftphead.burst_complete, ftphead.offset + ftphead.size);
+                  // log.infoFormat("Done {0} {1} ", ftphead.burst_complete, ftphead.offset + ftphead.size);
                     timeout.Complete = true;
                     return true;
                 }
 
                 if (ftphead.burst_complete == 1)
                 {
-                    log.InfoFormat("next burst {0} {1} ", ftphead.burst_complete, ftphead.offset + ftphead.size);
-                    log.Debug(payload);
+                  // log.infoFormat("next burst {0} {1} ", ftphead.burst_complete, ftphead.offset + ftphead.size);
+                  // log.Debug(payload);
                     _mavint.sendPacket(fileTransferProtocol, _sysid, _compid);
                 }
 
@@ -845,7 +845,7 @@ namespace MissionPlanner.ArduPilot.Mavlink
                 session = 0
             };
             fileTransferProtocol.payload = payload;
-            log.Info("get " + payload.opcode + " " + file);
+          // log.info("get " + payload.opcode + " " + file);
             var timeout = new RetryTimeout(30, 2000);
             crc32 = UInt32.MaxValue;
             var localcrc32 = crc32;
@@ -860,12 +860,12 @@ namespace MissionPlanner.ArduPilot.Mavlink
                     if (errorcode == FTPErrorCode.kErrFailErrno)
                     {
                         var _ftp_errno = (errno) ftphead.data[1];
-                        log.Error(ftphead.req_opcode + " " + errorcode + " " + _ftp_errno);
+                      // log.error(ftphead.req_opcode + " " + errorcode + " " + _ftp_errno);
                         timeout.Retries = 0;
                     }
                     else
                     {
-                        log.Error(ftphead.req_opcode + " " + errorcode);
+                      // log.error(ftphead.req_opcode + " " + errorcode);
                     }
 
                     if (errorcode == FTPErrorCode.kErrBusy)
@@ -883,7 +883,7 @@ namespace MissionPlanner.ArduPilot.Mavlink
                 if (ftphead.opcode != FTPOpcode.kRspAck)
                     return true;
                 localcrc32 = BitConverter.ToUInt32(ftphead.data, 0);
-                log.Info(ftphead.req_opcode + " " + file + " " + localcrc32);
+              // log.info(ftphead.req_opcode + " " + file + " " + localcrc32);
                 timeout.Complete = true;
                 return true;
             });
@@ -963,14 +963,14 @@ namespace MissionPlanner.ArduPilot.Mavlink
                     if (errorcode == FTPErrorCode.kErrFailErrno)
                     {
                         var _ftp_errno = (errno) ftphead.data[1];
-                        log.Error(ftphead.req_opcode + " " + errorcode + " " + _ftp_errno);
+                      // log.error(ftphead.req_opcode + " " + errorcode + " " + _ftp_errno);
 
                         if (_ftp_errno == errno.EEXIST)
                             timeout.Complete = true;
                     }
                     else
                     {
-                        log.Error(ftphead.req_opcode + " " + errorcode);
+                      // log.error(ftphead.req_opcode + " " + errorcode);
                     }
 
                     if (errorcode == FTPErrorCode.kErrNoSessionsAvailable)
@@ -984,7 +984,7 @@ namespace MissionPlanner.ArduPilot.Mavlink
                 // only ack's
                 if (ftphead.opcode != FTPOpcode.kRspAck)
                     return true;
-                log.Info(ftphead.req_opcode + " " + file + " ");
+              // log.info(ftphead.req_opcode + " " + file + " ");
                 timeout.Complete = true;
                 return true;
             });
@@ -1021,12 +1021,12 @@ namespace MissionPlanner.ArduPilot.Mavlink
                     if (errorcode == FTPErrorCode.kErrFailErrno)
                     {
                         var _ftp_errno = (errno) ftphead.data[1];
-                        log.Error(ftphead.req_opcode + " " + errorcode + " " + _ftp_errno);
+                      // log.error(ftphead.req_opcode + " " + errorcode + " " + _ftp_errno);
                         timeout.Retries = 0;
                     }
                     else
                     {
-                        log.Error(ftphead.req_opcode + " " + errorcode);
+                      // log.error(ftphead.req_opcode + " " + errorcode);
                     }
 
                     if (errorcode == FTPErrorCode.kErrNoSessionsAvailable)
@@ -1041,7 +1041,7 @@ namespace MissionPlanner.ArduPilot.Mavlink
                 if (ftphead.opcode != FTPOpcode.kRspAck)
                     return true;
                 localsize = BitConverter.ToInt32(ftphead.data, 0);
-                log.Info(ftphead.req_opcode + " " + file + " " + localsize);
+              // log.info(ftphead.req_opcode + " " + file + " " + localsize);
                 timeout.Complete = true;
                 return true;
             });
@@ -1054,7 +1054,7 @@ namespace MissionPlanner.ArduPilot.Mavlink
 
         public List<FtpFileInfo> kCmdListDirectory(string dir)
         {
-            log.Info("kCmdListDirectory: " + dir);
+          // log.info("kCmdListDirectory: " + dir);
             List <FtpFileInfo> answer = new List<FtpFileInfo>();
             fileTransferProtocol.target_system = _sysid;
             fileTransferProtocol.target_component = _compid;
@@ -1080,12 +1080,12 @@ namespace MissionPlanner.ArduPilot.Mavlink
                         if (errorcode == FTPErrorCode.kErrFailErrno)
                         {
                             var _ftp_errno = (errno) ftphead.data[1];
-                            log.Error(ftphead.req_opcode + " " + errorcode + " " + _ftp_errno);
+                          // log.error(ftphead.req_opcode + " " + errorcode + " " + _ftp_errno);
                             timeout.Retries = 0;
                         }
                         else
                         {
-                            log.Error(ftphead.req_opcode + " " + errorcode);
+                          // log.error(ftphead.req_opcode + " " + errorcode);
                         }
 
                         if (errorcode == FTPErrorCode.kErrEOF)
@@ -1186,7 +1186,7 @@ namespace MissionPlanner.ArduPilot.Mavlink
                 session = 0
             };
             fileTransferProtocol.payload = payload;
-            log.Info("get " + payload.opcode + " " + file);
+          // log.info("get " + payload.opcode + " " + file);
             var timeout = new RetryTimeout();
             size = -1;
             var localsize = size;
@@ -1201,12 +1201,12 @@ namespace MissionPlanner.ArduPilot.Mavlink
                     if (errorcode == FTPErrorCode.kErrFailErrno)
                     {
                         var _ftp_errno = (errno) ftphead.data[1];
-                        log.Error(ftphead.req_opcode + " " + errorcode + " " + _ftp_errno);
+                      // log.error(ftphead.req_opcode + " " + errorcode + " " + _ftp_errno);
                         timeout.Retries = 0;
                     }
                     else
                     {
-                        log.Error(ftphead.req_opcode + " " + errorcode);
+                      // log.error(ftphead.req_opcode + " " + errorcode);
                     }
 
                     if (errorcode == FTPErrorCode.kErrNoSessionsAvailable)
@@ -1225,7 +1225,7 @@ namespace MissionPlanner.ArduPilot.Mavlink
                 if (ftphead.opcode != FTPOpcode.kRspAck)
                     return true;
                 localsize = BitConverter.ToInt32(ftphead.data, 0);
-                log.Info(ftphead.req_opcode + " " + file + " " + localsize);
+              // log.info(ftphead.req_opcode + " " + file + " " + localsize);
                 timeout.Complete = true;
                 return true;
             });
@@ -1248,7 +1248,7 @@ namespace MissionPlanner.ArduPilot.Mavlink
                 session = 0
             };
             fileTransferProtocol.payload = payload;
-            log.Info("get " + payload.opcode + " " + file + " " + size);
+          // log.info("get " + payload.opcode + " " + file + " " + size);
             MemoryStream answer = new MemoryStream();
             sub = _mavint.SubscribeToPacketType(MAVLink.MAVLINK_MSG_ID.FILE_TRANSFER_PROTOCOL, message =>
             {
@@ -1266,12 +1266,12 @@ namespace MissionPlanner.ArduPilot.Mavlink
                     if (errorcode == FTPErrorCode.kErrFailErrno)
                     {
                         var _ftp_errno = (errno) ftphead.data[1];
-                        log.Error(ftphead.req_opcode + " " + errorcode + " " + _ftp_errno);
+                      // log.error(ftphead.req_opcode + " " + errorcode + " " + _ftp_errno);
                         timeout.Retries = 0;
                     }
                     else
                     {
-                        log.Error(ftphead.req_opcode + " " + errorcode);
+                      // log.error(ftphead.req_opcode + " " + errorcode);
                     }
 
                     return true;
@@ -1349,12 +1349,12 @@ namespace MissionPlanner.ArduPilot.Mavlink
                     if (errorcode == FTPErrorCode.kErrFailErrno)
                     {
                         var _ftp_errno = (errno) ftphead.data[1];
-                        log.Error(ftphead.req_opcode + " " + errorcode + " " + _ftp_errno);
+                      // log.error(ftphead.req_opcode + " " + errorcode + " " + _ftp_errno);
                         timeout.Retries = 0;
                     }
                     else
                     {
-                        log.Error(ftphead.req_opcode + " " + errorcode);
+                      // log.error(ftphead.req_opcode + " " + errorcode);
                     }
 
                     if (errorcode == FTPErrorCode.kErrNoSessionsAvailable)
@@ -1368,7 +1368,7 @@ namespace MissionPlanner.ArduPilot.Mavlink
                 // only ack's
                 if (ftphead.opcode != FTPOpcode.kRspAck)
                     return true;
-                log.Info(ftphead.req_opcode + " " + file + " ");
+              // log.info(ftphead.req_opcode + " " + file + " ");
                 timeout.Complete = true;
                 return true;
             });
@@ -1403,12 +1403,12 @@ namespace MissionPlanner.ArduPilot.Mavlink
                     if (errorcode == FTPErrorCode.kErrFailErrno)
                     {
                         var _ftp_errno = (errno) ftphead.data[1];
-                        log.Error(ftphead.req_opcode + " " + errorcode + " " + _ftp_errno);
+                      // log.error(ftphead.req_opcode + " " + errorcode + " " + _ftp_errno);
                         timeout.Retries = 0;
                     }
                     else
                     {
-                        log.Error(ftphead.req_opcode + " " + errorcode);
+                      // log.error(ftphead.req_opcode + " " + errorcode);
                     }
 
                     if (errorcode == FTPErrorCode.kErrNoSessionsAvailable)
@@ -1422,7 +1422,7 @@ namespace MissionPlanner.ArduPilot.Mavlink
                 // only ack's
                 if (ftphead.opcode != FTPOpcode.kRspAck)
                     return true;
-                log.Info(ftphead.req_opcode + " " + file + " ");
+              // log.info(ftphead.req_opcode + " " + file + " ");
                 timeout.Complete = true;
                 return true;
             });
@@ -1457,12 +1457,12 @@ namespace MissionPlanner.ArduPilot.Mavlink
                     if (errorcode == FTPErrorCode.kErrFailErrno)
                     {
                         var _ftp_errno = (errno) ftphead.data[1];
-                        log.Error(ftphead.req_opcode + " " + errorcode + " " + _ftp_errno);
+                      // log.error(ftphead.req_opcode + " " + errorcode + " " + _ftp_errno);
                         timeout.Retries = 0;
                     }
                     else
                     {
-                        log.Error(ftphead.req_opcode + " " + errorcode);
+                      // log.error(ftphead.req_opcode + " " + errorcode);
                     }
 
                     if (errorcode == FTPErrorCode.kErrNoSessionsAvailable)
@@ -1476,7 +1476,7 @@ namespace MissionPlanner.ArduPilot.Mavlink
                 // only ack's
                 if (ftphead.opcode != FTPOpcode.kRspAck)
                     return true;
-                log.Info(ftphead.req_opcode + " " + src + " -> " + dest);
+              // log.info(ftphead.req_opcode + " " + src + " -> " + dest);
                 timeout.Complete = true;
                 return true;
             });
@@ -1500,7 +1500,7 @@ namespace MissionPlanner.ArduPilot.Mavlink
             {
                 var msg = (MAVLink.mavlink_file_transfer_protocol_t) message.data;
                 FTPPayloadHeader ftphead = msg.payload;
-                log.Info(ftphead.opcode + " " + ftphead.req_opcode + " " + ftphead.size);
+              // log.info(ftphead.opcode + " " + ftphead.req_opcode + " " + ftphead.size);
                 // error at far end
                 if (ftphead.opcode == FTPOpcode.kRspNak)
                 {
@@ -1508,12 +1508,12 @@ namespace MissionPlanner.ArduPilot.Mavlink
                     if (errorcode == FTPErrorCode.kErrFailErrno)
                     {
                         var _ftp_errno = (errno) ftphead.data[1];
-                        log.Error(ftphead.req_opcode + " " + errorcode + " " + _ftp_errno);
+                      // log.error(ftphead.req_opcode + " " + errorcode + " " + _ftp_errno);
                         timeout.Retries = 0;
                     }
                     else
                     {
-                        log.Error(ftphead.req_opcode + " " + errorcode);
+                      // log.error(ftphead.req_opcode + " " + errorcode);
                     }
 
                     return true;
@@ -1529,7 +1529,7 @@ namespace MissionPlanner.ArduPilot.Mavlink
                 return true;
             });
             timeout.WorkToDo = () => _mavint.sendPacket(fileTransferProtocol, _sysid, _compid);
-            log.Info(payload.opcode);
+          // log.info(payload.opcode);
             var ans = timeout.DoWork();
             _mavint.UnSubscribeToPacketType(sub);
             return ans;
@@ -1549,7 +1549,7 @@ namespace MissionPlanner.ArduPilot.Mavlink
             {
                 var msg = (MAVLink.mavlink_file_transfer_protocol_t) message.data;
                 FTPPayloadHeader ftphead = msg.payload;
-                log.Info(ftphead.opcode + " " + ftphead.req_opcode + " " + ftphead.size);
+              // log.info(ftphead.opcode + " " + ftphead.req_opcode + " " + ftphead.size);
                 // error at far end
                 if (ftphead.opcode == FTPOpcode.kRspNak)
                 {
@@ -1557,12 +1557,12 @@ namespace MissionPlanner.ArduPilot.Mavlink
                     if (errorcode == FTPErrorCode.kErrFailErrno)
                     {
                         var _ftp_errno = (errno) ftphead.data[1];
-                        log.Error(ftphead.req_opcode + " " + errorcode + " " + _ftp_errno);
+                      // log.error(ftphead.req_opcode + " " + errorcode + " " + _ftp_errno);
                         timeout.Retries = 0;
                     }
                     else
                     {
-                        log.Error(ftphead.req_opcode + " " + errorcode);
+                      // log.error(ftphead.req_opcode + " " + errorcode);
                     }
 
                     return true;
@@ -1578,7 +1578,7 @@ namespace MissionPlanner.ArduPilot.Mavlink
                 return true;
             });
             timeout.WorkToDo = () => _mavint.sendPacket(fileTransferProtocol, _sysid, _compid);
-            log.Info(payload.opcode);
+          // log.info(payload.opcode);
             var ans = timeout.DoWork();
             _mavint.UnSubscribeToPacketType(sub);
             return ans;
@@ -1609,12 +1609,12 @@ namespace MissionPlanner.ArduPilot.Mavlink
                     if (errorcode == FTPErrorCode.kErrFailErrno)
                     {
                         var _ftp_errno = (errno) ftphead.data[1];
-                        log.Error(ftphead.req_opcode + " " + errorcode + " " + _ftp_errno);
+                      // log.error(ftphead.req_opcode + " " + errorcode + " " + _ftp_errno);
                         timeout.Retries = 0;
                     }
                     else
                     {
-                        log.Error(ftphead.req_opcode + " " + errorcode);
+                      // log.error(ftphead.req_opcode + " " + errorcode);
                     }
 
                     if (errorcode == FTPErrorCode.kErrNoSessionsAvailable)
@@ -1628,7 +1628,7 @@ namespace MissionPlanner.ArduPilot.Mavlink
                 // only ack's
                 if (ftphead.opcode != FTPOpcode.kRspAck)
                     return true;
-                log.Info(ftphead.req_opcode + " " + file + " ");
+              // log.info(ftphead.req_opcode + " " + file + " ");
                 timeout.Complete = true;
                 return true;
             });
@@ -1650,7 +1650,7 @@ namespace MissionPlanner.ArduPilot.Mavlink
                 session = 0
             };
             fileTransferProtocol.payload = payload;
-            log.Info("get " + payload.opcode + " " + srcfile + " ");
+          // log.info("get " + payload.opcode + " " + srcfile + " ");
             using (var stream = new BufferedStream(File.OpenRead(srcfile), 1024 * 1024))
             {
                 var size = stream.Length;
@@ -1673,12 +1673,12 @@ namespace MissionPlanner.ArduPilot.Mavlink
                         if (errorcode == FTPErrorCode.kErrFailErrno)
                         {
                             var _ftp_errno = (errno) ftphead.data[1];
-                            log.Error(ftphead.req_opcode + " " + errorcode + " " + _ftp_errno);
+                          // log.error(ftphead.req_opcode + " " + errorcode + " " + _ftp_errno);
                             timeout.Retries = 0;
                         }
                         else
                         {
-                            log.Error(ftphead.req_opcode + " " + errorcode);
+                          // log.error(ftphead.req_opcode + " " + errorcode);
                         }
 
                         return true;
@@ -1822,7 +1822,7 @@ namespace MissionPlanner.ArduPilot.Mavlink
         public int RetriesCurrent = 0;
         public int TimeoutMS = 1000;
         public Action WorkToDo;
-        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+     //   private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private DateTime _timeOutDateTime = DateTime.MinValue;
 
         public RetryTimeout(int Retrys = 30, int TimeoutMS = 1000)
@@ -1852,8 +1852,8 @@ namespace MissionPlanner.ArduPilot.Mavlink
                 Complete = false;
                 for (RetriesCurrent = 0; RetriesCurrent < Retries; RetriesCurrent++)
                 {
-                    log.InfoFormat("Retry {0} - {1}", RetriesCurrent,
-                        TimeOutDateTime.ToString("yyyy-MM-ddTHH:mm:ss.fff"));
+                  // log.infoFormat("Retry {0} - {1}", RetriesCurrent,
+                        //TimeOutDateTime.ToString("yyyy-MM-ddTHH:mm:ss.fff"));
                     WorkToDo();
                     TimeOutDateTime = DateTime.Now.AddMilliseconds(TimeoutMS);
                     while (DateTime.Now < TimeOutDateTime)
@@ -1861,7 +1861,7 @@ namespace MissionPlanner.ArduPilot.Mavlink
                         if (Complete)
                             return true;
                         Thread.Sleep(100);
-                        log.Debug("TimeOutDateTime " + TimeOutDateTime.ToString("yyyy-MM-ddTHH:mm:ss.fff"));
+                      // log.Debug("TimeOutDateTime " + TimeOutDateTime.ToString("yyyy-MM-ddTHH:mm:ss.fff"));
                     }
                 }
 

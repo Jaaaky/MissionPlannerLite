@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Collections;
@@ -7,7 +7,7 @@ using System.Globalization;
 using System.Reflection;
 using System.Resources;
 using System.Threading;
-using log4net;
+//using log4net;
 using Xamarin.Controls;
 using MissionPlanner.Utilities.Drawing;
 using SkiaSharp;
@@ -42,7 +42,7 @@ namespace MissionPlanner.Controls
 
         private static readonly SolidBrush AltGroundBrush = new SolidBrush(Color.FromArgb(100, Color.BurlyWood));
 
-        private static readonly ILog log =
+     //   private static readonly ILog log =
                                                                                     LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         private static readonly SolidBrush SlightlyTransparentWhiteBrush =
@@ -870,8 +870,8 @@ namespace MissionPlanner.Controls
             }
             catch (Exception ex)
             {
-                log.Error("Expected failure on max/linux due to opengl support");
-                log.Error(ex);
+              // log.error("Expected failure on max/linux due to opengl support");
+              // log.error(ex);
                 opengl = false;
             } // macs/linux fail here
         }
@@ -887,17 +887,17 @@ namespace MissionPlanner.Controls
             }
             catch (Exception ex)
             {
-                log.Info(ex.ToString());
+              // log.info(ex.ToString());
                 opengl = false;
             }
         }
 
         protected override void OnLoad(EventArgs e)
         {
-            log.Info("OnLoad Start");
+          // log.info("OnLoad Start");
             
 
-            log.Info("OnLoad Done");
+          // log.info("OnLoad Done");
 
             started = true;
         }
@@ -968,7 +968,7 @@ namespace MissionPlanner.Controls
 
                 if (inOnPaint)
                 {
-                    log.Info("Was in onpaint Hud th:" + System.Threading.Thread.CurrentThread.Name + " in " +
+                  // log.info("Was in onpaint Hud th:" + System.Threading.Thread.CurrentThread.Name + " in " +
                              otherthread);
                     return;
                 }
@@ -997,7 +997,7 @@ namespace MissionPlanner.Controls
             }
             catch (Exception ex)
             {
-                log.Info(ex.ToString());
+              // log.info(ex.ToString());
             }
 
             count++;
@@ -1118,7 +1118,7 @@ namespace MissionPlanner.Controls
                             }
                             catch (Exception ex)
                             {
-                                log.Error(ex);
+                              // log.error(ex);
                                 _bgimage = null;
                             }
                         }
@@ -2150,7 +2150,7 @@ namespace MissionPlanner.Controls
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine(ex);
-                log.Info("hud error " + ex.ToString());
+              // log.info("hud error " + ex.ToString());
             }
         }
 

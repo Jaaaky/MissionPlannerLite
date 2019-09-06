@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Drawing;
 using System.IO;
 using System.Net;
@@ -7,7 +7,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
-using log4net;
+//using log4net;
 using SharpKml.Base;
 using SharpKml.Dom;
 using Newtonsoft.Json;
@@ -36,8 +36,8 @@ namespace MissionPlanner.Utilities
 
         public static bool run = true;
 
-        private static readonly ILog log =
-            LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+     //   private static readonly ILog log =
+            //LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         ~httpserver()
         {
@@ -64,7 +64,7 @@ namespace MissionPlanner.Utilities
             }
             catch (Exception e)
             {
-                log.Error("Exception starting listener. Possible multiple instances of planner?", e);
+              // log.error("Exception starting listener. Possible multiple instances of planner?", e);
                 return;
             } // in use
             // Enter the listening loop.               
@@ -74,7 +74,7 @@ namespace MissionPlanner.Utilities
                 // You could also user server.AcceptSocket() here.               
                 try
                 {
-                    log.Info("Listening for client");
+                  // log.info("Listening for client");
                     //TcpClient client = listener.AcceptTcpClient();
 
                     // Set the event to nonsignaled state.
@@ -90,12 +90,12 @@ namespace MissionPlanner.Utilities
                 }
                 catch (ThreadAbortException ex)
                 {
-                    log.Info(ex);
+                  // log.info(ex);
                     return;
                 }
                 catch (Exception ex)
                 {
-                    log.Error(ex);
+                  // log.error(ex);
                 }
             }
         }
@@ -125,7 +125,7 @@ namespace MissionPlanner.Utilities
                 try
                 {
                     // Get a stream object for reading and writing          
-                    log.Info("Accepted Client " + client.Client.RemoteEndPoint.ToString());
+                  // log.info("Accepted Client " + client.Client.RemoteEndPoint.ToString());
                     //client.SendBufferSize = 100 * 1024; // 100kb
                     //client.LingerState.Enabled = true;
                     //client.NoDelay = true;
@@ -141,7 +141,7 @@ namespace MissionPlanner.Utilities
                     goto skipagain;
 
                     again:
-                    log.Info("doing Again");
+                  // log.info("doing Again");
 
                     skipagain:
 
@@ -161,7 +161,7 @@ namespace MissionPlanner.Utilities
                     }
 
                     string head = System.Text.Encoding.ASCII.GetString(request, 0, len);
-                    log.Info(head);
+                  // log.info(head);
 
                     int index = head.IndexOf('\n');
 
@@ -426,7 +426,7 @@ namespace MissionPlanner.Utilities
                     else if (url.Contains(" /network.kml"))
                     {
                         byte[] buffer = Encoding.ASCII.GetBytes(@"<?xml version=""1.0"" encoding=""UTF-8""?>
-<kml xmlns=""http://www.opengis.net/kml/2.2"" xmlns:gx=""http://www.google.com/kml/ext/2.2"" xmlns:kml=""http://www.opengis.net/kml/2.2"" xmlns:atom=""http://www.w3.org/2005/Atom"">
+<kml xmlns=""http://www.opengis.net/kml/2.2"" xmlns:gx=""http://www.noaa.io/kml/ext/2.2"" xmlns:kml=""http://www.opengis.net/kml/2.2"" xmlns:atom=""http://www.w3.org/2005/Atom"">
     <Folder>
         <name> Network Links </name>
         <open> 1 </open>
@@ -1068,12 +1068,12 @@ namespace MissionPlanner.Utilities
                     }
 
                     stream.Close();
-                    log.Info("Close http " + url);
+                  // log.info("Close http " + url);
                     client.Close();
                 }
                 catch (Exception ee)
                 {
-                    log.Error("Failed http ", ee);
+                  // log.error("Failed http ", ee);
                 }
             }
         }

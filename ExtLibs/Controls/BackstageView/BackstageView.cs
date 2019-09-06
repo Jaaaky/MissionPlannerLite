@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using log4net;
+//using log4net;
 using MissionPlanner.Controls.BackstageView;
 
 namespace MissionPlanner.Controls.BackstageView
@@ -17,7 +17,7 @@ namespace MissionPlanner.Controls.BackstageView
     /// </remarks>
     public partial class BackstageView : MyUserControl, IContainerControl
     {
-        private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+     //   private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         private Color _buttonsAreaBgColor = Color.White;
         private Color _buttonsAreaPencilColor = Color.DarkGray;
@@ -459,7 +459,7 @@ namespace MissionPlanner.Controls.BackstageView
                 }
                 catch (Exception ex)
                 {
-                    log.Error(ex);
+                  // log.error(ex);
                 }
             }
 
@@ -479,7 +479,7 @@ namespace MissionPlanner.Controls.BackstageView
             }
             catch (Exception ex)
             {
-                log.Error(ex);
+              // log.error(ex);
             }
 
             associatedPage.Page.ResumeLayout(false);
@@ -504,13 +504,13 @@ namespace MissionPlanner.Controls.BackstageView
             }
             catch (Exception ex)
             {
-                log.Error(ex);
+              // log.error(ex);
             }
 
             var end = DateTime.Now;
 
-            log.DebugFormat("{0} {1} {2}", associatedPage.Page.GetType().ToString(), associatedPage.LinkText,
-                (end - start).TotalMilliseconds);
+          // log.DebugFormat("{0} {1} {2}", associatedPage.Page.GetType().ToString(), associatedPage.LinkText,
+                //(end - start).TotalMilliseconds);
 
             _activePage = associatedPage;
         }
@@ -541,7 +541,7 @@ namespace MissionPlanner.Controls.BackstageView
                     }
                     catch (Exception ex)
                     {
-                        log.Error(ex);
+                      // log.error(ex);
                     }
 
                     try
@@ -550,7 +550,7 @@ namespace MissionPlanner.Controls.BackstageView
                     }
                     catch (Exception ex)
                     {
-                        log.Error(ex);
+                      // log.error(ex);
                     }
                 }
                 else
@@ -561,7 +561,7 @@ namespace MissionPlanner.Controls.BackstageView
                     }
                     catch (Exception ex)
                     {
-                        log.Error(ex);
+                      // log.error(ex);
                     }
                 }
             }

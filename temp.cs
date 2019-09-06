@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
@@ -24,7 +24,7 @@ using DotSpatial.Symbology;
 using GMap.NET;
 using GMap.NET.MapProviders;
 using GMap.NET.WindowsForms;
-using log4net;
+//using log4net;
 using Microsoft.Scripting.Utils;
 using MissionPlanner.ArduPilot;
 using MissionPlanner.Comms;
@@ -39,14 +39,14 @@ using MissionPlanner.Utilities;
 using MissionPlanner.Warnings;
 using resedit;
 using static MissionPlanner.Utilities.Firmware;
-using ILog = log4net.ILog;
+// using ILog = log4net.ILog;
 
 namespace MissionPlanner
 {
     public partial class temp : Form
     {
-        private static readonly ILog log =
-            LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+     //   private static readonly ILog log =
+            //LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         private static MAVLinkSerialPort comport;
 
@@ -77,7 +77,7 @@ namespace MissionPlanner
         {
             var MainMap = new GMapControl();
 
-            MainMap.MapProvider = GoogleSatelliteMapProvider.Instance;
+            MainMap.MapProvider = BingHybridMapProvider.Instance;
 
             MainMap.CacheLocation = Settings.GetDataDirectory() +
                                     "gmapcache" + Path.DirectorySeparatorChar;
@@ -106,7 +106,7 @@ namespace MissionPlanner
 
                 foreach (var file in files)
                 {
-                    log.Info(DateTime.Now.Millisecond + " Doing " + file);
+                  // log.info(DateTime.Now.Millisecond + " Doing " + file);
                     var reg = new Regex(@"Z([0-9]+)\\([0-9]+)\\([0-9]+)");
 
                     var mat = reg.Match(file);
@@ -129,7 +129,7 @@ namespace MissionPlanner
                     Img.Save(tile, ImageFormat.Jpeg);
 
                     tile.Seek(0, SeekOrigin.Begin);
-                    log.Info(pnt.X + " " + pnt.Y);
+                  // log.info(pnt.X + " " + pnt.Y);
 
                     Application.DoEvents();
 
@@ -146,13 +146,13 @@ namespace MissionPlanner
         private void BUT_clearcustommaps_Click(object sender, EventArgs e)
         {
             var MainMap = new GMapControl();
-            MainMap.MapProvider = GoogleSatelliteMapProvider.Instance;
+            MainMap.MapProvider = BingHybridMapProvider.Instance;
 
             var removed = MainMap.Manager.PrimaryCache.DeleteOlderThan(DateTime.Now, Custom.Instance.DbId);
 
             CustomMessageBox.Show("Removed " + removed + " images");
 
-            log.InfoFormat("Removed {0} images", removed);
+          // log.infoFormat("Removed {0} images", removed);
 
             MainMap.Dispose();
         }
@@ -482,7 +482,7 @@ namespace MissionPlanner
                                       point.X.ToString(CultureInfo.InvariantCulture) + "\r\n");
                         }
 
-                        log.Info("writting poly to " + path + Path.DirectorySeparatorChar + "poly-" + a + ".poly");
+                      // log.info("writting poly to " + path + Path.DirectorySeparatorChar + "poly-" + a + ".poly");
                         File.WriteAllText(path + Path.DirectorySeparatorChar + "poly-" + a + ".poly", sb.ToString());
 
                         a++;
@@ -675,7 +675,7 @@ namespace MissionPlanner
 
             CustomMessageBox.Show("Removed " + removed + " images");
 
-            log.InfoFormat("Removed {0} images", removed);
+          // log.infoFormat("Removed {0} images", removed);
         }
 
         private void myButton1_Click_2(object sender, EventArgs e)

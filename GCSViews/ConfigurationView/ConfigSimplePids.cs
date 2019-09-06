@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 using System.Xml;
-using log4net;
+//using log4net;
 using MissionPlanner.Controls;
 using MissionPlanner.Utilities;
 
@@ -14,7 +14,7 @@ namespace MissionPlanner.GCSViews.ConfigurationView
 {
     public partial class ConfigSimplePids : MyUserControl, IActivate
     {
-        internal static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        //internal static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private List<configitem> piditems = new List<configitem>();
         private int y = 10;
 
@@ -183,7 +183,7 @@ namespace MissionPlanner.GCSViews.ConfigurationView
             var value = float.Parse(Value, CultureInfo.InvariantCulture);
 
             var rc = ((RangeControl) sender);
-            log.Info(rc.Name + " " + rc.Value);
+          // log.info(rc.Name + " " + rc.Value);
 
             var relitems = ((configitem) rc.Tag).relations;
 

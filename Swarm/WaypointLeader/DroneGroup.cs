@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using log4net;
+//using log4net;
 using MissionPlanner.Controls;
 using MissionPlanner.Utilities;
 using ZedGraph;
@@ -11,7 +11,7 @@ namespace MissionPlanner.Swarm.WaypointLeader
 {
     public class DroneGroup
     {
-        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+     //   private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         public List<Drone> Drones = new List<Drone>();
         public MAVState airmaster;
@@ -260,7 +260,7 @@ namespace MissionPlanner.Swarm.WaypointLeader
                         }
                         catch (Exception ex)
                         {
-                            log.Error(ex);
+                          // log.error(ex);
                             Loading.ShowLoading("Communication with one of the drones is failing\n"+ex.ToString());
 
                             return;
@@ -284,7 +284,7 @@ namespace MissionPlanner.Swarm.WaypointLeader
                         }
                         catch (Exception ex)
                         {
-                            log.Error(ex);
+                          // log.error(ex);
                             Loading.ShowLoading("Communication with one of the drones is failing\n" + ex.ToString());
 
                             return;
@@ -554,7 +554,7 @@ namespace MissionPlanner.Swarm.WaypointLeader
 
                         System.Threading.Thread.Sleep(200);
 
-                        log.Info(drone.MavState.sysid + " " + drone.MavState.cs.alt + " at alt " + drone.TargetLocation.Alt);
+                      // log.info(drone.MavState.sysid + " " + drone.MavState.cs.alt + " at alt " + drone.TargetLocation.Alt);
 
                         // set mode rtl
                         drone.MavState.parent.setMode(drone.MavState.sysid, drone.MavState.compid, "RTL");

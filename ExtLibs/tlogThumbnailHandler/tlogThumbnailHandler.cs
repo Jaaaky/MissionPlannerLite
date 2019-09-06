@@ -1,4 +1,4 @@
-﻿using Microsoft.Win32.SafeHandles;
+using Microsoft.Win32.SafeHandles;
 using System;
 using System.Diagnostics;
 using System.Drawing;
@@ -47,19 +47,19 @@ namespace tlogThumbnailHandler
 
         private static class NativeMethods
         {
-            [DllImport("kernel32.dll",
-                   EntryPoint = "GetStdHandle",
-                   SetLastError = true,
-                   CharSet = CharSet.Auto,
-                  CallingConvention = CallingConvention.StdCall)]
-            internal static extern IntPtr GetStdHandle(int nStdHandle);
-            [DllImport("kernel32.dll",
-                EntryPoint = "AllocConsole",
-                SetLastError = true,
-                CharSet = CharSet.Auto,
-                CallingConvention = CallingConvention.StdCall)]
+            // [DllImport("kernel32.dll",
+            //        EntryPoint = "GetStdHandle",
+            //        SetLastError = true,
+            //        CharSet = CharSet.Auto,
+            //       CallingConvention = CallingConvention.StdCall)]
+            // internal static extern IntPtr GetStdHandle(int nStdHandle);
+            // [DllImport("kernel32.dll",
+            //     EntryPoint = "AllocConsole",
+            //     SetLastError = true,
+            //     CharSet = CharSet.Auto,
+            //     CallingConvention = CallingConvention.StdCall)]
 
-            internal static extern int AllocConsole();
+            // internal static extern int AllocConsole();
         }
 
         void WriteLine(string format, params object[] arg)
@@ -133,7 +133,7 @@ namespace tlogThumbnailHandler
                 GMaps.Instance.CacheOnIdleRead = false;
                 GMaps.Instance.BoostCacheEngine = true;
                 GMap.NET.GMaps.Instance.PrimaryCache = new MissionPlanner.Maps.MyImageCache();
-                Core.Provider = GMapProviders.GoogleSatelliteMap;
+                Core.Provider = GMapProviders.BingHybridMap;
 
                 if (!File.Exists(jpgfile))
                     LogMap.ProcessFile(m_filename);

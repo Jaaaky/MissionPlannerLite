@@ -1,16 +1,16 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
-using log4net;
+//using log4net;
 
 namespace MissionPlanner.Utilities
 {
     public class VersionDetection
     {
-        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+     //   private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         public static Version GetVersion(string input)
         {
@@ -20,7 +20,7 @@ namespace MissionPlanner.Utilities
 
             var match = versionregex.Match(input);
 
-            log.Info(input);
+          // log.info(input);
 
             if (match.Success)
             {
@@ -49,7 +49,7 @@ namespace MissionPlanner.Utilities
 
                 Version version = new Version(verstring);
 
-                log.Info(version.ToString());
+              // log.info(version.ToString());
 
                 return version;
             }

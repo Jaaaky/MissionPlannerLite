@@ -1,14 +1,14 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Reflection;
-using log4net;
+// //using log4net;
 using MissionPlanner.Utilities;
 
 namespace MissionPlanner.ArduPilot
 {
     public class mav_mission
     {
-        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        // private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         public static List<Locationwp> download(MAVLinkInterface port, MAVLink.MAV_MISSION_TYPE type, Action<int, string> progress = null)
         {
@@ -32,13 +32,13 @@ namespace MissionPlanner.ArduPilot
 
                 progress?.Invoke(0, "Getting WP count");
 
-                log.Info("Getting WP #");
+                //log.Info("Getting WP #");
 
                 int cmdcount = port.getWPCount(type);
 
                 for (ushort a = 0; a < cmdcount; a++)
                 {
-                    log.Info("Getting WP" + a);
+                    //log.Info("Getting WP" + a);
                     progress?.Invoke((a * 100) / cmdcount, "Getting WP " + a);
                     commandlist.Add(port.getWP(a, type));
                 }
@@ -47,11 +47,11 @@ namespace MissionPlanner.ArduPilot
 
                 progress?.Invoke(100, "Done");
 
-                log.Info("Done");
+                //log.Info("Done");
             }
             catch (Exception ex)
             {
-                log.Error(ex);
+                // //log.Error(ex);
                 throw;
             }
 
@@ -145,7 +145,7 @@ namespace MissionPlanner.ArduPilot
             }
             catch (Exception ex)
             {
-                log.Error(ex);
+                // //log.Error(ex);
                 throw;
             }
         }

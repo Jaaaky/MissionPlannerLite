@@ -114,7 +114,7 @@ namespace GMap.NET.MapProviders
                XmlDocument xmldoc = new XmlDocument();
                xmldoc.LoadXml(route);
                System.Xml.XmlNamespaceManager xmlnsManager = new System.Xml.XmlNamespaceManager(xmldoc.NameTable);
-               xmlnsManager.AddNamespace("sm", "http://earth.google.com/kml/2.0");
+               xmlnsManager.AddNamespace("sm", "http://earth.noaa.io/kml/2.0");
 
                ///Folder/Placemark/LineString/coordinates
                var coordNode = xmldoc.SelectSingleNode("/sm:kml/sm:Document/sm:Folder/sm:Placemark/sm:LineString/sm:coordinates", xmlnsManager);

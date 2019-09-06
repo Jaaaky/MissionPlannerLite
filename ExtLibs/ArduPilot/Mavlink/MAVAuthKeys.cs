@@ -1,19 +1,19 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Runtime.Serialization;
 using System.Security.Cryptography;
 using System.Text;
-using log4net;
+// //using log4net;
 using MissionPlanner.Utilities;
 
 namespace MissionPlanner.Mavlink
 {
     public class MAVAuthKeys
     {
-        private static readonly ILog log =
-    LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+    //  //   private static readonly ILog log =
+    // LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         static string keyfile = Settings.GetUserDataDirectory() + "authkeys.xml";
 
@@ -86,7 +86,7 @@ namespace MissionPlanner.Mavlink
             }
             catch (Exception ex)
             {
-                log.Error(ex);
+                // //log.Error(ex);
             }
         }
     }

@@ -1,4 +1,4 @@
-﻿using log4net;
+// //using log4net;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -82,10 +82,10 @@ namespace MissionPlanner.ArduPilot
                     null),
             };
 
-        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        // private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public static List<KeyValuePair<int, string>> getModesList(Firmwares firmware)
         {
-            log.Info("getModesList Called");
+            // log.Info("getModesList Called");
 
             if (firmware == Firmwares.PX4)
             {

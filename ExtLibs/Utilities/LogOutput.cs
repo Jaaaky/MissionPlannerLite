@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
@@ -12,14 +12,14 @@ using ICSharpCode.SharpZipLib.Zip;
 using KMLib;
 using KMLib.Feature;
 using KMLib.Geometry;
-using log4net;
+//using log4net;
 using MissionPlanner.Utilities;
 
 namespace MissionPlanner.Log
 {
     public class LogOutput
     {
-        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+     //   private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         string lastline = "";
         string[] ctunlast = new string[] {"", "", "", "", "", "", "", "", "", "", "", "", "", ""};
         string[] ntunlast = new string[] {"", "", "", "", "", "", "", "", "", "", "", "", "", ""};
@@ -226,7 +226,7 @@ namespace MissionPlanner.Log
                     }
                     catch (Exception ex)
                     {
-                        log.Error(ex);
+                      // log.error(ex);
                     }
                 }
             }
@@ -241,7 +241,7 @@ namespace MissionPlanner.Log
             StreamWriter stream = new StreamWriter(File.Open(filename, FileMode.Create));
             System.Text.ASCIIEncoding encoding = new System.Text.ASCIIEncoding();
             string header =
-                "<?xml version=\"1.0\" encoding=\"UTF-8\"?><kml xmlns=\"http://www.opengis.net/kml/2.2\" xmlns:gx=\"http://www.google.com/kml/ext/2.2\" xmlns:kml=\"http://www.opengis.net/kml/2.2\" xmlns:atom=\"http://www.w3.org/2005/Atom\">\n     <Document>   <name>Paths</name>    <description>Path</description>\n    <Style id=\"yellowLineGreenPoly\">      <LineStyle>        <color>7f00ffff</color>        <width>4</width>      </LineStyle>      <PolyStyle>        <color>7f00ff00</color>      </PolyStyle>    </Style>\n  ";
+                "<?xml version=\"1.0\" encoding=\"UTF-8\"?><kml xmlns=\"http://www.opengis.net/kml/2.2\" xmlns:gx=\"http://www.noaa.io/kml/ext/2.2\" xmlns:kml=\"http://www.opengis.net/kml/2.2\" xmlns:atom=\"http://www.w3.org/2005/Atom\">\n     <Document>   <name>Paths</name>    <description>Path</description>\n    <Style id=\"yellowLineGreenPoly\">      <LineStyle>        <color>7f00ffff</color>        <width>4</width>      </LineStyle>      <PolyStyle>        <color>7f00ff00</color>      </PolyStyle>    </Style>\n  ";
             stream.Write(header);
 
             StringBuilder kml = new StringBuilder();
@@ -853,7 +853,7 @@ gnssId GNSS Type
                 Style style2 = new Style();
                 Color color = Color.FromArgb(0xff, (stylecode >> 16) & 0xff, (stylecode >> 8) & 0xff,
                     (stylecode >> 0) & 0xff);
-                log.Info("colour " + color.ToArgb().ToString("X") + " " + color.ToString());
+              // log.info("colour " + color.ToArgb().ToString("X") + " " + color.ToString());
                 style2.Add(new LineStyle(color, 4));
 
 

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -6,7 +6,7 @@ using System.Text;
 using System.Windows.Forms;
 using MissionPlanner.Comms;
 using System.Threading;
-using log4net;
+//using log4net;
 using System.Collections;
 using MissionPlanner.Controls;
 using MissionPlanner.Utilities;
@@ -19,7 +19,7 @@ namespace MissionPlanner.GCSViews.ConfigurationView
 {
     public partial class ConfigSerialInjectGPS : UserControl, IActivate, IDeactivate
     {
-        private static ILog log = LogManager.GetLogger(typeof (ConfigSerialInjectGPS).FullName);
+        //private static ILog log = LogManager.GetLogger(typeof (ConfigSerialInjectGPS).FullName);
 
         // serialport
         internal static ICommsSerial comPort = new SerialPort();
@@ -197,7 +197,7 @@ namespace MissionPlanner.GCSViews.ConfigurationView
 
         ~ConfigSerialInjectGPS()
         {
-            log.Info("destroy");
+          // log.info("destroy");
         }
 
         void loadBasePosList()
@@ -216,7 +216,7 @@ namespace MissionPlanner.GCSViews.ConfigurationView
                     }
                     catch (Exception ex)
                     {
-                        log.Error(ex);
+                      // log.error(ex);
                         CustomMessageBox.Show("Failed to load Base Position List\n" + ex.ToString(), Strings.ERROR);
                     }
                 }
@@ -322,7 +322,7 @@ namespace MissionPlanner.GCSViews.ConfigurationView
                     }
                     catch (ArgumentException ex)
                     {
-                        log.Error(ex);
+                      // log.error(ex);
                         // try pipe method
                         comPort = new CommsSerialPipe();
                         comPort.PortName = CMB_serialport.Text;
@@ -445,7 +445,7 @@ namespace MissionPlanner.GCSViews.ConfigurationView
                             }
                             else
                             {
-                                log.Warn("Reconnecting");
+                              // log.Warn("Reconnecting");
                                 // close existing
                                 comPort.Close();
                                 // reopen
@@ -457,7 +457,7 @@ namespace MissionPlanner.GCSViews.ConfigurationView
                     }
                     catch
                     {
-                        log.Error("Failed to reconnect");
+                      // log.error("Failed to reconnect");
                         // sleep for 10 seconds on error
                         System.Threading.Thread.Sleep(10000);
                     }
@@ -558,7 +558,7 @@ namespace MissionPlanner.GCSViews.ConfigurationView
                 }
                 catch (Exception ex)
                 {
-                    log.Error(ex);
+                  // log.error(ex);
                 }
             }
         }
@@ -662,11 +662,11 @@ namespace MissionPlanner.GCSViews.ConfigurationView
                 }
                 else if (ubx_m8p.@class == 0x5 && ubx_m8p.subclass == 0x1)
                 {
-                    log.InfoFormat("ubx ack {0} {1}", ubx_m8p.packet[6], ubx_m8p.packet[7]);
+                  // log.infoFormat("ubx ack {0} {1}", ubx_m8p.packet[6], ubx_m8p.packet[7]);
                 }
                 else if (ubx_m8p.@class == 0x5 && ubx_m8p.subclass == 0x0)
                 {
-                    log.InfoFormat("ubx Nack {0} {1}", ubx_m8p.packet[6], ubx_m8p.packet[7]);
+                  // log.infoFormat("ubx Nack {0} {1}", ubx_m8p.packet[6], ubx_m8p.packet[7]);
                 }
                 else if (ubx_m8p.@class == 0xa && ubx_m8p.subclass == 0x4)
                 {
@@ -710,7 +710,7 @@ namespace MissionPlanner.GCSViews.ConfigurationView
 
                     ubxmode = tmode;
 
-                    log.InfoFormat("ubx TMODE3 {0} {1}", (ubx_m8p.ubx_cfg_tmode3.modeflags) tmode.flags, "");
+                  // log.infoFormat("ubx TMODE3 {0} {1}", (ubx_m8p.ubx_cfg_tmode3.modeflags) tmode.flags, "");
                 }
                 else
                 {
@@ -727,7 +727,7 @@ namespace MissionPlanner.GCSViews.ConfigurationView
             }
             catch (Exception ex)
             {
-                log.Error(ex);
+              // log.error(ex);
             }
         }
 
@@ -857,7 +857,7 @@ namespace MissionPlanner.GCSViews.ConfigurationView
             }
             catch (Exception ex)
             {
-                log.Error(ex);
+              // log.error(ex);
             }
         }
 
@@ -934,7 +934,7 @@ namespace MissionPlanner.GCSViews.ConfigurationView
             {
                 string[] bspos = Settings.Instance["base_pos"].Split(',');
 
-                log.Info("basepos: "+ Settings.Instance["base_pos"].ToString());
+              // log.info("basepos: "+ Settings.Instance["base_pos"].ToString());
 
                 basepos = new PointLatLngAlt(double.Parse(bspos[0], CultureInfo.InvariantCulture),
                     double.Parse(bspos[1], CultureInfo.InvariantCulture),

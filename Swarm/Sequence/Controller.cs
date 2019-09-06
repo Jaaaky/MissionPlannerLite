@@ -1,11 +1,11 @@
-﻿using log4net;
+//using log4net;
 using System.Threading;
 
 namespace MissionPlanner.Swarm.Sequence
 {
     public class Controller
     {
-        private static readonly ILog log =    LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+     //   private static readonly ILog log =    LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public DroneGroup DG;
 
@@ -25,7 +25,7 @@ namespace MissionPlanner.Swarm.Sequence
             {
                 foreach (var MAV in port.MAVlist)
                 {
-                    log.Debug("Add Drone " + MAV);
+                  // log.Debug("Add Drone " + MAV);
                     DG.Drones.Add(new Drone() { MavState = MAV });
                 }
             }
