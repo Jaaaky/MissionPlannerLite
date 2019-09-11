@@ -27,7 +27,7 @@ namespace MissionPlanner
 
         [JsonIgnore]
         [IgnoreDataMember]
-        public static ISpeech Speech;
+        // public static ISpeech Speech;
 
         public int lastautowp = -1;
 
@@ -2149,13 +2149,13 @@ namespace MissionPlanner
                                 }
                             }
 
-                            if (oldmode != mode && Speech != null && Speech.speechEnable &&
-                                parent?.parent?.MAV?.cs == this &&
-                                Settings.Instance.GetBoolean("speechmodeenabled"))
-                            {
-                                Speech.SpeakAsync(Common.speechConversion(parent,
-                                    "" + Settings.Instance["speechmode"]));
-                            }
+                            // if (oldmode != mode && Speech != null && Speech.speechEnable &&
+                            //     parent?.parent?.MAV?.cs == this &&
+                            //     Settings.Instance.GetBoolean("speechmodeenabled"))
+                            // {
+                            //     Speech.SpeakAsync(Common.speechConversion(parent,
+                            //         "" + Settings.Instance["speechmode"]));
+                            // }
                         }
                     }
 
@@ -2554,11 +2554,11 @@ namespace MissionPlanner
                             lastautowp = (int) wpno;
                         }
 
-                        if (oldwp != wpno && Speech != null && Speech.speechEnable && parent != null && parent.parent.MAV.cs == this &&
-                            Settings.Instance.GetBoolean("speechwaypointenabled"))
-                        {
-                            Speech.SpeakAsync(Common.speechConversion(parent, "" + Settings.Instance["speechwaypoint"]));
-                        }
+                        // if (oldwp != wpno && Speech != null && Speech.speechEnable && parent != null && parent.parent.MAV.cs == this &&
+                        //     Settings.Instance.GetBoolean("speechwaypointenabled"))
+                        // {
+                        //     Speech.SpeakAsync(Common.speechConversion(parent, "" + Settings.Instance["speechwaypoint"]));
+                        // }
 
                         //MAVLink.packets[(byte)MAVLink.MSG_NAMES.WAYPOINT_CURRENT);
                     }

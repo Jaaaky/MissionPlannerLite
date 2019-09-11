@@ -317,8 +317,8 @@ namespace MissionPlanner.GCSViews.ConfigurationView
         {
             MainV2.speechEnable = CHK_enablespeech.Checked;
             Settings.Instance["speechenable"] = CHK_enablespeech.Checked.ToString();
-            if (MainV2.speechEngine != null)
-                MainV2.speechEngine.SpeakAsyncCancelAll();
+            // if (MainV2.speechEngine != null)
+            //     MainV2.speechEngine.SpeakAsyncCancelAll();
 
             if (CHK_enablespeech.Checked)
             {
@@ -772,9 +772,9 @@ namespace MissionPlanner.GCSViews.ConfigurationView
 
         private void CHK_beta_CheckedChanged(object sender, EventArgs e)
         {
-            Settings.Instance["beta_updates"] = CHK_beta.Checked.ToString();
+            // Settings.Instance["beta_updates"] = CHK_beta.Checked.ToString();
 
-            MissionPlanner.Utilities.Update.dobeta = CHK_beta.Checked;
+            // MissionPlanner.Utilities.Update.dobeta = CHK_beta.Checked;
         }
 
         private void CHK_Password_CheckedChanged(object sender, EventArgs e)

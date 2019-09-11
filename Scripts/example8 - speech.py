@@ -12,7 +12,7 @@ MissionPlanner.MainV2.speechEnable = True
 
 while True:
 	print 'speech ...'
-	MissionPlanner.MainV2.speechEngine.SpeakAsync("test " + cs.roll.ToString())
+	# MissionPlanner.MainV2.speechEngine.SpeakAsync("test " + cs.roll.ToString())
 	time.sleep(1)
 
 

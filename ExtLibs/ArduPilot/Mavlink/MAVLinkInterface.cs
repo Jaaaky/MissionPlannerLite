@@ -230,7 +230,7 @@ namespace MissionPlanner
         int _bps2 = 0;
         DateTime _bpstime { get; set; }
 
-        public static ISpeech Speech;
+        // public static ISpeech Speech;
 
         public MAVLinkInterface()
         {
@@ -4129,14 +4129,14 @@ Mission Planner waits for 2 valid heartbeat packets before connecting");
                             MAVlist[sysid, compid].cs.messageHigh = logdata;
                             MAVlist[sysid, compid].cs.messageHighTime = DateTime.Now;
 
-                            if (Speech != null &&
-                                Speech.IsReady &&
-                                Settings.Instance["speechenable"] != null &&
-                                Settings.Instance["speechenable"].ToString() == "True")
-                            {
-                                if (speechenabled)
-                                    Speech.SpeakAsync(logdata);
-                            }
+                            // if (Speech != null &&
+                            //     Speech.IsReady &&
+                            //     Settings.Instance["speechenable"] != null &&
+                            //     Settings.Instance["speechenable"].ToString() == "True")
+                            // {
+                            //     if (speechenabled)
+                            //         Speech.SpeakAsync(logdata);
+                            // }
                         }
                     }
 

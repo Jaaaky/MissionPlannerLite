@@ -326,17 +326,17 @@ namespace MissionPlanner
         /// </summary>
         public static bool speechEnable
         {
-            get { return speechEngine == null ? false : speechEngine.speechEnable; }
+            get { return false; }
             set
             {
-                if (speechEngine != null) speechEngine.speechEnable = value;
+                return;
             }
         }
 
         /// <summary>
         /// spech engine static class
         /// </summary>
-        public static ISpeech speechEngine { get; set; }
+        // public static ISpeech speechEngine { get; set; }
 
         /// <summary>
         /// joystick static class
@@ -375,8 +375,8 @@ namespace MissionPlanner
 
         bool joystickthreadrun = false;
 
-        Thread httpthread;
-        Thread joystickthread;
+        // Thread httpthread;
+        // Thread joystickthread;
         Thread serialreaderthread;
         Thread pluginthread;
 
@@ -612,13 +612,13 @@ namespace MissionPlanner
             var t = Type.GetType("Mono.Runtime");
             MONO = (t != null);
 
-            try
-            {
-                speechEngine = new Speech();
-                MAVLinkInterface.Speech = speechEngine;
-                CurrentState.Speech = speechEngine;
-            }
-            catch { }
+            // try
+            // {
+            //     speechEngine = new Speech();
+            //     MAVLinkInterface.Speech = speechEngine;
+            //     CurrentState.Speech = speechEngine;
+            // }
+            // catch { }
 
             Warnings.CustomWarning.defaultsrc = comPort.MAV.cs;
             Warnings.WarningEngine.Start();
@@ -1364,8 +1364,8 @@ namespace MissionPlanner
           // log.info("We are disconnecting");
             try
             {
-                if (speechEngine != null) // cancel all pending speech
-                    speechEngine.SpeakAsyncCancelAll();
+                // if (speechEngine != null) // cancel all pending speech
+                //     speechEngine.SpeakAsyncCancelAll();
 
                 comPort.BaseStream.DtrEnable = false;
                 comPort.Close();
@@ -2026,8 +2026,8 @@ namespace MissionPlanner
 
             joystickthreadrun = false;
 
-            if (joystickthread != null)
-                joystickthread.Join();
+            // if (joystickthread != null)
+            //     joystickthread.Join();
 
           // log.info("closing httpthread");
 
@@ -2095,8 +2095,8 @@ namespace MissionPlanner
             // save config
             SaveConfig();
 
-            Console.WriteLine(httpthread?.IsAlive);
-            Console.WriteLine(joystickthread?.IsAlive);
+            // Console.WriteLine(httpthread?.IsAlive);
+            // Console.WriteLine(joystickthread?.IsAlive);
             Console.WriteLine(serialreaderthread?.IsAlive);
             Console.WriteLine(pluginthread?.IsAlive);
 
@@ -2178,7 +2178,7 @@ namespace MissionPlanner
 
             DateTime lastratechange = DateTime.Now;
 
-            joystickthreadrun = true;
+            joystickthreadrun = false;
 
             while (joystickthreadrun)
             {
@@ -2502,127 +2502,127 @@ namespace MissionPlanner
                       // log.error(ex);
                     }
 
-                    // 30 seconds interval speech options
-                    if (speechEnable && speechEngine != null && (DateTime.Now - speechcustomtime).TotalSeconds > 30 &&
-                        (MainV2.comPort.logreadmode || comPort.BaseStream.IsOpen))
-                    {
-                        if (MainV2.speechEngine.IsReady)
-                        {
-                            if (Settings.Instance.GetBoolean("speechcustomenabled"))
-                            {
-                                MainV2.speechEngine.SpeakAsync(ArduPilot.Common.speechConversion(comPort.MAV, "" + Settings.Instance["speechcustom"]));
-                            }
+                    // // 30 seconds interval speech options
+                    // if (speechEnable && speechEngine != null && (DateTime.Now - speechcustomtime).TotalSeconds > 30 &&
+                    //     (MainV2.comPort.logreadmode || comPort.BaseStream.IsOpen))
+                    // {
+                    //     if (MainV2.speechEngine.IsReady)
+                    //     {
+                    //         if (Settings.Instance.GetBoolean("speechcustomenabled"))
+                    //         {
+                    //             MainV2.speechEngine.SpeakAsync(ArduPilot.Common.speechConversion(comPort.MAV, "" + Settings.Instance["speechcustom"]));
+                    //         }
 
-                            speechcustomtime = DateTime.Now;
-                        }
+                    //         speechcustomtime = DateTime.Now;
+                    //     }
 
-                        // speech for battery alerts
-                        //speechbatteryvolt
-                        float warnvolt = Settings.Instance.GetFloat("speechbatteryvolt");
-                        float warnpercent = Settings.Instance.GetFloat("speechbatterypercent");
+                    //     // speech for battery alerts
+                    //     //speechbatteryvolt
+                    //     float warnvolt = Settings.Instance.GetFloat("speechbatteryvolt");
+                    //     float warnpercent = Settings.Instance.GetFloat("speechbatterypercent");
 
-                        if (Settings.Instance.GetBoolean("speechbatteryenabled") == true &&
-                            MainV2.comPort.MAV.cs.battery_voltage <= warnvolt &&
-                            MainV2.comPort.MAV.cs.battery_voltage >= 5.0)
-                        {
-                            if (MainV2.speechEngine.IsReady)
-                            {
-                                MainV2.speechEngine.SpeakAsync(ArduPilot.Common.speechConversion(comPort.MAV, "" + Settings.Instance["speechbattery"]));
-                            }
-                        }
-                        else if (Settings.Instance.GetBoolean("speechbatteryenabled") == true &&
-                                 (MainV2.comPort.MAV.cs.battery_remaining) < warnpercent &&
-                                 MainV2.comPort.MAV.cs.battery_voltage >= 5.0 &&
-                                 MainV2.comPort.MAV.cs.battery_remaining != 0.0)
-                        {
-                            if (MainV2.speechEngine.IsReady)
-                            {
-                                MainV2.speechEngine.SpeakAsync(
-                                    ArduPilot.Common.speechConversion(comPort.MAV, "" + Settings.Instance["speechbattery"]));
-                            }
-                        }
-                    }
+                    //     if (Settings.Instance.GetBoolean("speechbatteryenabled") == true &&
+                    //         MainV2.comPort.MAV.cs.battery_voltage <= warnvolt &&
+                    //         MainV2.comPort.MAV.cs.battery_voltage >= 5.0)
+                    //     {
+                    //         if (MainV2.speechEngine.IsReady)
+                    //         {
+                    //             MainV2.speechEngine.SpeakAsync(ArduPilot.Common.speechConversion(comPort.MAV, "" + Settings.Instance["speechbattery"]));
+                    //         }
+                    //     }
+                    //     else if (Settings.Instance.GetBoolean("speechbatteryenabled") == true &&
+                    //              (MainV2.comPort.MAV.cs.battery_remaining) < warnpercent &&
+                    //              MainV2.comPort.MAV.cs.battery_voltage >= 5.0 &&
+                    //              MainV2.comPort.MAV.cs.battery_remaining != 0.0)
+                    //     {
+                    //         if (MainV2.speechEngine.IsReady)
+                    //         {
+                    //             MainV2.speechEngine.SpeakAsync(
+                    //                 ArduPilot.Common.speechConversion(comPort.MAV, "" + Settings.Instance["speechbattery"]));
+                    //         }
+                    //     }
+                    // }
 
-                    // speech for airspeed alerts
-                    if (speechEnable && speechEngine != null && (DateTime.Now - speechlowspeedtime).TotalSeconds > 10 &&
-                        (MainV2.comPort.logreadmode || comPort.BaseStream.IsOpen))
-                    {
-                        if (Settings.Instance.GetBoolean("speechlowspeedenabled") == true && MainV2.comPort.MAV.cs.armed)
-                        {
-                            float warngroundspeed = Settings.Instance.GetFloat("speechlowgroundspeedtrigger");
-                            float warnairspeed = Settings.Instance.GetFloat("speechlowairspeedtrigger");
+                    // // speech for airspeed alerts
+                    // if (speechEnable && speechEngine != null && (DateTime.Now - speechlowspeedtime).TotalSeconds > 10 &&
+                    //     (MainV2.comPort.logreadmode || comPort.BaseStream.IsOpen))
+                    // {
+                    //     if (Settings.Instance.GetBoolean("speechlowspeedenabled") == true && MainV2.comPort.MAV.cs.armed)
+                    //     {
+                    //         float warngroundspeed = Settings.Instance.GetFloat("speechlowgroundspeedtrigger");
+                    //         float warnairspeed = Settings.Instance.GetFloat("speechlowairspeedtrigger");
 
-                            if (MainV2.comPort.MAV.cs.airspeed < warnairspeed)
-                            {
-                                if (MainV2.speechEngine.IsReady)
-                                {
-                                    MainV2.speechEngine.SpeakAsync(
-                                        ArduPilot.Common.speechConversion(comPort.MAV, "" + Settings.Instance["speechlowairspeed"]));
-                                    speechlowspeedtime = DateTime.Now;
-                                }
-                            }
-                            else if (MainV2.comPort.MAV.cs.groundspeed < warngroundspeed)
-                            {
-                                if (MainV2.speechEngine.IsReady)
-                                {
-                                    MainV2.speechEngine.SpeakAsync(
-                                        ArduPilot.Common.speechConversion(comPort.MAV, "" + Settings.Instance["speechlowgroundspeed"]));
-                                    speechlowspeedtime = DateTime.Now;
-                                }
-                            }
-                            else
-                            {
-                                speechlowspeedtime = DateTime.Now;
-                            }
-                        }
-                    }
+                    //         if (MainV2.comPort.MAV.cs.airspeed < warnairspeed)
+                    //         {
+                    //             if (MainV2.speechEngine.IsReady)
+                    //             {
+                    //                 MainV2.speechEngine.SpeakAsync(
+                    //                     ArduPilot.Common.speechConversion(comPort.MAV, "" + Settings.Instance["speechlowairspeed"]));
+                    //                 speechlowspeedtime = DateTime.Now;
+                    //             }
+                    //         }
+                    //         else if (MainV2.comPort.MAV.cs.groundspeed < warngroundspeed)
+                    //         {
+                    //             if (MainV2.speechEngine.IsReady)
+                    //             {
+                    //                 MainV2.speechEngine.SpeakAsync(
+                    //                     ArduPilot.Common.speechConversion(comPort.MAV, "" + Settings.Instance["speechlowgroundspeed"]));
+                    //                 speechlowspeedtime = DateTime.Now;
+                    //             }
+                    //         }
+                    //         else
+                    //         {
+                    //             speechlowspeedtime = DateTime.Now;
+                    //         }
+                    //     }
+                    // }
 
-                    // speech altitude warning - message high warning
-                    if (speechEnable && speechEngine != null &&
-                        (MainV2.comPort.logreadmode || comPort.BaseStream.IsOpen))
-                    {
-                        float warnalt = float.MaxValue;
-                        if (Settings.Instance.ContainsKey("speechaltheight"))
-                        {
-                            warnalt = Settings.Instance.GetFloat("speechaltheight");
-                        }
-                        try
-                        {
-                            altwarningmax = (int)Math.Max(MainV2.comPort.MAV.cs.alt, altwarningmax);
+                    // // speech altitude warning - message high warning
+                    // if (speechEnable && speechEngine != null &&
+                    //     (MainV2.comPort.logreadmode || comPort.BaseStream.IsOpen))
+                    // {
+                    //     float warnalt = float.MaxValue;
+                    //     if (Settings.Instance.ContainsKey("speechaltheight"))
+                    //     {
+                    //         warnalt = Settings.Instance.GetFloat("speechaltheight");
+                    //     }
+                    //     try
+                    //     {
+                    //         altwarningmax = (int)Math.Max(MainV2.comPort.MAV.cs.alt, altwarningmax);
 
-                            if (Settings.Instance.GetBoolean("speechaltenabled") == true && MainV2.comPort.MAV.cs.alt != 0.00 &&
-                                (MainV2.comPort.MAV.cs.alt <= warnalt) && MainV2.comPort.MAV.cs.armed)
-                            {
-                                if (altwarningmax > warnalt)
-                                {
-                                    if (MainV2.speechEngine.IsReady)
-                                        MainV2.speechEngine.SpeakAsync(
-                                            ArduPilot.Common.speechConversion(comPort.MAV, "" + Settings.Instance["speechalt"]));
-                                }
-                            }
-                        }
-                        catch
-                        {
-                        } // silent fail
+                    //         if (Settings.Instance.GetBoolean("speechaltenabled") == true && MainV2.comPort.MAV.cs.alt != 0.00 &&
+                    //             (MainV2.comPort.MAV.cs.alt <= warnalt) && MainV2.comPort.MAV.cs.armed)
+                    //         {
+                    //             if (altwarningmax > warnalt)
+                    //             {
+                    //                 if (MainV2.speechEngine.IsReady)
+                    //                     MainV2.speechEngine.SpeakAsync(
+                    //                         ArduPilot.Common.speechConversion(comPort.MAV, "" + Settings.Instance["speechalt"]));
+                    //             }
+                    //         }
+                    //     }
+                    //     catch
+                    //     {
+                    //     } // silent fail
 
 
-                        try
-                        {
-                            // say the latest high priority message
-                            if (MainV2.speechEngine.IsReady &&
-                                lastmessagehigh != MainV2.comPort.MAV.cs.messageHigh && MainV2.comPort.MAV.cs.messageHigh != null)
-                            {
-                                if (!MainV2.comPort.MAV.cs.messageHigh.StartsWith("PX4v2 "))
-                                {
-                                    MainV2.speechEngine.SpeakAsync(MainV2.comPort.MAV.cs.messageHigh);
-                                    lastmessagehigh = MainV2.comPort.MAV.cs.messageHigh;
-                                }
-                            }
-                        }
-                        catch
-                        {
-                        }
-                    }
+                    //     try
+                    //     {
+                    //         // say the latest high priority message
+                    //         if (MainV2.speechEngine.IsReady &&
+                    //             lastmessagehigh != MainV2.comPort.MAV.cs.messageHigh && MainV2.comPort.MAV.cs.messageHigh != null)
+                    //         {
+                    //             if (!MainV2.comPort.MAV.cs.messageHigh.StartsWith("PX4v2 "))
+                    //             {
+                    //                 MainV2.speechEngine.SpeakAsync(MainV2.comPort.MAV.cs.messageHigh);
+                    //                 lastmessagehigh = MainV2.comPort.MAV.cs.messageHigh;
+                    //             }
+                    //         }
+                    //     }
+                    //     catch
+                    //     {
+                    //     }
+                    // }
 
                     // not doing anything
                     if (!MainV2.comPort.logreadmode && !comPort.BaseStream.IsOpen)
@@ -2643,25 +2643,25 @@ namespace MissionPlanner
                         }
                     }
 
-                    // data loss warning - wait min of 10 seconds, ignore first 30 seconds of connect, repeat at 5 seconds interval
-                    if ((DateTime.Now - MainV2.comPort.MAV.lastvalidpacket).TotalSeconds > 10
-                        && (DateTime.Now - connecttime).TotalSeconds > 30
-                        && (DateTime.Now - nodatawarning).TotalSeconds > 5
-                        && (MainV2.comPort.logreadmode || comPort.BaseStream.IsOpen)
-                        && MainV2.comPort.MAV.cs.armed)
-                    {
-                        if (speechEnable && speechEngine != null)
-                        {
-                            if (MainV2.speechEngine.IsReady)
-                            {
-                                MainV2.speechEngine.SpeakAsync("WARNING No Data for " +
-                                                               (int)
-                                                                   (DateTime.Now - MainV2.comPort.MAV.lastvalidpacket)
-                                                                       .TotalSeconds + " Seconds");
-                                nodatawarning = DateTime.Now;
-                            }
-                        }
-                    }
+                    // // data loss warning - wait min of 10 seconds, ignore first 30 seconds of connect, repeat at 5 seconds interval
+                    // if ((DateTime.Now - MainV2.comPort.MAV.lastvalidpacket).TotalSeconds > 10
+                    //     && (DateTime.Now - connecttime).TotalSeconds > 30
+                    //     && (DateTime.Now - nodatawarning).TotalSeconds > 5
+                    //     && (MainV2.comPort.logreadmode || comPort.BaseStream.IsOpen)
+                    //     && MainV2.comPort.MAV.cs.armed)
+                    // {
+                    //     if (speechEnable && speechEngine != null)
+                    //     {
+                    //         if (MainV2.speechEngine.IsReady)
+                    //         {
+                    //             MainV2.speechEngine.SpeakAsync("WARNING No Data for " +
+                    //                                            (int)
+                    //                                                (DateTime.Now - MainV2.comPort.MAV.lastvalidpacket)
+                    //                                                    .TotalSeconds + " Seconds");
+                    //             nodatawarning = DateTime.Now;
+                    //         }
+                    //     }
+                    // }
 
                     // get home point on armed status change.
                     if (armedstatus != MainV2.comPort.MAV.cs.armed && comPort.BaseStream.IsOpen)
@@ -2698,17 +2698,17 @@ namespace MissionPlanner
                             });
                         }
 
-                        if (speechEnable && speechEngine != null)
-                        {
-                            if (Settings.Instance.GetBoolean("speecharmenabled"))
-                            {
-                                string speech = armedstatus ? Settings.Instance["speecharm"] : Settings.Instance["speechdisarm"];
-                                if (!string.IsNullOrEmpty(speech))
-                                {
-                                    MainV2.speechEngine.SpeakAsync(ArduPilot.Common.speechConversion(comPort.MAV, speech));
-                                }
-                            }
-                        }
+                        // if (speechEnable && speechEngine != null)
+                        // {
+                        //     if (Settings.Instance.GetBoolean("speecharmenabled"))
+                        //     {
+                        //         string speech = armedstatus ? Settings.Instance["speecharm"] : Settings.Instance["speechdisarm"];
+                        //         if (!string.IsNullOrEmpty(speech))
+                        //         {
+                        //             MainV2.speechEngine.SpeakAsync(ArduPilot.Common.speechConversion(comPort.MAV, speech));
+                        //         }
+                        //     }
+                        // }
                     }
 
                     // send a hb every seconds from gcs to ap
@@ -3221,24 +3221,24 @@ namespace MissionPlanner
                 System.Configuration.ConfigurationManager.AppSettings["BetaUpdateLocationVersion"] = "";
             }
 
-            try
-            {
-                // single update check per day - in a seperate thread
-                if (Settings.Instance["update_check"] != DateTime.Now.ToShortDateString())
-                {
-                    System.Threading.ThreadPool.QueueUserWorkItem(checkupdate);
-                    Settings.Instance["update_check"] = DateTime.Now.ToShortDateString();
-                }
-                else if (Settings.Instance.GetBoolean("beta_updates") == true)
-                {
-                    MissionPlanner.Utilities.Update.dobeta = true;
-                    System.Threading.ThreadPool.QueueUserWorkItem(checkupdate);
-                }
-            }
-            catch (Exception ex)
-            {
-              // log.error("Update check failed", ex);
-            }
+            // try
+            // {
+            //     // single update check per day - in a seperate thread
+            //     if (Settings.Instance["update_check"] != DateTime.Now.ToShortDateString())
+            //     {
+            //         System.Threading.ThreadPool.QueueUserWorkItem(checkupdate);
+            //         Settings.Instance["update_check"] = DateTime.Now.ToShortDateString();
+            //     }
+            //     else if (Settings.Instance.GetBoolean("beta_updates") == true)
+            //     {
+            //         // MissionPlanner.Utilities.Update.dobeta = true;
+            //         System.Threading.ThreadPool.QueueUserWorkItem(checkupdate);
+            //     }
+            // }
+            // catch (Exception ex)
+            // {
+            //   // log.error("Update check failed", ex);
+            // }
 
             // play a tlog that was passed to the program/ load a bin log passed
             if (Program.args.Length > 0)

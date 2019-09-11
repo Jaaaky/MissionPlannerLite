@@ -93,13 +93,13 @@ namespace MissionPlanner.Warnings
                                 // check primary condition
                                 if (checkCond(item))
                                 {
-                                    if (MainV2.speechEnable)
-                                    {
-                                        while (!MainV2.speechEngine.IsReady)
-                                            System.Threading.Thread.Sleep(10);
+                                    // if (MainV2.speechEnable)
+                                    // {
+                                    //     while (!MainV2.speechEngine.IsReady)
+                                    //         System.Threading.Thread.Sleep(10);
 
-                                        MainV2.speechEngine.SpeakAsync(item.SayText());
-                                    }
+                                    //     MainV2.speechEngine.SpeakAsync(item.SayText());
+                                    // }
 
                                     MainV2.comPort.MAV.cs.messageHigh = item.SayText();
                                     MainV2.comPort.MAV.cs.messageHighTime = DateTime.Now;

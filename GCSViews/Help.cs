@@ -33,14 +33,14 @@ namespace MissionPlanner.GCSViews
 
         public void BUT_updatecheck_Click(object sender, EventArgs e)
         {
-            try
-            {
-                Utilities.Update.CheckForUpdate(true);
-            }
-            catch (Exception ex)
-            {
-                CustomMessageBox.Show(ex.ToString(), Strings.ERROR);
-            }
+            // try
+            // {
+            //     Utilities.Update.CheckForUpdate(true);
+            // }
+            // catch (Exception ex)
+            // {
+            //     CustomMessageBox.Show(ex.ToString(), Strings.ERROR);
+            // }
         }
 
         private void CHK_showconsole_CheckedChanged(object sender, EventArgs e)
@@ -61,21 +61,21 @@ namespace MissionPlanner.GCSViews
 
         private void BUT_betaupdate_Click(object sender, EventArgs e)
         {
-            try
-            {
-                Utilities.Update.dobeta = true;
-                if (Control.ModifierKeys == Keys.Control)
-                {
-                    Utilities.Update.domaster = true;
-                    CustomMessageBox.Show("This will update to MASTER release");
-                }
+            // try
+            // {
+            //     Utilities.Update.dobeta = true;
+            //     if (Control.ModifierKeys == Keys.Control)
+            //     {
+            //         Utilities.Update.domaster = true;
+            //         CustomMessageBox.Show("This will update to MASTER release");
+            //     }
 
-                Utilities.Update.DoUpdate();
-            }
-            catch (Exception ex)
-            {
-                CustomMessageBox.Show(ex.ToString(), Strings.ERROR);
-            }
+            //     // Utilities.Update.DoUpdate();
+            // }
+            // catch (Exception ex)
+            // {
+            //     CustomMessageBox.Show(ex.ToString(), Strings.ERROR);
+            // }
         }
     }
 }

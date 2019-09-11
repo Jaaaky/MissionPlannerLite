@@ -689,14 +689,14 @@ namespace MissionPlanner
             MainV2.comPort.requestDatastream(MAVLink.MAV_DATA_STREAM.RC_CHANNELS, MainV2.comPort.MAV.cs.raterc);
                 // request rc info
 
-            if (MainV2.speechEnable)
-            {
-                MainV2.speechEngine.SpeakAsync("Compass Calibration Complete");
-            }
-            else
-            {
+            // if (MainV2.speechEnable)
+            // {
+            //     MainV2.speechEngine.SpeakAsync("Compass Calibration Complete");
+            // }
+            // else
+            // {
                 Console.Beep();
-            }
+            // }
 
             if (minx > 0 && maxx > 0 || minx < 0 && maxx < 0 || miny > 0 && maxy > 0 || miny < 0 && maxy < 0 ||
                 minz > 0 && maxz > 0 || minz < 0 && maxz < 0)
