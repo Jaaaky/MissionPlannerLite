@@ -22,7 +22,7 @@ using System.Drawing.Imaging;
 using System.Net.Sockets;
 using System.Text.RegularExpressions;
 using MissionPlanner.ArduPilot;
-using MissionPlanner.Utilities.AltitudeAngel;
+// using MissionPlanner.Utilities.AltitudeAngel;
 using System.Threading.Tasks;
 using GMap.NET.WindowsForms;
 using SkiaSharp;
@@ -1949,7 +1949,7 @@ namespace MissionPlanner
             Settings.Instance["MainLocY"] = this.Location.Y.ToString();
 
           // log.info("close logs");
-            AltitudeAngel.Dispose();
+            // AltitudeAngel.Dispose();
 
             // close bases connection
             try

@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 using MissionPlanner.Controls;
-using MissionPlanner.HIL;
+//using MissionPlanner.HIL;
 
 namespace MissionPlanner.GCSViews.ConfigurationView
 {
@@ -140,31 +140,31 @@ namespace MissionPlanner.GCSViews.ConfigurationView
                 frame_type = (int)MainV2.comPort.MAV.param["FRAME_TYPE"].Value;
             }
 
-            var motors = new Motor[0];
+            // var motors = new Motor[0];
 
             if (type == MAVLink.MAV_TYPE.TRICOPTER)
             {
                 motormax = 4;
 
-                motors = Motor.build_motors(MAVLink.MAV_TYPE.TRICOPTER, frame_type);
+                // motors = Motor.build_motors(MAVLink.MAV_TYPE.TRICOPTER, frame_type);
             }
             else if (type == MAVLink.MAV_TYPE.QUADROTOR)
             {
                 motormax = 4;
 
-                motors = Motor.build_motors(MAVLink.MAV_TYPE.QUADROTOR, frame_type);
+                // motors = Motor.build_motors(MAVLink.MAV_TYPE.QUADROTOR, frame_type);
             }
             else if (type == MAVLink.MAV_TYPE.HEXAROTOR)
             {
                 motormax = 6;
 
-                motors = Motor.build_motors(MAVLink.MAV_TYPE.HEXAROTOR, frame_type);
+                // motors = Motor.build_motors(MAVLink.MAV_TYPE.HEXAROTOR, frame_type);
             }
             else if (type == MAVLink.MAV_TYPE.OCTOROTOR)
             {
                 motormax = 8;
 
-                motors = Motor.build_motors(MAVLink.MAV_TYPE.OCTOROTOR, frame_type);
+                // motors = Motor.build_motors(MAVLink.MAV_TYPE.OCTOROTOR, frame_type);
             }
             else if (type == MAVLink.MAV_TYPE.HELICOPTER)
             {

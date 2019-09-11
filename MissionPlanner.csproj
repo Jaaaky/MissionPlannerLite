@@ -138,10 +138,10 @@
       <Project>{b994d8d2-c052-4616-9d20-386640c7387f}</Project>
       <Name>alglibnet</Name>
     </ProjectReference>
-    <ProjectReference Include="ExtLibs\AltitudeAngelWings\AltitudeAngelWings.csproj">
+    <!-- <ProjectReference Include="ExtLibs\AltitudeAngelWings\AltitudeAngelWings.csproj">
       <Project>{098f542c-7c70-4b9c-b2e2-ac5dc5e0294b}</Project>
       <Name>AltitudeAngelWings</Name>
-    </ProjectReference>
+    </ProjectReference> -->
     <ProjectReference Include="ExtLibs\Antenna\MissionPlanner.Antenna.csproj">
       <Project>{94836116-0CD5-4EA9-8049-447FEA886406}</Project>
       <Name>MissionPlanner.Antenna</Name>
@@ -200,10 +200,10 @@
       <Project>{e06def77-f933-42fb-afd7-db2d0d8d6a98}</Project>
       <Name>GMap.NET.WindowsForms</Name>
     </ProjectReference>
-    <ProjectReference Include="ExtLibs\HIL\MissionPlanner.HIL.csproj">
+    <!-- <ProjectReference Include="ExtLibs\HIL\MissionPlanner.HIL.csproj">
       <Project>{077E19BA-4129-4AAE-8FCD-34D6FAF85B78}</Project>
       <Name>MissionPlanner.HIL</Name>
-    </ProjectReference>
+    </ProjectReference> -->
     <ProjectReference Include="ExtLibs\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.csproj">
       <Project>{6D4F97A1-D0A0-44EC-B2A3-F5C954209444}</Project>
       <Name>ICSharpCode.SharpZipLib</Name>
@@ -462,7 +462,7 @@
     <Compile Include="test\FirmwareSelection.xaml.cs">
       <DependentUpon>FirmwareSelection.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Utilities\AltitudeAngel\MissionPlannerStateAdapter.cs" />
+    <!-- <Compile Include="Utilities\AltitudeAngel\MissionPlannerStateAdapter.cs" /> -->
     <Compile Include="Utilities\GimbalPoint.cs" />
     <Compile Include="Utilities\NativeLibrary.cs" />
     <Compile Include="Utilities\Speech.cs" />
@@ -997,13 +997,13 @@
     <Compile Include="Utilities\GStreamerUI.cs" />
     <Compile Include="Utilities\Update.cs" />
     <Compile Include="Utilities\Win32DeviceMgnt.cs" />
-    <Compile Include="Utilities\AltitudeAngel\AASettings.cs">
+    <!-- <Compile Include="Utilities\AltitudeAngel\AASettings.cs">
       <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Utilities\AltitudeAngel\AltitudeAngel.cs" />
+    </Compile> -->
+    <!-- <Compile Include="Utilities\AltitudeAngel\AltitudeAngel.cs" />
     <Compile Include="Utilities\AltitudeAngel\MapAdapter.cs" />
     <Compile Include="Utilities\AltitudeAngel\MissionPlannerAdaptor.cs" />
-    <Compile Include="Utilities\AltitudeAngel\OverlayAdapter.cs" />
+    <Compile Include="Utilities\AltitudeAngel\OverlayAdapter.cs" /> -->
     <Compile Include="Warnings\CustomWarning.cs" />
     <Compile Include="Warnings\WarningControl.cs">
       <SubType>UserControl</SubType>
@@ -1323,9 +1323,9 @@
     <Compile Include="Controls\fftui.Designer.cs">
       <DependentUpon>fftui.cs</DependentUpon>
     </Compile>
-    <Compile Include="Utilities\AltitudeAngel\AASettings.Designer.cs">
+    <!-- <Compile Include="Utilities\AltitudeAngel\AASettings.Designer.cs">
       <DependentUpon>AASettings.cs</DependentUpon>
-    </Compile>
+    </Compile> -->
     <Compile Include="Warnings\WarningsManager.Designer.cs">
       <DependentUpon>WarningsManager.cs</DependentUpon>
     </Compile>
@@ -4268,9 +4268,9 @@
     <EmbeddedResource Include="Controls\fftui.resx">
       <DependentUpon>fftui.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Utilities\AltitudeAngel\AASettings.resx">
+    <!-- <EmbeddedResource Include="Utilities\AltitudeAngel\AASettings.resx">
       <DependentUpon>AASettings.cs</DependentUpon>
-    </EmbeddedResource>
+    </EmbeddedResource> -->
     <EmbeddedResource Include="Warnings\WarningControl.resx">
       <DependentUpon>WarningControl.cs</DependentUpon>
     </EmbeddedResource>
