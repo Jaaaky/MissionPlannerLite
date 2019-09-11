@@ -172,7 +172,7 @@ namespace GMap.NET.WindowsForms
                     Stroke.DashStyle = DashStyle.Solid;
                 }
 
-                if (graphicsPath.PointCount > 400)
+                if (graphicsPath.PointCount > 10000)
                 {
                     Console.WriteLine("route OnRender Large Graphics Path " + graphicsPath.PointCount);
                 }
