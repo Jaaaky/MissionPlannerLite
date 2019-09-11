@@ -2475,7 +2475,7 @@ namespace GMap.NET.WindowsForms
       #region IGControl Members
 
       /// <summary>
-      /// Call it to empty tile cache & reload tiles
+      /// Call it to empty tile cache reload tiles
       /// </summary>
       public void ReloadMap()
       {

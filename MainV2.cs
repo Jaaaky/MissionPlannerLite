@@ -3641,7 +3641,7 @@ namespace MissionPlanner
             {
                 //var ftp = new MissionPlanner.ArduPilot.Mavlink.MAVFtp(MainV2.comPort, (byte) comPort.sysidcurrent, (byte) comPort.compidcurrent);
 
-                new MavFTPUI(comPort).ShowUserControl();
+                // new MavFTPUI(comPort).ShowUserControl();
 
                 //ftp.test();
 
