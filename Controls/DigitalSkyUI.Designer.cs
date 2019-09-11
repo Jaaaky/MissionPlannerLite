@@ -76,7 +76,7 @@
             this.but_dlartifact.TabIndex = 5;
             this.but_dlartifact.Text = "Permission Artifact";
             this.but_dlartifact.UseVisualStyleBackColor = true;
-            this.but_dlartifact.Click += new System.EventHandler(this.But_dlartifact_Click);
+            // this.but_dlartifact.Click += new System.EventHandler(this.But_dlartifact_Click);
             // 
             // but_login
             // 

@@ -16,7 +16,7 @@
     <Product>Mission Planner</Product>
     <Description>Mission Planner ground control station for ardupilot</Description>
     <Copyright>Copyright © Michael Oborne 2010-2018</Copyright>
-    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+    <!-- <ApplicationManifest>Properties\app.manifest</ApplicationManifest> -->
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -77,7 +77,7 @@
     <ManifestKeyFile>MissionPlanner_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <GenerateManifests>true</GenerateManifests>
+    <GenerateManifests>false</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
     <SignManifests>false</SignManifests>

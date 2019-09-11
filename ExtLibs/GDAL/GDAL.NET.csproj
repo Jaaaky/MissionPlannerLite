@@ -13,7 +13,7 @@
     <DebugType>portable</DebugType>
     <DebugSymbols>true</DebugSymbols>
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
-    <Platforms>x86</Platforms>
+    <Platforms>AnyCPU</Platforms>
   </PropertyGroup>
 
   <ItemGroup>

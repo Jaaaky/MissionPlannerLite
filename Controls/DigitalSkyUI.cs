@@ -251,31 +251,6 @@ namespace MissionPlanner.Controls
             }
         }
 
-        private async void But_dlartifact_Click(object sender, EventArgs e)
-        {
-            // var perm = (JToken)cmb_applications.SelectedValue;
-
-            // var id = perm["id"].Value<string>();
-
-            // var xmlfile = await digitalSky.GetPermissionArtifact(id);
-
-            // var artifactdir = Settings.GetDataDirectory() + Path.DirectorySeparatorChar + "DigitalSkyArtifact";
-
-            // if (!Directory.Exists(artifactdir))
-            //     Directory.CreateDirectory(artifactdir);
-
-            // var destlocalfile = artifactdir + Path.DirectorySeparatorChar + id + ".xml";
-
-            // File.WriteAllText(destlocalfile, xmlfile);
-
-            // MAVFtp ftp = new MAVFtp(MainV2.comPort, (byte) MainV2.comPort.sysidcurrent,
-            //     (byte) MainV2.comPort.compidcurrent);
-
-            // ftp.UploadFile(id + ".xml", destlocalfile, null);
-
-            // ftp = null;
-        }
-
         private async void But_uploadflightlog_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
