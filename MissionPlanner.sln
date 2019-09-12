@@ -55,10 +55,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GDAL.NET", "ExtLibs\GDAL\GD
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MAVLink", "ExtLibs\Mavlink\MAVLink.csproj", "{13D2EC90-C41F-48A1-AADA-859B6DC24EDC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zeroconf", "ExtLibs\Zeroconf\Zeroconf\Zeroconf.csproj", "{F4B60F03-F4C8-42CD-A46D-712838DC184B}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Installer", "ExtLibs\Installer\Installer.csproj", "{FF6AA762-7AD3-4F38-94B1-EA75D7B1F217}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "md5sum", "ExtLibs\md5sum\md5sum.csproj", "{624AFC60-565F-4F01-BD51-BCCE7AA09BE9}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SvgNet", "ExtLibs\SvgNet\SvgNet.csproj", "{BB4C8021-B5E1-4DE2-82CB-14BDFB9837E4}"

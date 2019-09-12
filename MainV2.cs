@@ -3139,10 +3139,6 @@ namespace MissionPlanner
             //         old.Dispose();
             // };
 
-            //ZeroConf.EnumerateAllServicesFromAllHosts();
-
-            //ZeroConf.ProbeForRTSP();
-
             CommsSerialScan.doConnect += port =>
             {
                 if (MainV2.instance.InvokeRequired)

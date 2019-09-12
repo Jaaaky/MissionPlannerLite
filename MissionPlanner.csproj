@@ -265,10 +265,6 @@
       <Name>ZedGraph</Name>
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </ProjectReference>
-    <ProjectReference Include="ExtLibs\Zeroconf\Zeroconf\Zeroconf.csproj">
-      <Project>{F4B60F03-F4C8-42CD-A46D-712838DC184B}</Project>
-      <Name>Zeroconf</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Crc32.NET">
