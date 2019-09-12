@@ -154,10 +154,6 @@ namespace MissionPlanner.GCSViews
 
             var opt = AddBackstageViewPage(typeof(ConfigOptional), rm.GetString("backstageViewPageopt.Text"));
             AddBackstageViewPage(typeof(ConfigSerialInjectGPS), "RTK/GPS Inject", true, opt);
-            if (MainV2.DisplayConfiguration.displaySikRadio)
-            {
-                AddBackstageViewPage(typeof(Sikradio), rm.GetString("backstageViewPageSikradio.Text"), true, opt);
-            }
 
             AddBackstageViewPage(typeof(ConfigADSB), "ADSB", isConnected, mand);
 
@@ -165,11 +161,6 @@ namespace MissionPlanner.GCSViews
             {
                 AddBackstageViewPage(typeof(ConfigBatteryMonitoring), rm.GetString("backstageViewPagebatmon.Text"), isConnected, opt);
                 AddBackstageViewPage(typeof(ConfigBatteryMonitoring2), rm.GetString("backstageViewPageBatt2.Text"), isConnected, opt);
-            }
-            if (MainV2.DisplayConfiguration.displayCAN)
-            {
-                //AddBackstageViewPage(typeof(ConfigHWCAN), "CAN", isConnected, opt);
-                AddBackstageViewPage(typeof(ConfigUAVCAN), "UAVCAN", true, opt);
             }
 
             if (MainV2.DisplayConfiguration.displayCompassMotorCalib)

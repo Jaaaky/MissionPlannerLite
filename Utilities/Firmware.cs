@@ -1,10 +1,8 @@
 //using log4net;
 using ManagedNativeWifi.Simple;
-using MissionPlanner.Arduino;
 using MissionPlanner.Comms;
 using px4uploader;
 using SharpAdbClient;
-using solo;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -1443,170 +1441,9 @@ namespace MissionPlanner.Utilities
                 return UploadParrot(filename, board);
             }
 
-            if (board == BoardDetect.boards.solo)
-            {
-                return UploadSolo(filename, board);
-            }
-
-            return UploadArduino(comport, filename, board);
+            return false;
         }
 
-        private bool UploadSolo(string filename, BoardDetect.boards board)
-        {
-            try
-            {
-                Solo.flash_px4(filename);
-            }
-            catch (SocketException)
-            {
-                CustomMessageBox.Show(Strings.ErrorUploadingFirmware + " for SOLO", Strings.ERROR);
-                return false;
-            }
-
-            return true;
-        }
-
-        public bool UploadArduino(string comport, string filename, BoardDetect.boards board)
-        { 
-            byte[] FLASH = new byte[1];
-            try
-            {
-                updateProgress(0, Strings.ReadingHexFile);
-                using (StreamReader sr = new StreamReader(filename))
-                {
-                    FLASH = readIntelHEXv2(sr);
-                }
-              // log.infoFormat("\n\nSize: {0}\n\n", FLASH.Length);
-            }
-            catch (Exception ex)
-            {
-                updateProgress(0, Strings.FailedReadHEX);
-                CustomMessageBox.Show(Strings.FailedToReadHex + ex.Message);
-                return false;
-            }
-            IArduinoComms port = new ArduinoSTK();
-
-            if (board == BoardDetect.boards.b1280)
-            {
-                if (FLASH.Length > 126976)
-                {
-                    CustomMessageBox.Show("Firmware is to big for a 1280, Please upgrade your hardware!!");
-                    return false;
-                }
-                //port = new ArduinoSTK();
-                port.BaudRate = 57600;
-            }
-            else if (board == BoardDetect.boards.b2560 || board == BoardDetect.boards.b2560v2)
-            {
-                port = new ArduinoSTKv2
-                {
-                    BaudRate = 115200
-                };
-            }
-            port.DtrEnable = true;
-
-            try
-            {
-                port.PortName = comport;
-
-                port.Open();
-
-                if (port.connectAP())
-                {
-                  // log.info("starting");
-                    updateProgress(0, String.Format(Strings.UploadingBytesToBoard, FLASH.Length) + board);
-
-                    // this is enough to make ap_var reset
-                    //port.upload(new byte[256], 0, 2, 0);
-
-                    port.Progress += updateProgress;
-
-                    if (!port.uploadflash(FLASH, 0, FLASH.Length, 0))
-                    {
-                        if (port.IsOpen)
-                            port.Close();
-                        throw new Exception("Upload failed. Lost sync. Try Arduino!!");
-                    }
-
-                    port.Progress -= updateProgress;
-
-                    updateProgress(100, Strings.UploadComplete);
-
-                  // log.info("Uploaded");
-
-                    int start = 0;
-                    short length = 0x100;
-
-                    byte[] flashverify = new byte[FLASH.Length + 256];
-
-                    updateProgress(0, Strings.VerifyFirmware);
-
-                    while (start < FLASH.Length)
-                    {
-                        updateProgress((int) ((start/(float) FLASH.Length)*100), Strings.VerifyFirmware);
-                        port.setaddress(start);
-                        //log.Info("Downloading " + length + " at " + start);
-                        port.downloadflash(length).CopyTo(flashverify, start);
-                        start += length;
-                    }
-
-                    for (int s = 0; s < FLASH.Length; s++)
-                    {
-                        if (FLASH[s] != flashverify[s])
-                        {
-                            CustomMessageBox.Show(
-                                String.Format(Strings.UploadSucceededButVerifyFailed, FLASH[s].ToString("X"),
-                                    flashverify[s].ToString("X")) + s);
-                            port.Close();
-                            return false;
-                        }
-                    }
-
-                    updateProgress(100, Strings.VerifyComplete);
-                }
-                else
-                {
-                    updateProgress(0, Strings.FailedUpload);
-                    CustomMessageBox.Show(Strings.CommunicationErrorNoConnection);
-                }
-                port.Close();
-
-                try
-                {
-                    ((SerialPort) port).Open();
-                }
-                catch
-                {
-                }
-
-                //CustomMessageBox.Show("1. If you are updating your firmware from a previous version, please verify your parameters are appropriate for the new version.\n2. Please ensure your accelerometer is calibrated after installing or re-calibrated after updating the firmware.");
-
-                try
-                {
-                    ((SerialPort) port).Close();
-                }
-                catch
-                {
-                }
-
-                updateProgress(100, Strings.Done);
-            }
-            catch (Exception ex)
-            {
-                updateProgress(0, Strings.FailedUpload);
-                CustomMessageBox.Show(Strings.CheckPortSettingsOr + ex);
-                try
-                {
-                    port.Close();
-                }
-                catch
-                {
-                }
-                return false;
-            }
-            MainV2.comPort.giveComport = false;
-            return true;
-        }
 
         /// <summary>
         /// Read intel hex file

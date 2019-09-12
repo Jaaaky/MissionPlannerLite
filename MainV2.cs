@@ -364,7 +364,6 @@ namespace MissionPlanner
         /// <summary>
         /// hud background image grabber from a video stream - not realy that efficent. ie no hardware overlays etc.
         /// </summary>
-        public static WebCamService.Capture cam { get; set; }
 
         /// <summary>
         /// controls the main serial reader thread
@@ -1998,18 +1997,6 @@ namespace MissionPlanner
           // log.info("stop GStreamer");
             GStreamer.StopAll();
 
-          // log.info("closing vlcrender");
-            try
-            {
-                while (vlcrender.store.Count > 0)
-                    vlcrender.store[0].Stop();
-            }
-            catch
-            {
-            }
-
-          // log.info("closing pluginthread");
-
             pluginthreadrun = false;
 
             if (pluginthread != null)
@@ -3307,20 +3294,6 @@ namespace MissionPlanner
                     else
                     {
                         CustomMessageBox.Show("Failed to start joystick");
-                    }
-                }
-
-                if (cmds.ContainsKey("cam"))
-                {
-                    try
-                    {
-                        MainV2.cam = new WebCamService.Capture(int.Parse(cmds["cam"]), null);
-
-                        MainV2.cam.Start();
-                    }
-                    catch (Exception ex)
-                    {
-                        CustomMessageBox.Show(ex.ToString());
                     }
                 }
 

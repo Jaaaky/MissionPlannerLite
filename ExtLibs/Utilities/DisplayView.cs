@@ -62,7 +62,6 @@ namespace MissionPlanner.Utilities
         public Boolean displayEscCalibration { get; set; }
         public Boolean displayFlightModes { get; set; }
         public Boolean displayFailSafe { get; set; }
-        public Boolean displaySikRadio { get; set; }
         public Boolean displayBattMonitor { get; set; }
         public Boolean displayCAN { get; set; }
         public Boolean displayCompassMotorCalib { get; set; }
@@ -141,7 +140,6 @@ namespace MissionPlanner.Utilities
             displayEscCalibration = true;
             displayFlightModes = true;
             displayFailSafe = true;
-            displaySikRadio = true;
             displayBattMonitor = true;
             displayCAN = true;
             displayCompassMotorCalib = true;
@@ -249,7 +247,6 @@ namespace MissionPlanner.Utilities
                 displayEscCalibration = true,
                 displayFlightModes = true,
                 displayFailSafe = true,
-                displaySikRadio = true,
                 displayBattMonitor = true,
                 displayCAN = true,
                 displayCompassMotorCalib = true,
@@ -327,7 +324,6 @@ namespace MissionPlanner.Utilities
                 displayEscCalibration = true,
                 displayFlightModes = true,
                 displayFailSafe = true,
-                displaySikRadio = true,
                 displayBattMonitor = true,
                 displayCAN = true,
                 displayCompassMotorCalib = true,

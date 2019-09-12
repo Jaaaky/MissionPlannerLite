@@ -22,7 +22,6 @@ using MissionPlanner.Joystick;
 using MissionPlanner.Log;
 using MissionPlanner.Utilities;
 using MissionPlanner.Warnings;
-using WebCamService;
 using ZedGraph;
 using LogAnalyzer = MissionPlanner.Utilities.LogAnalyzer;
 using MissionPlanner.Maps;
@@ -2188,11 +2187,6 @@ namespace MissionPlanner.GCSViews
 
         private void FlightData_ParentChanged(object sender, EventArgs e)
         {
-            if (MainV2.cam != null)
-            {
-                MainV2.cam.camimage += cam_camimage;
-            }
-
             // QUAD
             if (MainV2.comPort.MAV.param.ContainsKey("WP_SPEED_MAX"))
             {
@@ -4315,23 +4309,6 @@ namespace MissionPlanner.GCSViews
 
         private void startCameraToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (MainV2.MONO)
-                return;
-            if (MainV2.cam == null)
-            {
-                try
-                {
-                    MainV2.cam = new Capture(Settings.Instance.GetInt32("video_device"), new AMMediaType());
-
-                    MainV2.cam.Start();
-
-                    MainV2.cam.camimage += new CamImage(cam_camimage);
-                }
-                catch (Exception ex)
-                {
-                    CustomMessageBox.Show("Camera Fail: " + ex.ToString(), Strings.ERROR);
-                }
-            }
         }
 
         private void customizeToolStripMenuItem_Click(object sender, EventArgs e)

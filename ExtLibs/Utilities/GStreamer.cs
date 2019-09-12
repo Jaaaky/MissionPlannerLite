@@ -12,8 +12,6 @@ using System.Net;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading;
-//using log4net;
-using LibVLC.NET;
 using MissionPlanner.Utilities.Drawing;
 using guint = System.UInt32;
 using GstClockTime = System.UInt64;

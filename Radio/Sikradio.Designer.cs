@@ -1150,44 +1150,6 @@
             this.BUT_loadcustom.Name = "BUT_loadcustom";
             this.BUT_loadcustom.UseVisualStyleBackColor = true;
             this.BUT_loadcustom.Click += new System.EventHandler(this.BUT_loadcustom_Click);
-            // 
-            // Sikradio
-            // 
-            
-            this.Controls.Add(this.BUT_loadcustom);
-            this.Controls.Add(this.BUT_resettodefault);
-            this.Controls.Add(this.linkLabel1);
-            this.Controls.Add(this.label10);
-            this.Controls.Add(this.groupBoxRemote);
-            this.Controls.Add(this.groupBoxLocal);
-            this.Controls.Add(this.BUT_Syncoptions);
-            this.Controls.Add(this.BUT_savesettings);
-            this.Controls.Add(this.BUT_getcurrent);
-            this.Controls.Add(this.lbl_status);
-            this.Controls.Add(this.Progressbar);
-            this.Controls.Add(this.BUT_upload);
-            this.MinimumSize = new System.Drawing.Size(781, 433);
-            this.Name = "Sikradio";
-            resources.ApplyResources(this, "$this");
-            this.SPLIT_local.Panel1.ResumeLayout(false);
-            this.SPLIT_local.Panel1.PerformLayout();
-            this.SPLIT_local.Panel2.ResumeLayout(false);
-            this.SPLIT_local.Panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.SPLIT_local)).EndInit();
-            this.SPLIT_local.ResumeLayout(false);
-            this.SPLIT_remote.Panel1.ResumeLayout(false);
-            this.SPLIT_remote.Panel1.PerformLayout();
-            this.SPLIT_remote.Panel2.ResumeLayout(false);
-            this.SPLIT_remote.Panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.SPLIT_remote)).EndInit();
-            this.SPLIT_remote.ResumeLayout(false);
-            this.groupBoxLocal.ResumeLayout(false);
-            this.groupBoxLocal.PerformLayout();
-            this.groupBoxRemote.ResumeLayout(false);
-            this.groupBoxRemote.PerformLayout();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
         }
 
         #endregion

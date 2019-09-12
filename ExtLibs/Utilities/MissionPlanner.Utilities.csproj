@@ -52,7 +52,6 @@
     <ProjectReference Include="..\GMap.NET.Core\GMap.NET.Core.csproj" />
     <ProjectReference Include="..\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.csproj" />
     <ProjectReference Include="..\KMLib\KMLib.csproj" />
-    <ProjectReference Include="..\LibVLC.NET\LibVLC.NET.csproj" />
     <ProjectReference Include="..\Mavlink\MAVLink.csproj" />
     <ProjectReference Include="..\MetaDataExtractorCSharp240d\MetaDataExtractor.csproj" />
     <ProjectReference Include="..\netDxf\netDxf.csproj" />

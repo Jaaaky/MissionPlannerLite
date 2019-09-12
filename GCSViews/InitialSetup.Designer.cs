@@ -57,7 +57,6 @@ namespace MissionPlanner.GCSViews
             this.backstageViewPageParachute = new System.Windows.Forms.Label();
             this.backstageViewPagePX4Flow = new System.Windows.Forms.Label();
             this.backstageViewPageradio = new System.Windows.Forms.Label();
-            this.backstageViewPageSikradio = new System.Windows.Forms.Label();
             this.backstageViewPagesonar = new System.Windows.Forms.Label();
             this.backstageViewPagetradheli = new System.Windows.Forms.Label();
             this.backstageViewPagewizard = new System.Windows.Forms.Label();
@@ -196,11 +195,6 @@ namespace MissionPlanner.GCSViews
             resources.ApplyResources(this.backstageViewPageradio, "backstageViewPageradio");
             this.backstageViewPageradio.Name = "backstageViewPageradio";
             // 
-            // backstageViewPageSikradio
-            // 
-            resources.ApplyResources(this.backstageViewPageSikradio, "backstageViewPageSikradio");
-            this.backstageViewPageSikradio.Name = "backstageViewPageSikradio";
-            // 
             // backstageViewPagesonar
             // 
             resources.ApplyResources(this.backstageViewPagesonar, "backstageViewPagesonar");
@@ -243,7 +237,6 @@ namespace MissionPlanner.GCSViews
             this.Controls.Add(this.backstageViewPageParachute);
             this.Controls.Add(this.backstageViewPagePX4Flow);
             this.Controls.Add(this.backstageViewPageradio);
-            this.Controls.Add(this.backstageViewPageSikradio);
             this.Controls.Add(this.backstageViewPagesonar);
             this.Controls.Add(this.backstageViewPagetradheli);
             this.Controls.Add(this.backstageViewPagewizard);
@@ -285,7 +278,6 @@ namespace MissionPlanner.GCSViews
         private Label backstageViewPageParachute;
         private Label backstageViewPagePX4Flow;
         private Label backstageViewPageradio;
-        private Label backstageViewPageSikradio;
         private Label backstageViewPagesonar;
         private Label backstageViewPagetradheli;
         private Label backstageViewPagewizard;

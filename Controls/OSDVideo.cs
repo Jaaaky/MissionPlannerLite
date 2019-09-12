@@ -7,7 +7,6 @@ using System.Threading;
 using System.Drawing.Imaging;
 using System.IO;
 using DirectShowLib;
-using AviFile;
 using DirectShowLib.DES;
 
 namespace MissionPlanner
@@ -18,9 +17,6 @@ namespace MissionPlanner
         public DateTime startlogtime = DateTime.MinValue;
         public DateTime videopos = DateTime.MinValue;
         CurrentState cs = new CurrentState();
-
-        AviManager newManager;
-        VideoStream newStream;
 
         static int frame = 0;
         //double framerate = 0;
@@ -181,94 +177,6 @@ namespace MissionPlanner
 
         private void StartCapture()
         {
-            int hr;
-
-            ISampleGrabber sampGrabber = null;
-            IBaseFilter capFilter = null;
-            ICaptureGraphBuilder2 capGraph = null;
-
-            if (System.IO.File.Exists(txtAviFileName.Text))
-            {
-                // Get the graphbuilder object
-                m_FilterGraph = (IFilterGraph2) new FilterGraph();
-                m_mediaCtrl = m_FilterGraph as IMediaControl;
-
-                // Get the ICaptureGraphBuilder2
-                capGraph = (ICaptureGraphBuilder2) new CaptureGraphBuilder2();
-
-                // Get the SampleGrabber interface
-                sampGrabber = (ISampleGrabber) new SampleGrabber();
-
-                // Start building the graph
-                hr = capGraph.SetFiltergraph(m_FilterGraph);
-                DsError.ThrowExceptionForHR(hr);
-
-                // Add the video source
-                hr = m_FilterGraph.AddSourceFilter(txtAviFileName.Text, "File Source (Async.)", out capFilter);
-                DsError.ThrowExceptionForHR(hr);
-
-                //add AVI Decompressor
-                IBaseFilter pAVIDecompressor = (IBaseFilter) new AVIDec();
-                hr = m_FilterGraph.AddFilter(pAVIDecompressor, "AVI Decompressor");
-                DsError.ThrowExceptionForHR(hr);
- 
-                
-                //
-                IBaseFilter baseGrabFlt = (IBaseFilter) sampGrabber;
-                ConfigureSampleGrabber(sampGrabber);
-
-                // Add the frame grabber to the graph
-                hr = m_FilterGraph.AddFilter(baseGrabFlt, "Ds.NET Grabber");
-                DsError.ThrowExceptionForHR(hr);
-
-
-                IBaseFilter vidrender = (IBaseFilter) new VideoRenderer();
-                hr = m_FilterGraph.AddFilter(vidrender, "Render");
-                DsError.ThrowExceptionForHR(hr);
-
-                IPin captpin = DsFindPin.ByDirection(capFilter, PinDirection.Output, 0);
-
-                IPin samppin = DsFindPin.ByName(baseGrabFlt, "Input");
-
-                hr = m_FilterGraph.Connect(captpin, samppin);
-                DsError.ThrowExceptionForHR(hr);
-
-                FileWriter filewritter = new FileWriter();
-                IFileSinkFilter filemux = (IFileSinkFilter) filewritter;
-                //filemux.SetFileName("test.avi",);
-
-                //hr = capGraph.RenderStream(null, MediaType.Video, capFilter, null, vidrender);
-                // DsError.ThrowExceptionForHR(hr); 
-
-                SaveSizeInfo(sampGrabber);
-
-                // setup buffer
-                if (m_handle == IntPtr.Zero)
-                    m_handle = Marshal.AllocCoTaskMem(m_stride*m_videoHeight);
-
-                // tell the callback to ignore new images
-                m_PictureReady = new ManualResetEvent(false);
-                m_bGotOne = false;
-                m_bRunning = false;
-
-                timer1 = new Thread(timer);
-                timer1.IsBackground = true;
-                timer1.Start();
-
-                m_mediaextseek = m_FilterGraph as IAMExtendedSeeking;
-                m_mediapos = m_FilterGraph as IMediaPosition;
-                m_mediaseek = m_FilterGraph as IMediaSeeking;
-                double length = 0;
-                m_mediapos.get_Duration(out length);
-                trackBar_mediapos.Minimum = 0;
-                trackBar_mediapos.Maximum = (int) length;
-
-                Start();
-            }
-            else
-            {
-                MessageBox.Show("File does not exist");
-            }
         }
 
         void dolog()
@@ -580,16 +488,6 @@ namespace MissionPlanner
 
         private void BUT_vidfile_Click(object sender, EventArgs e)
         {
-            String fileName = GetFileName("Videos (*.avi)|*.avi;*.mpe;*.mpeg;*.mp4", txtAviFileName);
-            if (fileName != null)
-            {
-                // update name before calling next function
-                txtAviFileName.Text = fileName;
-                // load setting if they exist
-                loadconfig();
-                // force file we just picked as video
-                txtAviFileName.Text = fileName;
-            }
         }
 
         private String GetFileName(String filter, Control ctl)
@@ -637,19 +535,6 @@ namespace MissionPlanner
             }
             catch
             {
-            }
-
-            try
-            {
-                newManager =
-                    new AviManager(
-                        System.IO.Path.GetDirectoryName(txtAviFileName.Text) + System.IO.Path.DirectorySeparatorChar +
-                        System.IO.Path.GetFileNameWithoutExtension(txtAviFileName.Text) + "-overlay.avi", false);
-            }
-            catch
-            {
-                CustomMessageBox.Show(Strings.InvalidFileName, Strings.ERROR);
-                return;
             }
 
 
@@ -751,23 +636,9 @@ namespace MissionPlanner
 
                 Console.WriteLine("1e " + DateTime.Now.Millisecond);
 
-                if (newStream == null)
-                {
-                    //double frate = GetFrameRate(txtAviFileName.Text);
-
-                    double frate = Math.Round(10000000.0/m_avgtimeperframe, 0);
-
-                    newStream = newManager.AddVideoStream(true, frate, bmp);
-                }
-
                 Console.WriteLine("2 " + DateTime.Now.Millisecond);
 
                 addframe(bmp);
-                lock (avienclock)
-                {
-                    //    System.Threading.ThreadPool.QueueUserWorkItem(addframe, bmp);
-                }
-
 
                 Console.WriteLine("3 " + DateTime.Now.Millisecond);
             }
@@ -781,16 +652,9 @@ namespace MissionPlanner
             return 0;
         }
 
-        object avienclock = new object();
-
 
         void addframe(object bmp)
         {
-            lock (avienclock)
-            {
-                newStream.AddFrame((Bitmap) bmp);
-                ((Bitmap) bmp).Dispose();
-            }
         }
 
         private void BUT_tlogfile_Click(object sender, EventArgs e)
@@ -839,7 +703,6 @@ namespace MissionPlanner
             try
             {
                 System.Threading.Thread.Sleep(500);
-                newManager.Close();
 
                 th.Abort();
             }

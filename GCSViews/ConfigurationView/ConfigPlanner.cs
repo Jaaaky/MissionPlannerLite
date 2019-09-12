@@ -10,7 +10,6 @@ using DirectShowLib;
 using MissionPlanner.Controls;
 using MissionPlanner.Joystick;
 using MissionPlanner.Utilities;
-using WebCamService;
 
 namespace MissionPlanner.GCSViews.ConfigurationView
 {
@@ -93,16 +92,6 @@ namespace MissionPlanner.GCSViews.ConfigurationView
                 }
             }
 
-            // setup up camera button states
-            if (MainV2.cam != null)
-            {
-                BUT_videostart.Enabled = false;
-                CHK_hudshow.Checked = FlightData.myhud.hudon;
-            }
-            else
-            {
-                BUT_videostart.Enabled = true;
-            }
 
             // setup speech states
             SetCheckboxFromConfig("speechenable", CHK_enablespeech);
@@ -201,32 +190,10 @@ namespace MissionPlanner.GCSViews.ConfigurationView
 
             var bmp = (GCSBitmapInfo) CMB_videoresolutions.SelectedItem;
 
-            try
-            {
-                MainV2.cam = new Capture(CMB_videosources.SelectedIndex, bmp.Media);
-
-                MainV2.cam.Start();
-
-                Settings.Instance["video_device"] = CMB_videosources.SelectedIndex.ToString();
-
-                Settings.Instance["video_options"] = CMB_videoresolutions.SelectedIndex.ToString();
-
-                BUT_videostart.Enabled = false;
-            }
-            catch (Exception ex)
-            {
-                CustomMessageBox.Show("Camera Fail: " + ex.Message);
-            }
         }
 
         private void BUT_videostop_Click(object sender, EventArgs e)
         {
-            BUT_videostart.Enabled = true;
-            if (MainV2.cam != null)
-            {
-                MainV2.cam.Dispose();
-                MainV2.cam = null;
-            }
         }
 
         private void CMB_videosources_SelectedIndexChanged(object sender, EventArgs e)
@@ -661,16 +628,6 @@ namespace MissionPlanner.GCSViews.ConfigurationView
 
         private void CMB_videosources_Click(object sender, EventArgs e)
         {
-            if (MainV2.MONO)
-                return;
-            // the reason why i dont populate this list is because on linux/mac this call will fail.
-            var capt = new Capture();
-
-            var devices = WebCamService.Capture.getDevices();
-
-            CMB_videosources.DataSource = devices;
-
-            capt.Dispose();
         }
 
         private void CHK_maprotation_CheckedChanged(object sender, EventArgs e)
