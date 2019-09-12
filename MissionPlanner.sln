@@ -4,19 +4,11 @@ VisualStudioVersion = 16.0.29009.5
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MissionPlanner", "MissionPlanner.csproj", "{A2E22272-95FE-47B6-B050-9AE7E2055BF5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Updater", "Updater\Updater.csproj", "{E64A1A41-A5B0-458E-8284-BB63705354DA}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugins", "Plugins", "{9B3AC501-5FCB-4A2A-A628-BE0985DB2BD4}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MissionPlanner.Stats", "ExtLibs\MissionPlanner.Stats\MissionPlanner.Stats.csproj", "{6A6F4345-0A45-413E-B6D6-FD73660DAD4C}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrackerHomeGPS", "ExtLibs\TrackerHome\TrackerHomeGPS.csproj", "{94C380C1-566A-4D86-855B-2E987851BF0A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MissionPlanner.SimpleGrid", "ExtLibs\SimpleGrid\MissionPlanner.SimpleGrid.csproj", "{28D0BEF6-D69C-43AB-A22C-724F116D50EA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MissionPlanner.Gridv2", "ExtLibs\MissionPlanner.Gridv2\MissionPlanner.Gridv2.csproj", "{A7AA6037-BF11-473E-94F9-717276FE080C}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AviFile", "ExtLibs\AviFile\AviFile.csproj", "{ABB32A29-AF50-47FA-B243-5FD75A5ABA54}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "ExtLibs\Core\Core.csproj", "{59129078-7B12-4198-B93E-0AA08D0BB7ED}"
 EndProject
@@ -55,21 +47,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{6A21E0
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExtGuided", "ExtLibs\ExtGuided\ExtGuided.csproj", "{B5211B56-CA30-4B2A-843B-832849F18CEA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibVLC.NET", "ExtLibs\LibVLC.NET\LibVLC.NET.csproj", "{BB06DFF7-4F41-4B9D-A3C3-3B6D2B8702B6}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SikRadio", "SikRadio\SikRadio.csproj", "{B8943726-04B0-4477-BFDA-E156A0CD98A4}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ManagedNativeWifi.Simple", "ExtLibs\ManagedNativeWifi.Simple\ManagedNativeWifi.Simple.csproj", "{CCE510F7-1DA6-40F2-8921-B86ED41BB85E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpAdbClient", "ExtLibs\SharpAdbClient\SharpAdbClient.csproj", "{65473257-E70F-410B-9269-D0C0F771EA87}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "solo", "ExtLibs\solo\solo.csproj", "{CF402948-A3F4-4962-8A57-E40B46759D25}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GDAL.NET", "ExtLibs\GDAL\GDAL.NET.csproj", "{766FCF85-4809-44DB-B316-6C4902C65245}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MAVLink", "ExtLibs\Mavlink\MAVLink.csproj", "{13D2EC90-C41F-48A1-AADA-859B6DC24EDC}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Arduino", "ExtLibs\Arduino\Arduino.csproj", "{DFA3C3B7-F098-4567-A780-A37DC52CA577}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zeroconf", "ExtLibs\Zeroconf\Zeroconf\Zeroconf.csproj", "{F4B60F03-F4C8-42CD-A46D-712838DC184B}"
 EndProject
@@ -95,41 +79,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ICSharpCode.SharpZipLib", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjNET", "ExtLibs\ProjNet\ProjNET.csproj", "{993DB853-EC9F-45D5-AD2C-BA008B72995B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebCamService", "ExtLibs\WebCamService\WebCamService.csproj", "{78AC6375-28AF-4175-9F20-B5099C92EA2B}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Transitions", "ExtLibs\Transitions\Transitions.csproj", "{B6054E5B-362C-4298-8F20-6BA5BF1A859E}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "wasm", "ExtLibs\wasm\wasm.csproj", "{E2CE55F4-53FB-48C3-A8BE-34161961FD2A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibTessDotNet", "ExtLibs\LibTessDotNet\LibTessDotNet.csproj", "{A7C98A7E-1BCB-4A38-AAC4-2EEC63A5BC5C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MissionPlanner.Antenna", "ExtLibs\Antenna\MissionPlanner.Antenna.csproj", "{94836116-0CD5-4EA9-8049-447FEA886406}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OSDConfigurator", "ExtLibs\OSDConfigurator\OSDConfigurator.csproj", "{1442B805-D6B1-4729-89F8-3A5A1C7547AD}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UAVCAN", "ExtLibs\UAVCAN\UAVCAN.csproj", "{3A413E59-A20E-477C-997E-64B1398E0E80}"
-EndProject
-Project("{C7167F0D-BC9F-4E6E-AFE1-012C56B48DB5}") = "WindowsStore", "ExtLibs\WindowsStore\WindowsStore.wapproj", "{AADFFE7F-44CE-4FCA-BDB1-17C3F7020DCD}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xamarin.iOS", "ExtLibs\Xamarin\Xamarin.iOS\Xamarin.iOS.csproj", "{78519280-6472-4268-93C8-82404218EF38}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xamarin.UWP", "ExtLibs\Xamarin\Xamarin.UWP\Xamarin.UWP.csproj", "{6E11F62D-380C-44EE-9CBF-BF2F8BDB0CEA}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Xamarin", "ExtLibs\Xamarin\Xamarin\Xamarin.csproj", "{CAD00B0A-9C73-4C96-BA96-748B974D3AC3}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Other", "Other", "{B35C7AA8-707D-4575-96CD-41ECFA439286}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xamarin.Android", "ExtLibs\Xamarin\Xamarin.Android\Xamarin.Android.csproj", "{43643554-1B27-4E81-90E4-7CAAD8355DD3}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GMap.NET.Drawing", "ExtLibs\GMap.NET.Drawing\GMap.NET.Drawing.csproj", "{D773ACCD-9C2D-4E94-A967-FAA7EA2D21CB}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UAVCANFlasher", "ExtLibs\UAVCANFlasher\UAVCANFlasher.csproj", "{EECDFE74-6CDC-45E0-AA39-34FF55FFB49F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MavlinkMessagePlugin", "ExtLibs\MavlinkMessagePlugin\MavlinkMessagePlugin.csproj", "{DFCB0240-50CF-4F56-92C7-05941569231D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mock", "ExtLibs\Mock\Mock.csproj", "{183631BD-EC15-47AD-9ABE-CD8DB748C066}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "7zip", "ExtLibs\7zip\7zip.csproj", "{1117EFD6-3A46-47F7-9BEB-02792D213B8D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

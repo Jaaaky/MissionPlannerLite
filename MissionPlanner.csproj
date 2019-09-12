@@ -146,18 +146,9 @@
       <Project>{94836116-0CD5-4EA9-8049-447FEA886406}</Project>
       <Name>MissionPlanner.Antenna</Name>
     </ProjectReference>
-    <ProjectReference Include="ExtLibs\Arduino\Arduino.csproj">
-      <Project>{DFA3C3B7-F098-4567-A780-A37DC52CA577}</Project>
-      <Name>Arduino</Name>
-    </ProjectReference>
     <ProjectReference Include="ExtLibs\ArduPilot\MissionPlanner.ArduPilot.csproj">
       <Project>{CA6345D3-7A6D-478B-A0ED-A58E50DCAA83}</Project>
       <Name>MissionPlanner.ArduPilot</Name>
-    </ProjectReference>
-    <ProjectReference Include="ExtLibs\AviFile\AviFile.csproj">
-      <Project>{ABB32A29-AF50-47FA-B243-5FD75A5ABA54}</Project>
-      <Name>AviFile</Name>
-      <EmbedInteropTypes>False</EmbedInteropTypes>
     </ProjectReference>
     <ProjectReference Include="ExtLibs\BaseClasses\BaseClasses.csproj">
       <Project>{2a8e8af5-74e7-49db-a42e-9360fa7a6cc4}</Project>
@@ -216,10 +207,6 @@
       <Project>{a7c98a7e-1bcb-4a38-aac4-2eec63a5bc5c}</Project>
       <Name>LibTessDotNet</Name>
     </ProjectReference>
-    <ProjectReference Include="ExtLibs\LibVLC.NET\LibVLC.NET.csproj">
-      <Project>{bb06dff7-4f41-4b9d-a3c3-3b6d2b8702b6}</Project>
-      <Name>LibVLC.NET</Name>
-    </ProjectReference>
     <ProjectReference Include="ExtLibs\ManagedNativeWifi.Simple\ManagedNativeWifi.Simple.csproj">
       <Project>{cce510f7-1da6-40f2-8921-b86ed41bb85e}</Project>
       <Name>ManagedNativeWifi.Simple</Name>
@@ -240,10 +227,6 @@
       <Project>{785380e0-ceb9-4c34-82e5-60d0e33e848e}</Project>
       <Name>netDxf</Name>
     </ProjectReference>
-    <ProjectReference Include="ExtLibs\OSDConfigurator\OSDConfigurator.csproj">
-      <Project>{1442b805-d6b1-4729-89f8-3a5a1c7547ad}</Project>
-      <Name>OSDConfigurator</Name>
-    </ProjectReference>
     <ProjectReference Include="ExtLibs\ProjNet\ProjNET.csproj">
       <Project>{993DB853-EC9F-45D5-AD2C-BA008B72995B}</Project>
       <Name>ProjNET</Name>
@@ -260,10 +243,6 @@
       <Project>{53F12A60-E9CC-44BC-8366-1AE3AB2B547D}</Project>
       <Name>SharpKml</Name>
     </ProjectReference>
-    <ProjectReference Include="ExtLibs\solo\solo.csproj">
-      <Project>{cf402948-a3f4-4962-8a57-e40b46759d25}</Project>
-      <Name>solo</Name>
-    </ProjectReference>
     <ProjectReference Include="ExtLibs\Strings\MissionPlanner.Strings.csproj">
       <Project>{A0DE147B-144C-4A34-8D46-9394570AD7E8}</Project>
       <Name>MissionPlanner.Strings</Name>
@@ -276,17 +255,9 @@
       <Project>{B6054E5B-362C-4298-8F20-6BA5BF1A859E}</Project>
       <Name>Transitions</Name>
     </ProjectReference>
-    <ProjectReference Include="ExtLibs\UAVCAN\UAVCAN.csproj">
-      <Project>{3A413E59-A20E-477C-997E-64B1398E0E80}</Project>
-      <Name>UAVCAN</Name>
-    </ProjectReference>
     <ProjectReference Include="ExtLibs\Utilities\MissionPlanner.Utilities.csproj">
       <Project>{1378A66C-38E4-46F5-A05F-DC04EF7D4D16}</Project>
       <Name>MissionPlanner.Utilities</Name>
-    </ProjectReference>
-    <ProjectReference Include="ExtLibs\WebCamService\WebCamService.csproj">
-      <Project>{78AC6375-28AF-4175-9F20-B5099C92EA2B}</Project>
-      <Name>WebCamService</Name>
     </ProjectReference>
     <ProjectReference Include="ExtLibs\ZedGraph\ZedGraph.csproj">
       <Project>{2541686B-1673-43BF-AF89-3163945DB009}</Project>
@@ -371,9 +342,6 @@
     <Compile Include="Controls\RelayOptions.Designer.cs">
       <DependentUpon>RelayOptions.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\UAVCANInspector.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Controls\PropagationSettings.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -411,20 +379,8 @@
     <Compile Include="GCSViews\ConfigurationView\ConfigOSD.Designer.cs">
       <DependentUpon>ConfigOSD.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\UAVCANParams.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\UAVCANParams.Designer.cs">
-      <DependentUpon>UAVCANParams.cs</DependentUpon>
-    </Compile>
     <Compile Include="GCSViews\ConfigurationView\ConfigSerialInjectGPS.Designer.cs">
       <DependentUpon>ConfigSerialInjectGPS.cs</DependentUpon>
-    </Compile>
-    <Compile Include="GCSViews\ConfigurationView\ConfigUAVCAN.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="GCSViews\ConfigurationView\ConfigUAVCAN.Designer.cs">
-      <DependentUpon>ConfigUAVCAN.cs</DependentUpon>
     </Compile>
     <Compile Include="GCSViews\ConfigurationView\ConfigUserDefined.cs">
       <SubType>UserControl</SubType>
@@ -567,9 +523,6 @@
     <EmbeddedResource Include="Controls\RelayOptions.resx">
       <DependentUpon>RelayOptions.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\UAVCANInspector.resx">
-      <DependentUpon>UAVCANInspector.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Controls\PropagationSettings.resx">
       <DependentUpon>PropagationSettings.cs</DependentUpon>
     </EmbeddedResource>
@@ -587,12 +540,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GCSViews\ConfigurationView\ConfigOSD.resx">
       <DependentUpon>ConfigOSD.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\UAVCANParams.resx">
-      <DependentUpon>UAVCANParams.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GCSViews\ConfigurationView\ConfigUAVCAN.resx">
-      <DependentUpon>ConfigUAVCAN.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GCSViews\ConfigurationView\ConfigUserDefined.resx">
       <DependentUpon>ConfigUserDefined.cs</DependentUpon>
@@ -1214,9 +1161,6 @@
     <Compile Include="Plugin\PluginUI.Designer.cs">
       <DependentUpon>PluginUI.cs</DependentUpon>
     </Compile>
-    <Compile Include="Radio\Sikradio.Designer.cs">
-      <DependentUpon>Sikradio.cs</DependentUpon>
-    </Compile>
     <Compile Include="Swarm\FollowPathControl.Designer.cs">
       <DependentUpon>FollowPathControl.cs</DependentUpon>
     </Compile>
@@ -1561,9 +1505,6 @@
     <EmbeddedResource Include="Plugin\PluginUI.resx">
       <DependentUpon>PluginUI.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Radio\Sikradio.resx">
-      <DependentUpon>Sikradio.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Swarm\FollowPathControl.resx">
       <DependentUpon>FollowPathControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -1845,7 +1786,6 @@
     <None Include="m3u\networklink.kml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="MissionPlanner.GCSViews.ConfigurationView.UAVCANModel.datasource" />
     <None Include="MissionPlanner_TemporaryKey.pfx" />
     <None Include="NoFly\Areas-Lisboa.kmz">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
