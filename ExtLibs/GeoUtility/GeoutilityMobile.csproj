@@ -22,9 +22,9 @@
     <AssemblyOriginatorKeyFile>Resources\geoutility.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>portable</DebugType>
-    <Optimize>false</Optimize>
+    <DebugSymbols>false</DebugSymbols>
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
     <OutputPath>bin\Mobile\Debug\</OutputPath>
     <DefineConstants>TRACE;DEBUG;Smartphone, COMPACT_FRAMEWORK</DefineConstants>
     <NoStdLib>true</NoStdLib>

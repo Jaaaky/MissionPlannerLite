@@ -6,8 +6,8 @@
     <OutputTypeEx>library</OutputTypeEx>
     <StartupObject />
 
-    <DebugType>portable</DebugType>
-    <DebugSymbols>True</DebugSymbols>
+    <DebugType>none</DebugType>
+    <DebugSymbols>false</DebugSymbols>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
 
   </PropertyGroup>

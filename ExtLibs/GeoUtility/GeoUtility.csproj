@@ -5,8 +5,8 @@
     </FileUpgradeFlags>
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
-        <DebugType>portable</DebugType>
-    <DebugSymbols>true</DebugSymbols>
+        <DebugType>none</DebugType>
+    <DebugSymbols>false</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="GeoSystem\MapService\Cache.cs" />

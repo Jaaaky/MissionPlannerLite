@@ -5,8 +5,8 @@
     <ApplicationIcon />
     <OutputTypeEx>library</OutputTypeEx>
     <StartupObject />
-    <DebugType>portable</DebugType>
-    <DebugSymbols>True</DebugSymbols>
+    <DebugType>none</DebugType>
+    <DebugSymbols>false</DebugSymbols>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Michael Oborne</Authors>
     <Company>Michael Oborne</Company>

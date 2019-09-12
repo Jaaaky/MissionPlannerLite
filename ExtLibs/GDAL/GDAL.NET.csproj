@@ -10,8 +10,8 @@
     <Company>Michael Oborne</Company>
     <AssemblyName>GDAL.NET</AssemblyName>
     <RootNamespace>GDAL</RootNamespace>
-    <DebugType>portable</DebugType>
-    <DebugSymbols>true</DebugSymbols>
+    <DebugType>none</DebugType>
+    <DebugSymbols>false</DebugSymbols>
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
     <Platforms>AnyCPU</Platforms>
   </PropertyGroup>

@@ -6,8 +6,8 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     
-    <DebugType>portable</DebugType>
-    <DebugSymbols>true</DebugSymbols>
+    <DebugType>none</DebugType>
+    <DebugSymbols>false</DebugSymbols>
     <Description />
     <NeutralLanguage>en</NeutralLanguage>
   </PropertyGroup>

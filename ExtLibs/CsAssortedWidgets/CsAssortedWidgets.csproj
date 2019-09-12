@@ -6,8 +6,8 @@
     <OutputTypeEx>library</OutputTypeEx>
     <StartupObject />
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
-    <DebugType>portable</DebugType>
-    <DebugSymbols>True</DebugSymbols>
+    <DebugType>none</DebugType>
+    <DebugSymbols>false</DebugSymbols>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 
   </PropertyGroup>
