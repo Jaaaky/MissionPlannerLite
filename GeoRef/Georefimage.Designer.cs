@@ -27,7 +27,6 @@ namespace MissionPlanner.GeoRef
             this.label1 = new System.Windows.Forms.Label();
             this.BUT_Geotagimages = new MissionPlanner.Controls.MyButton();
             this.BUT_estoffset = new MissionPlanner.Controls.MyButton();
-            this.BUT_doit = new MissionPlanner.Controls.MyButton();
             this.BUT_browsedir = new MissionPlanner.Controls.MyButton();
             this.BUT_browselog = new MissionPlanner.Controls.MyButton();
             this.BUT_networklinkgeoref = new MissionPlanner.Controls.MyButton();
@@ -109,13 +108,6 @@ namespace MissionPlanner.GeoRef
             this.BUT_estoffset.Name = "BUT_estoffset";
             this.BUT_estoffset.UseVisualStyleBackColor = true;
             this.BUT_estoffset.Click += new System.EventHandler(this.BUT_estoffset_Click);
-            // 
-            // BUT_doit
-            // 
-            resources.ApplyResources(this.BUT_doit, "BUT_doit");
-            this.BUT_doit.Name = "BUT_doit";
-            this.BUT_doit.UseVisualStyleBackColor = true;
-            this.BUT_doit.Click += new System.EventHandler(this.BUT_doit_Click);
             // 
             // BUT_browsedir
             // 
@@ -371,7 +363,6 @@ namespace MissionPlanner.GeoRef
             this.Controls.Add(this.BUT_networklinkgeoref);
             this.Controls.Add(this.BUT_Geotagimages);
             this.Controls.Add(this.TXT_outputlog);
-            this.Controls.Add(this.BUT_doit);
             this.Controls.Add(this.TXT_jpgdir);
             this.Controls.Add(this.TXT_logfile);
             this.Controls.Add(this.BUT_browsedir);
@@ -401,7 +392,6 @@ namespace MissionPlanner.GeoRef
         private TextBox TXT_logfile;
         private TextBox TXT_jpgdir;
         private TextBox TXT_offsetseconds;
-        private Controls.MyButton BUT_doit;
         private FolderBrowserDialog folderBrowserDialog1;
         private Label label1;
         private TextBox TXT_outputlog;

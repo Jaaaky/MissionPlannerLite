@@ -35,7 +35,7 @@
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
+    <DebugType>none</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Mobile\Release\</OutputPath>
     <DefineConstants>TRACE;Smartphone, COMPACT_FRAMEWORK</DefineConstants>

@@ -10,7 +10,6 @@ using System.Drawing.Imaging;
 using System.Collections;
 using System.Threading;
 using System.Drawing.Drawing2D;
-//using log4net;
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;

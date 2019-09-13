@@ -10,11 +10,9 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-//using log4net;
 using MissionPlanner.ArduPilot;
 using MissionPlanner.Comms;
 using MissionPlanner.Controls;
-using MissionPlanner.test;
 using MissionPlanner.Utilities;
 
 namespace MissionPlanner.GCSViews.ConfigurationView
@@ -186,17 +184,6 @@ namespace MissionPlanner.GCSViews.ConfigurationView
                     if (fwitems?.Count == 1)
                     {
                         baseurl = fwitems[0].Url.ToString();
-                    }
-                    else if (fwitems?.Count > 0)
-                    {
-                        FirmwareSelection fws = new FirmwareSelection(fwitems, deviceInfo);
-                        fws.ShowXamarinControl(400, 400);
-                        baseurl = fws.FinalResult;
-                        if (fws.FinalResult == null)
-                        {
-                            // user canceled
-                            return;
-                        }
                     }
                     else
                     {

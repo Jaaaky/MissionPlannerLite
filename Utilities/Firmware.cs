@@ -18,7 +18,6 @@ using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Serialization;
 using MissionPlanner.ArduPilot;
-using MissionPlanner.test;
 
 namespace MissionPlanner.Utilities
 {
@@ -426,14 +425,6 @@ namespace MissionPlanner.Utilities
                             {
                                 board = BoardDetect.boards.pass;
                                 baseurl = fwitems[0].Url.ToString();
-                            }
-                            else if (fwitems?.Count > 0)
-                            {
-                                FirmwareSelection fws = new FirmwareSelection(fwitems, item);
-                                fws.ShowXamarinControl(400, 800);
-                                board = BoardDetect.boards.pass;
-                                baseurl = fws.FinalResult;
-                                break;
                             }
                         }
 

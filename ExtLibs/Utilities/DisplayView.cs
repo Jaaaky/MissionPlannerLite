@@ -21,12 +21,6 @@ namespace MissionPlanner.Utilities
     {
         public DisplayNames displayName { get; set; }
 
-        //MainV2 buttons
-        public Boolean displaySimulation { get; set; }
-        public Boolean displayTerminal { get; set; }
-        public Boolean displayDonate { get; set; }
-        public Boolean displayHelp { get; set; }
-
         //flight Data view
         public Boolean displayAnenometer { get; set; }
         public Boolean displayQuickTab { get; set; }
@@ -98,12 +92,6 @@ namespace MissionPlanner.Utilities
             //also when a new field is added/created this defines the template for missing options
             displayName = DisplayNames.Basic;
             
-
-            //MainV2 buttons
-            displaySimulation = false;
-            displayTerminal = false;
-            displayDonate = false;
-            displayHelp = false;
 
             //flight Data view
             displayAnenometer = true;
@@ -206,11 +194,6 @@ namespace MissionPlanner.Utilities
             return new DisplayView()
             {
                 displayName = DisplayNames.Basic,
-                //MainV2 buttons
-                displaySimulation = false,
-                displayTerminal = false,
-                displayDonate = false,
-                displayHelp = false,
 
                 //flight Data view
                 displayAnenometer = true,
@@ -283,11 +266,6 @@ namespace MissionPlanner.Utilities
             return new DisplayView()
             {
                 displayName = DisplayNames.Advanced,
-                //MainV2 buttons
-                displaySimulation = false,
-                displayTerminal = false,
-                displayDonate = false,
-                displayHelp = false,
 
                 //flight Data view
                 displayAnenometer = true,

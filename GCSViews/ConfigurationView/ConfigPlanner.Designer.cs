@@ -75,7 +75,6 @@
             this.CHK_maprotation = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.CHK_disttohomeflightdata = new System.Windows.Forms.CheckBox();
-            this.BUT_Joystick = new MissionPlanner.Controls.MyButton();
             this.BUT_videostop = new MissionPlanner.Controls.MyButton();
             this.BUT_videostart = new MissionPlanner.Controls.MyButton();
             this.label3 = new System.Windows.Forms.Label();
@@ -99,7 +98,6 @@
             this.CMB_Layout = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.CHK_AutoParamCommit = new System.Windows.Forms.CheckBox();
-            this.chk_shownofly = new System.Windows.Forms.CheckBox();
             this.label6 = new System.Windows.Forms.Label();
             this.CMB_altunits = new System.Windows.Forms.ComboBox();
             this.num_gcsid = new System.Windows.Forms.NumericUpDown();
@@ -498,13 +496,6 @@
             this.CHK_disttohomeflightdata.UseVisualStyleBackColor = true;
             this.CHK_disttohomeflightdata.CheckedChanged += new System.EventHandler(this.CHK_disttohomeflightdata_CheckedChanged);
             // 
-            // BUT_Joystick
-            // 
-            resources.ApplyResources(this.BUT_Joystick, "BUT_Joystick");
-            this.BUT_Joystick.Name = "BUT_Joystick";
-            this.BUT_Joystick.UseVisualStyleBackColor = true;
-            this.BUT_Joystick.Click += new System.EventHandler(this.BUT_Joystick_Click);
-            // 
             // BUT_videostop
             // 
             resources.ApplyResources(this.BUT_videostop, "BUT_videostop");
@@ -666,15 +657,6 @@
             this.CHK_AutoParamCommit.UseVisualStyleBackColor = true;
             this.CHK_AutoParamCommit.CheckedChanged += new System.EventHandler(this.CHK_AutoParamCommit_CheckedChanged);
             // 
-            // chk_shownofly
-            // 
-            resources.ApplyResources(this.chk_shownofly, "chk_shownofly");
-            this.chk_shownofly.Checked = true;
-            this.chk_shownofly.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk_shownofly.Name = "chk_shownofly";
-            this.chk_shownofly.UseVisualStyleBackColor = true;
-            this.chk_shownofly.CheckedChanged += new System.EventHandler(this.chk_shownofly_CheckedChanged);
-            // 
             // label6
             // 
             resources.ApplyResources(this.label6, "label6");
@@ -721,7 +703,6 @@
             this.Controls.Add(this.num_gcsid);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.CMB_altunits);
-            this.Controls.Add(this.chk_shownofly);
             this.Controls.Add(this.CHK_AutoParamCommit);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.CMB_Layout);
@@ -789,7 +770,6 @@
             this.Controls.Add(this.CHK_hudshow);
             this.Controls.Add(this.label92);
             this.Controls.Add(this.CMB_videosources);
-            this.Controls.Add(this.BUT_Joystick);
             this.Controls.Add(this.BUT_videostop);
             this.Controls.Add(this.BUT_videostart);
             this.Name = "ConfigPlanner";
@@ -845,7 +825,6 @@
         private System.Windows.Forms.CheckBox CHK_hudshow;
         private System.Windows.Forms.Label label92;
         private System.Windows.Forms.ComboBox CMB_videosources;
-        private Controls.MyButton BUT_Joystick;
         private Controls.MyButton BUT_videostop;
         private Controls.MyButton BUT_videostart;
         private System.Windows.Forms.Label label1;
@@ -873,7 +852,6 @@
         public System.Windows.Forms.ComboBox CMB_Layout;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.CheckBox CHK_AutoParamCommit;
-        private System.Windows.Forms.CheckBox chk_shownofly;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox CMB_altunits;
         private System.Windows.Forms.NumericUpDown num_gcsid;

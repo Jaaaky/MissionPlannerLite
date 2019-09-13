@@ -24,7 +24,6 @@ using GMap.NET.MapProviders;
 using GMap.NET.WindowsForms;
 using GMap.NET.WindowsForms.Markers;
 using Ionic.Zip;
-//using log4net;
 using MissionPlanner.Controls;
 using MissionPlanner.Maps;
 using MissionPlanner.Properties;
@@ -34,10 +33,8 @@ using ProjNet.CoordinateSystems.Transformations;
 using SharpKml.Base;
 using SharpKml.Dom;
 using Feature = SharpKml.Dom.Feature;
-// using ILog = log4net.ILog;
 using Placemark = SharpKml.Dom.Placemark;
 using Point = System.Drawing.Point;
-using GDAL;
 using GeoAPI.CoordinateSystems;
 using GeoAPI.CoordinateSystems.Transformations;
 using MissionPlanner.ArduPilot;
@@ -5015,44 +5012,7 @@ namespace MissionPlanner.GCSViews
 
                     FlightData.kmlpolygons.Routes.Clear();
                     FlightData.kmlpolygons.Polygons.Clear();
-                    if (file.ToLower().EndsWith("gpkg"))
-                    {
-                        using (var ogr = OGR.Open(file))
-                        {
-                            ogr.NewPoint += pnt =>
-                            {
-                                var mark = new GMarkerGoogle(new PointLatLngAlt(pnt), GMarkerGoogleType.brown_small);
-                                FlightData.kmlpolygons.Markers.Add(mark);
-                                kmlpolygonsoverlay.Markers.Add(mark);
-                            };
-                            ogr.NewLineString += ls =>
-                            {
-                                var route =
-                                    new GMapRoute(ls.Select(a => new PointLatLngAlt(a.y, a.x, a.z).Point()), "")
-                                    {
-                                        IsHitTestVisible = false,
-                                        Stroke = new Pen(Color.Red)
-                                    };
-                                FlightData.kmlpolygons.Routes.Add(route);
-                                kmlpolygonsoverlay.Routes.Add(route);
-                            };
-                            ogr.NewPolygon += ls =>
-                            {
-                                var polygon =
-                                    new GMapPolygon(ls.Select(a => new PointLatLngAlt(a.y, a.x, a.z).Point()).ToList(), "")
-                                    {
-                                        Fill = Brushes.Transparent,
-                                        IsHitTestVisible = false,
-                                        Stroke = new Pen(Color.Red)
-                                    };
-                                FlightData.kmlpolygons.Polygons.Add(polygon);
-                                kmlpolygonsoverlay.Polygons.Add(polygon);
-                            };
-
-                            ogr.Process();
-                        }
-                    }
-                    else if (file.ToLower().EndsWith("dxf"))
+                    if (file.ToLower().EndsWith("dxf"))
                     {
                         string zone = "-99";
                         InputBox.Show("Zone", "Please enter the UTM zone, or cancel to not change", ref zone);

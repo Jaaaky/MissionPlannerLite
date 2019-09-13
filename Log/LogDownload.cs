@@ -86,92 +86,92 @@ namespace MissionPlanner.Log
             }
         }
 
-        private void Log_Load(object sender, EventArgs e)
-        {
-            status = serialstatus.Connecting;
+        // private void Log_Load(object sender, EventArgs e)
+        // {
+        //     status = serialstatus.Connecting;
 
-            comPort = GCSViews.Terminal.comPort;
+        //     comPort = GCSViews.Terminal.comPort;
 
-            try
-            {
-                Console.WriteLine("Log_load " + comPort.IsOpen);
+        //     try
+        //     {
+        //         Console.WriteLine("Log_load " + comPort.IsOpen);
 
-                if (!comPort.IsOpen)
-                    comPort.Open();
+        //         if (!comPort.IsOpen)
+        //             comPort.Open();
 
-                //Console.WriteLine("Log dtr");
+        //         //Console.WriteLine("Log dtr");
 
-                //comPort.toggleDTR();
+        //         //comPort.toggleDTR();
 
-                Console.WriteLine("Log discard");
+        //         Console.WriteLine("Log discard");
 
-                comPort.DiscardInBuffer();
+        //         comPort.DiscardInBuffer();
 
-                Console.WriteLine("Log w&sleep");
+        //         Console.WriteLine("Log w&sleep");
 
-                try
-                {
-                    // try provoke a response
-                    comPort.Write("\n\n?\r\n\n");
-                }
-                catch
-                {
-                }
+        //         try
+        //         {
+        //             // try provoke a response
+        //             comPort.Write("\n\n?\r\n\n");
+        //         }
+        //         catch
+        //         {
+        //         }
 
-                // 10 sec
-                waitandsleep(10000);
-            }
-            catch (Exception ex)
-            {
-              // log.error("Error opening comport", ex);
-                CustomMessageBox.Show("Error opening comport");
-                return;
-            }
+        //         // 10 sec
+        //         waitandsleep(10000);
+        //     }
+        //     catch (Exception ex)
+        //     {
+        //       // log.error("Error opening comport", ex);
+        //         CustomMessageBox.Show("Error opening comport");
+        //         return;
+        //     }
 
-            var t11 = new System.Threading.Thread(delegate()
-            {
-                var start = DateTime.Now;
+        //     var t11 = new System.Threading.Thread(delegate()
+        //     {
+        //         var start = DateTime.Now;
 
-                threadrun = true;
+        //         threadrun = true;
 
-                if (comPort.IsOpen)
-                    readandsleep(100);
+        //         if (comPort.IsOpen)
+        //             readandsleep(100);
 
-                try
-                {
-                    if (comPort.IsOpen)
-                        comPort.Write("\n\n\n\nexit\r\nlogs\r\n"); // more in "connecting"
-                }
-                catch
-                {
-                }
+        //         try
+        //         {
+        //             if (comPort.IsOpen)
+        //                 comPort.Write("\n\n\n\nexit\r\nlogs\r\n"); // more in "connecting"
+        //         }
+        //         catch
+        //         {
+        //         }
 
-                while (threadrun)
-                {
-                    try
-                    {
-                        updateDisplay();
+        //         while (threadrun)
+        //         {
+        //             try
+        //             {
+        //                 updateDisplay();
 
-                        System.Threading.Thread.Sleep(1);
-                        if (!comPort.IsOpen)
-                            break;
-                        while (comPort.BytesToRead >= 4)
-                        {
-                            comPort_DataReceived((object) null, null);
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                      // log.error("crash in comport reader " + ex);
-                    } // cant exit unless told to
-                }
-              // log.info("Comport thread close");
-            }) {Name = "comport reader", IsBackground = true};
-            t11.Start();
+        //                 System.Threading.Thread.Sleep(1);
+        //                 if (!comPort.IsOpen)
+        //                     break;
+        //                 while (comPort.BytesToRead >= 4)
+        //                 {
+        //                     comPort_DataReceived((object) null, null);
+        //                 }
+        //             }
+        //             catch (Exception ex)
+        //             {
+        //               // log.error("crash in comport reader " + ex);
+        //             } // cant exit unless told to
+        //         }
+        //       // log.info("Comport thread close");
+        //     }) {Name = "comport reader", IsBackground = true};
+        //     t11.Start();
 
-            // doesnt seem to work on mac
-            //comPort.DataReceived += new SerialDataReceivedEventHandler(comPort_DataReceived);
-        }
+        //     // doesnt seem to work on mac
+        //     //comPort.DataReceived += new SerialDataReceivedEventHandler(comPort_DataReceived);
+        // }
 
         void genchkcombo(int logcount)
         {

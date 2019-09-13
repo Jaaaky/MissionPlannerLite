@@ -172,10 +172,6 @@
       <Name>Core</Name>
       <Private>true</Private>
     </ProjectReference>
-    <ProjectReference Include="ExtLibs\GDAL\GDAL.NET.csproj">
-      <Project>{766FCF85-4809-44DB-B316-6C4902C65245}</Project>
-      <Name>GDAL.NET</Name>
-    </ProjectReference>
     <ProjectReference Include="ExtLibs\GeoUtility\GeoUtility.csproj">
       <Project>{7F7994CE-823F-4A04-BBEA-D0A3808FF56D}</Project>
       <Name>GeoUtility</Name>
@@ -192,10 +188,6 @@
       <Project>{e06def77-f933-42fb-afd7-db2d0d8d6a98}</Project>
       <Name>GMap.NET.WindowsForms</Name>
     </ProjectReference>
-    <!-- <ProjectReference Include="ExtLibs\HIL\MissionPlanner.HIL.csproj">
-      <Project>{077E19BA-4129-4AAE-8FCD-34D6FAF85B78}</Project>
-      <Name>MissionPlanner.HIL</Name>
-    </ProjectReference> -->
     <ProjectReference Include="ExtLibs\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.csproj">
       <Project>{6D4F97A1-D0A0-44EC-B2A3-F5C954209444}</Project>
       <Name>ICSharpCode.SharpZipLib</Name>
@@ -289,13 +281,10 @@
     <PackageReference Include="DotSpatial.Topology" version="1.9" targetFramework="net462" />
     <PackageReference Include="Flurl" version="2.8.0" targetFramework="net462" />
     <PackageReference Include="Flurl.Http" version="2.3.2" targetFramework="net462" />
-    <PackageReference Include="GDAL" Version="2.4.2" />
     <PackageReference Include="GeoJSON.Net" version="1.1.64" targetFramework="net462" />
     <PackageReference Include="IronPython" version="2.7.8.1" targetFramework="net462" />
     <PackageReference Include="IronPython.StdLib" version="2.7.8.1" targetFramework="net462" />
-    <!-- <PackageReference Include="log4net" version="2.0.8" targetFramework="net462" /> -->
     <PackageReference Include="Microsoft.Win32.Registry" Version="4.5.0" />
-    <PackageReference Include="MP.GDAL.Native" Version="2.2.3" />
     <PackageReference Include="NETStandard.Library">
       <Version>2.0.3</Version>
     </PackageReference>
@@ -317,9 +306,6 @@
     <PackageReference Include="System.Reactive.Core" Version="4.0.0" />
     <PackageReference Include="System.Reactive.Linq" Version="4.0.0" />
     <PackageReference Include="Unofficial.ObjectListView" version="2.6.0" targetFramework="net40" />
-    <PackageReference Include="Xamarin.Forms.Platform.WinForms">
-      <Version>3.4.0-alpha</Version>
-    </PackageReference>
     <PackageReference Include="zlib.net" version="1.0.4.0" targetFramework="net40" />
   </ItemGroup>
   <ItemGroup>
@@ -385,9 +371,6 @@
     <Compile Include="GCSViews\ConfigurationView\ConfigUserDefined.Designer.cs">
       <DependentUpon>ConfigUserDefined.cs</DependentUpon>
     </Compile>
-    <Compile Include="Joystick\JoystickAxis.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Include="MainV2.Designer.cs">
       <DependentUpon>MainV2.cs</DependentUpon>
     </Compile>
@@ -402,14 +385,8 @@
     <Compile Include="temp.Designer.cs">
       <DependentUpon>temp.cs</DependentUpon>
     </Compile>
-    <Compile Include="test\FirmwareSelection.xaml.cs">
-      <DependentUpon>FirmwareSelection.xaml</DependentUpon>
-    </Compile>
-    <!-- <Compile Include="Utilities\AltitudeAngel\MissionPlannerStateAdapter.cs" /> -->
     <Compile Include="Utilities\GimbalPoint.cs" />
     <Compile Include="Utilities\NativeLibrary.cs" />
-    <!-- <Compile Include="Utilities\Speech.cs" /> -->
-    <Compile Include="Utilities\SSHTerminal.cs" />
     <Compile Include="Utilities\Fence.cs" />
     <Compile Include="Utilities\XTermRBGColors.cs" />
     <Compile Include="Controls\GenOTP.cs">
@@ -505,9 +482,6 @@
     <Compile Include="Controls\Loading.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Controls\LogAnalyzer.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Log\LogStrings.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -541,7 +515,6 @@
     <EmbeddedResource Include="GCSViews\ConfigurationView\ConfigUserDefined.resx">
       <DependentUpon>ConfigUserDefined.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Joystick\JoystickAxis.resx" />
     <EmbeddedResource Include="Log\LogStrings.resx">
       <DependentUpon>LogStrings.cs</DependentUpon>
     </EmbeddedResource>
@@ -568,9 +541,6 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\ServoOptions.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="GCSViews\SITL.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\ThemeColors.cs">
@@ -603,16 +573,10 @@
     <Compile Include="GCSViews\FlightPlanner.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="GCSViews\Help.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Include="GCSViews\InitialSetup.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="GCSViews\SoftwareConfig.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="GCSViews\Terminal.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="GCSViews\ConfigurationView\ConfigAccelerometerCalibration.cs">
@@ -751,30 +715,6 @@
     <Compile Include="Grid\GridUI.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Joystick\JoystickSetup.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Joystick\Joy_Button_axis.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Joystick\Joy_ChangeMode.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Joystick\Joy_Do_Repeat_Relay.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Joystick\Joy_Do_Repeat_Servo.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Joystick\Joy_Do_Set_Relay.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Joystick\Joy_Do_Set_Servo.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Joystick\Joy_Mount_Mode.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Log\LogBrowse.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -784,9 +724,6 @@
     <Compile Include="Log\LogDownloadMavLink.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Log\LogDownloadscp.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Log\LogIndex.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -794,7 +731,6 @@
     <Compile Include="Log\MavlinkLog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="NoFly\NoFly.cs" />
     <Compile Include="Plugin\Plugin.cs" />
     <Compile Include="Plugin\PluginLoader.cs" />
     <Compile Include="Plugin\PluginUI.cs">
@@ -843,9 +779,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Utilities\Firmware.cs" />
-    <Compile Include="Utilities\httpserver.cs" />
     <Compile Include="Utilities\LangUtility.cs" />
-    <Compile Include="Utilities\LogAnalyzer.cs" />
     <Compile Include="Utilities\OpticalFlow.cs" />
     <Compile Include="Utilities\ParamFile.cs" />
     <Compile Include="Utilities\POI.cs" />
@@ -854,7 +788,6 @@
     <Compile Include="Utilities\ThemeManager.cs" />
     <Compile Include="Utilities\Tracking.cs" />
     <Compile Include="Utilities\GStreamerUI.cs" />
-    <Compile Include="Utilities\Update.cs" />
     <Compile Include="Utilities\Win32DeviceMgnt.cs" />
     <!-- <Compile Include="Utilities\AltitudeAngel\AASettings.cs">
       <SubType>Form</SubType>
@@ -936,17 +869,11 @@
     <Compile Include="Controls\Loading.Designer.cs">
       <DependentUpon>Loading.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\LogAnalyzer.Designer.cs">
-      <DependentUpon>LogAnalyzer.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\ModifyandSet.Designer.cs">
       <DependentUpon>ModifyandSet.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\ServoOptions.Designer.cs">
       <DependentUpon>ServoOptions.cs</DependentUpon>
-    </Compile>
-    <Compile Include="GCSViews\SITL.Designer.cs">
-      <DependentUpon>SITL.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\ThemeColors.Designer.cs">
       <DependentUpon>ThemeColors.cs</DependentUpon>
@@ -969,17 +896,11 @@
     <Compile Include="GCSViews\FlightPlanner.Designer.cs">
       <DependentUpon>FlightPlanner.cs</DependentUpon>
     </Compile>
-    <Compile Include="GCSViews\Help.Designer.cs">
-      <DependentUpon>Help.cs</DependentUpon>
-    </Compile>
     <Compile Include="GCSViews\InitialSetup.Designer.cs">
       <DependentUpon>InitialSetup.cs</DependentUpon>
     </Compile>
     <Compile Include="GCSViews\SoftwareConfig.Designer.cs">
       <DependentUpon>SoftwareConfig.cs</DependentUpon>
-    </Compile>
-    <Compile Include="GCSViews\Terminal.Designer.cs">
-      <DependentUpon>Terminal.cs</DependentUpon>
     </Compile>
     <Compile Include="GCSViews\ConfigurationView\ConfigAccelerometerCalibration.Designer.cs">
       <DependentUpon>ConfigAccelerometerCalibration.cs</DependentUpon>
@@ -1110,30 +1031,6 @@
     <Compile Include="Grid\GridUI.Designer.cs">
       <DependentUpon>GridUI.cs</DependentUpon>
     </Compile>
-    <Compile Include="Joystick\JoystickSetup.Designer.cs">
-      <DependentUpon>JoystickSetup.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Joystick\Joy_Button_axis.Designer.cs">
-      <DependentUpon>Joy_Button_axis.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Joystick\Joy_ChangeMode.Designer.cs">
-      <DependentUpon>Joy_ChangeMode.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Joystick\Joy_Do_Repeat_Relay.Designer.cs">
-      <DependentUpon>Joy_Do_Repeat_Relay.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Joystick\Joy_Do_Repeat_Servo.Designer.cs">
-      <DependentUpon>Joy_Do_Repeat_Servo.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Joystick\Joy_Do_Set_Relay.Designer.cs">
-      <DependentUpon>Joy_Do_Set_Relay.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Joystick\Joy_Do_Set_Servo.Designer.cs">
-      <DependentUpon>Joy_Do_Set_Servo.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Joystick\Joy_Mount_Mode.Designer.cs">
-      <DependentUpon>Joy_Mount_Mode.cs</DependentUpon>
-    </Compile>
     <Compile Include="Log\LogBrowse.Designer.cs">
       <DependentUpon>LogBrowse.cs</DependentUpon>
     </Compile>
@@ -1142,9 +1039,6 @@
     </Compile>
     <Compile Include="Log\LogDownloadMavLink.Designer.cs">
       <DependentUpon>LogDownloadMavLink.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Log\LogDownloadscp.Designer.cs">
-      <DependentUpon>LogDownloadscp.cs</DependentUpon>
     </Compile>
     <Compile Include="Log\LogIndex.Designer.cs">
       <DependentUpon>LogIndex.cs</DependentUpon>
@@ -1277,9 +1171,6 @@
     <EmbeddedResource Include="Controls\Loading.resx">
       <DependentUpon>Loading.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\LogAnalyzer.resx">
-      <DependentUpon>LogAnalyzer.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Controls\MavlinkCheckBoxBitMask.resx">
       <DependentUpon>MavlinkCheckBoxBitMask.cs</DependentUpon>
     </EmbeddedResource>
@@ -1291,9 +1182,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\ServoOptions.resx">
       <DependentUpon>ServoOptions.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GCSViews\SITL.resx">
-      <DependentUpon>SITL.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\ThemeColors.resx">
       <DependentUpon>ThemeColors.cs</DependentUpon>
@@ -1316,17 +1204,11 @@
     <EmbeddedResource Include="GCSViews\FlightPlanner.resx">
       <DependentUpon>FlightPlanner.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GCSViews\Help.resx">
-      <DependentUpon>Help.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="GCSViews\InitialSetup.resx">
       <DependentUpon>InitialSetup.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GCSViews\SoftwareConfig.resx">
       <DependentUpon>SoftwareConfig.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GCSViews\Terminal.resx">
-      <DependentUpon>Terminal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GCSViews\ConfigurationView\ConfigAccelerometerCalibration.resx">
       <DependentUpon>ConfigAccelerometerCalibration.cs</DependentUpon>
@@ -1454,30 +1336,6 @@
     <EmbeddedResource Include="Grid\GridUI.resx">
       <DependentUpon>GridUI.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Joystick\JoystickSetup.resx">
-      <DependentUpon>JoystickSetup.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Joystick\Joy_Button_axis.resx">
-      <DependentUpon>Joy_Button_axis.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Joystick\Joy_ChangeMode.resx">
-      <DependentUpon>Joy_ChangeMode.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Joystick\Joy_Do_Repeat_Relay.resx">
-      <DependentUpon>Joy_Do_Repeat_Relay.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Joystick\Joy_Do_Repeat_Servo.resx">
-      <DependentUpon>Joy_Do_Repeat_Servo.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Joystick\Joy_Do_Set_Relay.resx">
-      <DependentUpon>Joy_Do_Set_Relay.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Joystick\Joy_Do_Set_Servo.resx">
-      <DependentUpon>Joy_Do_Set_Servo.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Joystick\Joy_Mount_Mode.resx">
-      <DependentUpon>Joy_Mount_Mode.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Log\LogBrowse.resx">
       <DependentUpon>LogBrowse.cs</DependentUpon>
     </EmbeddedResource>
@@ -1486,9 +1344,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Log\LogDownloadMavLink.resx">
       <DependentUpon>LogDownloadMavLink.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Log\LogDownloadscp.resx">
-      <DependentUpon>LogDownloadscp.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Log\LogIndex.resx">
       <DependentUpon>LogIndex.cs</DependentUpon>
@@ -1781,18 +1636,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="MissionPlanner_TemporaryKey.pfx" />
-    <None Include="NoFly\Areas-Lisboa.kmz">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="NoFly\Drone No Fly Zones.kmz">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="NoFly\Regulamento-RPA-ver-5.0.kmz">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="NoFly\SouthAfricaNoRPASOutlined.kmz">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Include="ph2_serial.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -1885,11 +1728,6 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="test\FirmwareSelection.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

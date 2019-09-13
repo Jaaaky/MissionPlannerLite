@@ -15,15 +15,12 @@ using DirectShowLib;
 using GMap.NET;
 using GMap.NET.WindowsForms;
 using GMap.NET.WindowsForms.Markers;
-//using log4net;
 using MissionPlanner.ArduPilot;
 using MissionPlanner.Controls;
-using MissionPlanner.Joystick;
 using MissionPlanner.Log;
 using MissionPlanner.Utilities;
 using MissionPlanner.Warnings;
 using ZedGraph;
-using LogAnalyzer = MissionPlanner.Utilities.LogAnalyzer;
 using MissionPlanner.Maps;
 
 // written by michael oborne
@@ -338,18 +335,6 @@ namespace MissionPlanner.GCSViews
             base.OnInvalidated(e);
             updateBindingSourceWork();
         }
-
-        void NoFly_NoFlyEvent(object sender, NoFly.NoFly.NoFlyEventArgs e)
-        {
-            Invoke((Action) delegate
-            {
-                foreach (var poly in e.NoFlyZones.Polygons)
-                {
-                    kmlpolygons.Polygons.Add(poly);
-                }
-            });
-        }
-
         void mymap_Paint(object sender, PaintEventArgs e)
         {
             distanceBar1.DoPaintRemote(e);
@@ -650,11 +635,6 @@ namespace MissionPlanner.GCSViews
         private void FlightData_Load(object sender, EventArgs e)
         {
             POI.POIModified += POI_POIModified;
-
-            tfr.GotTFRs += tfr_GotTFRs;
-
-            if (!Settings.Instance.ContainsKey("ShowNoFly") || Settings.Instance.GetBoolean("ShowNoFly"))
-                NoFly.NoFly.NoFlyEvent += NoFly_NoFlyEvent;
 
             TRK_zoom.Minimum = gMapControl1.MapProvider.MinZoom;
             TRK_zoom.Maximum = 24;
@@ -1094,13 +1074,6 @@ namespace MissionPlanner.GCSViews
                     // update map
                     if (tracklast.AddSeconds(Settings.Instance.GetDouble("FD_MapUpdateDelay", 1.2)) < DateTime.Now)
                     {
-                        // show disable joystick button
-                        if (MainV2.joystick != null && MainV2.joystick.enabled)
-                        {
-                            this.Invoke((MethodInvoker) delegate {
-                                but_disablejoystick.Visible = true;
-                            });
-                        }
 
                         adsb.CurrentPosition = MainV2.comPort.MAV.cs.HomeLocation;
 
@@ -2582,13 +2555,6 @@ namespace MissionPlanner.GCSViews
             frm.Show();
         }
 
-        private void BUT_joystick_Click(object sender, EventArgs e)
-        {
-            Form joy = new JoystickSetup();
-            ThemeManager.ApplyThemeTo(joy);
-            joy.Show();
-        }
-
         private void CMB_modes_Click(object sender, EventArgs e)
         {
             CMB_modes.DataSource = Common.getModesList(MainV2.comPort.MAV.cs.firmware);
@@ -3959,74 +3925,6 @@ namespace MissionPlanner.GCSViews
         {
         }
 
-        private void BUT_loganalysis_Click(object sender, EventArgs e)
-        {
-            using (OpenFileDialog ofd = new OpenFileDialog())
-            {
-                ofd.Filter = "*.log;*.bin|*.log;*.bin;*.BIN;*.LOG";
-                ofd.ShowDialog();
-
-                if (ofd.FileName != "")
-                {
-                    string newlogfile = null;
-
-                    if (ofd.FileName.ToLower().EndsWith(".bin"))
-                    {
-                        newlogfile = Path.GetTempFileName() + ".log";
-
-                        try
-                        {
-                            BinaryLog.ConvertBin(ofd.FileName, newlogfile);
-                        }
-                        catch (IOException ex)
-                        {
-                            CustomMessageBox.Show("File access issue: " + ex.Message, Strings.ERROR);
-                            return;
-                        }
-
-                        ofd.FileName = newlogfile;
-                    }
-
-                    string xmlfile = LogAnalyzer.CheckLogFile(ofd.FileName);
-
-                    GC.Collect();
-
-                    if (File.Exists(xmlfile))
-                    {
-                        try
-                        {
-                            var out1 = LogAnalyzer.Results(xmlfile);
-
-                            Controls.LogAnalyzer frm = new Controls.LogAnalyzer(out1);
-
-                            ThemeManager.ApplyThemeTo(frm);
-
-                            frm.Show();
-                        }
-                        catch (Exception ex)
-                        {
-                            CustomMessageBox.Show("Failed to load analyzer results\n"+ex.ToString());
-                        }
-                    }
-                    else
-                    {
-                        CustomMessageBox.Show("Bad input file");
-                    }
-
-                    if (!String.IsNullOrEmpty(newlogfile))
-                    {
-                        try
-                        {
-                            File.Delete(newlogfile);
-                        }
-                        catch
-                        {
-                        }
-                    }
-                }
-            }
-        }
-
         private void FlightData_FormClosing(object sender, FormClosingEventArgs e)
         {
             threadrun = false;
@@ -4292,18 +4190,6 @@ namespace MissionPlanner.GCSViews
                     else
                         poly.IsVisible = false;
                 }
-            }
-        }
-
-        private void but_disablejoystick_Click(object sender, EventArgs e)
-        {
-            if (MainV2.joystick != null && MainV2.joystick.enabled)
-            {
-                MainV2.joystick.enabled = false;
-
-                MainV2.joystick.clearRCOverride();
-
-                but_disablejoystick.Visible = false;
             }
         }
 

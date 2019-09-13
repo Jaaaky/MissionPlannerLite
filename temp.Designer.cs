@@ -98,9 +98,7 @@
             this.controlSensorsStatus1 = new MissionPlanner.Controls.ControlSensorsStatus();
             this.but_followswarm = new MissionPlanner.Controls.MyButton();
             this.myButton3 = new MissionPlanner.Controls.MyButton();
-            this.but_GDAL = new MissionPlanner.Controls.MyButton();
             this.but_sortlogs = new MissionPlanner.Controls.MyButton();
-            this.but_logdlscp = new MissionPlanner.Controls.MyButton();
             this.but_td = new MissionPlanner.Controls.MyButton();
             this.but_dem = new MissionPlanner.Controls.MyButton();
             this.but_proximity = new MissionPlanner.Controls.MyButton();
@@ -596,27 +594,12 @@
             this.myButton3.UseVisualStyleBackColor = true;
             this.myButton3.Click += new System.EventHandler(this.myButton3_Click);
             // 
-            // but_GDAL
-            // 
-            resources.ApplyResources(this.but_GDAL, "but_GDAL");
-            this.but_GDAL.Name = "but_GDAL";
-            this.but_GDAL.UseVisualStyleBackColor = true;
-            this.but_GDAL.Click += new System.EventHandler(this.but_GDAL_Click);
-            // 
             // but_sortlogs
             // 
             resources.ApplyResources(this.but_sortlogs, "but_sortlogs");
             this.but_sortlogs.Name = "but_sortlogs";
             this.but_sortlogs.UseVisualStyleBackColor = true;
             this.but_sortlogs.Click += new System.EventHandler(this.but_sortlogs_Click);
-            // 
-            // but_logdlscp
-            // 
-            resources.ApplyResources(this.but_logdlscp, "but_logdlscp");
-            this.but_logdlscp.Name = "but_logdlscp";
-            this.but_logdlscp.UseVisualStyleBackColor = true;
-            this.but_logdlscp.Click += new System.EventHandler(this.but_logdlscp_Click);
-            // 
             // but_td
             // 
             resources.ApplyResources(this.but_td, "but_td");
@@ -724,9 +707,7 @@
             this.Controls.Add(this.but_proximity);
             this.Controls.Add(this.but_dem);
             this.Controls.Add(this.but_td);
-            this.Controls.Add(this.but_logdlscp);
             this.Controls.Add(this.but_sortlogs);
-            this.Controls.Add(this.but_GDAL);
             this.Controls.Add(this.myButton3);
             this.Controls.Add(this.but_followswarm);
             this.Controls.Add(this.but_gpsinj);
@@ -822,9 +803,7 @@
         private Controls.MyButton but_gpsinj;
         private Controls.MyButton but_followswarm;
         private Controls.MyButton myButton3;
-        private Controls.MyButton but_GDAL;
         private Controls.MyButton but_sortlogs;
-        private Controls.MyButton but_logdlscp;
         private Controls.MyButton but_td;
         private Controls.MyButton but_dem;
         private Controls.MyButton but_proximity;

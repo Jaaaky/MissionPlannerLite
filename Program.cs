@@ -203,25 +203,8 @@ namespace MissionPlanner
             GMap.NET.MapProviders.GMapProviders.List.Add(Maps.Earthbuilder.Instance);
             GMap.NET.MapProviders.GMapProviders.List.Add(Maps.Statkart_Topo2.Instance);
             GMap.NET.MapProviders.GMapProviders.List.Add(Maps.Eniro_Topo.Instance);
-            //GMap.NET.MapProviders.GMapProviders.List.Add(Maps.MapBox.Instance);
-            //GMap.NET.MapProviders.GMapProviders.List.Add(Maps.MapboxNoFly.Instance);
-            //GMap.NET.MapProviders.GMapProviders.List.Add(Maps.Japan.Instance);
-            //GMap.NET.MapProviders.GMapProviders.List.Add(Maps.Japan_Lake.Instance);
-            //GMap.NET.MapProviders.GMapProviders.List.Add(Maps.Japan_1974.Instance);
-            //GMap.NET.MapProviders.GMapProviders.List.Add(Maps.Japan_1979.Instance);
-            //GMap.NET.MapProviders.GMapProviders.List.Add(Maps.Japan_1984.Instance);
-            //GMap.NET.MapProviders.GMapProviders.List.Add(Maps.Japan_1988.Instance);
-            //GMap.NET.MapProviders.GMapProviders.List.Add(Maps.Japan_Relief.Instance);
-            //GMap.NET.MapProviders.GMapProviders.List.Add(Maps.Japan_Slopezone.Instance);
-            //GMap.NET.MapProviders.GMapProviders.List.Add(Maps.Japan_Sea.Instance);
-
-            //BingHybridMapProvider.APIKey = "AIzaSyA5nFp39fEHruCezXnG3r8rGyZtuAkmCug";
 
             Settings.Instance.UserAgent = Application.ProductName + " " + Application.ProductVersion + " (" + Environment.OSVersion.VersionString + ")";
-
-            // optionally add gdal support
-            if (Directory.Exists(Application.StartupPath + Path.DirectorySeparatorChar + "gdal"))
-                GMap.NET.MapProviders.GMapProviders.List.Add(GDAL.GDALProvider.Instance);
 
             // add proxy settings
             GMap.NET.MapProviders.GMapProvider.WebProxy = WebRequest.GetSystemWebProxy();
@@ -310,15 +293,6 @@ namespace MissionPlanner
                 Console.ReadLine();
             }
 
-            try
-            {
-                // kill sim background process if its still running
-                if (GCSViews.SITL.simulator != null)
-                    GCSViews.SITL.simulator.Kill();
-            }
-            catch
-            {
-            }
         }
 
         private static string SerialPort_GetDeviceName(string port)

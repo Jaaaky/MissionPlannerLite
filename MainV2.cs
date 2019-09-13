@@ -88,10 +88,6 @@ namespace MissionPlanner
             public abstract Image fp { get; }
             public abstract Image initsetup { get; }
             public abstract Image config_tuning { get; }
-            public abstract Image sim { get; }
-            public abstract Image terminal { get; }
-            public abstract Image help { get; }
-            public abstract Image donate { get; }
             public abstract Image connect { get; }
             public abstract Image disconnect { get; }
             public abstract Image bg { get; }
@@ -118,26 +114,6 @@ namespace MissionPlanner
             public override Image config_tuning
             {
                 get { return global::MissionPlanner.Properties.Resources.light_tuningconfig_icon; }
-            }
-
-            public override Image sim
-            {
-                get { return global::MissionPlanner.Properties.Resources.light_simulation_icon; }
-            }
-
-            public override Image terminal
-            {
-                get { return global::MissionPlanner.Properties.Resources.light_terminal_icon; }
-            }
-
-            public override Image help
-            {
-                get { return global::MissionPlanner.Properties.Resources.light_help_icon; }
-            }
-
-            public override Image donate
-            {
-                get { return global::MissionPlanner.Properties.Resources.donate; }
             }
 
             public override Image connect
@@ -180,26 +156,6 @@ namespace MissionPlanner
             public override Image config_tuning
             {
                 get { return global::MissionPlanner.Properties.Resources.dark_tuningconfig_icon; }
-            }
-
-            public override Image sim
-            {
-                get { return global::MissionPlanner.Properties.Resources.dark_simulation_icon; }
-            }
-
-            public override Image terminal
-            {
-                get { return global::MissionPlanner.Properties.Resources.dark_terminal_icon; }
-            }
-
-            public override Image help
-            {
-                get { return global::MissionPlanner.Properties.Resources.dark_help_icon; }
-            }
-
-            public override Image donate
-            {
-                get { return global::MissionPlanner.Properties.Resources.donate; }
             }
 
             public override Image connect
@@ -333,33 +289,6 @@ namespace MissionPlanner
             }
         }
 
-        /// <summary>
-        /// spech engine static class
-        /// </summary>
-        // public static ISpeech speechEngine { get; set; }
-
-        /// <summary>
-        /// joystick static class
-        /// </summary>
-        public static Joystick.Joystick joystick { get; set; }
-
-        /// <summary>
-        /// track last joystick packet sent. used to control rate
-        /// </summary>
-        DateTime lastjoystick = DateTime.Now;
-
-        /// <summary>
-        /// determine if we are running sitl
-        /// </summary>
-        public static bool sitl
-        {
-            get
-            {
-                if (MissionPlanner.GCSViews.SITL.SITLSEND == null) return false;
-                if (MissionPlanner.GCSViews.SITL.SITLSEND.Client.Connected) return true;
-                return false;
-            }
-        }
 
         /// <summary>
         /// hud background image grabber from a video stream - not realy that efficent. ie no hardware overlays etc.
@@ -371,11 +300,6 @@ namespace MissionPlanner
         bool serialThread = false;
 
         bool pluginthreadrun = false;
-
-        bool joystickthreadrun = false;
-
-        // Thread httpthread;
-        // Thread joystickthread;
         Thread serialreaderthread;
         Thread pluginthread;
 
@@ -410,7 +334,6 @@ namespace MissionPlanner
         public GCSViews.FlightData FlightData;
 
         public GCSViews.FlightPlanner FlightPlanner;
-        GCSViews.SITL Simulation;
 
         private Form connectionStatsForm;
         private ConnectionStats _connectionStats;
@@ -426,10 +349,6 @@ namespace MissionPlanner
 
         public void updateLayout(object sender, EventArgs e)
         {
-            MenuSimulation.Visible = DisplayConfiguration.displaySimulation;
-            MenuTerminal.Visible = DisplayConfiguration.displayTerminal;
-            MenuHelp.Visible = DisplayConfiguration.displayHelp;
-            MenuDonate.Visible = DisplayConfiguration.displayDonate;
             MissionPlanner.Controls.BackstageView.BackstageView.Advanced = DisplayConfiguration.isAdvancedMode;
 
             if (Settings.Instance.GetBoolean("menu_autohide") != DisplayConfiguration.autoHideMenuForce)
@@ -784,14 +703,11 @@ namespace MissionPlanner
               // log.info("Create FP");
                 FlightPlanner = new GCSViews.FlightPlanner();
                 //Configuration = new GCSViews.ConfigurationView.Setup();
-              // log.info("Create SIM");
-                Simulation = new GCSViews.SITL();
                 //Firmware = new GCSViews.Firmware();
                 //Terminal = new GCSViews.Terminal();
 
                 FlightData.Width = MyView.Width;
                 FlightPlanner.Width = MyView.Width;
-                Simulation.Width = MyView.Width;
             }
             catch (ArgumentException e)
             {
@@ -982,25 +898,13 @@ namespace MissionPlanner
 
             if (Program.Logo != null && Program.name == "VVVVZ")
             {
-                MenuDonate.Click -= this.toolStripMenuItem1_Click;
-                MenuDonate.Text = "";
-                MenuDonate.Image = Program.Logo;
-
-                MenuDonate.Click += MenuCustom_Click;
-
                 MenuFlightData.Visible = false;
                 MenuFlightPlanner.Visible = true;
                 MenuConfigTune.Visible = false;
-                MenuHelp.Visible = false;
                 MenuInitConfig.Visible = false;
-                MenuSimulation.Visible = false;
-                MenuTerminal.Visible = false;
             }
             else if (Program.Logo != null && Program.names.Contains(Program.name))
             {
-                MenuDonate.Click -= this.toolStripMenuItem1_Click;
-                MenuDonate.Text = "";
-                MenuDonate.Image = Program.Logo;
             }
 
 
@@ -1110,23 +1014,15 @@ namespace MissionPlanner
             MenuFlightData.Image = displayicons.fd;
             MenuFlightPlanner.Image = displayicons.fp;
             MenuInitConfig.Image = displayicons.initsetup;
-            MenuSimulation.Image = displayicons.sim;
             MenuConfigTune.Image = displayicons.config_tuning;
-            MenuTerminal.Image = displayicons.terminal;
             MenuConnect.Image = displayicons.connect;
-            MenuHelp.Image = displayicons.help;
-            MenuDonate.Image = displayicons.donate;
 
 
             MenuFlightData.ForeColor = ThemeManager.TextColor;
             MenuFlightPlanner.ForeColor = ThemeManager.TextColor;
             MenuInitConfig.ForeColor = ThemeManager.TextColor;
-            MenuSimulation.ForeColor = ThemeManager.TextColor;
             MenuConfigTune.ForeColor = ThemeManager.TextColor;
-            MenuTerminal.ForeColor = ThemeManager.TextColor;
             MenuConnect.ForeColor = ThemeManager.TextColor;
-            MenuHelp.ForeColor = ThemeManager.TextColor;
-            MenuDonate.ForeColor = ThemeManager.TextColor;
         }
 
         void MenuCustom_Click(object sender, EventArgs e)
@@ -1136,10 +1032,7 @@ namespace MissionPlanner
                 MenuFlightData.Visible = true;
                 MenuFlightPlanner.Visible = true;
                 MenuConfigTune.Visible = true;
-                MenuHelp.Visible = true;
                 MenuInitConfig.Visible = true;
-                MenuSimulation.Visible = true;
-                MenuTerminal.Visible = true;
             }
             else
             {
@@ -1160,10 +1053,7 @@ namespace MissionPlanner
                     MenuFlightData.Visible = true;
                     MenuFlightPlanner.Visible = true;
                     MenuConfigTune.Visible = true;
-                    MenuHelp.Visible = true;
                     MenuInitConfig.Visible = true;
-                    MenuSimulation.Visible = true;
-                    MenuTerminal.Visible = true;
                 }
             }
         }
@@ -1321,11 +1211,6 @@ namespace MissionPlanner
             }
         }
 
-        private void MenuSimulation_Click(object sender, EventArgs e)
-        {
-            MyView.ShowScreen("Simulation");
-        }
-
         private void MenuTuning_Click(object sender, EventArgs e)
         {
             if (Settings.Instance.GetBoolean("password_protect") == false)
@@ -1351,11 +1236,6 @@ namespace MissionPlanner
                     MyView.ShowScreen("SWConfig");
                 }
             }
-        }
-
-        private void MenuTerminal_Click(object sender, EventArgs e)
-        {
-            MyView.ShowScreen("Terminal");
         }
 
         public void doDisconnect(MAVLinkInterface comPort)
@@ -2009,18 +1889,6 @@ namespace MissionPlanner
             if (serialreaderthread != null)
                 serialreaderthread.Join();
 
-          // log.info("closing joystickthread");
-
-            joystickthreadrun = false;
-
-            // if (joystickthread != null)
-            //     joystickthread.Join();
-
-          // log.info("closing httpthread");
-
-            // if we are waiting on a socket we need to force an abort
-            httpserver.Stop();
-
           // log.info("sorting tlogs");
             try
             {
@@ -2061,14 +1929,7 @@ namespace MissionPlanner
             catch
             {
             }
-          // log.info("closing sim");
-            try
-            {
-                Simulation.Dispose();
-            }
-            catch
-            {
-            }
+
 
             try
             {
@@ -2082,8 +1943,6 @@ namespace MissionPlanner
             // save config
             SaveConfig();
 
-            // Console.WriteLine(httpthread?.IsAlive);
-            // Console.WriteLine(joystickthread?.IsAlive);
             Console.WriteLine(serialreaderthread?.IsAlive);
             Console.WriteLine(pluginthread?.IsAlive);
 
@@ -2105,13 +1964,6 @@ namespace MissionPlanner
 
             Console.WriteLine("MainV2_FormClosed");
 
-            if (joystick != null)
-            {
-                while (!joysendThreadExited)
-                    Thread.Sleep(10);
-
-                joystick.Dispose(); //proper clean up of joystick.
-            }
         }
 
         private void LoadConfig()
@@ -2148,165 +2000,6 @@ namespace MissionPlanner
             {
                 CustomMessageBox.Show(ex.ToString());
             }
-        }
-
-        /// <summary>
-        /// needs to be true by default so that exits properly if no joystick used.
-        /// </summary>
-        volatile private bool joysendThreadExited = true;
-
-        /// <summary>
-        /// thread used to send joystick packets to the MAV
-        /// </summary>
-        private void joysticksend()
-        {
-            float rate = 50; // 1000 / 50 = 20 hz
-            int count = 0;
-
-            DateTime lastratechange = DateTime.Now;
-
-            joystickthreadrun = false;
-
-            while (joystickthreadrun)
-            {
-                joysendThreadExited = false;
-                //so we know this thread is stil alive.           
-                try
-                {
-                    if (MONO)
-                    {
-                      // log.error("Mono: closing joystick thread");
-                        break;
-                    }
-
-                    if (!MONO)
-                    {
-                      // log.error("!Mono: closing joystick thread");
-                        break;
-                        // //joystick stuff
-
-                        // if (joystick != null && joystick.enabled)
-                        // {
-                        //     if (!joystick.manual_control)
-                        //     {
-                        //         MAVLink.mavlink_rc_channels_override_t rc = new MAVLink.mavlink_rc_channels_override_t();
-
-                        //         rc.target_component = comPort.MAV.compid;
-                        //         rc.target_system = comPort.MAV.sysid;
-
-                        //         if (joystick.getJoystickAxis(1) != Joystick.Joystick.joystickaxis.None) rc.chan1_raw = (ushort)MainV2.comPort.MAV.cs.rcoverridech1;
-                        //         if (joystick.getJoystickAxis(2) != Joystick.Joystick.joystickaxis.None) rc.chan2_raw = (ushort)MainV2.comPort.MAV.cs.rcoverridech2;
-                        //         if (joystick.getJoystickAxis(3) != Joystick.Joystick.joystickaxis.None) rc.chan3_raw = (ushort)MainV2.comPort.MAV.cs.rcoverridech3;
-                        //         if (joystick.getJoystickAxis(4) != Joystick.Joystick.joystickaxis.None) rc.chan4_raw = (ushort)MainV2.comPort.MAV.cs.rcoverridech4;
-                        //         if (joystick.getJoystickAxis(5) != Joystick.Joystick.joystickaxis.None) rc.chan5_raw = (ushort)MainV2.comPort.MAV.cs.rcoverridech5;
-                        //         if (joystick.getJoystickAxis(6) != Joystick.Joystick.joystickaxis.None) rc.chan6_raw = (ushort)MainV2.comPort.MAV.cs.rcoverridech6;
-                        //         if (joystick.getJoystickAxis(7) != Joystick.Joystick.joystickaxis.None) rc.chan7_raw = (ushort)MainV2.comPort.MAV.cs.rcoverridech7;
-                        //         if (joystick.getJoystickAxis(8) != Joystick.Joystick.joystickaxis.None) rc.chan8_raw = (ushort)MainV2.comPort.MAV.cs.rcoverridech8;
-                        //         if (joystick.getJoystickAxis(9) != Joystick.Joystick.joystickaxis.None) rc.chan9_raw = (ushort)MainV2.comPort.MAV.cs.rcoverridech9;
-                        //         if (joystick.getJoystickAxis(10) != Joystick.Joystick.joystickaxis.None) rc.chan10_raw = (ushort)MainV2.comPort.MAV.cs.rcoverridech10;
-                        //         if (joystick.getJoystickAxis(11) != Joystick.Joystick.joystickaxis.None) rc.chan11_raw = (ushort)MainV2.comPort.MAV.cs.rcoverridech11;
-                        //         if (joystick.getJoystickAxis(12) != Joystick.Joystick.joystickaxis.None) rc.chan12_raw = (ushort)MainV2.comPort.MAV.cs.rcoverridech12;
-                        //         if (joystick.getJoystickAxis(13) != Joystick.Joystick.joystickaxis.None) rc.chan13_raw = (ushort)MainV2.comPort.MAV.cs.rcoverridech13;
-                        //         if (joystick.getJoystickAxis(14) != Joystick.Joystick.joystickaxis.None) rc.chan14_raw = (ushort)MainV2.comPort.MAV.cs.rcoverridech14;
-                        //         if (joystick.getJoystickAxis(15) != Joystick.Joystick.joystickaxis.None) rc.chan15_raw = (ushort)MainV2.comPort.MAV.cs.rcoverridech15;
-                        //         if (joystick.getJoystickAxis(16) != Joystick.Joystick.joystickaxis.None) rc.chan16_raw = (ushort)MainV2.comPort.MAV.cs.rcoverridech16;
-                        //         if (joystick.getJoystickAxis(17) != Joystick.Joystick.joystickaxis.None) rc.chan17_raw = (ushort)MainV2.comPort.MAV.cs.rcoverridech17;
-                        //         if (joystick.getJoystickAxis(18) != Joystick.Joystick.joystickaxis.None) rc.chan18_raw = (ushort)MainV2.comPort.MAV.cs.rcoverridech18;
-
-                        //         if (lastjoystick.AddMilliseconds(rate) < DateTime.Now)
-                        //         {
-                        //             /*
-                        //         if (MainV2.comPort.MAV.cs.rssi > 0 && MainV2.comPort.MAV.cs.remrssi > 0)
-                        //         {
-                        //             if (lastratechange.Second != DateTime.Now.Second)
-                        //             {
-                        //                 if (MainV2.comPort.MAV.cs.txbuffer > 90)
-                        //                 {
-                        //                     if (rate < 20)
-                        //                         rate = 21;
-                        //                     rate--;
-
-                        //                     if (MainV2.comPort.MAV.cs.linkqualitygcs < 70)
-                        //                         rate = 50;
-                        //                 }
-                        //                 else
-                        //                 {
-                        //                     if (rate > 100)
-                        //                         rate = 100;
-                        //                     rate++;
-                        //                 }
-
-                        //                 lastratechange = DateTime.Now;
-                        //             }
-                                 
-                        //         }
-                        //         */
-                        //             //                                Console.WriteLine(DateTime.Now.Millisecond + " {0} {1} {2} {3} {4}", rc.chan1_raw, rc.chan2_raw, rc.chan3_raw, rc.chan4_raw,rate);
-
-                        //             //Console.WriteLine("Joystick btw " + comPort.BaseStream.BytesToWrite);
-
-                        //             if (!comPort.BaseStream.IsOpen)
-                        //                 continue;
-
-                        //             if (comPort.BaseStream.BytesToWrite < 50)
-                        //             {
-                        //                 if (sitl)
-                        //                 {
-                        //                     MissionPlanner.GCSViews.SITL.rcinput();
-                        //                 }
-                        //                 else
-                        //                 {
-                        //                     comPort.sendPacket(rc, rc.target_system, rc.target_component);
-                        //                 }
-                        //                 count++;
-                        //                 lastjoystick = DateTime.Now;
-                        //             }
-                        //         }
-                        //     }
-                        //     else
-                        //     {
-                        //         MAVLink.mavlink_manual_control_t rc = new MAVLink.mavlink_manual_control_t();
-
-                        //         rc.target = comPort.MAV.compid;
-
-                        //         if (joystick.getJoystickAxis(1) != Joystick.Joystick.joystickaxis.None)
-                        //             rc.x = MainV2.comPort.MAV.cs.rcoverridech1;
-                        //         if (joystick.getJoystickAxis(2) != Joystick.Joystick.joystickaxis.None)
-                        //             rc.y = MainV2.comPort.MAV.cs.rcoverridech2;
-                        //         if (joystick.getJoystickAxis(3) != Joystick.Joystick.joystickaxis.None)
-                        //             rc.z = MainV2.comPort.MAV.cs.rcoverridech3;
-                        //         if (joystick.getJoystickAxis(4) != Joystick.Joystick.joystickaxis.None)
-                        //             rc.r = MainV2.comPort.MAV.cs.rcoverridech4;
-
-                        //         if (lastjoystick.AddMilliseconds(rate) < DateTime.Now)
-                        //         {
-                        //             if (!comPort.BaseStream.IsOpen)
-                        //                 continue;
-
-                        //             if (comPort.BaseStream.BytesToWrite < 50)
-                        //             {
-                        //                 if (sitl)
-                        //                 {
-                        //                     MissionPlanner.GCSViews.SITL.rcinput();
-                        //                 }
-                        //                 else
-                        //                 {
-                        //                     comPort.sendPacket(rc, comPort.MAV.sysid, comPort.MAV.compid);
-                        //                 }
-                        //                 count++;
-                        //                 lastjoystick = DateTime.Now;
-                        //             }
-                        //         }
-                        //     }
-                        // }
-                    }
-                    Thread.Sleep(20);
-                }
-                catch
-                {
-                } // cant fall out
-            }
-            joysendThreadExited = true; //so we know this thread exited.    
         }
 
         /// <summary>
@@ -2463,22 +2156,6 @@ namespace MissionPlanner
                 {
                     Thread.Sleep(1); // was 5
 
-                    try
-                    {
-                        if (GCSViews.Terminal.comPort is MAVLinkSerialPort)
-                        {
-                        }
-                        else
-                        {
-                            if (GCSViews.Terminal.comPort != null && GCSViews.Terminal.comPort.IsOpen)
-                                continue;
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                      // log.error(ex);
-                    }
-
                     // update connect/disconnect button and info stats
                     try
                     {
@@ -2489,127 +2166,6 @@ namespace MissionPlanner
                       // log.error(ex);
                     }
 
-                    // // 30 seconds interval speech options
-                    // if (speechEnable && speechEngine != null && (DateTime.Now - speechcustomtime).TotalSeconds > 30 &&
-                    //     (MainV2.comPort.logreadmode || comPort.BaseStream.IsOpen))
-                    // {
-                    //     if (MainV2.speechEngine.IsReady)
-                    //     {
-                    //         if (Settings.Instance.GetBoolean("speechcustomenabled"))
-                    //         {
-                    //             MainV2.speechEngine.SpeakAsync(ArduPilot.Common.speechConversion(comPort.MAV, "" + Settings.Instance["speechcustom"]));
-                    //         }
-
-                    //         speechcustomtime = DateTime.Now;
-                    //     }
-
-                    //     // speech for battery alerts
-                    //     //speechbatteryvolt
-                    //     float warnvolt = Settings.Instance.GetFloat("speechbatteryvolt");
-                    //     float warnpercent = Settings.Instance.GetFloat("speechbatterypercent");
-
-                    //     if (Settings.Instance.GetBoolean("speechbatteryenabled") == true &&
-                    //         MainV2.comPort.MAV.cs.battery_voltage <= warnvolt &&
-                    //         MainV2.comPort.MAV.cs.battery_voltage >= 5.0)
-                    //     {
-                    //         if (MainV2.speechEngine.IsReady)
-                    //         {
-                    //             MainV2.speechEngine.SpeakAsync(ArduPilot.Common.speechConversion(comPort.MAV, "" + Settings.Instance["speechbattery"]));
-                    //         }
-                    //     }
-                    //     else if (Settings.Instance.GetBoolean("speechbatteryenabled") == true &&
-                    //              (MainV2.comPort.MAV.cs.battery_remaining) < warnpercent &&
-                    //              MainV2.comPort.MAV.cs.battery_voltage >= 5.0 &&
-                    //              MainV2.comPort.MAV.cs.battery_remaining != 0.0)
-                    //     {
-                    //         if (MainV2.speechEngine.IsReady)
-                    //         {
-                    //             MainV2.speechEngine.SpeakAsync(
-                    //                 ArduPilot.Common.speechConversion(comPort.MAV, "" + Settings.Instance["speechbattery"]));
-                    //         }
-                    //     }
-                    // }
-
-                    // // speech for airspeed alerts
-                    // if (speechEnable && speechEngine != null && (DateTime.Now - speechlowspeedtime).TotalSeconds > 10 &&
-                    //     (MainV2.comPort.logreadmode || comPort.BaseStream.IsOpen))
-                    // {
-                    //     if (Settings.Instance.GetBoolean("speechlowspeedenabled") == true && MainV2.comPort.MAV.cs.armed)
-                    //     {
-                    //         float warngroundspeed = Settings.Instance.GetFloat("speechlowgroundspeedtrigger");
-                    //         float warnairspeed = Settings.Instance.GetFloat("speechlowairspeedtrigger");
-
-                    //         if (MainV2.comPort.MAV.cs.airspeed < warnairspeed)
-                    //         {
-                    //             if (MainV2.speechEngine.IsReady)
-                    //             {
-                    //                 MainV2.speechEngine.SpeakAsync(
-                    //                     ArduPilot.Common.speechConversion(comPort.MAV, "" + Settings.Instance["speechlowairspeed"]));
-                    //                 speechlowspeedtime = DateTime.Now;
-                    //             }
-                    //         }
-                    //         else if (MainV2.comPort.MAV.cs.groundspeed < warngroundspeed)
-                    //         {
-                    //             if (MainV2.speechEngine.IsReady)
-                    //             {
-                    //                 MainV2.speechEngine.SpeakAsync(
-                    //                     ArduPilot.Common.speechConversion(comPort.MAV, "" + Settings.Instance["speechlowgroundspeed"]));
-                    //                 speechlowspeedtime = DateTime.Now;
-                    //             }
-                    //         }
-                    //         else
-                    //         {
-                    //             speechlowspeedtime = DateTime.Now;
-                    //         }
-                    //     }
-                    // }
-
-                    // // speech altitude warning - message high warning
-                    // if (speechEnable && speechEngine != null &&
-                    //     (MainV2.comPort.logreadmode || comPort.BaseStream.IsOpen))
-                    // {
-                    //     float warnalt = float.MaxValue;
-                    //     if (Settings.Instance.ContainsKey("speechaltheight"))
-                    //     {
-                    //         warnalt = Settings.Instance.GetFloat("speechaltheight");
-                    //     }
-                    //     try
-                    //     {
-                    //         altwarningmax = (int)Math.Max(MainV2.comPort.MAV.cs.alt, altwarningmax);
-
-                    //         if (Settings.Instance.GetBoolean("speechaltenabled") == true && MainV2.comPort.MAV.cs.alt != 0.00 &&
-                    //             (MainV2.comPort.MAV.cs.alt <= warnalt) && MainV2.comPort.MAV.cs.armed)
-                    //         {
-                    //             if (altwarningmax > warnalt)
-                    //             {
-                    //                 if (MainV2.speechEngine.IsReady)
-                    //                     MainV2.speechEngine.SpeakAsync(
-                    //                         ArduPilot.Common.speechConversion(comPort.MAV, "" + Settings.Instance["speechalt"]));
-                    //             }
-                    //         }
-                    //     }
-                    //     catch
-                    //     {
-                    //     } // silent fail
-
-
-                    //     try
-                    //     {
-                    //         // say the latest high priority message
-                    //         if (MainV2.speechEngine.IsReady &&
-                    //             lastmessagehigh != MainV2.comPort.MAV.cs.messageHigh && MainV2.comPort.MAV.cs.messageHigh != null)
-                    //         {
-                    //             if (!MainV2.comPort.MAV.cs.messageHigh.StartsWith("PX4v2 "))
-                    //             {
-                    //                 MainV2.speechEngine.SpeakAsync(MainV2.comPort.MAV.cs.messageHigh);
-                    //                 lastmessagehigh = MainV2.comPort.MAV.cs.messageHigh;
-                    //             }
-                    //         }
-                    //     }
-                    //     catch
-                    //     {
-                    //     }
-                    // }
 
                     // not doing anything
                     if (!MainV2.comPort.logreadmode && !comPort.BaseStream.IsOpen)
@@ -2907,9 +2463,7 @@ namespace MissionPlanner
             MyView.AddScreen(new MainSwitcher.Screen("FlightPlanner", FlightPlanner, true));
             MyView.AddScreen(new MainSwitcher.Screen("HWConfig", typeof(GCSViews.InitialSetup), false));
             MyView.AddScreen(new MainSwitcher.Screen("SWConfig", typeof(GCSViews.SoftwareConfig), false));
-            // MyView.AddScreen(new MainSwitcher.Screen("Simulation", Simulation, true));
-            // MyView.AddScreen(new MainSwitcher.Screen("Terminal", typeof(GCSViews.Terminal), false));
-            // MyView.AddScreen(new MainSwitcher.Screen("Help", typeof(GCSViews.Help), false));
+
 
             try
             {
@@ -2948,33 +2502,6 @@ namespace MissionPlanner
 
             this.SuspendLayout();
 
-            // // setup http server
-            // try
-            // {
-            //   // log.info("start http");
-            //     httpthread = new Thread(new httpserver().listernforclients)
-            //     {
-            //         Name = "motion jpg stream-network kml",
-            //         IsBackground = true
-            //     };
-            //     httpthread.Start();
-            // }
-            // catch (Exception ex)
-            // {
-            //   // log.error("Error starting TCP listener thread: ", ex);
-            //     CustomMessageBox.Show(ex.ToString());
-            // }
-
-            // log.Info("start joystick");
-            // // setup joystick packet sender
-            // joystickthread = new Thread(new ThreadStart(joysticksend))
-            // {
-            //     IsBackground = true,
-            //     Priority = ThreadPriority.AboveNormal,
-            //     Name = "Main joystick sender"
-            // };
-            // joystickthread.Start();
-
           // log.info("start serialreader");
             // setup main serial reader
             serialreaderthread = new Thread(SerialReader)
@@ -2995,22 +2522,11 @@ namespace MissionPlanner
             };
             pluginthread.Start();
 
-            // ThreadPool.QueueUserWorkItem(BGLoadAirports);
-
-            // ThreadPool.QueueUserWorkItem(BGCreateMaps);
-
-            //ThreadPool.QueueUserWorkItem(BGGetAlmanac);
-
-            // ThreadPool.QueueUserWorkItem(BGgetTFR);
-
-            // ThreadPool.QueueUserWorkItem(BGNoFly);
-
             ThreadPool.QueueUserWorkItem(BGGetKIndex);
 
             // update firmware version list - only once per day
             // ThreadPool.QueueUserWorkItem(BGFirmwareCheck);
 
-          // log.info("start AutoConnect");
             AutoConnect.NewMavlinkConnection += (sender, serial) =>
             {
                 try
@@ -3280,17 +2796,6 @@ namespace MissionPlanner
                         MainV2.comPort.MAV.cs.firmware = Firmwares.ArduSub;
                     }
 
-                    var joy = new Joystick.Joystick(() => MainV2.comPort);
-
-                    if (joy.start(cmds["joy"]))
-                    {
-                        MainV2.joystick = joy;
-                        MainV2.joystick.enabled = true;
-                    }
-                    else
-                    {
-                        CustomMessageBox.Show("Failed to start joystick");
-                    }
                 }
 
                 if (cmds.ContainsKey("gstream"))
@@ -3439,32 +2944,6 @@ namespace MissionPlanner
             }
         }
 
-        private void BGgetTFR(object state)
-        {
-            // try
-            // {
-            //     tfr.tfrcache = Settings.GetUserDataDirectory() + "tfr.xml";
-            //     tfr.GetTFRs();
-            // }
-            // catch (Exception ex)
-            // {
-            //   // log.error(ex);
-            // }
-        }
-
-        private void BGNoFly(object state)
-        {
-            try
-            {
-                NoFly.NoFly.Scan();
-            }
-            catch (Exception ex)
-            {
-              // log.error(ex);
-            }
-        }
-
-
         void KIndex_KIndex(object sender, EventArgs e)
         {
             CurrentState.KIndexstatic = (int)sender;
@@ -3543,12 +3022,6 @@ namespace MissionPlanner
           // log.info("this   width " + this.Width + " height " + this.Height);
         }
 
-        private void MenuHelp_Click(object sender, EventArgs e)
-        {
-            MyView.ShowScreen("Help");
-        }
-
-
         /// <summary>
         /// keyboard shortcuts override
         /// </summary>
@@ -3557,7 +3030,6 @@ namespace MissionPlanner
         /// <returns></returns>
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            if (GCSViews.Terminal.SSHTerminal) { return false; }
             if (keyData == Keys.F12)
             {
                 MenuConnect_Click(null, null);
@@ -3689,7 +3161,7 @@ namespace MissionPlanner
                 Settings.Instance["language"] = ci.Name;
                 //System.Threading.Thread.CurrentThread.CurrentCulture = ci;
 
-                HashSet<Control> views = new HashSet<Control> { this, FlightData, FlightPlanner, Simulation };
+                HashSet<Control> views = new HashSet<Control> { this, FlightData, FlightPlanner };
 
                 foreach (Control view in MyView.Controls)
                     views.Add(view);

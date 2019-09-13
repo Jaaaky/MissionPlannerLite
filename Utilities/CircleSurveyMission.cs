@@ -45,7 +45,6 @@ namespace MissionPlanner.Utilities
 
             MainV2.instance.FlightPlanner.quickadd = false;
 
-            MainV2.instance.FlightPlanner.writeKML();
         }
     }
 }

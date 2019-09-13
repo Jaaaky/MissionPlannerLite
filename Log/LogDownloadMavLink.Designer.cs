@@ -179,7 +179,7 @@
             resources.ApplyResources(this, "$this");
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "LogDownloadMavLink";
-            this.Load += new System.EventHandler(this.Log_Load);
+            // this.Load += new System.EventHandler(this.Log_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);

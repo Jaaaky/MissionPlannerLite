@@ -125,7 +125,7 @@
             this.Controls.Add(this.TXT_seriallog);
             this.Name = "LogDownload";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Log_FormClosing);
-            this.Load += new System.EventHandler(this.Log_Load);
+            // this.Load += new System.EventHandler(this.Log_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

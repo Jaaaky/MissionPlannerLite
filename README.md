@@ -1,4 +1,31 @@
-MissionPlanner
+MissionPlannerLite
+==============
+
+MissionPlannerLite aims to be a light - lite - version of MissionPlanner that:
+
+1. Runs as fast as possible on both Windows and Linux and doesn’t get slower when used for long.
+2. Doesn’t collect/store data or do any sluggish background tasks
+3. Supports Linux better - final target is to be as native to Linux as possible. Now it already runs faster on wine or mono.
+4. Only includes features for real flights - no simulator, telemtery configurator or other secondary features that makes MissionPlanner very slow and sluggish when doing actual critical work.
+5. Not a replacement, as you’d need MissionPlanner for seconday or rarely used features.
+
+Lite patches/commits lives at MissionPlannerLite branch.
+ 
+Now it could already be compiled on Linux using `https://www.mono-project.com/download/stable/`
+
+After installation goes to MissionPlannerLite directory and run
+`git checkout MissionPlannerLite`
+
+`msbuild -r MissionPlanner.sln /t:MissionPlanner 
+/p:Configuration=Release,Optimize=true,DebugSymbols=false 
+/p:BuildProjectReferences=true`
+
+Note: You've to use a case-insensitive filesystem on Linux. Or you can use WSL as it's case-insensitive by default.
+Note: It could of course be compiled using Visual Studio normally.
+
+Feedback is welcome :)
+
+Original MissionPlanner Readme
 ==============
 
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/ArduPilot/MissionPlanner?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Build status](https://ci.noaa.io/api/projects/status/2c5tbxr2wvcguihp?svg=true)](https://ci.noaa.io/project/meee1/missionplanner)

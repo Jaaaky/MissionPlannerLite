@@ -853,7 +853,7 @@ namespace MissionPlanner
 
         private void myButton3_Click(object sender, EventArgs e)
         {
-            but_GDAL_Click(sender, e);
+            // but_GDAL_Click(sender, e);
         }
 
         protected override void WndProc(ref Message m)
@@ -872,40 +872,12 @@ namespace MissionPlanner
             base.WndProc(ref m);
         }
 
-        private void but_GDAL_Click(object sender, EventArgs e)
-        {
-            FolderBrowserDialog fbd = new FolderBrowserDialog();
-
-            if (fbd.ShowDialog() == DialogResult.OK)
-            {
-                if (Directory.Exists(fbd.SelectedPath))
-                {
-                    GDAL.GDAL.OnProgress += GDAL_OnProgress;
-                    GDAL.GDAL.ScanDirectory(fbd.SelectedPath);
-                    DTED.OnProgress += GDAL_OnProgress;
-                    DTED.AddCustomDirectory(fbd.SelectedPath);
-
-                    Loading.Close();
-                }
-            }
-        }
-
-        private void GDAL_OnProgress(double percent, string message)
-        {
-            Loading.ShowLoading((percent).ToString("0.0%") + " " +message, this);
-        }
-
         private void but_sortlogs_Click(object sender, EventArgs e)
         {
             MissionPlanner.Log.LogSort.SortLogs(Directory.GetFiles(Settings.Instance.LogDir, "*.tlog",
                 SearchOption.AllDirectories), Settings.Instance.LogDir);
         }
 
-        private void but_logdlscp_Click(object sender, EventArgs e)
-        {
-            LogDownloadscp form = new LogDownloadscp();
-            form.Show();
-        }
 
         private void but_td_Click(object sender, EventArgs e)
         {
