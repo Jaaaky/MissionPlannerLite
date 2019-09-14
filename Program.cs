@@ -106,7 +106,7 @@ namespace MissionPlanner
                 return;
             }
 
-            name = "Mission Planner";
+            name = "Mission Planner Lite";
 
             try
             {
